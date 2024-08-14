@@ -1,0 +1,6 @@
+<% @available_templates.each do |template| %>
+  <div>
+    <%= link_to template, component_path(template),
+                class: "text-indigo-600 underline"%>
+  </div>
+<% end %>
