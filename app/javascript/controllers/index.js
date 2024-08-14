@@ -6,3 +6,12 @@ import { application } from "./application"
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import SelectMenuController from "./select_menu_controller"
+application.register("select-menu", SelectMenuController)
+
+import TablistController from "./tablist_controller"
+application.register("tablist", TablistController)
+
+import ToggleSwitchController from "./toggle_switch_controller"
+application.register("toggle-switch", ToggleSwitchController)

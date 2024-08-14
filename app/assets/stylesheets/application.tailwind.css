@@ -1,3 +1,57 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    button[data-controller="toggle-switch"] {
+
+        &[aria-checked='true'] {
+            @apply bg-indigo-600;
+
+            span {
+                @apply translate-x-5;
+            }
+        }
+
+        &[aria-checked='false'] {
+            @apply bg-gray-200;
+
+            span {
+                @apply translate-x-0;
+            }
+        }
+    }
+
+    *[data-controller="select-menu"] {
+        > ul {
+            @apply transition duration-200;
+            li {
+                @apply hover:bg-indigo-600 hover:text-white;
+                &:hover span:nth-child(2) {
+                    @apply text-white;
+                }
+                &[aria-selected='true'] {
+                    span:nth-child(1) {
+                        @apply font-semibold;
+                    }
+                    span:nth-child(2) {
+                        @apply visible;
+                    }
+                }
+            }
+
+        }
+        button[aria-expanded='false'] + ul {
+            @apply  opacity-0;
+        }
+        button[aria-expanded='true'] + ul {
+            @apply  opacity-100;
+        }
+    }
+
+    *[data-controller="tablist"] {
+        *[aria-current="page"] {
+            @apply !border-indigo-500 !text-indigo-600;
+        }
+    }
+}
