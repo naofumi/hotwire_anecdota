@@ -3,4 +3,7 @@
   <component name="ComposerSettings">
     <execution />
   </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_22" project-jdk-name="rbenv: 3.3.4" project-jdk-type="RUBY_SDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
 </project>
