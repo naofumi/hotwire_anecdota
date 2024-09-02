@@ -1,5 +1,5 @@
 class ComponentsController < ApplicationController
-  @@available_templates = %w[toggle select tabs]
+  @@available_templates = %w[toggle select tabs navigation]
   def index
     @available_templates = @@available_templates
   end
