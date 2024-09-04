@@ -1,3 +1,22 @@
+/*
+* # Tablist
+*
+* Use this to select a tab within a tablist.
+* This implementation specifies the currently selected tab
+* using the `aria-current` attribute. This may not be appropriate
+* if the tab is small and the contents do not represent a full-page.
+* https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current
+*
+* With MPA/TurboDrive/TurboFrames, it is common to simply select the
+* current tab on the new page rendered on the server, without providing
+* immediate feedback to the user other than the CSS `:active`
+* pseudo-selector. The current approach, however, provides feedback
+* to the user immediately after the tab is clicked. This may or
+* may not be preferable, depending on server latency and other UI
+* elements.
+*
+* */
+
 import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="tablist"

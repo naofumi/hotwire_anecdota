@@ -41,25 +41,25 @@ export default class DropdownController extends Controller {
 
   show() {
     this.menuTargets.forEach(target => {
-      target.classList.remove(...this.#hideClasses())
-      target.classList.add(...this.#showClasses())
+      target.classList.remove(...this.#hideClassesWithDefaults())
+      target.classList.add(...this.#showClassesWithDefaults())
     })
   }
 
   hide() {
     this.menuTargets.forEach(target => {
-      target.classList.remove(...this.#showClasses())
-      target.classList.add(...this.#hideClasses())
+      target.classList.remove(...this.#showClassesWithDefaults())
+      target.classList.add(...this.#hideClassesWithDefaults())
     })
   }
 
-  #showClasses() {
+  #showClassesWithDefaults() {
     return this.showClasses.length
            ? this.showClasses
            : DefaultShowClasses
   }
 
-  #hideClasses() {
+  #hideClassesWithDefaults() {
     return this.hideClasses.length
            ? this.hideClasses
            : DefaultHideClasses
