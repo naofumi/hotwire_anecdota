@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer components {
-    button[data-controller="toggle-switch"] {
+    button[data-controller="aria-checked"] {
 
         &[aria-checked='true'] {
             @apply bg-indigo-600;
