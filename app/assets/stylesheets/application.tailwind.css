@@ -3,37 +3,35 @@
 @tailwind utilities;
 
 @layer components {
-    button[data-controller="aria-checked"] {
-
-        &[aria-checked='true'] {
-            @apply bg-indigo-600;
-
-            span {
-                @apply translate-x-5;
-            }
-        }
-
-        &[aria-checked='false'] {
-            @apply bg-gray-200;
-
-            span {
-                @apply translate-x-0;
-            }
-        }
+    .switch--on {
+        @apply !bg-indigo-600
+    }
+    .switch--off {
+        @apply !bg-gray-200
+    }
+    .switch__toggle--on {
+        @apply !translate-x-5
+    }
+    .switch__toggle--off {
+        @apply !translate-x-0
     }
 
     *[data-controller="select-menu"] {
         > ul {
             @apply transition duration-200;
+
             li {
                 @apply hover:bg-indigo-600 hover:text-white;
+
                 &:hover span:nth-child(2) {
                     @apply text-white;
                 }
+
                 &[aria-selected='true'] {
                     span:nth-child(1) {
                         @apply font-semibold;
                     }
+
                     span:nth-child(2) {
                         @apply visible;
                     }
@@ -41,11 +39,13 @@
             }
 
         }
+
         button[aria-expanded='false'] + ul {
-            @apply  opacity-0;
+            @apply opacity-0;
         }
+
         button[aria-expanded='true'] + ul {
-            @apply  opacity-100;
+            @apply opacity-100;
         }
     }
 
@@ -53,5 +53,13 @@
         *[aria-current="page"] {
             @apply !border-indigo-500 !text-indigo-600;
         }
+    }
+
+    .dropdown__menu--closed {
+        @apply transform !opacity-0 !scale-95 !collapse transition-all ease-in duration-75
+    }
+
+    .dropdown__menu--opened {
+        @apply transform !opacity-100 !scale-100 !visible transition-all ease-out duration-200
     }
 }

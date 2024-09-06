@@ -4,11 +4,11 @@
 
 import { application } from "./application"
 
-import AriaCheckedController from "./aria_checked_controller"
-application.register("aria-checked", AriaCheckedController)
+import SwitchController from "./switch_controller"
+application.register("switch", SwitchController)
 
-import AriaExpandedController from "./aria_expanded_controller"
-application.register("aria-expanded", AriaExpandedController)
+import DropdownController from "./dropdown_controller"
+application.register("dropdown", DropdownController)
 
 import HamburgerController from "./hamburger_controller"
 application.register("hamburger", HamburgerController)

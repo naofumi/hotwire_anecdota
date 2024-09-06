@@ -36,12 +36,13 @@
           </button>
 
           <!-- Profile dropdown -->
-          <div class="relative ml-3" data-controller="aria-expanded" data-action="mouseleave->aria-expanded#hide">
+          <div class="relative ml-3"
+               data-controller="dropdown"
+               data-action="mouseleave->dropdown#hide">
             <button type="button" class="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     id="user-menu-button"
                     aria-expanded="false"
-                    data-aria-expanded-target="control"
-                    data-action="mouseenter->aria-expanded#show"
+                    data-action="mouseenter->dropdown#show"
                     aria-haspopup="true">
               <span class="absolute -inset-1.5"></span>
               <span class="sr-only">Open user menu</span>
@@ -58,9 +59,10 @@
                 From: "transform opacity-100 scale-100"
                 To: "transform opacity-0 scale-95"
             -->
-            <div data-aria-expanded-target="expandable"
-                 class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transform opacity-0 collapse scale-95"
+            <div id="user-menu"
+                 class="dropdown__menu--closed absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transform opacity-0 collapse scale-95"
                  role="menu"
+                 data-dropdown-target="menu"
                  aria-orientation="vertical"
                  aria-labelledby="user-menu-button"
                  tabindex="-1">

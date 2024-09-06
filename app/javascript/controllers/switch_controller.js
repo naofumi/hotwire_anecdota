@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="aria-checked"
+// Connects to data-controller="switch"
 /*
 * Assumes something like the following
 *
@@ -26,10 +26,16 @@ import { Controller } from "@hotwired/stimulus"
 *           Maybe better for certain buttons.
 * */
 export default class extends Controller {
+  static targets = ["toggle"]
   connect() {
   }
 
   toggle() {
     this.element.ariaChecked = this.element.ariaChecked === "true" ? "false" : "true"
+
+    this.element.classList.toggle("switch--on")
+    this.element.classList.toggle("switch--off")
+    this.toggleTarget.classList.toggle("switch__toggle--on")
+    this.toggleTarget.classList.toggle("switch__toggle--off")
   }
 }
