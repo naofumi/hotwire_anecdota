@@ -4,9 +4,6 @@
 
 import { application } from "./application"
 
-import SwitchController from "./switch_controller"
-application.register("switch", SwitchController)
-
 import DropdownController from "./dropdown_controller"
 application.register("dropdown", DropdownController)
 
@@ -22,5 +19,11 @@ application.register("navbar", NavbarController)
 import SelectMenuController from "./select_menu_controller"
 application.register("select-menu", SelectMenuController)
 
+import SwitchController from "./switch_controller"
+application.register("switch", SwitchController)
+
 import TablistController from "./tablist_controller"
 application.register("tablist", TablistController)
+
+import TiersWithToggleController from "./tiers_with_toggle_controller"
+application.register("tiers-with-toggle", TiersWithToggleController)

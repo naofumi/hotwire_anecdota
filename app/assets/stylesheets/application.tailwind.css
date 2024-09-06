@@ -72,4 +72,12 @@
     .dropdown__menu--opened {
         @apply transform !opacity-100 !scale-100 !visible transition-all ease-out duration-200
     }
+
+    .tiers-with-toggle__plan--selected {
+        @apply !ring-indigo-600
+    }
+
+    .tiers-with-toggle__buy-button--selected {
+        @apply !bg-indigo-600 !text-white
+    }
 }
