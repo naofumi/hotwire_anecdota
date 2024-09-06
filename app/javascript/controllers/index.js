@@ -4,8 +4,14 @@
 
 import { application } from "./application"
 
-import DropdownController from "./dropdown_controller"
-application.register("dropdown", DropdownController)
+import AriaCheckedController from "./aria_checked_controller"
+application.register("aria-checked", AriaCheckedController)
+
+import AriaExpandedController from "./aria_expanded_controller"
+application.register("aria-expanded", AriaExpandedController)
+
+import HamburgerController from "./hamburger_controller"
+application.register("hamburger", HamburgerController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
@@ -18,6 +24,3 @@ application.register("select-menu", SelectMenuController)
 
 import TablistController from "./tablist_controller"
 application.register("tablist", TablistController)
-
-import AriaCheckedController from "./aria_checked_controller"
-application.register("aria-checked", AriaCheckedController)
