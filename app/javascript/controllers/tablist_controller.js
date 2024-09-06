@@ -33,5 +33,18 @@ export default class extends Controller {
     this.element.querySelectorAll(".tablist__tab--selected")
       .forEach(e => e.classList.remove("tablist__tab--selected"))
     selected.classList.add("tablist__tab--selected")
+
+    if (event.params.content) {
+      document.querySelectorAll(".tablist__content--shown")
+        .forEach(e => {
+          e.classList.remove("tablist__content--shown")
+          e.classList.add("tablist__content--hidden")
+        })
+      document.querySelectorAll(event.params.content)
+        .forEach(e => {
+          e.classList.remove("tablist__content--hidden")
+          e.classList.add("tablist__content--shown")
+        })
+    }
   }
 }

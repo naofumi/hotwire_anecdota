@@ -56,6 +56,19 @@
 * 3. Set `data-dropdown-target="menu"` on the menu element
 * 4. Write CSS classes for `dropdown__menu--opened` and `dropdown__menu--closed`
 *
+* # Notes on Tailwind
+*
+* In the above, I recommended the use of BEM classes to change the display state.
+* An alternative is to directly apply Tailwind utility classes. I don't think this
+* is a good idea. Unlike React components, we want Stimulus controllers to be
+* independent of the HTML structure. In exchange, we should accept coupling between
+* HTML and CSS for dynamic elements. In the spirit of Tailwind, we decouple
+* HTML and CSS for non-dynamic elements. However, for dynamic elements, we accept coupling
+* to allow Stimulus controllers to be decoupled from HTML.
+*
+* I'm not yet 100% sure that Stimulus controllers need to be decoupled from the HTML
+* structure. If this is not the case, then the discussion above will not apply. We
+* should then remove coupling between CSS and HTML even for dynamic elements.
 * */
 
 import {Controller} from "@hotwired/stimulus"

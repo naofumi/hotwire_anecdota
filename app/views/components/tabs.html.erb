@@ -8,12 +8,15 @@
     <div class="sm:hidden">
       <label for="tabs" class="sr-only">Select a tab</label>
       <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
-      <select id="tabs" name="tabs" class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-        <option>My Account</option>
-        <option>Company</option>
+      <select id="tabs"
+              name="tabs"
+              data-action="change->tablist#mobileSelect"
+              class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+        <option value="my_account">My Account</option>
+        <option value="company">Company</option>
         <!-- No client-side updates necessary here so leave as is.-->
-        <option selected>Team Members</option>
-        <option>Billing</option>
+        <option selected value="team_members">Team Members</option>
+        <option value="billing">Billing</option>
       </select>
     </div>
     <div class="hidden sm:block">
@@ -21,21 +24,39 @@
         <nav class="-mb-px flex space-x-8" aria-label="Tabs">
           <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
           <a href="javascript:void(0)"
+             data-tablist-content-param="#my_account"
              data-action="click->tablist#select"
              aria-current="page"
              class="tablist__tab--selected whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">My Account</a>
           <a href="javascript:void(0)"
+             data-tablist-content-param="#company"
              data-action="click->tablist#select"
              class="whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Company</a>
           <a href="javascript:void(0)"
+             data-tablist-content-param="#team_members"
              data-action="click->tablist#select"
              class="whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700" aria-current="page">Team Members</a>
           <a href="javascript:void(0)"
+             data-tablist-content-param="#billing"
              data-action="click->tablist#select"
              class="whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Billing</a>
         </nav>
       </div>
     </div>
   </div>
+  <main>
+    <div id="my_account" class="tablist__content--shown">
+      Content for My Account
+    </div>
+    <div id="company" class="tablist__content--hidden">
+      Content for Company
+    </div>
+    <div id="team_members" class="tablist__content--hidden">
+      Content for Team Members
+    </div>
+    <div id="billing" class="tablist__content--hidden">
+      Content for Billing
+    </div>
+  </main>
 
 <% end %>
