@@ -29,5 +29,9 @@ export default class extends Controller {
     this.element.querySelectorAll("[aria-current]")
       .forEach((e) => {e.ariaCurrent = "false"})
     selected.ariaCurrent = "page"
+
+    this.element.querySelectorAll(".tablist__tab--selected")
+      .forEach(e => e.classList.remove("tablist__tab--selected"))
+    selected.classList.add("tablist__tab--selected")
   }
 }

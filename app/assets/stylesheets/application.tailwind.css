@@ -49,10 +49,12 @@
         }
     }
 
-    *[data-controller="tablist"] {
-        *[aria-current="page"] {
-            @apply !border-indigo-500 !text-indigo-600;
-        }
+    .tablist__tab--selected {
+        @apply !border-indigo-500 !text-indigo-600
+    }
+
+    .navigation-bar .tablist__tab--selected {
+        @apply !text-gray-900
     }
 
     .dropdown__menu--closed {
