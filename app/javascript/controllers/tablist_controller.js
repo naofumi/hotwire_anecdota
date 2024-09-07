@@ -18,6 +18,7 @@
 * */
 
 import { Controller } from "@hotwired/stimulus"
+import {changeClasses} from "../utlitilies";
 
 // Connects to data-controller="tablist"
 export default class extends Controller {
@@ -26,25 +27,38 @@ export default class extends Controller {
 
   select(event) {
     const selected = event.currentTarget
+
+    this.#setAriaCurrent(selected)
+    this.#selectTab(selected)
+    this.#displayContent(event.params.content)
+  }
+
+  #setAriaCurrent(selected) {
     this.element.querySelectorAll("[aria-current]")
-      .forEach((e) => {e.ariaCurrent = "false"})
+      .forEach(e => {
+        e.ariaCurrent = "false"
+      })
     selected.ariaCurrent = "page"
+  }
 
-    this.element.querySelectorAll(".tablist__tab--selected")
-      .forEach(e => e.classList.remove("tablist__tab--selected"))
+  #selectTab(selected) {
+    changeClasses(".tablist__tab--selected", {
+      remove: "tablist__tab--selected",
+      scope: this.element
+    })
     selected.classList.add("tablist__tab--selected")
+  }
 
-    if (event.params.content) {
-      document.querySelectorAll(".tablist__content--shown")
-        .forEach(e => {
-          e.classList.remove("tablist__content--shown")
-          e.classList.add("tablist__content--hidden")
-        })
-      document.querySelectorAll(event.params.content)
-        .forEach(e => {
-          e.classList.remove("tablist__content--hidden")
-          e.classList.add("tablist__content--shown")
-        })
+  #displayContent(selector) {
+    if (selector) {
+      changeClasses(".tablist__content--shown", {
+        remove: "tablist__content--shown",
+        add: "tablist__content--hidden"
+      })
+      changeClasses(selector, {
+        remove: "tablist__content--hidden",
+        add: "tablist__content--shown"
+      })
     }
   }
 }
