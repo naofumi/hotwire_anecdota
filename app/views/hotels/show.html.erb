@@ -35,13 +35,24 @@
     <% end %>
   </div>
 </div>
-<div role="tablist" class="flex flex-row shadow-md border">
-  <%= link_to "部屋・プラン", "", class: "px-4 inline-block py-4 h-16 text-lg border-b-4 border-blue-500" %>
-  <%= link_to "宿の紹介", "", class: "px-4 inline-block py-4 h-16 text-lg" %>
-  <%= link_to "クチコミ", "", class: "px-4 inline-block py-4 h-16 text-lg" %>
-  <%= link_to "アクセス", "", class: "px-4 inline-block py-4 h-16 text-lg" %>
-  <%= link_to "空室カレンダー", "", class: "px-4 inline-block py-4 h-16 text-lg" %>
-  <%= link_to "写真", "", class: "px-4 inline-block py-4 h-16 text-lg" %>
+<div role="tablist"
+     class="flex flex-row shadow-md border"
+     data-controller="drawer-trigger"
+     data-drawer-trigger-slide-drawer-outlet="#slide-drawer"
+>
+  <%= link_to "部屋・プラン", "",
+              class: "px-4 inline-block py-4 h-16 text-lg border-b-4 border-blue-500" %>
+  <%= link_to "宿の紹介", hotel_description_path(@hotel),
+              data: {action: "click->drawer-trigger#show", turbo_frame: :slide_drawer},
+              class: "px-4 inline-block py-4 h-16 text-lg" %>
+  <%= link_to "クチコミ", "",
+              class: "px-4 inline-block py-4 h-16 text-lg" %>
+  <%= link_to "アクセス", "",
+              class: "px-4 inline-block py-4 h-16 text-lg" %>
+  <%= link_to "空室カレンダー", "",
+              class: "px-4 inline-block py-4 h-16 text-lg" %>
+  <%= link_to "写真", "",
+              class: "px-4 inline-block py-4 h-16 text-lg" %>
 </div>
 
 <p style="color: green"><%= notice %></p>

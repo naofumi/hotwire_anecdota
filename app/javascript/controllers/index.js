@@ -7,6 +7,9 @@ import { application } from "./application"
 import CarouselController from "./carousel_controller"
 application.register("carousel", CarouselController)
 
+import DrawerTriggerController from "./drawer_trigger_controller"
+application.register("drawer-trigger", DrawerTriggerController)
+
 import DropdownController from "./dropdown_controller"
 application.register("dropdown", DropdownController)
 
@@ -21,6 +24,9 @@ application.register("navbar", NavbarController)
 
 import SelectMenuController from "./select_menu_controller"
 application.register("select-menu", SelectMenuController)
+
+import SlideDrawerController from "./slide_drawer_controller"
+application.register("slide-drawer", SlideDrawerController)
 
 import SwitchController from "./switch_controller"
 application.register("switch", SwitchController)

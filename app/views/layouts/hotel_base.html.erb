@@ -38,5 +38,24 @@
   <div><%= content_for(:breadcrumbs) %></div>
   <%= yield %>
 </div>
+
+<div data-controller="slide-drawer" id="slide-drawer">
+  <div class="!opacity-0 invisible transition-all duration-500 fixed h-full w-full z-20 bg-black opacity-50 top-0 left-0"
+       data-slide-drawer-target="backdrop"
+       data-action="click->slide-drawer#hide:prevent">
+  </div>
+  <div class="translate-x-[768px] transition-all duration-500 ease-out fixed h-full w-[768px] z-20 bg-white top-0 right-0 overflow-auto"
+       data-slide-drawer-target="drawer">
+    <%= button_tag type: :button,
+                   data: {action: "click->slide-drawer#hide"},
+                   class: "absolute top-2 right-2 h-14 w-14 p-1 bg-gray-500 text-white hover:bg-gray-400 active:bg-gray-600" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+      </svg>
+    <% end %>
+    <%= turbo_frame_tag :slide_drawer do %>
+    <% end %>
+  </div>
+</div>
 </body>
 </html>
