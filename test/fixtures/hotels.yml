@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+haleclani:
+  name: ハレクラニ沖縄
+  prefecture: 沖縄県
+  city: 恩納村
+  tagline: ハワイで100年以上続く「ハレクラニ」の世界2軒目となるホテル
+  description:
+    ハレクラニ沖縄は、世界一流のホテルやレストラン、スパの格付けを行う「フォーブス・トラベルガイド2024」の「スパ部門」において、スパハレクラニが初めて最高評価の5つ星スパに認定されました。また、「ホテル部門」においては、3年連続で5つ星を獲得いたしました。<br>
+    5周年を迎える2024年の記念の年に、世界的評価の高い「フォーブス・トラベルガイド」で、沖縄で唯一「スパ」「ホテル」両部門で5つ星に選ばれたことは大変光栄です。今後もこの評価を維持し、ハレクラニ沖縄をご愛顧くださるゲストの皆さまの声やご要望に真摯にお応えし、皆さまに選ばれるホテルであり続けるよう、尽力してまいります。
+
+two:
+  name: MyString
+  prefecture: MyString
+  city: MyString
+  tagline: MyString
+  description: MyText

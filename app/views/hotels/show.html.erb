@@ -1,0 +1,66 @@
+<div data-controller="carousel" class="relative">
+  <div class="w-full h-[360px]">
+    <% ["10543662.jpg", "11471947.jpg", "11471976.jpg", "11471978.jpg"].each_with_index do |filename, i| %>
+      <div class="<%= "invisible opacity-0" unless i == 0 %> transition-all duration-1000"
+           data-carousel-target="slide"
+           data-carousel-key="<%= i %>">
+        <%= image_tag "hotel_images/#{filename}", class: "absolute w-full h-[360px] object-cover" %>
+      </div>
+    <% end %>
+  </div>
+  <%= button_tag "<", type: "button",
+                 class: "absolute w-8 h-8 p-1 rounded-full block top-[170px] left-[10px] bg-white opacity-40 hover:opacity-100",
+                 data: {action: "click->carousel#previous"} do %>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+    </svg>
+<% end %>
+  <%= button_tag type: "button",
+                 class: "absolute w-8 h-8 p-1 rounded-full block top-[170px] right-[10px] bg-white opacity-40 hover:opacity-100",
+                 data: {action: "click->carousel#next"} do %>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+    </svg>
+<% end %>
+  <div class="inline-block absolute bottom-4 left-[50%] -translate-x-1/2">
+    <% 0.upto(3).each do |index| %>
+      <%= button_tag "⚫︎",
+                     type: :button,
+                     class: "text-white #{index == 0 ? "opacity-100" : "opacity-50"}",
+                     data: {action: "click->carousel#move",
+                            carousel_index_param: index,
+                            carousel_target: "pagination"
+                     }
+      %>
+    <% end %>
+  </div>
+</div>
+<div role="tablist" class="flex flex-row shadow-md border">
+  <%= link_to "部屋・プラン", "", class: "px-4 inline-block py-4 h-16 text-lg border-b-4 border-blue-500" %>
+  <%= link_to "宿の紹介", "", class: "px-4 inline-block py-4 h-16 text-lg" %>
+  <%= link_to "クチコミ", "", class: "px-4 inline-block py-4 h-16 text-lg" %>
+  <%= link_to "アクセス", "", class: "px-4 inline-block py-4 h-16 text-lg" %>
+  <%= link_to "空室カレンダー", "", class: "px-4 inline-block py-4 h-16 text-lg" %>
+  <%= link_to "写真", "", class: "px-4 inline-block py-4 h-16 text-lg" %>
+</div>
+
+<p style="color: green"><%= notice %></p>
+
+<main class="mt-8 container mx-auto">
+  <h1 class="text-3xl font-bold"><%= @hotel.name %></h1>
+  <div class="mt-2 text-sm"><%= @hotel.prefecture %>/<%= @hotel.city %></div>
+
+  <h2 class="text-lg font-bold mt-8"><%= @hotel.tagline %></h2>
+
+  <div class="mt-6">
+    <%= sanitize @hotel.description %>
+  </div>
+</main>
+
+
+<div>
+  <%= link_to "Edit this hotel", edit_hotel_path(@hotel) %> |
+  <%= link_to "Back to hotels", hotels_path %>
+
+  <%= button_to "Destroy this hotel", @hotel, method: :delete %>
+</div>

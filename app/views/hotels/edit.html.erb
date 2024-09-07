@@ -1,0 +1,12 @@
+<% content_for :title, "Editing hotel" %>
+
+<h1>Editing hotel</h1>
+
+<%= render "form", hotel: @hotel %>
+
+<br>
+
+<div>
+  <%= link_to "Show this hotel", @hotel %> |
+  <%= link_to "Back to hotels", hotels_path %>
+</div>

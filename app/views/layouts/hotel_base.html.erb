@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for(:title) || "Tailwind Rails" %></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= yield :head %>
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+</head>
+
+<body>
+<div class="w-full min-w-[768px]">
+  <nav class="flex h-16">
+    <div class="h-14 w-14">
+      <%= image_tag "orange-tabby-cat-dribbble.jpg",
+                    size: "56x56",
+                    class: "object-cover h-14 w-14",
+                    alt: "logo" %>
+    </div>
+    <div class="h-14 grow flex pl-6 items-center">
+      <%= link_to "レストラン予約", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
+      <%= link_to "スパ予約", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
+      <%= link_to "海外宿泊予約", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
+      <%= link_to "お取り寄せ", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
+      <%= link_to "ふるさと納税", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
+      <%= link_to "宿泊＋航空券", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
+    </div>
+  </nav>
+  <div><%= content_for(:breadcrumbs) %></div>
+  <%= yield %>
+</div>
+</body>
+</html>
