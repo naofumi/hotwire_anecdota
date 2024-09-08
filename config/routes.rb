@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :features
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -14,14 +15,14 @@ Rails.application.routes.draw do
 
   resources :components, only: [ :index, :show ]
   resources :hotels do
-    resource :description, module: :hotels do
-      member do
+    resources :features, module: :hotels do
+      collection do
         get :room
         get :restaurant
-        get :amenities
+        get :service
         get :basic_info
       end
     end
   end
-
+  resource :iphone
 end

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @feature %>
+
+<div>
+  <%= link_to "Edit this feature", edit_feature_path(@feature) %> |
+  <%= link_to "Back to features", features_path %>
+
+  <%= button_to "Destroy this feature", @feature, method: :delete %>
+</div>

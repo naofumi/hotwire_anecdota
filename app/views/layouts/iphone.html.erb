@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for(:title) || "Tailwind Rails" %></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= yield :head %>
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+</head>
+
+<body>
+<div class="w-full mx-auto min-w-[1028px] lg:max-w-5xl px-4">
+  <nav class="flex justify-between mt-2">
+    <%= link_to "Apple", "", class: "text-sm font-light" %>
+    <%= link_to "Store", "", class: "text-sm font-light" %>
+    <%= link_to "Mac", "", class: "text-sm font-light" %>
+    <%= link_to "iPad", "", class: "text-sm font-light" %>
+    <%= link_to "iPhone", "", class: "text-sm font-light" %>
+    <%= link_to "Watch", "", class: "text-sm font-light" %>
+    <%= link_to "Vision", "", class: "text-sm font-light" %>
+    <%= link_to "AirPods", "", class: "text-sm font-light" %>
+    <%= link_to "TV & Home", "", class: "text-sm font-light" %>
+    <%= link_to "Entertainment", "", class: "text-sm font-light" %>
+    <%= link_to "Accessories", "", class: "text-sm font-light" %>
+    <%= link_to "Support", "", class: "text-sm font-light" %>
+    <%= link_to "Search", "", class: "text-sm font-light" %>
+    <%= link_to "Cart", "", class: "text-sm font-light" %>
+  </nav>
+  <div><%= content_for(:breadcrumbs) %></div>
+  <%= yield %>
+</div>
+</body>
+</html>

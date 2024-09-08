@@ -19,6 +19,9 @@ application.register("hamburger", HamburgerController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import ImageSwitcherController from "./image_switcher_controller"
+application.register("image-switcher", ImageSwitcherController)
+
 import NavbarController from "./navbar_controller"
 application.register("navbar", NavbarController)
 

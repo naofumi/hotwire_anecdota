@@ -1,0 +1,79 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+halekulani_topic1:
+  tagline: 天国の名にもっともふさわしい楽園へ
+  description:
+    ハワイの言葉で「天国にふさわしい館」を意味するハレクラニは、ワイキキビーチで100年以上にわたる歴史を重ね、世代を超えて多くのお客さまに愛されてきたホテルブランドです。その2つめのホテルとなるハレクラニ沖縄は、沖縄海岸国定公園として守られてきた恩納村の優雅な海辺で、新たな時代のラグジュアリーをご提供します。
+  category: topic
+  image_path: a_tpc01_190909.jpg.webp
+  position: 1
+  hotel: halekulani
+
+halekulani_topic2:
+  tagline: すべての客室がオーシャンビュー
+  description:
+    ハレクラニ沖縄では、ご滞在するすべてのお客様にオーシャンビューと沖縄の自然を満喫できる客室をご用意しております。<br>
+    全室50平米以上の白を基調としたリラックスした空間と、心地よい時間を過ごせるテラス付き。<br>
+    ハレクラニのアイデンティティである「Seven Shades of White（7色の白）」のコンセプトを
+    受け継ぎ、優美な白に満たされた滞在空間は、窓の外に広がる青く美しい世界をいっそう鮮やかに映し出します。
+  category: topic
+  image_path: a_tp_01_240808.jpg.webp
+  position: 2
+  hotel: halekulani
+
+halekulani_topic3:
+  tagline: 美しい空間デザイン
+  description:
+    リゾート内のあらゆる空間が、「ハレクラニ」の世界観をそのまま体現しています。陽気な楽園ムードに心が華やぐオールデイダイニング、落ち着きと風格を醸すステーキ＆ワイン、ドラマティックなサンセットを満喫するバーなど、それぞれインテリアの趣は異なりますが、どの空間においても「優雅なおもてなし」を体感いただけるハレクラニスピリットが息づいています。
+  category: topic
+  image_path: a_tp_02_240808.jpg.webp
+  position: 3
+  hotel: halekulani
+
+halekulani_topic4:
+  tagline: スタッフの心からのホスピタリティ
+  description:
+    ハレクラニ沖縄で過ごすラグジュアリーな1日。この奇跡の楽園においては、あらゆるシーンに特別な時間が流れています。<br>
+    ヴァカンス、ハネムーン、一人旅などお越しになる目的はさまざまでも、一貫して変わらないのは、スタッフの心からのホスピタリティ。ハレクラニの伝統的なおもてなしを大切にしながら、パーソナルでプロフェッショナルなサービスを体感いただけます。ハレクラニに愛着をもち、誇りと情熱を心に抱いて、お客さまをお迎えします。
+  category: topic
+  image_path: a_tp_03a_220622.jpg.webp
+  position: 4
+  hotel: halekulani
+
+halekulani_room1:
+  tagline: VILLAS
+  description:
+    青い海が間近に広がるクリフトップには、プライベートプール(温水)と天然温泉を備えた5棟のヴィラがございます。<br>
+    頂点の贅沢を満喫しながら、まるで我が家のようなくつろぎを感じていただけます。
+  category: room
+  image_path: b_ss1_02_240808.jpg.webp
+  position: 1
+  hotel: halekulani
+
+halekulani_room2:
+  tagline: SUITES
+  description:
+    絶佳の眺望を誇る広さ76平米のエグゼクティブオーシャン スイートから、贅沢の頂点を極めたペントハウスタイプのプライベートプールも備えた広さ294㎡のオーキッド スイートまで、まさに天国にふさわしい滞在をご提供します。
+  category: room
+  image_path: b_ss2_01_240808.jpg.webp
+  position: 2
+  hotel: halekulani
+
+halekulani_room3:
+  tagline: STANDARD ROOMS
+  description:
+    新たなラグジュアリーのスタンダードとなるテラス付き広さ50平米のゲストルームは、ビーチフロントウイング、サンセットウイングに7つのタイプをご用意しました。お客さまの求める滞在スタイルに合わせて、お選びいただけます。
+  category: room
+  image_path: b_ss3_01_240808.jpg.webp
+  position: 3
+  hotel: halekulani
+
+halekulani_room4:
+  tagline: CLUB LOUNGE
+  description:
+    サンセットウィング5階には、クラブラウンジをご用意しました。プレミアクラブオーシャンフロント、ヴィラにご宿泊のお客さまが、ご利用いただけます。クラブラウンジレセプションには専任スタッフが常駐し、快適な滞在のお手伝いをいたします。<br>
+    心地よいテラス席も設けたラウンジ内では、終日シャンパンサービスをご堪能いただけます。また、朝食をお召し上がりいただけるほか、アフタヌーンティーやカクテルなどをご自由にお楽しみください。
+  category: room
+  image_path: b_ss4_01_240808.jpg.webp
+  position: 4
+  hotel: halekulani

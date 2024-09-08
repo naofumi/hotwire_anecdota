@@ -1,6 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-haleclani:
+halekulani:
   name: ハレクラニ沖縄
   prefecture: 沖縄県
   city: 恩納村
