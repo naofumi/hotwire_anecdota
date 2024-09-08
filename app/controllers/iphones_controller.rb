@@ -7,6 +7,7 @@ class IphonesController < ApplicationController
   def create
     @iphone.model = params[:model] if params[:model]
     @iphone.color = params[:color] if params[:color]
+    @iphone.ram = params[:ram] if params[:ram]
     redirect_to iphone_path
   end
 

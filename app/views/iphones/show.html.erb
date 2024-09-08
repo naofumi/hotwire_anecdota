@@ -1,5 +1,13 @@
 <% turbo_refreshes_with(method: :morph, scroll: :preserve) %>
 
+<div class="text-xl z-10 font-bold sticky top-0 right-0 h-8 w-full">
+  <div class="animate-bounce ml-auto p-2 bg-white text-center w-[400px]">
+    <%= "From #{number_to_currency @iphone.pricing.lump, locale: :en}" %>
+    <%= "or #{number_to_currency @iphone.pricing.monthly, locale: :en}" %>
+    for 24 mo.*
+  </div>
+</div>
+
 <div class="pt-12 pb-6">
   <h1 class="text-5xl">Buy iPhone 15 Pro</h1>
   <div class="text-sm mt-4 text-light">From $1399 or $58.29/mo. for 24 mo.<sup>*</sup></div>
@@ -17,20 +25,29 @@
       <h2 class="mb-6 text-2xl">Model. <span class="text-gray-400">Which is best for you?</span></h2>
       <div>
         <%= form_with url: iphone_path, method: :post do %>
-          <%= render 'option',
-                     name: :model,
-                     value: "6-1inch",
-                     selected: @iphone.model == "6-1inch",
-                     title: "iPhone 15 Pro",
-                     subtitle: "6.1-inch display",
-                     pricing_lines: ["From $999", "or $41.62/mo.", "for 24 mo."] %>
-          <%= render 'option',
-                     name: :model,
-                     value: "6-7inch",
-                     selected: @iphone.model == "6-7inch",
-                     title: "iPhone 15 Pro Max",
-                     subtitle: "6.7-inch display",
-                     pricing_lines: ["From $1199", "or $49.95/mo.", "for 24 mo."] %>
+          <%= fieldset_tag nil, disabled: !@iphone.model_enterable?, class: "disabled:opacity-30" do %>
+            <%= render 'option',
+                       name: :model,
+                       value: "6-1inch",
+                       selected: @iphone.model == "6-1inch",
+                       title: "iPhone 15 Pro",
+                       subtitle: "6.1-inch display",
+                       pricing_lines: ["From #{number_to_currency Iphone.pricing_for("6-1inch").lump, locale: :en}",
+                                       "or #{number_to_currency Iphone.pricing_for("6-1inch").monthly, locale: :en}/mo.",
+                                       "for 24 mo."]
+            %>
+            <%= render 'option',
+                       name: :model,
+                       value: "6-7inch",
+                       selected: @iphone.model == "6-7inch",
+                       title: "iPhone 15 Pro Max",
+                       subtitle: "6.7-inch display",
+                       pricing_lines: ["From #{number_to_currency Iphone.pricing_for("6-7inch").lump, locale: :en}",
+                                       "or #{number_to_currency Iphone.pricing_for("6-7inch").monthly, locale: :en}/mo.",
+                                       "for 24 mo."]
+
+            %>
+          <% end %>
         <% end %>
         <div class="flex justify-between mt-4 p-4 block bg-gray-100 rounded-lg w-full">
           <div class="text-sm">
@@ -48,28 +65,76 @@
 
     <div class="mt-48">
       <h2 class="mb-6 text-2xl">Finish. <span class="text-gray-400">Pick your favorite</span></h2>
-      <%= tag.div data: {controller: "image-switcher", image_switcher_iphone_value: @iphone} do %>
+      <%= tag.div data: { controller: "image-switcher", image_switcher_iphone_value: @iphone } do %>
         <div class="text-xl my-4" data-image-switcher-target="colorText"><%= @iphone.color_name %></div>
 
         <%= form_with url: iphone_path, method: :post do %>
-          <%= render 'color_option',
-                     value: "naturaltitanium",
-                     color: "bg-gray-400",
-                     iphone: @iphone %>
-          <%= render 'color_option',
-                     value: "bluetitanium",
-                     color: "bg-indigo-800",
-                     iphone: @iphone %>
-          <%= render 'color_option',
-                     value: "whitetitanium",
-                     color: "bg-white",
-                     iphone: @iphone %>
-          <%= render 'color_option',
-                     value: "blacktitanium",
-                     color: "bg-black",
-                     iphone: @iphone %>
+          <%= fieldset_tag nil, disabled: !@iphone.color_enterable?, class: "disabled:opacity-30" do %>
+            <%= render 'color_option',
+                       value: "naturaltitanium",
+                       color: "bg-gray-400",
+                       iphone: @iphone %>
+            <%= render 'color_option',
+                       value: "bluetitanium",
+                       color: "bg-indigo-800",
+                       iphone: @iphone %>
+            <%= render 'color_option',
+                       value: "whitetitanium",
+                       color: "bg-white",
+                       iphone: @iphone %>
+            <%= render 'color_option',
+                       value: "blacktitanium",
+                       color: "bg-black",
+                       iphone: @iphone %>
+          <% end %>
         <% end %>
       <% end %>
     </div>
+
+    <div class="mt-48">
+      <h2 class="mb-6 text-2xl">Storage. <span class="text-gray-400">How much space do you need?</span></h2>
+      <div>
+        <%= form_with url: iphone_path, method: :post do %>
+          <%= fieldset_tag nil, disabled: !@iphone.ram_enterable?, class: "disabled:opacity-30" do %>
+            <%= render 'option',
+                       name: :ram,
+                       value: "256GB",
+                       selected: @iphone.ram == "256GB",
+                       title: "256GB<sup>2</sup>".html_safe,
+                       pricing_lines: ["From #{number_to_currency Iphone.pricing_for(@iphone.model, "256GB").lump, locale: :en}",
+                                       "or #{number_to_currency Iphone.pricing_for(@iphone.model, "256GB").monthly, locale: :en}/mo.",
+                                       "for 24 mo."] %>
+            <%= render 'option',
+                       name: :ram,
+                       value: "512GB",
+                       selected: @iphone.ram == "512GB",
+                       title: "512GB<sup>*</sup>".html_safe,
+                       pricing_lines: ["From #{number_to_currency Iphone.pricing_for(@iphone.model, "512GB").lump, locale: :en}",
+                                       "or #{number_to_currency Iphone.pricing_for(@iphone.model, "512GB").monthly, locale: :en}/mo.",
+                                       "for 24 mo."] %>
+            <%= render 'option',
+                       name: :ram,
+                       value: "1TB",
+                       selected: @iphone.ram == "1TB",
+                       title: "1TB<sup>2</sup>".html_safe,
+                       pricing_lines: ["From #{number_to_currency Iphone.pricing_for(@iphone.model, "1TB").lump, locale: :en}",
+                                       "or #{number_to_currency Iphone.pricing_for(@iphone.model, "1TB").monthly, locale: :en}/mo.",
+                                       "for 24 mo."] %>
+          <% end %>
+        <% end %>
+        <div class="flex justify-between mt-4 p-4 block bg-gray-100 rounded-lg w-full">
+          <div class="text-sm">
+            <div class="font-bold">Need help choosing a model?</div>
+            <div class="font-light">Explore the differences in screen size and battery life</div>
+          </div>
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 <% end %>
