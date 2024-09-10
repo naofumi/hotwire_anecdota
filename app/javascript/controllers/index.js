@@ -16,6 +16,9 @@ application.register("drawer-trigger", DrawerTriggerController)
 import DropdownController from "./dropdown_controller"
 application.register("dropdown", DropdownController)
 
+import GlobalNotificationController from "./global_notification_controller"
+application.register("global-notification", GlobalNotificationController)
+
 import HamburgerController from "./hamburger_controller"
 application.register("hamburger", HamburgerController)
 
@@ -42,3 +45,6 @@ application.register("tablist", TablistController)
 
 import TiersWithToggleController from "./tiers_with_toggle_controller"
 application.register("tiers-with-toggle", TiersWithToggleController)
+
+import TodoController from "./todo_controller"
+application.register("todo", TodoController)

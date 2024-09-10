@@ -1,0 +1,38 @@
+<% turbo_refreshes_with method: :morph, scroll: :preserve %>
+
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Todos" %>
+
+<div class="max-w-lg mx-auto">
+  <h1 class="text-4xl text-center mb-16">Todos</h1>
+
+
+  <table id="todos" class="w-full border border-gray-400 rounded-lg border-spacing-0 border-separate"
+         data-controller="todo">
+    <% @todos.each do |todo| %>
+      <tr class="group p-2" id="<%= dom_id(todo) %>">
+        <td class="<%= 'highlight-on-appear' if flash[:new_todo_id] == todo.id %> p-2 border-gray-400 border-t group-[:first-child]:border-none">
+          <div class="flex justify-between">
+            <div><%= todo.title %></div>
+            <%= button_to todo, method: :delete, data: {action: "click->todo#delete", todo_row_param: dom_id(todo)} do %>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+              </svg>
+              <span class="sr-only">Close</span>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+  <div class="mt-16">
+    <%= form_with model: Todo.new do |f| %>
+      <%= f.text_field :title, class: "w-full border border-gray-400 rounded-lg p-1" %>
+      <div class="mt-4 text-right">
+        <%= f.button "Post Todo!", class: "border-2 border-orange-600 bg-orange-100 hover:bg-orange-600 p-1 rounded-lg" %>
+      </div>
+    <% end %>
+  </div>
+</div>

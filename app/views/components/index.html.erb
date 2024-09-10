@@ -16,3 +16,20 @@
     </div>
   <% end %>
 </div>
+
+<h2 class="mt-36 text-5xl font-extralight text-center">
+  Other Rails Frontend Experiments
+</h2>
+
+<div class="flex flex-row space-x-2 mt-12">
+  <% @available_projects.each do |name, url| %>
+    <div class="overflow-hidden rounded-lg bg-white shadow">
+      <%= link_to url,
+                  class: "text-center text-gray-600 font-bold text-lg" do %>
+        <div class="px-4 py-5 sm:p-6 bg-orange-100 hover:bg-orange-600 hover:text-white">
+          <%= name %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

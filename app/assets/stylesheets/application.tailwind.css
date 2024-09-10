@@ -81,3 +81,13 @@
         @apply !bg-indigo-600 !text-white
     }
 }
+
+.highlight-on-appear {
+    transition: background-color ease-out 1s;
+
+    @starting-style {
+        background-color: yellow;
+    }
+}
+
+

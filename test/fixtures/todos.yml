@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: 歯を磨く
+  completed_at: <%= 1.hour.ago %>
+
+two:
+  title: 朝ごはんを食べる
+  completed_at: null
+
+three:
+  title: 服を着る
+  completed_at: null
+
+four:
+  title: 猫を撫でる
+  completed_at: null

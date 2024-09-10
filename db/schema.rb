@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_07_075950) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_08_064946) do
   create_table "features", force: :cascade do |t|
     t.string "tagline"
     t.string "description"
@@ -29,6 +29,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_07_075950) do
     t.string "city"
     t.string "tagline"
     t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "todos", force: :cascade do |t|
+    t.string "title", null: false
+    t.datetime "completed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
