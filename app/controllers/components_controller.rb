@@ -17,7 +17,6 @@ class ComponentsController < ApplicationController
     def available_projects
       { "一休.com tracing" => hotels_path,
         "Apple.com iPhone" => iphone_path,
-        "Apple.com iPhone サーバ通信少" => iphone_client_side_path,
         "Todo: List animations" => todos_path}
     end
 end
