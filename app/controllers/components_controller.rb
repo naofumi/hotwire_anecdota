@@ -15,8 +15,11 @@ class ComponentsController < ApplicationController
   private
 
     def available_projects
-      { "一休.com tracing" => hotels_path,
+      {
+        "一休.com tracing" => hotels_path,
         "Apple.com iPhone" => iphone_path,
-        "Todo: List animations" => todos_path}
+        "Todo: List animations with Notifications" => todos_path,
+        "Files" => file_nodes_path,
+      }
     end
 end

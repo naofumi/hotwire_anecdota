@@ -1,0 +1,60 @@
+<%= turbo_frame_tag dom_id(file_node),
+                    class: "flex justify-between",
+                    data: { controller: "file-node-name",
+                            action: "turbo:frame-load->file-node-name#selectInput"} do %>
+  <span><%= file_node.name %></span>
+  <div class="relative flex">
+    <%= link_to "Edit", [:edit, file_node], class: "p-1", tabindex: 0 %>
+    <%= tag.div class: "relative",
+                data: { controller: 'popup',
+                        popup_popup_outlet: "*[data-controller=popup]",
+                        action: "keydown.esc->popup#close:prevent:stop" } do %>
+      <button data-action="click->popup#showPopup">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 inline-block">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+        </svg>
+      </button>
+      <dialog class="shadow-lg file-node-popup absolute z-20 -top-1 left-10 w-36 p-2 border rounded border-gray-400 bg-white"
+              data-popup-target="popup">
+        <div class="w-full h-6 flex justify-between">
+          <div></div>
+          <button data-action="click->popup#close">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+            </svg>
+          </button>
+        </div>
+        <div>
+          <ul class="text-left"
+              data-controller="option-list"
+              data-action="keydown.up->option-list#up keydown.down->option-list#down"
+          >
+            <li class="">
+              <a tabindex="0"
+                 autofocus
+                 href="<%= url_for [:details, file_node] %>"
+                 data-turbo-frame="<%= "details_#{dom_id(file_node)}" %>"
+                 data-action="turbo:click->file-node-name#show turbo:click->popup#close"
+                 class="inline-block focus:outline-none focus:bg-gray-300 w-full h-full" data-option-list-target="option">
+                情報を見る
+              </a>
+            </li>
+            <li class="">
+              <a href="<%= url_for [:edit, file_node] %>" tabindex="0" class="inline-block focus:outline-none focus:bg-gray-300 w-full h-full" data-option-list-target="option">
+                名前を変更
+              </a>
+            </li>
+            <li class="">
+              <a tabindex="0" class="inline-block focus:outline-none focus:bg-gray-300 w-full h-full" data-option-list-target="option">
+                複製
+              </a>
+            </li>
+          </ul>
+        </div>
+      </dialog>
+    <% end %>
+  </div>
+  <%= turbo_frame_tag "details_#{dom_id(file_node)}",
+                      data: { file_node_name_target: "detail" },
+                      class: "hidden fixed top-0 left-0 border border-red-500 bg-white" %>
+<% end %>

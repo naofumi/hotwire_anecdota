@@ -16,6 +16,9 @@ application.register("drawer-trigger", DrawerTriggerController)
 import DropdownController from "./dropdown_controller"
 application.register("dropdown", DropdownController)
 
+import FileNodeNameController from "./file_node_name_controller"
+application.register("file-node-name", FileNodeNameController)
+
 import GlobalNotificationController from "./global_notification_controller"
 application.register("global-notification", GlobalNotificationController)
 
@@ -30,6 +33,12 @@ application.register("image-switcher", ImageSwitcherController)
 
 import NavbarController from "./navbar_controller"
 application.register("navbar", NavbarController)
+
+import OptionListController from "./option_list_controller"
+application.register("option-list", OptionListController)
+
+import PopupController from "./popup_controller"
+application.register("popup", PopupController)
 
 import SelectMenuController from "./select_menu_controller"
 application.register("select-menu", SelectMenuController)

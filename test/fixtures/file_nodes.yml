@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+root_file_1:
+  name: File 1
+  directory: /
+
+root_file_2:
+  name: File 2
+  directory: /

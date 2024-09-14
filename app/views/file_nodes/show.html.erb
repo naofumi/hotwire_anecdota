@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @file_node %>
+
+<div>
+  <%= link_to "Edit this file node", edit_file_node_path(@file_node) %> |
+  <%= link_to "Back to file nodes", file_nodes_path %>
+
+  <%= button_to "Destroy this file node", @file_node, method: :delete %>
+</div>

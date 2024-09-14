@@ -1,0 +1,15 @@
+<%= form_with model: file_node,
+              method: :patch,
+              class: "flex justify-between w-full" do |f| %>
+  <div>
+    <%= f.text_field :name, class: "border-none p-1 w-full text-black",
+                     autofocus: true,
+                     required: true,
+                     data: { action: "blur->file-node-name#submit keydown.esc->file-node-name#reset:stop:prevent",
+                             file_node_name_target: "input"} %>
+    <% if f.object.errors.any? %>
+      <div class="text-red-600"><%= safe_join f.object.errors.full_messages %></div>
+    <% end %>
+  </div>
+  <%= f.button "Save", data: { turbo_submits_with: "Saving..." } %>
+<% end %>
