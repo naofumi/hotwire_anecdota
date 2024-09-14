@@ -20,6 +20,7 @@ class ComponentsController < ApplicationController
         "Apple.com iPhone" => iphone_path,
         "Todo: List animations with Notifications" => todos_path,
         "Files" => file_nodes_path,
+        "Kanban" => board_path
       }
     end
 end

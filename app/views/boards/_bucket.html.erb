@@ -1,0 +1,8 @@
+<div class="basis-64 grow-0 shrink h-96 border rounded border-gray-400">
+  <div class="w-100 py-2 border-b border-gray-400 font-bold">
+    <%= bucket.name %>
+  </div>
+  <div class="flex flex-col">
+    <%= render partial: "task", collection: bucket.tasks.order(:position) %>
+  </div>
+</div>

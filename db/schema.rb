@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_11_105948) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_14_134833) do
+  create_table "activities", force: :cascade do |t|
+    t.string "trackable_type", null: false
+    t.integer "trackable_id", null: false
+    t.string "event"
+    t.string "before"
+    t.string "after"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable"
+  end
+
+  create_table "buckets", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "position", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "features", force: :cascade do |t|
     t.string "tagline"
     t.string "description"
@@ -40,6 +58,19 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_11_105948) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tasks", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.integer "position", null: false
+    t.datetime "deadline"
+    t.integer "bucket_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bucket_id"], name: "index_tasks_on_bucket_id"
+    t.index ["user_id"], name: "index_tasks_on_user_id"
+  end
+
   create_table "todos", force: :cascade do |t|
     t.string "title", null: false
     t.datetime "completed_at"
@@ -47,5 +78,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_11_105948) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "features", "hotels"
+  add_foreign_key "tasks", "buckets"
+  add_foreign_key "tasks", "users"
 end

@@ -1,0 +1,12 @@
+<% content_for :title, "New task" %>
+
+<h1>New task</h1>
+
+<%= turbo_frame_tag :side_panel do %>
+  <%= render "form", task: @task %>
+<% end %>
+<br>
+
+<div>
+  <%= link_to "Back to tasks", tasks_path %>
+</div>

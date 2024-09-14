@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @bucket %>
+
+<div>
+  <%= link_to "Edit this bucket", edit_bucket_path(@bucket) %> |
+  <%= link_to "Back to buckets", buckets_path %>
+
+  <%= button_to "Destroy this bucket", @bucket, method: :delete %>
+</div>

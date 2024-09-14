@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -12,7 +13,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "components#index"
 
-  resources :components, only: [ :index, :show ]
+  resource :board
+  resources :buckets
+  resources :components, only: [:index, :show]
+  resources :features
   resources :file_nodes do
     get :details, on: :member
   end
@@ -27,6 +31,10 @@ Rails.application.routes.draw do
     end
   end
   resource :iphone
+  resources :tasks do
+    scope module: :tasks do
+      resource :completion
+    end
+  end
   resources :todos
-  resources :features
 end

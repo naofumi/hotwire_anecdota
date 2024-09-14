@@ -1,0 +1,10 @@
+<%= link_to task,
+            id: dom_id(task),
+            class: "highlightable m-2 p-2 border rounded border-gray-400 #{dom_id(task) == flash[:current] ? "bg-yellow-200" : nil}",
+            data: { turbo_frame: :side_panel,
+                    controller: "side-panel-opener",
+                    side_panel_opener_panel_value: "#side-panel",
+                    highlightable_target: "highlightee",
+                    action: "turbo:click->side-panel-opener#show turbo:click->highlightable#highlight"} do %>
+  <%= task.name %>
+<% end %>

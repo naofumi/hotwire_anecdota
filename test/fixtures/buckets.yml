@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+todo:
+  name: To Do
+  position: 1
+
+in_progress:
+  name: In Progress
+  position: 2
+
+complete:
+  name: Complete
+  position: 3

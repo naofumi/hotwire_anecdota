@@ -1,0 +1,18 @@
+<%= turbo_refreshes_with method: :morph, scroll: :preserve %>
+
+<div data-controller="highlightable"
+     data-highlightable-highlight-class="bg-yellow-200">
+  <div class="text-center">
+    <h1 class="text-4xl font-light">Kanban</h1>
+    <%= link_to "new bucket", new_bucket_path, class: "bg-green-400 rounded" %>
+    <div class="flex gap-x-4">
+      <%= render partial: "bucket", collection: @buckets %>
+    </div>
+  </div>
+
+  <dialog id="side-panel"
+          data-turbo-permanent
+          class="fixed mr-0 top-0 right-0 h-full w-96 border border-gray-400">
+    <%= turbo_frame_tag :side_panel %>
+  </dialog>
+</div>

@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Buckets" %>
+
+<h1>Buckets</h1>
+
+<div id="buckets">
+  <% @buckets.each do |bucket| %>
+    <%= render bucket %>
+    <p>
+      <%= link_to "Show this bucket", bucket %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New bucket", new_bucket_path %>

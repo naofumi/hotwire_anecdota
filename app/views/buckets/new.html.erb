@@ -1,0 +1,11 @@
+<% content_for :title, "New bucket" %>
+
+<h1>New bucket</h1>
+
+<%= render "form", bucket: @bucket %>
+
+<br>
+
+<div>
+  <%= link_to "Back to buckets", buckets_path %>
+</div>

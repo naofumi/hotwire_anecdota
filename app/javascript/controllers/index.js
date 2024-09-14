@@ -7,6 +7,9 @@ import { application } from "./application"
 import AccordionController from "./accordion_controller"
 application.register("accordion", AccordionController)
 
+import AutosubmitController from "./autosubmit_controller"
+application.register("autosubmit", AutosubmitController)
+
 import CarouselController from "./carousel_controller"
 application.register("carousel", CarouselController)
 
@@ -19,6 +22,9 @@ application.register("dropdown", DropdownController)
 import FileNodeNameController from "./file_node_name_controller"
 application.register("file-node-name", FileNodeNameController)
 
+import FormResponderController from "./form_responder_controller"
+application.register("form-responder", FormResponderController)
+
 import GlobalNotificationController from "./global_notification_controller"
 application.register("global-notification", GlobalNotificationController)
 
@@ -27,6 +33,9 @@ application.register("hamburger", HamburgerController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import HighlightableController from "./highlightable_controller"
+application.register("highlightable", HighlightableController)
 
 import ImageSwitcherController from "./image_switcher_controller"
 application.register("image-switcher", ImageSwitcherController)
@@ -42,6 +51,9 @@ application.register("popup", PopupController)
 
 import SelectMenuController from "./select_menu_controller"
 application.register("select-menu", SelectMenuController)
+
+import SidePanelOpenerController from "./side_panel_opener_controller"
+application.register("side-panel-opener", SidePanelOpenerController)
 
 import SlideDrawerController from "./slide_drawer_controller"
 application.register("slide-drawer", SlideDrawerController)

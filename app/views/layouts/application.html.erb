@@ -17,8 +17,8 @@
   <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
 </head>
 
-<body>
-<div class="container container-lg mx-auto px-4 mt-16">
+<body class="relative">
+<div class="container container-lg mx-auto px-4 pt-16">
   <div><%= content_for(:breadcrumbs) %></div>
   <%= yield %>
 </div>
