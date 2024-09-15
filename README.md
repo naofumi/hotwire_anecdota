@@ -40,3 +40,50 @@ instead of composing inside the controller.
 However, this is actually similar to how Tailwind works,
 and may be preferred if used in combination with HTML components. 
 
+## Hierarchy Patterns
+
+Stimulus controllers can manage actions and targets that belong to the element on which the controller was defined.
+Hence, the DOM hierarchy directly impacts the scope of Stimulus controllers.
+
+This is similar to React – React components communicate between each other through props.
+Therefore, to control two elements, you need to put state management and controls into a common ancestor.
+In some cases, this can mean that you have to go pretty high-up in the tree.
+If this is challenging to manage, then you can use global contexts like `useContext` or `useReducer`.
+
+Likewise, when the actions and targets of Stimulus controllers are spread widely in the document,
+then the most straightforward approach is to define the controller in a common ancestor.
+Unlike React, you don't need prop-drilling to access elements deep in the hierarchy,
+and so this solution is typically simpler.
+
+On the other hand, Stimulus offers a few alternatives.
+
+1. You can communicate between controllers either using custom events or by using Outlets.
+2. You can directly change the `values` on a controller, which will automatically trigger a callback inside it.
+3. If you do not need to go through a controller, you can directly change an element outside the hierarchy.
+
+The abundance of options makes it hard to decide.
+
+In the case of 1 and 2, you need to create a separate controller.
+Typically, you will have a controller to trigger an event and a controller to respond to it.
+You also have to define an agreement between these two controllers regarding how they identify themselves – i.e.,
+how will the trigger controller identify the responder.
+This means more moving parts and additional complexity.
+
+The third option means that you are no longer using Stimulus.
+For example, if you are using Stimulus to open a popup which is outside the triggering controller,
+and that popup also needs a close button, then you can't put an action onto it.
+You will need an additional controller for this.
+
+Given the above limitations,
+the recommendation is
+to put the Stimulus controller in a common ancestor which encompasses the actions and the targets.
+Note that a single DOM element can have an action or be a target of multiple Stimulus controllers,
+and so Stimulus controllers can overlap each other comfortably.
+
+Limiting the scope of a Stimulus controller certainly makes the code easier to read,
+but when you need to expand the scope,
+then it is often a better option than the alternatives (inter-controller communication).
+
+If the controller has too many responsibilities, however, then inter-controller communication will be an option.
+Don't use inter-controller communication just to avoid expanding the DOM scope,
+but use it if it helps break up the responsibilities.
