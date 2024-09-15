@@ -34,9 +34,6 @@ application.register("global-notification", GlobalNotificationController)
 import HamburgerController from "./hamburger_controller"
 application.register("hamburger", HamburgerController)
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
 import HighlightableController from "./highlightable_controller"
 application.register("highlightable", HighlightableController)
 
