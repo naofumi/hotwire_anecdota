@@ -23,6 +23,7 @@
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/app/assets/builds" />
     </content>
     <orderEntry type="jdk" jdkName="rbenv: 3.3.4" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

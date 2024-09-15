@@ -2,7 +2,7 @@ import {Controller} from "@hotwired/stimulus"
 
 // Connects to data-controller="accordion"
 export default class extends Controller {
-  static targets = ["revealable", "indicator"]
+  static targets = ["revealable", "toggle"]
 
   connect() {
   }
@@ -22,7 +22,7 @@ export default class extends Controller {
         target.style.height = scrollHeight + "px"
       }
     })
-    this.indicatorTargets.forEach(target => {
+    this.toggleTargets.forEach(target => {
       target.classList.toggle("rotate-180")
     })
   }
