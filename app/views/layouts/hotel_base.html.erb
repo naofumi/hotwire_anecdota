@@ -39,8 +39,12 @@
   <%= yield %>
 </div>
 
-<div data-controller="slide-drawer" id="slide-drawer">
-  <div class="!opacity-0 invisible transition-all duration-500 fixed h-full w-full z-20 bg-black opacity-50 top-0 left-0"
+<div id="slide-drawer"
+     data-controller="slide-drawer"
+     data-slide-drawer-backdrop-hide-class="!opacity-0 invisible"
+     data-slide-drawer-drawer-hide-class="translate-x-[768px]"
+>
+  <div class="!opacity-0 invisible transition-all duration-500 fixed h-full w-full z-20 bg-black top-0 left-0"
        data-slide-drawer-target="backdrop"
        data-action="click->slide-drawer#hide:prevent">
   </div>
@@ -53,8 +57,7 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
       </svg>
     <% end %>
-    <%= turbo_frame_tag :slide_drawer do %>
-    <% end %>
+    <%= turbo_frame_tag :slide_drawer %>
   </div>
 </div>
 </body>
