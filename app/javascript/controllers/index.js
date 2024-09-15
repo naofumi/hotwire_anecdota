@@ -19,6 +19,9 @@ application.register("drawer-trigger", DrawerTriggerController)
 import DropdownController from "./dropdown_controller"
 application.register("dropdown", DropdownController)
 
+import FileDetailController from "./file_detail_controller"
+application.register("file-detail", FileDetailController)
+
 import FileNodeNameController from "./file_node_name_controller"
 application.register("file-node-name", FileNodeNameController)
 

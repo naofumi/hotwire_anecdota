@@ -1,3 +1,13 @@
 <%= turbo_frame_tag "details_#{dom_id(@file_node)}" do %>
-  <h1>Details</h1>
+  <div class="w-48">
+    <h1 class="text-2xl"><%= @file_node.name %></h1>
+  </div>
+  <div>
+    <div class="font-bold text-sm">Created at:</div>
+    <div class="pl-1"><%= l @file_node.created_at, format: :short %></div>
+  </div>
+  <div>
+    <div class="font-bold text-sm">Updated at:</div>
+    <div class="pl-1"><%= l @file_node.updated_at, format: :short %></div>
+  </div>
 <% end %>

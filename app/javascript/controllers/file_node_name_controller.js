@@ -16,10 +16,6 @@ export default class extends Controller {
     this.submit(event)
   }
 
-  show(event) {
-    this.detailTarget.classList.remove('hidden')
-  }
-
   selectInput(event) {
     this.hasInputTarget && this.inputTarget.select()
   }

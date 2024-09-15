@@ -1,15 +1,17 @@
 <%= turbo_frame_tag dom_id(file_node),
                     class: "flex justify-between",
-                    data: { controller: "file-node-name",
+                    data: { controller: "file-node-name file-detail",
                             action: "turbo:frame-load->file-node-name#selectInput"} do %>
   <span><%= file_node.name %></span>
   <div class="relative flex">
     <%= link_to "Edit", [:edit, file_node], class: "p-1", tabindex: 0 %>
-    <%= tag.div class: "relative",
+    <%= tag.div class: "relative file-node-popup",
                 data: { controller: 'popup',
-                        popup_popup_outlet: "*[data-controller=popup]",
+                        popup_popup_outlet: ".file-node-popup",
                         action: "keydown.esc->popup#close:prevent:stop" } do %>
-      <button data-action="click->popup#showPopup">
+      <button data-action="click->popup#toggleAndHideOthers"
+              data-popup-target="control"
+              aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 inline-block">
           <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
         </svg>
@@ -34,7 +36,7 @@
                  autofocus
                  href="<%= url_for [:details, file_node] %>"
                  data-turbo-frame="<%= "details_#{dom_id(file_node)}" %>"
-                 data-action="turbo:click->file-node-name#show turbo:click->popup#close"
+                 data-action="turbo:click->file-detail#show turbo:click->popup#close"
                  class="inline-block focus:outline-none focus:bg-gray-300 w-full h-full" data-option-list-target="option">
                 情報を見る
               </a>
@@ -55,6 +57,6 @@
     <% end %>
   </div>
   <%= turbo_frame_tag "details_#{dom_id(file_node)}",
-                      data: { file_node_name_target: "detail" },
-                      class: "hidden fixed top-0 left-0 border border-red-500 bg-white" %>
+                      data: { file_detail_target: "panel" },
+                      class: "hidden fixed top-1 right-1 border border-gray-400 p-2 rounded shadow bg-white" %>
 <% end %>
