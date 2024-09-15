@@ -40,9 +40,6 @@ application.register("highlightable", HighlightableController)
 import ImageSwitcherController from "./image_switcher_controller"
 application.register("image-switcher", ImageSwitcherController)
 
-import NavbarController from "./navbar_controller"
-application.register("navbar", NavbarController)
-
 import OptionListController from "./option_list_controller"
 application.register("option-list", OptionListController)
 
