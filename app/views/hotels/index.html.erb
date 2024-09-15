@@ -6,9 +6,9 @@
 
 <div id="hotels">
   <% @hotels.each do |hotel| %>
-    <%= render hotel %>
+    <%= hotel.name %>
     <p>
-      <%= link_to "Show this hotel", hotel %>
+      <%= link_to "Show this hotel", hotel, class: "p-1 border-2 rounded bg-orange-200 border-orange-600" %>
     </p>
   <% end %>
 </div>

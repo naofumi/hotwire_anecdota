@@ -5,46 +5,27 @@ export default class extends Controller {
   static targets = ["slide", "pagination"]
   static values = {
     currentSlide: {type: Number, default: 0},
-    autoplay: {type: Boolean, default: true}
+    autoplay: {type: Boolean, default: true},
+    interval: {type: Number, default: 4000},
   }
+  #hideClasses;
+  #paginationSelectedClasses;
+  #paginationUnselectedClasses;
 
   connect() {
     if (this.autoplayValue) {
       this.slideInterval = setInterval(() => {
         this.#moveNext()
-      }, 2000)
+      }, this.intervalValue)
     }
+
+    this.#hideClasses = ["invisible", "opacity-0"]
+    this.#paginationSelectedClasses = ["opacity-100"]
+    this.#paginationUnselectedClasses = ["opacity-50"]
   }
 
   disconnect() {
     this.#clearSlideInterval()
-  }
-
-  #clearSlideInterval() {
-    this.autoPlayValue = false
-    if (this.slideInterval) {
-      clearInterval(this.slideInterval)
-    }
-  }
-
-  #render() {
-    this.slideTargets.forEach((target, index) => {
-      if (index === this.currentSlideValue) {
-        target.classList.remove("invisible", "opacity-0")
-      } else {
-        target.classList.add("invisible", "opacity-0")
-      }
-    })
-    this.paginationTargets.forEach((target,index) => {
-      if (index === this.currentSlideValue) {
-        target.classList.remove("opacity-50")
-        target.classList.add("opacity-100")
-      } else {
-        target.classList.remove("opacity-100")
-        target.classList.add("opacity-50")
-
-      }
-    })
   }
 
   move(event) {
@@ -68,6 +49,40 @@ export default class extends Controller {
     return this.slideTargets.length
   }
 
+  #clearSlideInterval() {
+    this.autoPlayValue = false
+    if (this.slideInterval) {
+      clearInterval(this.slideInterval)
+    }
+  }
+
+  #render() {
+    this.#renderSlide();
+    this.#renderPagination();
+  }
+
+  #renderPagination() {
+    this.paginationTargets.forEach((target, index) => {
+      if (index === this.currentSlideValue) {
+        target.classList.remove(...this.#paginationUnselectedClasses)
+        target.classList.add(...this.#paginationSelectedClasses)
+      } else {
+        target.classList.remove(...this.#paginationUnselectedClasses)
+        target.classList.add(...this.#paginationUnselectedClasses)
+      }
+    })
+  }
+
+  #renderSlide() {
+    this.slideTargets.forEach((target, index) => {
+      if (index === this.currentSlideValue) {
+        target.classList.remove(...this.#hideClasses)
+      } else {
+        target.classList.add(...this.#hideClasses)
+      }
+    })
+  }
+
   #moveNext() {
     if (this.currentSlideValue + 1 < this.slideCount) {
       this.currentSlideValue = this.currentSlideValue + 1
@@ -85,5 +100,4 @@ export default class extends Controller {
     }
     this.#render()
   }
-
 }
