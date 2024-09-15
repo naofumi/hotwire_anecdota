@@ -3,8 +3,7 @@ import {classTokenize} from "../utlitilies";
 
 // Connects to data-controller="hamburger"
 export default class extends Controller {
-  static targets = ["icon"]
-  static values = {controls: String}
+  static targets = ["icon", "menu"]
 
   connect() {
   }
@@ -12,23 +11,19 @@ export default class extends Controller {
   toggle(event) {
     this.#toggleAriaExpanded(event.currentTarget)
 
-    this.#toggleMultiple(this.iconTargets, "hidden block")
+    this.#toggleMultiple(this.iconTargets, ["hidden", "block"])
 
-    const menus = document.querySelectorAll(this.controlsValue)
-
-    this.#toggleMultiple(menus, "hidden block")
+    this.#toggleMultiple(this.menuTargets, ["hidden", "block"])
   }
 
   #toggleAriaExpanded(element) {
     element.ariaExpanded = element.ariaExpanded == "true" ? "false" : "true"
   }
 
-  #toggleMultiple(elements, classesString) {
-    const classStrings = classTokenize(classesString)
-
+  #toggleMultiple(elements, classes) {
     elements.forEach(element => {
-      classStrings.forEach(classString => {
-        element.classList.toggle(classString)
+      classes.forEach(classToken => {
+        element.classList.toggle(classToken)
       })
     })
   }

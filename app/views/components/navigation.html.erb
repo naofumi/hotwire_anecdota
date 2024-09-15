@@ -11,7 +11,9 @@
       <li>A <code>aria_expanded</code> controller for the mobile menu.</li>
     </ul>
   </div>
-  <nav class="navigation-bar bg-white shadow">
+  <nav class="navigation-bar bg-white shadow"
+       data-controller="hamburger"
+  >
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 justify-between">
         <div class="flex">
@@ -82,9 +84,7 @@
                   class="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
                   aria-controls="mobile-menu"
                   aria-expanded="false"
-                  data-controller="hamburger"
                   data-action="click->hamburger#toggle"
-                  data-hamburger-controls-value="#mobile-menu"
           >
             <span class="absolute -inset-0.5"></span>
             <span class="sr-only">Open main menu</span>
@@ -124,7 +124,10 @@
     </div>
 
     <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="hidden sm:hidden" id="mobile-menu">
+    <div class="hidden sm:hidden"
+         id="mobile-menu"
+         data-hamburger-target="menu"
+    >
       <div class="space-y-1 pb-3 pt-2">
         <!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" -->
         <a href="javascript:void(0)" class="block border-l-4 border-indigo-500 bg-indigo-50 py-2 pl-3 pr-4 text-base font-medium text-indigo-700">Dashboard</a>
