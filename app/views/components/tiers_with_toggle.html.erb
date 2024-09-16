@@ -29,7 +29,8 @@
             <label class="has-[:checked]:bg-indigo-600 has-[:checked]:text-white text-gray-500 cursor-pointer rounded-full px-2.5 py-1">
               <input type="radio" name="frequency" value="monthly" class="sr-only"
                      data-tiers-with-toggle-frequency-param="monthly"
-                     data-action="click->tiers-with-toggle#setFrequency">
+                     data-action="click->tiers-with-toggle#setFrequency"
+              >
               <span>Monthly</span>
             </label>
             <!-- Checked: "bg-indigo-600 text-white", Not Checked: "text-gray-500" -->
@@ -56,9 +57,9 @@
           <p class="mt-6 flex items-baseline gap-x-1">
             <!-- Price, update based on frequency toggle state -->
             <span class="text-4xl font-bold tracking-tight text-gray-900"
-                  data-tier-plan="freelancer"
-                  data-tiers-with-toggle-target="price"
-            >$15</span>
+                  data-tier-path="freelancer"
+                  data-tiers-with-toggle-target="slot"
+            ></span>
             <!-- Payment frequency, update based on frequency toggle state -->
             <span class="text-sm font-semibold leading-6 text-gray-600"
                   data-tiers-with-toggle-target="frequency"
@@ -101,9 +102,9 @@
           <p class="mt-6 flex items-baseline gap-x-1">
             <!-- Price, update based on frequency toggle state -->
             <span class="text-4xl font-bold tracking-tight text-gray-900"
-                  data-tier-plan="startup"
-                  data-tiers-with-toggle-target="price"
-            >$30</span>
+                  data-tier-path="startup"
+                  data-tiers-with-toggle-target="slot"
+            ></span>
             <!-- Payment frequency, update based on frequency toggle state -->
             <span class="text-sm font-semibold leading-6 text-gray-600"
                   data-tiers-with-toggle-target="frequency"
@@ -152,9 +153,9 @@
           <p class="mt-6 flex items-baseline gap-x-1">
             <!-- Price, update based on frequency toggle state -->
             <span class="text-4xl font-bold tracking-tight text-gray-900"
-                  data-tier-plan="enterprise"
-                  data-tiers-with-toggle-target="price"
-            >$60</span>
+                  data-tier-path="enterprise"
+                  data-tiers-with-toggle-target="slot"
+            ></span>
             <!-- Payment frequency, update based on frequency toggle state -->
             <span class="text-sm font-semibold leading-6 text-gray-600"
                   data-tiers-with-toggle-target="frequency"
