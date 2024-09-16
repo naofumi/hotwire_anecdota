@@ -22,6 +22,8 @@ import {changeClasses} from "../utlitilies";
 
 // Connects to data-controller="tablist"
 export default class extends Controller {
+  static targets = ["control"]
+  static classes = ["selected"]
   connect() {
   }
 
@@ -42,11 +44,10 @@ export default class extends Controller {
   }
 
   #selectTab(selected) {
-    changeClasses(".tablist__tab--selected", {
-      remove: "tablist__tab--selected",
-      scope: this.element
+    this.controlTargets.forEach(e => {
+      e.classList.remove(...this.selectedClasses)
     })
-    selected.classList.add("tablist__tab--selected")
+    selected.classList.add(...this.selectedClasses)
   }
 
   #displayContent(selector) {

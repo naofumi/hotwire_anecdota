@@ -49,18 +49,6 @@
         }
     }
 
-    .tablist__tab--selected {
-        @apply !border-indigo-500 !text-indigo-600
-    }
-
-    .tablist__content--shown {
-        @apply block
-    }
-
-    .tablist__content--hidden {
-        @apply hidden
-    }
-
     .navigation-bar .tablist__tab--selected {
         @apply !text-gray-900
     }

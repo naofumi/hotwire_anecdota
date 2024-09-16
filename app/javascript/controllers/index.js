@@ -46,6 +46,9 @@ application.register("option-list", OptionListController)
 import PopupController from "./popup_controller"
 application.register("popup", PopupController)
 
+import RevealerController from "./revealer_controller"
+application.register("revealer", RevealerController)
+
 import SelectMenuController from "./select_menu_controller"
 application.register("select-menu", SelectMenuController)
 

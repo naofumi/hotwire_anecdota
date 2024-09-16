@@ -22,6 +22,18 @@ There are several things to consider.
 2. Since Aria attributes will often also be flipped, you might want to use these to control this display. Indeed, you can use this approach to display loading state because Turbo will add `aria="busy"` to the `body` and `turbo-frame` elements automatically.
 3. With a utility CSS approach like Tailwind, you are encouraged to directly add CSS classes to the elements whose display you want to control, without relying on the CSS cascade. Tailwind also allows you to use the traditional approach, but is generally discouraged.
 
+### Recommendation
+
+* When using the traditional CSS approach, flipping classes on the parent element is a good way to go. However, if you need to change the display of multiple elements within a parent, consider splitting up your controller. It may be doing too many things.
+* With Tailwind, try to work with the utility classes directly – specify the utility classes with Stimulus `class` attributes and apply them to the `targets`. Tailwind provides `group` and `has` which help style elements that are not the `targets` themselves.
+
+Note that Stimulus will require more thought for complex changes compared to React.
+React allows you to do anything with both the DOM and CSS in response to state changes,
+whereas Stimulus recommends leaning towards a CSS only approach.
+Although the traditional CSS approach utlimately gives you more flexibility,
+I find that Tailwind utility classes are generally sufficient,
+as long as you ensure that your Stimulus controllers are only doing one thing (as in SRP). 
+
 ## Using small Stimulus controllers
 
 We will use Stimulus controllers to flip CSS classes.
@@ -87,3 +99,7 @@ then it is often a better option than the alternatives (inter-controller communi
 If the controller has too many responsibilities, however, then inter-controller communication will be an option.
 Don't use inter-controller communication just to avoid expanding the DOM scope,
 but use it if it helps break up the responsibilities.
+
+# ARIA and Accessibility
+
+https://www.w3.org/WAI/ARIA/apg/patterns/
