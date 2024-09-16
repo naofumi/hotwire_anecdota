@@ -3,19 +3,6 @@
 @tailwind utilities;
 
 @layer components {
-    .switch--on {
-        @apply !bg-indigo-600
-    }
-    .switch--off {
-        @apply !bg-gray-200
-    }
-    .switch__toggle--on {
-        @apply !translate-x-5
-    }
-    .switch__toggle--off {
-        @apply !translate-x-0
-    }
-
     *[data-controller="select-menu"] {
         > ul {
             @apply transition duration-200;
@@ -47,18 +34,6 @@
         button[aria-expanded='true'] + ul {
             @apply opacity-100;
         }
-    }
-
-    .navigation-bar .tablist__tab--selected {
-        @apply !text-gray-900
-    }
-
-    .tiers-with-toggle__plan--selected {
-        @apply !ring-indigo-600
-    }
-
-    .tiers-with-toggle__buy-button--selected {
-        @apply !bg-indigo-600 !text-white
     }
 }
 
