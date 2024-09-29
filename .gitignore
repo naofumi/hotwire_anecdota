@@ -39,3 +39,4 @@
 
 /node_modules
 /.kamal/registry_password.key
+/.kamal/secrets-common
