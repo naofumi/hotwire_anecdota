@@ -1,5 +1,5 @@
 class ComponentsController < ApplicationController
-  AVAILABLE_TEMPALTES = %w[toggle select tabs navigation tiers_with_toggle]
+  AVAILABLE_TEMPALTES = %w[toggle select tabs navigation tiers_with_toggle accordion]
 
   def index
     @available_templates = AVAILABLE_TEMPALTES

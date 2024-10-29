@@ -1,0 +1,26 @@
+<h1 class="text-5xl">Accordion</h1>
+
+<div class="mt-16 border-t border-gray-500 pt-8 px-4">
+  <h2 class="text-4xl pb-8 border-b border-gray-300">
+    Frequently Asked Questions
+  </h2>
+  <%= render 'accordion_row',
+             title: "What is an eSIM?" do %>
+    iPhone 15 or iPhone 15 Pro models purchased in the U.S. or Puerto Rico don’t have a physical SIM
+    tray and activate only using eSIM. You can activate your iPhone outside the country if your carrier supports
+    eSIM. Learn more (Opens in a new window) about using eSIM while traveling.
+  <% end %>
+  <%= render 'accordion_row',
+             title: "Can I activate an iPhone 15 or iPhone 15 Pro outside of the United States?" do %>
+    iPhone 15 models purchased in the U.S. or Puerto Rico don’t have a physical SIM tray and
+    activate only using eSIM.
+    You can activate your iPhone outside the country if your carrier supports eSIM. Learn more (Opens in a new
+    window) about using eSIM while traveling.
+  <% end %>
+  <%= render 'accordion_row',
+             title: "When I buy from apple.com, does my iPhone come ready to use?" do %>
+    Carrier-connected iPhone SE, iPhone 14, iPhone 15, iPhone 16, and iPhone 16 Pro models will arrive ready to activate with eSIM and can connect to your cellular voice and data service without a physical SIM card.<br>
+    If you completed the steps to authorize activation with AT&T, Boost Mobile, T-Mobile, or Verizon when you purchased your new iPhone online, it will arrive ready to use. Just turn it on and follow the onscreen instructions to set it up and activate with the carrier. To activate with eSIM, you will need Wi-Fi for setup.<br>
+    If you choose "Connect to a carrier later" when you buy your iPhone, you can activate with your service when you receive your device. If you're asked to transfer your SIM, follow the onscreen instructions to transfer service from your previous iPhone. To learn more, visit https://support.apple.com/kb/HT212780 (Opens in a new window).<br>
+  <% end %>
+</div>
