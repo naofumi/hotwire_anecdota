@@ -37,6 +37,6 @@ Rails.application.routes.draw do
     end
   end
   resources :todos do
-    resources :likes, only: [ :create, :destroy ], module: :todos
+    resource :likes, only: [ :create, :destroy ], module: :todos
   end
 end

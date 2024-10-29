@@ -1,5 +1,6 @@
 class TodosController < ApplicationController
   before_action :set_todo, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /todos or /todos.json
   def index

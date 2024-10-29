@@ -72,3 +72,6 @@ application.register("tiers-with-toggle", TiersWithToggleController)
 
 import TodoController from "./todo_controller"
 application.register("todo", TodoController)
+
+import TodoLikesController from "./todo_likes_controller"
+application.register("todo-likes", TodoLikesController)
