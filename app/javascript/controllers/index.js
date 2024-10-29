@@ -58,6 +58,9 @@ application.register("side-panel-opener", SidePanelOpenerController)
 import SlideDrawerController from "./slide_drawer_controller"
 application.register("slide-drawer", SlideDrawerController)
 
+import StaticTabsController from "./static_tabs_controller"
+application.register("static-tabs", StaticTabsController)
+
 import SwitchController from "./switch_controller"
 application.register("switch", SwitchController)
 
