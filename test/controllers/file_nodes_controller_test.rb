@@ -2,7 +2,7 @@ require "test_helper"
 
 class FileNodesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @file_node = file_nodes(:one)
+    @file_node = file_nodes(:root_file_1)
   end
 
   test "should get index" do

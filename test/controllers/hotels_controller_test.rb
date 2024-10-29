@@ -2,7 +2,7 @@ require "test_helper"
 
 class HotelsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @hotel = hotels(:one)
+    @hotel = hotels(:halekulani)
   end
 
   test "should get index" do

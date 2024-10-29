@@ -2,7 +2,7 @@ require "test_helper"
 
 class FeaturesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @feature = features(:one)
+    @feature = features(:halekulani_topic1)
   end
 
   test "should get index" do
@@ -17,7 +17,7 @@ class FeaturesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create feature" do
     assert_difference("Feature.count") do
-      post features_url, params: { feature: { category: @feature.category, descrption: @feature.descrption, hotel_id: @feature.hotel_id, image_path: @feature.image_path, position: @feature.position, tagline: @feature.tagline } }
+      post features_url, params: { feature: { category: @feature.category, description: @feature.description, hotel_id: @feature.hotel_id, image_path: @feature.image_path, position: @feature.position, tagline: @feature.tagline } }
     end
 
     assert_redirected_to feature_url(Feature.last)
@@ -34,7 +34,7 @@ class FeaturesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update feature" do
-    patch feature_url(@feature), params: { feature: { category: @feature.category, descrption: @feature.descrption, hotel_id: @feature.hotel_id, image_path: @feature.image_path, position: @feature.position, tagline: @feature.tagline } }
+    patch feature_url(@feature), params: { feature: { category: @feature.category, description: @feature.description, hotel_id: @feature.hotel_id, image_path: @feature.image_path, position: @feature.position, tagline: @feature.tagline } }
     assert_redirected_to feature_url(@feature)
   end
 

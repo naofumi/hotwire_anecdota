@@ -2,7 +2,7 @@ require "test_helper"
 
 class BucketsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @bucket = buckets(:one)
+    @bucket = buckets(:todo)
   end
 
   test "should get index" do

@@ -20,7 +20,7 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
       post todos_url, params: { todo: { completed_at: @todo.completed_at, title: @todo.title } }
     end
 
-    assert_redirected_to todo_url(Todo.last)
+    assert_redirected_to todos_url
   end
 
   test "should show todo" do
