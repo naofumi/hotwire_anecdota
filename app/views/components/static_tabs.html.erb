@@ -11,9 +11,10 @@
         <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
         <select id="tabs"
                 name="tabs"
+                data-static-tabs-target="mobileSelect"
                 data-action="change->static-tabs#mobileSelect"
                 class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-          <option selected value="my_account">My Account</option>
+          <option value="my_account">My Account</option>
           <option value="company">Company</option>
           <option value="team_members">Team Members</option>
           <option value="billing">Billing</option>
@@ -23,10 +24,10 @@
         <div class="border-b border-gray-200">
           <nav class="-mb-px flex space-x-8" aria-label="Tabs">
             <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
-            <%= render 'static_tabs_switch', current: true, title: "My Account", content_id: "my_account" %>
-            <%= render 'static_tabs_switch', current: false, title: "Company", content_id: "company" %>
-            <%= render 'static_tabs_switch', current: false, title: "Team Members", content_id: "team_members" %>
-            <%= render 'static_tabs_switch', current: false, title: "Billing", content_id: "billing" %>
+            <%= render 'static_tabs_switch', title: "My Account", content_id: "my_account" %>
+            <%= render 'static_tabs_switch', title: "Company", content_id: "company" %>
+            <%= render 'static_tabs_switch', title: "Team Members", content_id: "team_members" %>
+            <%= render 'static_tabs_switch', title: "Billing", content_id: "billing" %>
           </nav>
         </div>
       </div>
