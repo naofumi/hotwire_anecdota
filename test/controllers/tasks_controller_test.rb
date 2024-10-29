@@ -2,7 +2,7 @@ require "test_helper"
 
 class TasksControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @task = tasks(:one)
+    @task = tasks(:todo1)
   end
 
   test "should get index" do
@@ -17,7 +17,9 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
 
   test "should create task" do
     assert_difference("Task.count") do
-      post tasks_url, params: { task: { bucket_id: @task.bucket_id, deadline: @task.deadline, description: @task.description, name: @task.name, position: @task.position } }
+      login_user users(:one) do
+        post tasks_url, params: { task: { bucket_id: @task.bucket_id, deadline: @task.deadline, description: @task.description, name: @task.name, position: @task.position } }
+      end
     end
 
     assert_redirected_to task_url(Task.last)

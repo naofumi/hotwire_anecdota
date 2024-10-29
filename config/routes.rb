@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   resource :board
   resources :buckets
-  resources :components, only: [:index, :show]
+  resources :components, only: [ :index, :show ]
   resources :features
   resources :file_nodes do
     get :details, on: :member
@@ -36,5 +36,7 @@ Rails.application.routes.draw do
       resource :completion
     end
   end
-  resources :todos
+  resources :todos do
+    resources :likes, only: [ :create, :destroy ], module: :todos
+  end
 end

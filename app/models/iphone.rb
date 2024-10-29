@@ -19,11 +19,11 @@ class Iphone
   end
 
   def color_enterable?
-    state.in? [:model_entered, :color_entered, :ram_entered]
+    state.in? [ :model_entered, :color_entered, :ram_entered ]
   end
 
   def ram_enterable?
-    state.in? [:color_entered, :ram_entered]
+    state.in? [ :color_entered, :ram_entered ]
   end
 
   def model=(string)
@@ -76,7 +76,6 @@ class Iphone
   end
 
   def self.pricing_for(model = "6-1inch", ram = "256GB")
-
     Price.new(lump: 0, monthly: 0).then do |price|
       case model
       when "6-1inch" then Price.new(lump: price.lump + 999, monthly: price.monthly + 41.62)
