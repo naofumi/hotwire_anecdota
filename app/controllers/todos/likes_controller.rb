@@ -2,17 +2,15 @@ class Todos::LikesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_todo
   def create
-    sleep 1
-    @todo.like! current_user
+    if params[:like]
+      @todo.like_by! current_user
+    else
+      @todo.unlike_by! current_user
+    end
 
-    redirect_to todos_url
-  end
-
-  def destroy
-    sleep 1
-    @todo.unlike! current_user
-
-    redirect_to todos_url
+    sleep 2
+    #
+    # redirect_to todos_url
   end
 
   private

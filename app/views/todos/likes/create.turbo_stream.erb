@@ -1,0 +1,5 @@
+<%= turbo_stream.append dom_id(@todo) do %>
+  <template>
+    <%= render partial: "todos/todo_row", locals: { todo: @todo } %>
+  </template>
+<% end %>

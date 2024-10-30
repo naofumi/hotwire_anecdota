@@ -6,7 +6,7 @@ class TodoTest < ActiveSupport::TestCase
     todo = todos(:two)
 
     assert_changes -> { todo.likes.count }, from: 1, to: 2 do
-      todo.like!(user)
+      todo.like_by!(user)
     end
   end
 
@@ -16,7 +16,7 @@ class TodoTest < ActiveSupport::TestCase
 
     assert_raises ActiveRecord::RecordInvalid,
                   "Validation failed: User has already been taken" do
-      todo.like!(user)
+      todo.like_by!(user)
     end
   end
 
@@ -25,7 +25,7 @@ class TodoTest < ActiveSupport::TestCase
     todo = todos(:one)
 
     assert_changes -> { todo.likes.count }, from: 1, to: 0 do
-      todo.unlike!(user)
+      todo.unlike_by!(user)
     end
   end
 
@@ -34,7 +34,7 @@ class TodoTest < ActiveSupport::TestCase
     todo = todos(:two)
 
     assert_raises ActiveRecord::RecordNotFound do
-      todo.unlike!(user)
+      todo.unlike_by!(user)
     end
   end
 end
