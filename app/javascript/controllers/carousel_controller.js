@@ -1,7 +1,8 @@
-import { Controller } from "@hotwired/stimulus"
+import {Controller} from "@hotwired/stimulus"
 
 // Connects to data-controller="carousel"
 export default class extends Controller {
+  static classes = ["bar"]
   static targets = ["slide", "pagination"]
   static values = {
     currentSlide: {type: Number, default: 0},
@@ -29,8 +30,7 @@ export default class extends Controller {
   }
 
   move(event) {
-    const moveToIndex = event.params.index
-    this.currentSlideValue = moveToIndex
+    this.currentSlideValue = event.params.index
     this.#render()
     this.#clearSlideInterval()
   }
@@ -57,11 +57,11 @@ export default class extends Controller {
   }
 
   #render() {
-    this.#renderSlide();
-    this.#renderPagination();
+    this.#renderSlideTargets();
+    this.#renderPaginationTargets();
   }
 
-  #renderPagination() {
+  #renderPaginationTargets() {
     this.paginationTargets.forEach((target, index) => {
       if (index === this.currentSlideValue) {
         target.classList.remove(...this.#paginationUnselectedClasses)
@@ -73,7 +73,7 @@ export default class extends Controller {
     })
   }
 
-  #renderSlide() {
+  #renderSlideTargets() {
     this.slideTargets.forEach((target, index) => {
       if (index === this.currentSlideValue) {
         target.classList.remove(...this.#hideClasses)

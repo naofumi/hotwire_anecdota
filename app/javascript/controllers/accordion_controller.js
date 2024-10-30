@@ -10,7 +10,7 @@ export default class extends Controller {
 
   toggle(event) {
     this.#toggleRevealableTargets()
-    this.#toggleSwitches()
+    this.#toggleSwitchTargets()
   }
 
   #toggleRevealableTargets() {
@@ -30,7 +30,7 @@ export default class extends Controller {
     })
   }
 
-  #toggleSwitches() {
+  #toggleSwitchTargets() {
     this.switchTargets.forEach(target => {
       target.classList.toggle(this.toggleSwitchClass)
     })

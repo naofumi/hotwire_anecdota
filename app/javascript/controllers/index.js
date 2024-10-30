@@ -40,6 +40,9 @@ application.register("highlightable", HighlightableController)
 import ImageSwitcherController from "./image_switcher_controller"
 application.register("image-switcher", ImageSwitcherController)
 
+import IphoneStaticController from "./iphone_static_controller"
+application.register("iphone-static", IphoneStaticController)
+
 import OptionListController from "./option_list_controller"
 application.register("option-list", OptionListController)
 

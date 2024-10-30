@@ -3,7 +3,6 @@ import {Controller} from "@hotwired/stimulus"
 // Connects to data-controller="option-list"
 export default class extends Controller {
   static targets = ["option"]
-  this
 
   connect() {
   }

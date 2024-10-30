@@ -5,10 +5,10 @@
   <span><%= file_node.name %></span>
   <div class="relative flex">
     <%= link_to "Edit", [:edit, file_node], class: "p-1", tabindex: 0 %>
-    <%= tag.div class: "relative file-node-popup",
+    <%= tag.div class: "relative file-node-popup-outlet",
                 data: { controller: 'popup',
-                        popup_popup_outlet: ".file-node-popup",
-                        action: "keydown.esc->popup#close:prevent:stop" } do %>
+                        popup_popup_outlet: ".file-node-popup-outlet",
+                        action: "keydown.esc@window->popup#close" } do %>
       <button data-action="click->popup#toggleAndHideOthers"
               data-popup-target="control"
               aria-expanded="false">
@@ -16,7 +16,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
         </svg>
       </button>
-      <dialog class="shadow-lg file-node-popup absolute z-20 -top-1 left-10 w-36 p-2 border rounded border-gray-400 bg-white"
+      <dialog class="shadow-lg absolute z-20 -top-1 left-10 w-36 p-2 border rounded border-gray-400 bg-white"
               data-popup-target="popup">
         <div class="w-full h-6 flex justify-between">
           <div></div>

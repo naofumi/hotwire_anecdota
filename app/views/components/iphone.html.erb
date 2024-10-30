@@ -1,0 +1,141 @@
+<% set_breadcrumbs [["iPhone Static", component_path(:iphone)]] %>
+<%
+  @catalog_data[:images].transform_values! { image_path(_1) }
+%>
+<%= tag.div data: { controller: "iphone-static", iphone_static_catalog_data_value: @catalog_data },
+            class: "relative" do %>
+  <div class="text-xl z-10 font-bold sticky top-14 right-0 h-8 w-full">
+    <div class="ml-auto p-2 bg-white text-center w-[400px] shadow">
+      <span data-iphone-static-target="price"></span>
+      for 24 mo.*
+    </div>
+  </div>
+
+  <div class="pt-12 pb-6">
+    <h1 class="text-5xl">Buy iPhone 15 Pro</h1>
+    <div class="text-sm mt-4 text-light">From $1399 or $58.29/mo. for 24 mo.<sup>*</sup></div>
+  </div>
+
+  <%= tag.div class: "flex" do %>
+    <div class="shrink-0 sticky top-0 w-[592px] h-[460px]">
+      <%= image_tag "",
+                    class: "object-cover w-[592px] h-[460px] rounded-[20px]",
+                    data: { iphone_static_target: "image" }
+      %>
+    </div>
+    <div class="pl-10">
+      <div>
+        <h2 class="mb-6 text-2xl">Model. <span class="text-gray-400">Which is best for you?</span></h2>
+        <div>
+          <%= fieldset_tag nil, disabled: false, class: "disabled:opacity-30" do %>
+            <%= render 'iphone_option',
+                       name: :model,
+                       value: "6-1inch",
+                       selected: true,
+                       title: "iPhone 15 Pro",
+                       subtitle: "6.1-inch display",
+                       pricing_lines: ["From $1000",
+                                       "or $1000/mo.",
+                                       "for 24 mo."]
+            %>
+            <%= render 'iphone_option',
+                       name: :model,
+                       value: "6-7inch",
+                       selected: false,
+                       title: "iPhone 15 Pro Max",
+                       subtitle: "6.7-inch display",
+                       pricing_lines: ["From $2000",
+                                       "or $2000/mo.",
+                                       "for 24 mo."]
+
+            %>
+          <% end %>
+          <div class="flex justify-between mt-4 p-4 block bg-gray-100 rounded-lg w-full">
+            <div class="text-sm">
+              <div class="font-bold">Need help choosing a model?</div>
+              <div class="font-light">Explore the differences in screen size and battery life</div>
+            </div>
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-48">
+        <h2 class="mb-6 text-2xl">Finish. <span class="text-gray-400">Pick your favorite</span></h2>
+        <%= tag.div do %>
+          <div class="text-xl my-4" data-iphone-static-target="colorText"><%= "Foo color name" %></div>
+
+          <%= fieldset_tag nil, disabled: false, class: "disabled:opacity-30" do %>
+            <%= render 'iphone_color_option',
+                       value: "naturaltitanium",
+                       color: "bg-gray-400",
+                       selected: true,
+                       iphone: {} %>
+            <%= render 'iphone_color_option',
+                       value: "bluetitanium",
+                       color: "bg-indigo-800",
+                       selected: false,
+                       iphone: {} %>
+            <%= render 'iphone_color_option',
+                       value: "whitetitanium",
+                       color: "bg-white",
+                       selected: false,
+                       iphone: {} %>
+            <%= render 'iphone_color_option',
+                       value: "blacktitanium",
+                       color: "bg-black",
+                       selected: false,
+                       iphone: {} %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="mt-48">
+        <h2 class="mb-6 text-2xl">Storage. <span class="text-gray-400">How much space do you need?</span></h2>
+        <div>
+          <%= fieldset_tag nil, disabled: false, class: "disabled:opacity-30" do %>
+            <%= render 'iphone_option',
+                       name: :ram,
+                       value: "256GB",
+                       selected: true,
+                       title: "256GB<sup>2</sup>".html_safe,
+                       pricing_lines: ["From $1000",
+                                       "or $1000/mo.",
+                                       "for 24 mo."] %>
+            <%= render 'iphone_option',
+                       name: :ram,
+                       value: "512GB",
+                       selected: false,
+                       title: "512GB<sup>*</sup>".html_safe,
+                       pricing_lines: ["From $2000",
+                                       "or $2000/mo.",
+                                       "for 24 mo."] %>
+            <%= render 'iphone_option',
+                       name: :ram,
+                       value: "1TB",
+                       selected: false,
+                       title: "1TB<sup>2</sup>".html_safe,
+                       pricing_lines: ["From $3000",
+                                       "or 3000/mo.",
+                                       "for 24 mo."] %>
+          <% end %>
+          <div class="flex justify-between mt-4 p-4 block bg-gray-100 rounded-lg w-full">
+            <div class="text-sm">
+              <div class="font-bold">Need help choosing a model?</div>
+              <div class="font-light">Explore the differences in screen size and battery life</div>
+            </div>
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

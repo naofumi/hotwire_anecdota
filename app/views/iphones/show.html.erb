@@ -1,3 +1,5 @@
+<% set_breadcrumbs [["iPhone", iphone_path]] %>
+
 <% turbo_refreshes_with(method: :morph, scroll: :preserve) %>
 
 <div class="text-xl z-10 font-bold sticky top-0 right-0 h-8 w-full">
@@ -137,43 +139,3 @@
     </div>
   </div>
 <% end %>
-
-<div class="mt-16 border-t border-gray-500 pt-8 px-4">
-  <h2 class="text-4xl pb-8 border-b border-gray-300">
-    Frequently Asked Questions
-  </h2>
-  <div class="py-4 border-b border-gray-300"
-       data-controller="accordion"
-       data-action="click->accordion#toggle">
-    <h3 class="flex justify-between text-xl cursor-pointer">
-      <span>What is an eSIM?</span>
-      <div data-accordion-target="toggle" class="pt-2 transition-all duration-300">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-        </svg>
-      </div>
-    </h3>
-    <div data-accordion-target="revealable" class="h-0 overflow-hidden transition-all duration-300 text-sm">
-      <div class="mt-4">iPhone 15 or iPhone 15 Pro models purchased in the U.S. or Puerto Rico don’t have a physical SIM
-        tray and activate only using eSIM. You can activate your iPhone outside the country if your carrier supports
-        eSIM. Learn more (Opens in a new window) about using eSIM while traveling.
-      </div>
-    </div>
-  </div>
-  <h3 class="text-xl py-4 border-b border-gray-300"
-      data-controller="accordion"
-      data-action="click->accordion#toggle">
-    Can I activate an iPhone 15 or iPhone 15 Pro outside of the United States?
-  </h3>
-  <h3 class="text-xl py-4 border-b border-gray-300"
-      data-controller="accordion"
-      data-action="click->accordion#toggle">
-    When I buy from apple.com, does my iPhone come ready to use?
-  </h3>
-  <h3 class="text-xl py-4 border-b border-gray-300"
-      data-controller="accordion"
-      data-action="click->accordion#reveal">
-    Will my new iPhone be unlocked?
-  </h3>
-  v
-</div>

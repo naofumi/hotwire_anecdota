@@ -10,16 +10,16 @@ export default class DropdownController extends Controller {
   }
 
   show(event) {
-    this.#setSwitchTargets({ariaExpandedValue: true})
+    this.#renderSwitchTargets({ariaExpandedValue: true})
     this.#showMenuTargets()
   }
 
   hide(event) {
-    this.#setSwitchTargets({ariaExpandedValue: false})
+    this.#renderSwitchTargets({ariaExpandedValue: false})
     this.#hideMenuTargets()
   }
 
-  #setSwitchTargets({ariaExpandedValue}) {
+  #renderSwitchTargets({ariaExpandedValue}) {
     this.switchTargets.forEach((target) => target.ariaExpanded = ariaExpandedValue)
   }
 

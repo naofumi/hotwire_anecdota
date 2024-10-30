@@ -10,26 +10,26 @@
   </div>
   <%= button_tag "<", type: "button",
                  class: "absolute w-8 h-8 p-1 rounded-full block top-[170px] left-[10px] bg-white opacity-40 hover:opacity-100",
-                 data: {action: "click->carousel#previous"} do %>
+                 data: { action: "click->carousel#previous" } do %>
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
     </svg>
-<% end %>
+  <% end %>
   <%= button_tag type: "button",
                  class: "absolute w-8 h-8 p-1 rounded-full block top-[170px] right-[10px] bg-white opacity-40 hover:opacity-100",
-                 data: {action: "click->carousel#next"} do %>
+                 data: { action: "click->carousel#next" } do %>
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-      <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+      <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"/>
     </svg>
-<% end %>
+  <% end %>
   <div class="inline-block absolute bottom-4 left-[50%] -translate-x-1/2">
     <% 0.upto(3).each do |index| %>
       <%= button_tag "⚫︎",
                      type: :button,
                      class: "text-white #{index == 0 ? "opacity-100" : "opacity-50"}",
-                     data: {action: "click->carousel#move",
-                            carousel_index_param: index,
-                            carousel_target: "pagination"
+                     data: { action: "click->carousel#move",
+                             carousel_index_param: index,
+                             carousel_target: "pagination"
                      }
       %>
     <% end %>
@@ -43,7 +43,7 @@
   <%= link_to "部屋・プラン", "",
               class: "px-4 inline-block py-4 h-16 text-lg border-b-4 border-blue-500" %>
   <%= link_to "宿の紹介", hotel_features_path(@hotel),
-              data: {action: "click->drawer-trigger#show", turbo_frame: :slide_drawer},
+              data: { action: "click->drawer-trigger#show", turbo_frame: :slide_drawer },
               class: "px-4 inline-block py-4 h-16 text-lg" %>
   <%= link_to "クチコミ", "",
               class: "px-4 inline-block py-4 h-16 text-lg" %>

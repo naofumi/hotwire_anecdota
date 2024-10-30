@@ -1,0 +1,21 @@
+<%# locals: (name:, value:, selected: false, title:, subtitle: nil, pricing_lines:[]) %>
+<%= label_tag [name, value].join('_'), class: "mt-4 flex justify-between items-center p-4 block border-2 rounded-lg w-full cursor-pointer has-[:checked]:border-blue-500" do %>
+  <%= radio_button_tag name, value, selected,
+                       class: "hidden",
+                       data: {action: "change->iphone-static#updateOption"}
+  %>
+  <div>
+    <div class="text-lg"><%= title %></div>
+    <% if subtitle %>
+      <div class="text-sm text-gray-500"><%= subtitle %></div>
+    <% end %>
+  </div>
+  <div data-iphone-static-target="itemPricing"
+       data-iphone-static-pricing-name="<%= name %>"
+       data-iphone-static-pricing-value="<%= value %>"
+  >
+    <% pricing_lines.each do |line| %>
+      <div class="text-xs text-gray-500 text-right"><%= line %></div>
+    <% end %>
+  </div>
+<% end %>

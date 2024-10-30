@@ -1,7 +1,7 @@
 <%# locals: (value:, color:, iphone:) %>
 <%= label_tag [:color, value].join('_'),
               data: {
-                action: "mouseenter->image-switcher#setColorTitle mouseleave->image-switcher#resetColorTitle",
+                action: "mouseenter->image-switcher#setColorText mouseleave->image-switcher#resetColorText",
                 image_switcher_color_name_param: iphone.color_name_for_value(value)
               },
               class: "#{color} inline-block w-8 h-8 border-2 rounded-full cursor-pointer outline-2 outline outline-offset-0.5 outline-transparent has-[:checked]:outline-blue-500" do %>

@@ -8,12 +8,12 @@ export default class extends Controller {
   connect() {
   }
 
-  setColorTitle(event) {
+  setColorText(event) {
     const colorName = event.params.colorName
     this.colorTextTargets.forEach(target => target.textContent = colorName)
   }
 
-  resetColorTitle(event) {
+  resetColorText(event) {
     this.colorTextTargets.forEach(target => target.textContent = this.iphoneValue.color_name)
   }
 

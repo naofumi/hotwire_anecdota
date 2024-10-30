@@ -1,0 +1,13 @@
+<%# locals: (value:, color:, iphone:, selected:) %>
+<%= label_tag [:color, value].join('_'),
+              data: {
+                action: "mouseenter->iphone-static#setColorText mouseleave->iphone-static#resetColorText",
+                iphone_static_color_name_param: value
+              },
+              class: "#{color} inline-block w-8 h-8 border-2 rounded-full cursor-pointer outline-2 outline outline-offset-0.5 outline-transparent has-[:checked]:outline-blue-500" do %>
+  <%= radio_button_tag :color, value, selected,
+                       class: "hidden",
+                       data: { action: "change->iphone-static#updateColor" }
+  %>
+  &nbsp;
+<% end %>
