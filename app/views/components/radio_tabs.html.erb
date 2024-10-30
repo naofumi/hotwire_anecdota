@@ -1,0 +1,35 @@
+<% set_breadcrumbs [["Radio Tabs", component_path(:radio_tabs)]] %>
+
+<%= render 'template',
+           title: "Radio Tabs",
+           description: "" do %>
+
+  <div data-controller="radio-tabs" data-radio-tabs-content-id-value="my_account">
+    <div>
+      <div>
+        <div class="border-b border-gray-200">
+          <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+            <%= render 'radio_tabs_switch', title: "My Account", content_id: "my_account", current: true %>
+            <%= render 'radio_tabs_switch', title: "Company", content_id: "company", current: false %>
+            <%= render 'radio_tabs_switch', title: "Team Members", content_id: "team_members", current: false %>
+            <%= render 'radio_tabs_switch', title: "Billing", content_id: "billing", current: false %>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <main>
+      <div id="my_account" class="block py-4" data-radio-tabs-target="content">
+        <h1 class="text-3xl">Content for My Account</h1>
+      </div>
+      <div id="company" class="hidden py-4" data-radio-tabs-target="content">
+        <h1 class="text-3xl">Content for Company</h1>
+      </div>
+      <div id="team_members" class="hidden py-4" data-radio-tabs-target="content">
+        <h1 class="text-3xl">Content for Team Members</h1>
+      </div>
+      <div id="billing" class="hidden py-4" data-radio-tabs-target="content">
+        <h1 class="text-3xl">Content for Billing</h1>
+      </div>
+    </main>
+  </div>
+<% end %>

@@ -9,7 +9,6 @@
   <div class="bg-white py-24 sm:py-32"
        data-controller="tiers-with-toggle"
        data-tiers-with-toggle-frequency-value="monthly"
-       data-tiers-with-toggle-tier-value="startup"
        data-tiers-with-toggle-price-table-value="<%= {
                                                        "freelancer" => {"monthly" => "$15", "annually" => "$144"},
                                                        "startup" => {"monthly" => "$30", "annually" => "$288"},
@@ -23,48 +22,15 @@
       </div>
       <p class="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-gray-600">Choose an affordable plan that’s packed with the best features for engaging your audience, creating customer loyalty, and driving sales.</p>
       <div class="mt-16 flex justify-center">
-        <fieldset aria-label="Payment frequency">
-          <div class="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200">
-            <!-- Checked: "bg-indigo-600 text-white", Not Checked: "text-gray-500" -->
-            <label class="has-[:checked]:bg-indigo-600 has-[:checked]:text-white text-gray-500 cursor-pointer rounded-full px-2.5 py-1">
-              <input type="radio" name="frequency" value="monthly" class="sr-only"
-                     data-tiers-with-toggle-frequency-param="monthly"
-                     data-action="click->tiers-with-toggle#setFrequency"
-              >
-              <span>Monthly</span>
-            </label>
-            <!-- Checked: "bg-indigo-600 text-white", Not Checked: "text-gray-500" -->
-            <label class="has-[:checked]:bg-indigo-600 has-[:checked]:text-white text-gray-500 cursor-pointer rounded-full px-2.5 py-1">
-              <input type="radio" name="frequency" value="annually" class="sr-only"
-                     data-tiers-with-toggle-frequency-param="annually"
-                     data-action="click->tiers-with-toggle#setFrequency">
-              <span>Annually</span>
-            </label>
-          </div>
-        </fieldset>
+        <%= render 'tiers_with_toggle_toggler' %>
       </div>
       <div class="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-        <div class="rounded-3xl p-8 ring-1 ring-gray-200 xl:p-10"
-             aria-role="radio"
-             aria-checked="false"
-             data-tiers-with-toggle-plan-params="freelancer"
-             data-action="click->tiers-with-toggle#setPlan"
-        >
+        <div class="rounded-3xl p-8 ring-1 ring-gray-200 xl:p-10">
           <div class="flex items-center justify-between gap-x-4">
             <h3 id="tier-freelancer" class="text-lg font-semibold leading-8 text-gray-900">Freelancer</h3>
           </div>
           <p class="mt-4 text-sm leading-6 text-gray-600">The essentials to provide your best work for clients.</p>
-          <p class="mt-6 flex items-baseline gap-x-1">
-            <!-- Price, update based on frequency toggle state -->
-            <span class="text-4xl font-bold tracking-tight text-gray-900"
-                  data-tier-path="freelancer"
-                  data-tiers-with-toggle-target="slot"
-            ></span>
-            <!-- Payment frequency, update based on frequency toggle state -->
-            <span class="text-sm font-semibold leading-6 text-gray-600"
-                  data-tiers-with-toggle-target="frequency"
-            >/month</span>
-          </p>
+          <%= render 'tiers_with_toggle_price_section', tier_path: "freelancer" %>
           <a href="#" aria-describedby="tier-freelancer" class="mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Buy plan</a>
           <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-gray-600 xl:mt-10">
             <li class="flex gap-x-3">
@@ -99,17 +65,7 @@
             <p class="rounded-full bg-indigo-600/10 px-2.5 py-1 text-xs font-semibold leading-5 text-indigo-600">Most popular</p>
           </div>
           <p class="mt-4 text-sm leading-6 text-gray-600">A plan that scales with your rapidly growing business.</p>
-          <p class="mt-6 flex items-baseline gap-x-1">
-            <!-- Price, update based on frequency toggle state -->
-            <span class="text-4xl font-bold tracking-tight text-gray-900"
-                  data-tier-path="startup"
-                  data-tiers-with-toggle-target="slot"
-            ></span>
-            <!-- Payment frequency, update based on frequency toggle state -->
-            <span class="text-sm font-semibold leading-6 text-gray-600"
-                  data-tiers-with-toggle-target="frequency"
-            >/month</span>
-          </p>
+          <%= render 'tiers_with_toggle_price_section', tier_path: "startup" %>
           <a href="#" aria-describedby="tier-startup"
              class="mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 text-white bg-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Buy plan</a>
           <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-gray-600 xl:mt-10">
@@ -150,17 +106,7 @@
             <h3 id="tier-enterprise" class="text-lg font-semibold leading-8 text-gray-900">Enterprise</h3>
           </div>
           <p class="mt-4 text-sm leading-6 text-gray-600">Dedicated support and infrastructure for your company.</p>
-          <p class="mt-6 flex items-baseline gap-x-1">
-            <!-- Price, update based on frequency toggle state -->
-            <span class="text-4xl font-bold tracking-tight text-gray-900"
-                  data-tier-path="enterprise"
-                  data-tiers-with-toggle-target="slot"
-            ></span>
-            <!-- Payment frequency, update based on frequency toggle state -->
-            <span class="text-sm font-semibold leading-6 text-gray-600"
-                  data-tiers-with-toggle-target="frequency"
-            >/month</span>
-          </p>
+          <%= render 'tiers_with_toggle_price_section', tier_path: "enterprise" %>
           <a href="#" aria-describedby="tier-enterprise" class="mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Buy plan</a>
           <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-gray-600 xl:mt-10">
             <li class="flex gap-x-3">

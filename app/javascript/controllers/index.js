@@ -46,6 +46,9 @@ application.register("option-list", OptionListController)
 import PopupController from "./popup_controller"
 application.register("popup", PopupController)
 
+import RadioTabsController from "./radio_tabs_controller"
+application.register("radio-tabs", RadioTabsController)
+
 import RevealerController from "./revealer_controller"
 application.register("revealer", RevealerController)
 

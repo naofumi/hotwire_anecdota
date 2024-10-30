@@ -20,38 +20,40 @@ import get from "lodash/get"
 * */
 // Connects to data-controller="tiers-with-toggle"
 export default class extends Controller {
-  static values = {frequency: String, priceTable: Object}
-  static targets = ["slot", "frequency"]
+  static values = {priceTable: Object}
+  static targets = ["price", "frequency", "toggler"]
 
   connect() {
     this.#render()
   }
 
   setFrequency(event) {
-    this.frequencyValue = event.params.frequency
     this.#render()
   }
 
-  #render() {
-    this.#updateFrequencyToggle()
-    this.#updatePrices()
+  #frequency() {
+    return this.togglerTargets.find(e => e.checked).value
   }
 
-  #updateFrequencyToggle() {
-    document.querySelectorAll(`input[type=radio][name=frequency]`)
-      .forEach(e=> {
-        e.checked = e.value === this.frequencyValue ? true : false
-      })
+  #render() {
+    this.#updatePrices()
+    this.#updateFrequencyLabel()
   }
 
   #updatePrices() {
     const priceTable = this.priceTableValue
 
-    this.slotTargets.forEach(slot => {
-      const plan = slot.dataset.tierPath
+    this.priceTargets.forEach(priceTarget => {
+      const plan = priceTarget.dataset.tierPath
       // Use Lodash get (https://lodash.com/docs/4.17.15#get) to
       // allow flexibile retrieval of data from the `data-tier-path` attribute
-      slot.textContent = get(priceTable, `${plan}.${this.frequencyValue}`)
+      priceTarget.textContent = get(priceTable, `${plan}.${this.#frequency()}`)
     })
+  }
+
+  #updateFrequencyLabel() {
+    const frequencyText = this.#frequency() === "monthly" ? "/month" : "/year"
+
+    this.frequencyTargets.forEach(e => e.textContent = frequencyText)
   }
 }
