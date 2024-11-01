@@ -18,6 +18,24 @@
 </div>
 
 <h2 class="mt-36 text-5xl font-extralight text-center">
+  React Templates
+</h2>
+
+<div class="flex flex-row flex-wrap gap-4 mt-12">
+  <% @available_react_templates.each do |template| %>
+    <div class="overflow-hidden rounded-lg bg-white shadow">
+      <%= link_to react_path(template),
+                  data: {turbo: false},
+                  class: "text-center text-gray-600 font-bold text-lg" do %>
+        <div class="px-4 py-5 sm:p-6 bg-orange-100 hover:bg-orange-600 hover:text-white">
+          <%= template %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<h2 class="mt-36 text-5xl font-extralight text-center">
   Other Rails Frontend Experiments
 </h2>
 

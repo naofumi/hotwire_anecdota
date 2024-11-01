@@ -17,13 +17,14 @@
 *
 * */
 
-import { Controller } from "@hotwired/stimulus"
-import {changeClasses} from "../utlitilies";
+import {Controller} from "@hotwired/stimulus"
+import {changeClasses} from "../utilities/utilities";
 
 // Connects to data-controller="tablist"
 export default class extends Controller {
   static targets = ["control"]
   static classes = ["selected"]
+
   connect() {
   }
 

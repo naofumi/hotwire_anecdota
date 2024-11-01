@@ -1,5 +1,4 @@
 import { Controller } from "@hotwired/stimulus"
-import {classTokenize} from "../utlitilies";
 
 // Connects to data-controller="hamburger"
 export default class extends Controller {

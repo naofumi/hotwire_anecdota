@@ -1,5 +1,5 @@
 import {Controller} from "@hotwired/stimulus"
-import {classTokenize} from "../utlitilies";
+import {classTokenize} from "../utilities/utilities";
 
 // Connects to data-controller="global-notification"
 export default class extends Controller {

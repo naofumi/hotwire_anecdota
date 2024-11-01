@@ -2,6 +2,16 @@
 
 The goal of this project is to study and document how to effectively use Hotwire in combination with Tailwind. I hope it will become a catalog of well-thought-out patterns.
 
+## React
+
+As a reference, we also provide some examples written in React. This allows us to more clearly analyzed the cases where React may seem simpler than Hotwire. React is set up using the following command and is embedded into regular MPA pages.
+
+```shell
+yarn add react react-dom react-router-dom
+```
+
+We also configured tailwind to read `jsx` files.
+
 ## Thoughts on Stimulus
 
 It is tempting to come up with best practices for Stimulus controllers and, in particular, consider how we can maximize reusability.

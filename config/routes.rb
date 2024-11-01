@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     end
   end
   resource :iphone
+  resources :react, only: [ :show ]
   resources :tasks do
     scope module: :tasks do
       resource :completion
