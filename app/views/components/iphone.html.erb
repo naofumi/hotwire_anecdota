@@ -103,25 +103,19 @@
                        value: "256GB",
                        selected: true,
                        title: "256GB<sup>2</sup>".html_safe,
-                       pricing_lines: ["From $1000",
-                                       "or $1000/mo.",
-                                       "for 24 mo."] %>
+                       pricing_lines: [] %>
             <%= render 'iphone_option',
                        name: :ram,
                        value: "512GB",
                        selected: false,
                        title: "512GB<sup>*</sup>".html_safe,
-                       pricing_lines: ["From $2000",
-                                       "or $2000/mo.",
-                                       "for 24 mo."] %>
+                       pricing_lines: [] %>
             <%= render 'iphone_option',
                        name: :ram,
                        value: "1TB",
                        selected: false,
                        title: "1TB<sup>2</sup>".html_safe,
-                       pricing_lines: ["From $3000",
-                                       "or 3000/mo.",
-                                       "for 24 mo."] %>
+                       pricing_lines: [] %>
           <% end %>
           <div class="flex justify-between mt-4 p-4 block bg-gray-100 rounded-lg w-full">
             <div class="text-sm">

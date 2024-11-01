@@ -17,8 +17,6 @@ export default class extends Controller {
   close(event) {
     if (!this.popupTarget.open) { return true }
 
-    event.stopPropagation()
-    event.preventDefault()
     this.controlTarget.ariaExpanded = "false"
 
     this.popupTarget.close()

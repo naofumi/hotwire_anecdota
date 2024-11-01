@@ -66,8 +66,8 @@ export default class extends Controller {
                       ? this.iphone.pricingFor(value, this.iphone.ram)
                       : this.iphone.pricingFor(this.iphone.model, value)
       e.innerHTML = `
-        <div class="text-xs text-gray-500 text-right">From \$${pricing.lump}</div>
-        <div class="text-xs text-gray-500 text-right">or \$${pricing.monthly}</div>
+        <div class="text-xs text-gray-500 text-right">From \$${pricing.lump.toFixed(2)}</div>
+        <div class="text-xs text-gray-500 text-right">or \$${pricing.monthly.toFixed(2)}</div>
         <div class="text-xs text-gray-500 text-right">for 24 mo.</div>
       `
     })

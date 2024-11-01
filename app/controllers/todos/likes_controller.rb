@@ -7,10 +7,6 @@ class Todos::LikesController < ApplicationController
     else
       @todo.unlike_by! current_user
     end
-
-    sleep 2
-    #
-    # redirect_to todos_url
   end
 
   private

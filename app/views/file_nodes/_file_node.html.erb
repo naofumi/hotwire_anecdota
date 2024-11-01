@@ -8,7 +8,7 @@
     <%= tag.div class: "relative file-node-popup-outlet",
                 data: { controller: 'popup',
                         popup_popup_outlet: ".file-node-popup-outlet",
-                        action: "keydown.esc@window->popup#close" } do %>
+                        action: "keydown.esc@window->popup#close:prevent:stop" } do %>
       <button data-action="click->popup#toggleAndHideOthers"
               data-popup-target="control"
               aria-expanded="false">

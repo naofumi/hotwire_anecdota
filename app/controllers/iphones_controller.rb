@@ -8,7 +8,10 @@ class IphonesController < ApplicationController
     @iphone.model = params[:model] if params[:model]
     @iphone.color = params[:color] if params[:color]
     @iphone.ram = params[:ram] if params[:ram]
-    redirect_to iphone_path
+    respond_to do |format|
+      format.turbo_stream
+      # format.html { redirect_to iphone_path }
+    end
   end
 
   private
