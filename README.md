@@ -4,13 +4,19 @@ The goal of this project is to study and document how to effectively use Hotwire
 
 ## React
 
-As a reference, we also provide some examples written in React. This allows us to more clearly analyzed the cases where React may seem simpler than Hotwire. React is set up using the following command and is embedded into regular MPA pages.
+As a reference, we also provide some examples written in React. This allows us to better draw similarities between Hotwire and React concepts.
+
+* Stimulus actions – React event handler functions
+* Stimulus value state – React state
+* Stimulus `#render` functions – React automatic rendering (one-way data flow)
+
+React is set up using the following command and is embedded into regular MPA pages.
 
 ```shell
-yarn add react react-dom react-router-dom
+yarn add react react-dom
 ```
 
-We also configured tailwind to read `jsx` files.
+Tailwind is also configured to reference `jsx` files.
 
 ## Thoughts on Stimulus
 

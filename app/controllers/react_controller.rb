@@ -3,7 +3,9 @@ class ReactController < ApplicationController
   before_action :set_template
   before_action :set_data
   layout false
+
   def show
+    render @template
   end
 
   private

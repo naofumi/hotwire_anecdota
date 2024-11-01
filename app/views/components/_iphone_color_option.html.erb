@@ -1,4 +1,4 @@
-<%# locals: (value:, color:, iphone:, selected:) %>
+<%# locals: (value:, color:, selected:) %>
 <%= label_tag [:color, value].join('_'),
               data: {
                 action: "mouseenter->iphone-static#setColorText mouseleave->iphone-static#resetColorText",
