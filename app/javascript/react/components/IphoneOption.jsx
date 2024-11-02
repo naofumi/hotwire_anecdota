@@ -13,7 +13,7 @@ export default function IphoneOption(
              name={name}
              value={value}
              checked={selected}
-             onChange={() => handleOptionChange(value)}
+             onChange={() => handleOptionChange(name, value)}
              className="hidden" />
       <div>
         <div className="text-lg" dangerouslySetInnerHTML={{__html: title}}/>

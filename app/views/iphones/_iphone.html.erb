@@ -14,10 +14,8 @@
 
   <%= tag.div class: "flex" do %>
     <div class="shrink-0 sticky top-0 w-[592px] h-[460px]">
-      <% if @iphone.image_path %>
-        <%= image_tag @iphone.image_path,
-                      class: "object-cover w-[592px] h-[460px] rounded-[20px]" %>
-      <% end %>
+      <%= image_tag @iphone.image_path,
+                    class: "object-cover w-[592px] h-[460px] rounded-[20px]" %>
     </div>
     <div class="pl-10">
       <div>
@@ -25,27 +23,17 @@
         <div>
           <%= form_with url: iphone_path, method: :post do %>
             <%= fieldset_tag nil, disabled: !@iphone.model_enterable?, class: "disabled:opacity-30" do %>
-              <%= render 'option',
-                         name: :model,
-                         value: "6-1inch",
-                         selected: @iphone.model == "6-1inch",
-                         title: "iPhone 15 Pro",
-                         subtitle: "6.1-inch display",
-                         pricing_lines: ["From #{number_to_currency Iphone.pricing_for("6-1inch").lump, locale: :en}",
-                                         "or #{number_to_currency Iphone.pricing_for("6-1inch").monthly, locale: :en}/mo.",
-                                         "for 24 mo."]
-              %>
-              <%= render 'option',
-                         name: :model,
-                         value: "6-7inch",
-                         selected: @iphone.model == "6-7inch",
-                         title: "iPhone 15 Pro Max",
-                         subtitle: "6.7-inch display",
-                         pricing_lines: ["From #{number_to_currency Iphone.pricing_for("6-7inch").lump, locale: :en}",
-                                         "or #{number_to_currency Iphone.pricing_for("6-7inch").monthly, locale: :en}/mo.",
-                                         "for 24 mo."]
-
-              %>
+              <% [{ model: "6-1inch", title: "iPhone 15 Pro", subtitle: "6.1-inch display" },
+                  { model: "6-7inch", title: "iPhone 15 Pro Max", subtitle: "6.7-inch display" }].each do |attributes| %>
+                <%= render 'option',
+                           name: :model,
+                           value: attributes[:model],
+                           selected: @iphone.model == attributes[:model],
+                           title: attributes[:title],
+                           subtitle: attributes[:subtitle],
+                           pricing_lines: item_pricing(attributes[:model], @iphone.ram)
+                %>
+              <% end %>
             <% end %>
           <% end %>
           <div class="flex justify-between mt-4 p-4 block bg-gray-100 rounded-lg w-full">
@@ -69,22 +57,15 @@
 
           <%= form_with url: iphone_path, method: :post do %>
             <%= fieldset_tag nil, disabled: !@iphone.color_enterable?, class: "disabled:opacity-30" do %>
-              <%= render 'color_option',
-                         value: "naturaltitanium",
-                         color: "bg-gray-400",
-                         iphone: @iphone %>
-              <%= render 'color_option',
-                         value: "bluetitanium",
-                         color: "bg-indigo-800",
-                         iphone: @iphone %>
-              <%= render 'color_option',
-                         value: "whitetitanium",
-                         color: "bg-white",
-                         iphone: @iphone %>
-              <%= render 'color_option',
-                         value: "blacktitanium",
-                         color: "bg-black",
-                         iphone: @iphone %>
+              <% [{ color: "naturaltitanium", class: "bg-gray-400" },
+                  { color: "bluetitanium", class: "bg-indigo-800" },
+                  { color: "whitetitanium", class: "bg-white" },
+                  { color: "blacktitanium", class: "bg-black" }].each do |attributes| %>
+                <%= render 'color_option',
+                           value: attributes[:color],
+                           color: attributes[:class],
+                           iphone: @iphone %>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
@@ -95,30 +76,17 @@
         <div>
           <%= form_with url: iphone_path, method: :post do %>
             <%= fieldset_tag nil, disabled: !@iphone.ram_enterable?, class: "disabled:opacity-30" do %>
-              <%= render 'option',
-                         name: :ram,
-                         value: "256GB",
-                         selected: @iphone.ram == "256GB",
-                         title: "256GB<sup>2</sup>".html_safe,
-                         pricing_lines: ["From #{number_to_currency Iphone.pricing_for(@iphone.model, "256GB").lump, locale: :en}",
-                                         "or #{number_to_currency Iphone.pricing_for(@iphone.model, "256GB").monthly, locale: :en}/mo.",
-                                         "for 24 mo."] %>
-              <%= render 'option',
-                         name: :ram,
-                         value: "512GB",
-                         selected: @iphone.ram == "512GB",
-                         title: "512GB<sup>*</sup>".html_safe,
-                         pricing_lines: ["From #{number_to_currency Iphone.pricing_for(@iphone.model, "512GB").lump, locale: :en}",
-                                         "or #{number_to_currency Iphone.pricing_for(@iphone.model, "512GB").monthly, locale: :en}/mo.",
-                                         "for 24 mo."] %>
-              <%= render 'option',
-                         name: :ram,
-                         value: "1TB",
-                         selected: @iphone.ram == "1TB",
-                         title: "1TB<sup>2</sup>".html_safe,
-                         pricing_lines: ["From #{number_to_currency Iphone.pricing_for(@iphone.model, "1TB").lump, locale: :en}",
-                                         "or #{number_to_currency Iphone.pricing_for(@iphone.model, "1TB").monthly, locale: :en}/mo.",
-                                         "for 24 mo."] %>
+              <% [{ value: "256GB", title: "256GB<sup>2</sup>".html_safe },
+                  { value: "512GB", title: "512GB<sup>*</sup>".html_safe },
+                  { value: "1TB", title: "1TB<sup>2</sup>".html_safe },
+                 ].each do |attributes| %>
+                <%= render 'option',
+                           name: :ram,
+                           value: attributes[:value],
+                           selected: @iphone.ram == attributes[:value],
+                           title: attributes[:title],
+                           pricing_lines: item_pricing(@iphone.model, attributes[:value]) %>
+              <% end %>
             <% end %>
           <% end %>
           <div class="flex justify-between mt-4 p-4 block bg-gray-100 rounded-lg w-full">

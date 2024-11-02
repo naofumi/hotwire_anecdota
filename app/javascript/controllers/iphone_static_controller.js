@@ -13,19 +13,13 @@ export default class extends Controller {
   }
 
   updateOption(event) {
-    const element = event.currentTarget
-    const name = element.name
-    const value = element.value
+    const {name, value} = event.currentTarget
     this.iphoneValue = {...this.iphoneValue, [name]: value}
   }
 
   updateColor(event) {
     const color = event.currentTarget.value
     this.iphoneValue = {...this.iphoneValue, color: color}
-  }
-
-  iphoneValueChanged() {
-    this.#render()
   }
 
   setColorText(event) {
@@ -36,6 +30,10 @@ export default class extends Controller {
 
   resetColorText(event) {
     this.colorTextTargets.forEach(target => target.textContent = this.iphone.fullColorName())
+  }
+
+  iphoneValueChanged() {
+    this.#render()
   }
 
   #render() {

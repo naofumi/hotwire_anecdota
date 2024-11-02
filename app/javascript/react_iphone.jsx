@@ -2,66 +2,49 @@ import React, {useState} from "react";
 import {createRoot} from "react-dom/client";
 import IphoneOption from "./react/components/IphoneOption"
 import IphoneColorOption from "./react/components/IphoneColorOption"
+import IPhone from "./models/IPhone"
 
 document.addEventListener("DOMContentLoaded", () => {
   const dataJSON = document.getElementById('catalog-data').textContent
   const data = JSON.parse(dataJSON)
 
   const root = createRoot(document.getElementById("root"))
-  root.render(<IPhone catalogData={data} />);
+  root.render(<IPhoneShow catalogData={data} />);
 });
 
-function IPhone({catalogData}) {
-  const [model, setModel] = useState("6-1inch")
-  const [color, setColor] = useState("naturaltitanium")
-  const [ram, setRam] = useState("256GB")
+function IPhoneShow({catalogData}) {
+  const [iPhoneState, setIphoneState] = useState(
+    {model: null, color: null, ram: null}
+  )
+  const [colorText, setColorText] = useState("Color – Natural Titanium")
 
-  function imagePath(model, color) {
-    return catalogData.images[`${model}-${color}`]
-  }
+  const iPhone = new IPhone(iPhoneState, catalogData)
 
-  function fullColorName(color) {
-    return catalogData.colors[color].full_name
-  }
-
-  function price(model, ram) {
-    const modelPrice = catalogData.prices.model[model]
-    const ramPrice = catalogData.prices.ram[ram]
-
-    return {lump: modelPrice.lump + ramPrice.lump, monthly: modelPrice.monthly + ramPrice.monthly}
-  }
-
-  function pricingFor(model, ram) {
-    const modelPricing = catalogData.prices.model[model]
-    const ramPricing = catalogData.prices.ram[ram]
-
-    return {
-      lump: modelPricing.lump + ramPricing.lump,
-      monthly: modelPricing.monthly + ramPricing.monthly,
-    }
-  }
-
-  function itemPricing(model, ram) {
-    const pricing = pricingFor(model, ram)
-    return [`From \$${pricing.lump.toFixed(2)}`, `or \$${pricing.monthly.toFixed(2)}/mo.`, "for 24 mo."]
-  }
-
-  function handleModelChange(model) {
-    setModel(model)
+  function handleOptionChange(name, value) {
+    setIphoneState({...iPhoneState, [name]: value})
   }
 
   function handleColorChange(color) {
-    setColor(color)
+    setIphoneState({...iPhoneState, color})
   }
 
-  function handleRamChange(ram) {
-    setRam(ram)
+  function handleSetColorText(selectedColor) {
+    setColorText(catalogData.colors[selectedColor].full_name)
+  }
+
+  function handleResetColorText() {
+    setColorText(iPhone.fullColorName())
+  }
+
+  function itemPricing(model, ram) {
+    const pricing = iPhone.pricingFor(model, ram)
+    return [`From \$${pricing.lump.toFixed(2)}`, `or \$${pricing.monthly.toFixed(2)}/mo.`, "for 24 mo."]
   }
 
   return (<div className="relative">
     <div className="text-xl z-10 font-bold sticky top-14 right-0 h-8 w-full">
       <div className="ml-auto p-2 bg-white text-center w-[400px] shadow">
-        <span>{`From ${price(model, ram).lump.toFixed(2)} or ${price(model, ram).monthly.toFixed(2)}`} </span>
+        <span>{`From ${iPhone.price().lump.toFixed(2)} or ${iPhone.price().monthly.toFixed(2)}`} </span>
         for 24 mo.*
       </div>
     </div>
@@ -73,31 +56,24 @@ function IPhone({catalogData}) {
 
     <div className="flex">
       <div className="shrink-0 sticky top-0 w-[592px] h-[460px]">
-        <img src={imagePath(model, color)} className="object-cover w-[592px] h-[460px] rounded-[20px]" alt="iphone-image"/>
+        <img src={iPhone.imagePath()} className="object-cover w-[592px] h-[460px] rounded-[20px]" alt="iphone-image"/>
       </div>
       <div className="pl-10">
         <div>
           <h2 className="mb-6 text-2xl">Model. <span className="text-gray-400">Which is best for you?</span></h2>
           <div>
-            <fieldset className="disabled:opacity-30">
-              <IphoneOption
-                name="model"
-                value="6-1inch"
-                selected={model === "6-1inch"}
-                title="iPhone 15 Pro"
-                subtitle="6.1-inch display"
-                pricingLines={itemPricing("6-1inch", ram)}
-                handleOptionChange={handleModelChange}
-              />
-              <IphoneOption
-                name="model"
-                value="6-7inch"
-                selected={model === "6-7inch"}
-                title="iPhone 15 Pro Max"
-                subtitle="6.7-inch display"
-                pricingLines={itemPricing("6-7inch", ram)}
-                handleOptionChange={handleModelChange}
-              />
+            <fieldset disabled={!iPhone.canEnterModel()} className="disabled:opacity-30">
+              { [ { model: "6-1inch", title: "iPhone 15 Pro", subtitle: "6.1-inch display" },
+                  { model: "6-7inch", title: "iPhone 15 Pro Max", subtitle: "6.7-inch display" }
+                ].map( attributes => <IphoneOption
+                  name="model"
+                  value={attributes.model}
+                  selected={iPhone.model === attributes.}
+                  title={attributes.title}
+                  subtitle={attributes.subtitle}
+                  pricingLines={itemPricing(attributes.model, iPhone.ram)}
+                  handleOptionChange={handleOptionChange}
+                />) }
             </fieldset>
             <div className="flex justify-between mt-4 p-4 block bg-gray-100 rounded-lg w-full">
               <div className="text-sm">
@@ -118,32 +94,24 @@ function IPhone({catalogData}) {
         <div className="mt-48">
           <h2 className="mb-6 text-2xl">Finish. <span className="text-gray-400">Pick your favorite</span></h2>
           <div>
-            <div className="text-xl my-4" data-iphone-static-target="colorText"></div>
-            <fieldset className="disabled:opacity-30">
-              <IphoneColorOption
-                value="naturaltitanium"
-                color="bg-gray-400"
-                selected={color === "naturaltitanium"}
-                handleColorChange={handleColorChange}
-                />
-              <IphoneColorOption
-                value="bluetitanium"
-                color="bg-indigo-400"
-                selected={color === "bluetitanium"}
-                handleColorChange={handleColorChange}
-              />
-              <IphoneColorOption
-                value="whitetitanium"
-                color="bg-white"
-                selected={color === "whitetitanium"}
-                handleColorChange={handleColorChange}
-              />
-              <IphoneColorOption
-                value="blacktitanium"
-                color="bg-black"
-                selected={color === "blacktitanium"}
-                handleColorChange={handleColorChange}
-              />
+            <div className="text-xl my-4">
+              {colorText}
+            </div>
+            <fieldset  disabled={!iPhone.canEnterColor()} className="disabled:opacity-30">
+              {
+                [{ color: "naturaltitanium", class: "bg-gray-400" },
+                  { color: "bluetitanium", class: "bg-indigo-800" },
+                  { color: "whitetitanium", class: "bg-white" },
+                  { color: "blacktitanium", class: "bg-black" }
+                ].map( attributes =><IphoneColorOption
+                  value={attributes.color}
+                  color={attributes.class}
+                  selected={iPhone.color === attributes.color}
+                  handleColorChange={handleColorChange}
+                  handleSetColorText={handleSetColorText}
+                  handleResetColorText={handleResetColorText}
+                />)
+              }
             </fieldset>
           </div>
         </div>
@@ -151,31 +119,18 @@ function IPhone({catalogData}) {
         <div className="mt-48">
           <h2 className="mb-6 text-2xl">Storage. <span className="text-gray-400">How much space do you need?</span></h2>
           <div>
-            <fieldset className="disabled:opacity-30">
-              <IphoneOption
+            <fieldset  disabled={!iPhone.canEnterRam()} className="disabled:opacity-30">
+              {[{ value: "256GB", title: "256GB<sup>2</sup>" },
+                { value: "512GB", title: "512GB<sup>*</sup>" },
+                { value: "1TB", title: "1TB<sup>2</sup>" },
+              ].map(attributes => <IphoneOption
                 name="ram"
-                value="256GB"
-                selected={ram === "256GB"}
-                title="256GB<sup>2</sup>"
-                pricingLines={itemPricing(model, "256GB")}
-                handleOptionChange={handleRamChange}
-              />
-              <IphoneOption
-                name="ram"
-                value="512GB"
-                selected={ram === "512GB"}
-                title="512GB<sup>*</sup>"
-                pricingLines={itemPricing(model, "512GB")}
-                handleOptionChange={handleRamChange}
-              />
-              <IphoneOption
-                name="ram"
-                value="1TB"
-                selected={ram === "1TB"}
-                title="1TB<sup>2</sup>"
-                pricingLines={itemPricing(model, "1TB")}
-                handleOptionChange={handleRamChange}
-              />
+                value={attributes.value}
+                selected={iPhone.ram === attributes.value}
+                title={attributes.title}
+                pricingLines={itemPricing(iPhone.model, attributes.value)}
+                handleOptionChange={handleOptionChange}
+              />)}
             </fieldset>
             <div className="flex justify-between mt-4 p-4 block bg-gray-100 rounded-lg w-full">
               <div className="text-sm">
