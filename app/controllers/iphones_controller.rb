@@ -14,6 +14,12 @@ class IphonesController < ApplicationController
     end
   end
 
+  def destroy
+    session.delete(:iphone)
+
+    redirect_to iphone_path
+  end
+
   private
 
     def set_iphone

@@ -1,4 +1,5 @@
-<% set_breadcrumbs [["iPhone", iphone_path]] %>
+<div class="mx-auto min-w-[1028px] lg:max-w-5xl">
+  <% set_breadcrumbs [["Apple Store Turbo Stream SSR", iphone_path]] %>
 
-<% turbo_refreshes_with(method: :morph, scroll: :preserve) %>
-<%= render "iphone", iphone: @iphone %>
+  <%= render "iphone", iphone: @iphone %>
+</div>
