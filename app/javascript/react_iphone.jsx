@@ -68,7 +68,7 @@ function IPhoneShow({catalogData}) {
                 ].map( attributes => <IphoneOption
                   name="model"
                   value={attributes.model}
-                  selected={iPhone.model === attributes.}
+                  selected={iPhone.model === attributes.model}
                   title={attributes.title}
                   subtitle={attributes.subtitle}
                   pricingLines={itemPricing(attributes.model, iPhone.ram)}

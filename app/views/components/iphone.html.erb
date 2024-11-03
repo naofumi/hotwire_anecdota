@@ -27,28 +27,19 @@
       <div>
         <h2 class="mb-6 text-2xl">Model. <span class="text-gray-400">Which is best for you?</span></h2>
         <div>
-          <%= fieldset_tag nil, disabled: false, class: "disabled:opacity-30" do %>
-            <%= render 'iphone_option',
-                       name: :model,
-                       value: "6-1inch",
-                       selected: true,
-                       title: "iPhone 15 Pro",
-                       subtitle: "6.1-inch display",
-                       pricing_lines: ["From $1000",
-                                       "or $1000/mo.",
-                                       "for 24 mo."]
-            %>
-            <%= render 'iphone_option',
-                       name: :model,
-                       value: "6-7inch",
-                       selected: false,
-                       title: "iPhone 15 Pro Max",
-                       subtitle: "6.7-inch display",
-                       pricing_lines: ["From $2000",
-                                       "or $2000/mo.",
-                                       "for 24 mo."]
-
-            %>
+          <%= fieldset_tag nil, disabled: false, class: "disabled:opacity-30",
+                           data: { iphone_static_target: "modelForm" } do %>
+            <% [{ model: "6-1inch", title: "iPhone 15 Pro", subtitle: "6.1-inch display" },
+                { model: "6-7inch", title: "iPhone 15 Pro Max", subtitle: "6.7-inch display" }].each do |attributes| %>
+              <%= render 'iphone_option',
+                         name: :model,
+                         value: attributes[:model],
+                         selected: false,
+                         title: attributes[:title],
+                         subtitle: attributes[:subtitle],
+                         pricing_lines: []
+              %>
+            <% end %>
           <% end %>
           <div class="flex justify-between mt-4 p-4 block bg-gray-100 rounded-lg w-full">
             <div class="text-sm">
@@ -69,23 +60,18 @@
         <%= tag.div do %>
           <div class="text-xl my-4" data-iphone-static-target="colorText"><%= "Foo color name" %></div>
 
-          <%= fieldset_tag nil, disabled: false, class: "disabled:opacity-30" do %>
-            <%= render 'iphone_color_option',
-                       value: "naturaltitanium",
-                       color: "bg-gray-400",
-                       selected: true %>
-            <%= render 'iphone_color_option',
-                       value: "bluetitanium",
-                       color: "bg-indigo-800",
-                       selected: false %>
-            <%= render 'iphone_color_option',
-                       value: "whitetitanium",
-                       color: "bg-white",
-                       selected: false %>
-            <%= render 'iphone_color_option',
-                       value: "blacktitanium",
-                       color: "bg-black",
-                       selected: false %>
+          <%= fieldset_tag nil, disabled: false, class: "disabled:opacity-30",
+                           data: { iphone_static_target: "colorForm" } do %>
+            <% [{ color: "naturaltitanium", class: "bg-gray-400" },
+                { color: "bluetitanium", class: "bg-indigo-800" },
+                { color: "whitetitanium", class: "bg-white" },
+                { color: "blacktitanium", class: "bg-black" }].each do |attributes| %>
+
+              <%= render 'iphone_color_option',
+                         value: attributes[:color],
+                         color: attributes[:class],
+                         selected: false %>
+            <% end %>
           <% end %>
         <% end %>
       </div>
@@ -93,25 +79,19 @@
       <div class="mt-48">
         <h2 class="mb-6 text-2xl">Storage. <span class="text-gray-400">How much space do you need?</span></h2>
         <div>
-          <%= fieldset_tag nil, disabled: false, class: "disabled:opacity-30" do %>
-            <%= render 'iphone_option',
-                       name: :ram,
-                       value: "256GB",
-                       selected: true,
-                       title: "256GB<sup>2</sup>".html_safe,
-                       pricing_lines: [] %>
-            <%= render 'iphone_option',
-                       name: :ram,
-                       value: "512GB",
-                       selected: false,
-                       title: "512GB<sup>*</sup>".html_safe,
-                       pricing_lines: [] %>
-            <%= render 'iphone_option',
-                       name: :ram,
-                       value: "1TB",
-                       selected: false,
-                       title: "1TB<sup>2</sup>".html_safe,
-                       pricing_lines: [] %>
+          <%= fieldset_tag nil, disabled: false, class: "disabled:opacity-30",
+                           data: { iphone_static_target: "ramForm" } do %>
+            <% [{ value: "256GB", title: "256GB<sup>2</sup>".html_safe },
+                { value: "512GB", title: "512GB<sup>*</sup>".html_safe },
+                { value: "1TB", title: "1TB<sup>2</sup>".html_safe },
+               ].each do |attributes| %>
+              <%= render 'iphone_option',
+                         name: :ram,
+                         value: attributes[:value],
+                         selected: false,
+                         title: attributes[:title],
+                         pricing_lines: [] %>
+            <% end %>
           <% end %>
           <div class="flex justify-between mt-4 p-4 block bg-gray-100 rounded-lg w-full">
             <div class="text-sm">

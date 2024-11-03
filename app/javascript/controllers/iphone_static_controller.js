@@ -3,10 +3,13 @@ import IPhone from "../models/IPhone"
 
 // Connects to data-controller="iphone-static"
 export default class extends Controller {
-  static targets = ["image", "price", "colorText", "itemPricing"]
+  static targets = [
+    "image", "price", "colorText", "itemPricing",
+    "modelForm", "colorForm", "ramForm"
+  ]
   static values = {
     catalogData: Object,
-    iphone: {type: Object, default: {model: "6-1inch", color: "naturaltitanium", ram: "256GB"}}
+    iphone: {type: Object, default: {model: null, color: null, ram: null}}
   }
 
   connect() {
@@ -42,6 +45,7 @@ export default class extends Controller {
     this.#renderPriceTarget()
     this.#renderColorTextTargets()
     this.#renderItemPricingTargets()
+    this.#renderFormTargets()
   }
 
   #renderImageTarget() {
@@ -49,12 +53,14 @@ export default class extends Controller {
   }
 
   #renderPriceTarget() {
+    const price = this.iphone.price()
     this.priceTarget.textContent =
-      `From ${this.iphone.price().lump.toFixed(2)} or ${this.iphone.price().monthly.toFixed(2)}`
+      `From ${price.lump.toFixed(2)} or ${price.monthly.toFixed(2)}`
   }
 
   #renderColorTextTargets() {
-    this.colorTextTargets.forEach(e => e.textContent = this.iphone.fullColorName())
+    const colorText = this.iphone.fullColorName()
+    this.colorTextTargets.forEach(e => e.textContent = colorText)
   }
 
   #renderItemPricingTargets() {
@@ -70,5 +76,11 @@ export default class extends Controller {
         <div class="text-xs text-gray-500 text-right">for 24 mo.</div>
       `
     })
+  }
+
+  #renderFormTargets() {
+    this.modelFormTarget.disabled = !this.iphone.canEnterModel()
+    this.colorFormTarget.disabled = !this.iphone.canEnterColor()
+    this.ramFormTarget.disabled = !this.iphone.canEnterRam()
   }
 }
