@@ -1,0 +1,53 @@
+<%= provide :head, javascript_include_tag("https://unpkg.com/react@18/umd/react.production.min.js", "data-turbo-track": "reload", crossorigin: true) %>
+<%= provide :head, javascript_include_tag("https://unpkg.com/react-dom@18/umd/react-dom.production.min.js", "data-turbo-track": "reload", crossorigin: true) %>
+<%= provide :head, javascript_include_tag("https://unpkg.com/@babel/standalone/babel.min.js", "data-turbo-track": "reload") %>
+
+<% set_breadcrumbs [["React with Babel", component_path(:react_babel)]] %>
+
+<%= render 'template',
+           title: "React with Babel",
+           description: "" do %>
+
+  <div id="greetings"></div>
+  <div id="counter1" class="mt-8"></div>
+  <div id="counter2" class="mt-8"></div>
+
+  <script type="text/babel">
+    function Greeting({message}) {
+      return (<div className="p-2 rounded border-2 border-dashed">
+        <h1 className="text-3xl">{message}</h1>
+      </div>)
+    }
+
+    const greetingsRoot = ReactDOM.createRoot(document.getElementById('greetings'));
+    greetingsRoot.render(React.createElement(Greeting, {message: "Hello World without JSX"}, null));
+  </script>
+
+  <script type="text/babel">
+    function Counter({initialValue}) {
+      const [count, setCount] = React.useState(initialValue);
+
+      function handleSetCount(newCount) {
+        setCount(newCount)
+      }
+
+      return <div className="p-2 rounded border-2 border-dashed">
+        <div className="text-3xl">Counter: {count}</div>
+        <button className="w-16 bg-orange-600 border rounded p-1 text-white"
+                onClick={e => handleSetCount(count + 1)}>
+          Up
+        </button>
+        <button className="w-16 bg-orange-600 border rounded p-1 text-white"
+                onClick={e => handleSetCount(count - 1)}>
+          Down
+        </button>
+      </div>
+    }
+
+    const counter1Root = ReactDOM.createRoot(document.getElementById('counter1'));
+    counter1Root.render(React.createElement(Counter, {initialValue: 3}, null));
+
+    const counter2Root = ReactDOM.createRoot(document.getElementById('counter2'));
+    counter2Root.render(React.createElement(Counter, {initialValue: 5}, null));
+  </script>
+<% end %>

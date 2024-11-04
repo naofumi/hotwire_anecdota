@@ -2,7 +2,7 @@ class ComponentsController < ApplicationController
   AVAILABLE_TEMPLATES = %w[
     toggle select tabs navigation tiers_with_toggle
     accordion dropdown_menu static_tabs radio_tabs
-    iphone react react_wo_jsx
+    iphone react react_wo_jsx react_babel
   ]
   before_action :set_template, only: [ :show ]
   before_action :set_data , only: [ :show ]

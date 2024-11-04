@@ -2,15 +2,21 @@
 title: Kamal Rails
 layout: body
 hide_top_button: true
+hide_title: true
+sections:
+  - ["概要", "introduction"]
+  - ["考え方", "concepts"]
+  - ["コツ", "tips"]
+  - ["パフォーマンス", "performance"]
+  - ["その他", "others"]
 ---
-
 <div class="bg-white py-24 sm:py-32">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl lg:mx-0">
       <p class="text-base font-semibold leading-7 text-orange-600">
-        Hotwireのいろいろな話
+        Hotwire よもやま話
       </p>
-      <h2 class="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+      <h2 class="mt-2 text-4xl font-light text-gray-900 sm:text-6xl">
         Anecdotes on Hotwire
       </h2>
       <p class="mt-6 text-lg leading-8 text-gray-600">
@@ -20,13 +26,16 @@ hide_top_button: true
 
       </p>
 
-      </p>
-      <div class="flex flex-wrap gap-2 mt-4">
-        <% site.glob("sections/*.html.*")
-               .sort_by { _1.data.order }.each do |page| %>
-          <%= link_to page.data.title, page.url, class: "btn-primary" %>
-        <% end %>
-      </div>
+      <% current_page.data.sections.each_entry do |section| %>
+        <% title, folder = section[0], section[1] %>
+        <h3 class="mt-12 text-2xl font-light text-gray-600"><%= title %></h3>
+        <div class="flex flex-wrap gap-4 mt-4">
+          <% site.glob("#{folder}/*.html.*")
+                 .sort_by { _1.data.order }.each do |page| %>
+            <%= link_to page.data.title, page.url, class: "py-2 px-4 border rounded-lg border-orange-300 text-gray-600 font-light hover:text-orange-300 active:bg-orange-100" %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

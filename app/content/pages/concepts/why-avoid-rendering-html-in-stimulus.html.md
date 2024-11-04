@@ -1,5 +1,5 @@
 ---
-title: 一般にStimulusでHTMLを作らない理由
+title: 一般にStimulusでHTMLを生成しない理由
 section: Background
 layout: section
 order: 010

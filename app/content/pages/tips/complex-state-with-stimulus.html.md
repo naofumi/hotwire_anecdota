@@ -5,6 +5,10 @@ layout: section
 order: 005
 ---
 
+## ステート管理の課題
+
+![ステートの中央管理](content_images/central-state-management.webp)
+
 ## Stimulusは`*values`を使って複雑なステートに対応できる
 
 ## Stimulusはデータバインディングがない

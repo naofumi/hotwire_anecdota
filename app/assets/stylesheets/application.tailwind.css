@@ -63,7 +63,7 @@
 
     .md {
         h2 {
-            @apply mt-16 pt-4 py-2 text-2xl font-bold tracking-tight text-gray-900 sticky bg-white top-12 scroll-mt-12 sm:top-12 sm:scroll-mt-12
+            @apply mt-4 pt-4 py-2 text-2xl font-bold tracking-tight text-gray-900 sticky bg-white top-12 scroll-mt-12 sm:top-12 sm:scroll-mt-12
         }
 
         h3 {
@@ -72,7 +72,7 @@
         }
 
         p {
-            @apply text-gray-700 my-4 text-base/7
+            @apply text-gray-700 my-3 text-base/6
         }
 
         a {
@@ -81,6 +81,10 @@
 
         blockquote {
             @apply pl-4 border-l-4 border-gray-200
+        }
+
+        img {
+            @apply py-4 mx-auto
         }
 
         ul {
