@@ -1,0 +1,27 @@
+<%= provide :head, javascript_include_tag("application_react_stimulus", "data-turbo-track": "reload", type: "module") %>
+
+<% set_breadcrumbs [["React in Stimulus", component_path(:react)]] %>
+
+<%= render 'template',
+           title: "React in Stimulus",
+           description: "" do %>
+
+  <div data-controller="react"
+       data-react-selector-value="greeting"
+       data-react-props-value='{"message": "Hello World from JSX Stimulus"}'>
+    <div data-react-target="insert"></div>
+  </div>
+
+  <div data-controller="react"
+       data-react-selector-value="counter"
+       data-react-props-value='{"initialValue": 3}'
+       class="mt-8">
+    <div data-react-target="insert"></div>
+  </div>
+  <div data-controller="react"
+       data-react-selector-value="counter"
+       data-react-props-value='{"initialValue": 5}'
+       class="mt-8">
+    <div data-react-target="insert"></div>
+  </div>
+<% end %>

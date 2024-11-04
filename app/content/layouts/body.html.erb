@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= content_for(:title) || "Tailwind Rails" %></title>
+  <title><%= current_page.data.title %></title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <%= csrf_meta_tags %>
@@ -17,11 +17,10 @@
   <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
 </head>
 
-<body class="relative">
-<div class="container container-lg mx-auto px-4 pt-16">
-  <div><%= content_for(:breadcrumbs) %></div>
-  <%= yield %>
-</div>
-<%= render 'global_notification' %>
+<body>
+<%= render 'nav',
+           hide_top_button: current_page.data.hide_top_button,
+           hide_title: current_page.data.hide_title %>
+<%= yield %>
 </body>
 </html>

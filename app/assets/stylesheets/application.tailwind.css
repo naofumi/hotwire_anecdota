@@ -35,16 +35,81 @@
             @apply opacity-100;
         }
     }
-}
 
-.highlight-on-appear {
-    transition: background-color ease-out 1s;
+    .highlight-on-appear {
+        transition: background-color ease-out 1s;
 
-    @starting-style {
-        background-color: yellow;
+        @starting-style {
+            background-color: yellow;
+        }
+    }
+
+    .field_with_errors input {
+        @apply !bg-red-500 !bg-opacity-10 !border-red-500 !border-2
+    }
+
+    /* general component classes */
+    .btn-primary {
+        @apply rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600
+    }
+
+    .btn-primary-muted {
+        @apply rounded-md bg-orange-400 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400
+    }
+
+    .btn-outline-primary {
+        @apply rounded-md border border-orange-600 bg-white px-3.5 py-2.5 text-sm font-semibold text-orange-600 hover:bg-orange-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600
+    }
+
+    .md {
+        h2 {
+            @apply mt-16 pt-4 py-2 text-2xl font-bold tracking-tight text-gray-900 sticky bg-white top-12 scroll-mt-12 sm:top-12 sm:scroll-mt-12
+        }
+
+        h3 {
+            /*@apply sticky bg-white top-24 scroll-mt-24 sm:top-24 sm:scroll-mt-24*/
+            @apply mt-4 py-2 text-xl font-bold tracking-tight text-gray-900 scroll-mt-24 sm:scroll-mt-24
+        }
+
+        p {
+            @apply text-gray-700 my-4 text-base/7
+        }
+
+        a {
+            @apply text-orange-600 hover:text-orange-400 underline
+        }
+
+        ul {
+            @apply ml-4 my-4 space-y-2
+        }
+
+        ul li {
+            background: url('check-circle.svg') no-repeat left top 12px;
+            padding: 4px 16px 4px 32px;
+            list-style: none;
+            margin: 0;
+            vertical-align: middle;
+        }
+
+        ul li li {
+            background: url('check-circle-gray.svg') no-repeat left top 12px;
+        }
+
+        ol {
+            @apply ml-12 my-2
+        }
+
+        ol li {
+            /*background: url('check-circle.svg') no-repeat left top 12px;*/
+            padding: 4px 16px 4px 4px;
+            list-style: decimal outside none;
+            margin: 0;
+            vertical-align: middle;
+
+            li {
+                list-style: lower-alpha;
+            }
+        }
     }
 }
 
-.field_with_errors input{
-        @apply !bg-red-500 !bg-opacity-10 !border-red-500 !border-2
-}

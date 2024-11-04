@@ -130,7 +130,16 @@ GEM
       net-pop
       net-smtp
     marcel (1.0.4)
+    markdown-rails (2.1.0)
+      actionview (>= 6.0.0)
+      activesupport (>= 6.0.0)
+      railties (>= 6.0.0)
+      redcarpet (>= 3.0.0)
     matrix (0.4.2)
+    mime-types (3.6.0)
+      logger
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2024.1001)
     mini_mime (1.1.5)
     minitest (5.25.1)
     msgpack (1.7.3)
@@ -207,6 +216,7 @@ GEM
     rake (13.2.1)
     rdoc (6.7.0)
       psych (>= 4.0.0)
+    redcarpet (3.6.0)
     redis (5.3.0)
       redis-client (>= 0.22.0)
     redis-client (0.22.2)
@@ -215,6 +225,7 @@ GEM
     reline (0.5.10)
       io-console (~> 0.5)
     rexml (3.3.9)
+    rouge (4.4.0)
     rubocop (1.67.0)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -252,6 +263,13 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sitepress-core (4.0.5)
+      mime-types (>= 2.99)
+    sitepress-rails (4.0.5)
+      actionpack (>= 6.0)
+      railties (>= 6.0)
+      sitepress-core (= 4.0.5)
+      sprockets-rails (>= 2.0.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -325,11 +343,14 @@ DEPENDENCIES
   debug
   jbuilder
   jsbundling-rails
+  markdown-rails (~> 2.1)
   puma (>= 5.0)
   rails (~> 7.2.0)
   redis (>= 4.0.1)
+  rouge (~> 4.4)
   rubocop-rails-omakase
   selenium-webdriver
+  sitepress-rails (~> 4.0)
   sprockets-rails
   sqlite3 (>= 1.4)
   stimulus-rails

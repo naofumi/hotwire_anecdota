@@ -1,0 +1,26 @@
+<%= render_layout "body" do %>
+  <div class="lg:max-w-6xl lg:mx-auto">
+    <div class="hidden ml-2 max-h-full lg:w-72 lg:fixed lg:block">
+      <!-- chapter list -->
+    </div>
+    <div class="bg-white px-6 py-16 lg:px-8 lg:pl-80">
+      <div class="mx-auto max-w-2xl text-base leading-7 text-gray-700">
+        <p class="text-base font-semibold leading-7 text-orange-600">
+          <%= current_page.data.section %>
+        </p>
+        <h1 class="z-10 bg-white sticky top-0 pt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <%= current_page.data.title %>
+        </h1>
+        <p class="mt-6 text-xl leading-8">
+          <%= current_page.data.subtitle %>
+        </p>
+        <div class="lg:hidden">
+          <!-- chapter list -->
+        </div>
+        <div class="mt-10 max-w-3xl mx-auto md">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
