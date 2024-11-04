@@ -19,8 +19,8 @@ export default class extends Controller {
 
 function Dispatcher({selector, props}) {
   const dispatchTable = {
-    greeting: <Greeting message={props.message} />,
-    counter: <Counter initialValue={props.initialValue} />,
+    greeting: <Greeting message={props.message}/>,
+    counter: <Counter initialValue={props.initialValue}/>,
   }
   return dispatchTable[selector]
 }

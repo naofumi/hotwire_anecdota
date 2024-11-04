@@ -79,6 +79,10 @@
             @apply text-orange-600 hover:text-orange-400 underline
         }
 
+        blockquote {
+            @apply pl-4 border-l-4 border-gray-200
+        }
+
         ul {
             @apply ml-4 my-4 space-y-2
         }

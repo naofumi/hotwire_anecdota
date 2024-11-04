@@ -5,24 +5,30 @@ layout: section
 order: 005
 ---
 
-## HTMLレンダリングはサーバで行う
+## HotwireはSPA
 
-SSRと基本的に同じ
+言葉の定義によって考え方が異なりますが、Wikipediaの[「シングルページアプリケーション」](https://ja.wikipedia.org/wiki/シングルページアプリケーション)に従えば、HotwireはSPAとなります。HotwireのTurboは、Wikipedia記事から引用した下記の文書の通りに画面遷移をしたり、画面の部分的置換を行なっています。
 
-## SPAである
+> 必要なコード（HTML、JavaScript、CSS）は最初にまとめて読み込むか、ユーザの操作などに応じて動的にサーバと通信し、必要なものだけ読み込みを行う。
+> 
+> ...
+> 
+> サーバへリクエストすると、通常は生データ（XMLやJSON）かHTMLのどちらかが送られてくる。HTMLであれば、クライアント側はJavaScriptでDOMの一部を更新する。
 
-## HTMLを入れ替えるだけの非同期ページ更新
 
-1. Reactの場合はデータを入れ替えて、その結果として新しいHTMLがブラウザで生成されて、新しいページになる
-2. Hotwireの場合はサーバで新しいデータを使ったHTMLがサーバで生成されて、ブラウザで表示されているページ部分的に置換する
+## HotwireはSSR
 
-Reactはレンダリングされた後のHTMLを部分的に置換することをしません。サーバからデータを取得 => ステートを更新 => HTMLをブラウザで再レンダリング(Shadow DOM) => 現在表示されているHTMLとShadow DOMを比較して([差分検出処理](https://ja.legacy.reactjs.org/docs/reconciliation.html))、変更があった箇所を入れ替えます
+これも言葉の定義によって考え方が変わりますが、HotwireはSSR (サーバサイドレンダリング)です。HTMLコードは専らサーバ側で生成され、ブラウザに送信されます。
 
-それに対してHotwireの場合はサーバから新しいHTMLを取得します。これを`innerHTML`等で入れ替えるだけです(Morphingを使うとReactの差分検出処理と同様のことも可能)。圧倒的にシンプルな仕組みです。
+HotwireはSPAであり、かつSSRであることから、Next.jsで`getServerSideProps()`を使用し、かつ`Link`タグを使用した場合と似たように動作します。
 
-## Hydrationは不要
+## HotwireはIKEA家具のような組み立て式
 
-Hotwireのイベント処理は、通常はStimulusを使用します。Stimulusは...を使用してDOMにイベントハンドラを自動的につけるもので、非同期通信によりHTMLの中身が頻繁に変わるサイトでイベントハンドラを効率的にかつコードを整理した状態でつけることができます。
+HotwireはIKEA家具のような部分組み立て工法です。工場（サーバ）で製造されたパーツを、自宅（ブラウザ）で組み立てます。一方でReact等では木材と設計図だけ（JavaScript, JSON）を搬入し、自宅でゼロから組み立てます。
 
-React SSRでイベントハンドラをつけるためにはHydration処理を行う必要がありますが、Stimulusの場合は変更があった箇所だけイベントハンドラをつけるだけなので、軽量です。
+Hotwireはサーバで組み上がったHTMLを取得します。HTMLはページ全体のこともありますし、一部分であることもあります。そしてブラウザに表示されているDOMに、`innerHTML`等を使って適宜挿入・置換します。
+
+## HotwireはJSON APIが不要
+
+HotwireではHTML断片をブラウザに送ります。JSONは送りません。
 
