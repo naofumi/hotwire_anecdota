@@ -1,5 +1,5 @@
 ---
-title: Turbo Streamsによる高速化
+title: Post/Redirect/Getパターンと高速化
 section: Performance
 layout: section
 order: 60
