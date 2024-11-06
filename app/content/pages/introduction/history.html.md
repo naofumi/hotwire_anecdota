@@ -1,5 +1,5 @@
 ---
-title: CSR vs SSR
+title: Hotwireの歴史
 section: History
 layout: section
 order: 010

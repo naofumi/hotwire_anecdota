@@ -1,5 +1,5 @@
 ---
-title: Stimulusでアコーディオンを実装
+title: サイドバー
 section: Tips
 layout: section
 order: 005

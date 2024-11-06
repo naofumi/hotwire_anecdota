@@ -3,6 +3,7 @@
 
 class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   include ActionView::Helpers::OutputSafetyHelper
+  include ActionView::Helpers::UrlHelper
   # Reformats your boring punctation like " and " into “ and ” so you can look
   # and feel smarter. Read the docs at https://github.com/vmg/redcarpet#also-now-our-pants-are-much-smarter
   include Redcarpet::Render::SmartyPants
@@ -50,6 +51,17 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
       youtube_tag url, alt
     else
       super
+    end
+  end
+
+  def header(text, header_level)
+    title, fragment = text.split("--").map(&:strip)
+    if fragment.present?
+      content_tag("h#{header_level}", id: fragment) do
+        link_to title, "\##{fragment}"
+      end
+    else
+      content_tag("h#{header_level}", text)
     end
   end
 

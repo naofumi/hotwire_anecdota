@@ -1,15 +1,23 @@
 ---
-title: 一般にStimulusでHTMLを生成しない理由
+title: Stimulus中のHTML生成を避ける理由
 section: Background
 layout: section
 order: 010
 ---
 
+## Hotwireは自主ルール
+
+Stimulus Controllerの中でHTMLを生成することはできます。jQuery時代のように、JavaScriptコードで自在にHTMLは作れます。しかしそれを自主的に避けるのがHotwireの流儀です。
+
+その理由を紹介します。
+
 ## ERBとの重複を避ける
 
-Railsの世界ではまずERBを使ってサーバサイドでHTMLをレンダリングするのが大原則となる。したがって類似したHTMLをStimulusでも作成するとなると、HTMLを２箇所で記述することになってしまう。これはメンテナンス上、問題になりやすい。そこでStimulusではHTMLレンダリングをしないのが原則となる
+Railsの世界ではまずERBを使ってサーバサイドでHTMLをレンダリングするのが大原則となります。サーバでのERBレンダリングが**主**です。同じHTMLをStimulusでも生成してしまうと、HTMLを２箇所で記述することになってしまいます。これだと同じコードを複製することになり、メンテナンス上の問題になりやすいです。
 
-## StimulusでHTMLレンダリングをすることも可能
+Stimulus Controllerの中でHTMLレンダリングをしないのはこのためです。
+
+## StimulusでHTMLレンダリングをすることもある
 
 もちろんStimulusでHTMLをレンダリングしたり、直接DOMを記述することは可能である。jQueryではこれは一般的に行われていましたし、軽量のJavaScriptテンプレートライブラリも昔から存在する。やろうと思えば問題なくできます。
 

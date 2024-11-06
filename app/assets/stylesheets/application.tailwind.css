@@ -65,6 +65,9 @@
         h2 {
             @apply mt-4 pt-4 py-2 text-2xl underline underline-offset-4 decoration-1 font-light text-gray-900 sticky bg-white top-12 scroll-mt-12 sm:top-12 sm:scroll-mt-12
         }
+        h2 > a {
+            @apply text-inherit decoration-1 hover:text-orange-600;
+        }
 
         h3 {
             /*@apply sticky bg-white top-24 scroll-mt-24 sm:top-24 sm:scroll-mt-24*/
