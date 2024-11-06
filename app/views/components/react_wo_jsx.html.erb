@@ -1,3 +1,15 @@
+<%#
+This is an example of using React libraries loaded from a CDN,
+and writing the component code directly in the first-loaded HTML without using JSX.
+It also shows how data can be injected into the React components using a
+`script type=application/json` tag.
+
+This is similar to how the React on the Apple Store is loaded,
+and allows the content to be displayed faster.
+
+https://legacy.reactjs.org/docs/react-without-jsx.html
+%>
+
 <%= provide :head, javascript_include_tag("https://unpkg.com/react@18/umd/react.production.min.js", "data-turbo-track": "reload", crossorigin: true) %>
 <%= provide :head, javascript_include_tag("https://unpkg.com/react-dom@18/umd/react-dom.production.min.js", "data-turbo-track": "reload", crossorigin: true) %>
 
@@ -10,52 +22,65 @@
   <div id="greetings"></div>
   <div id="counter1" class="mt-8"></div>
   <div id="counter2" class="mt-8"></div>
-
-  <script>
-    function Greeting({message}) {
-      const e = React.createElement
-
-      return React.createElement('div',
-        {className: "p-2 rounded border-2 border-dashed"},
-        e('h1', {className: "text-3xl"}, message)
-      )
-    }
-
-    const greetingsRoot = ReactDOM.createRoot(document.getElementById('greetings'));
-    greetingsRoot.render(React.createElement(Greeting, {message: "Hello World without JSX"}, null));
-  </script>
-
-  <script>
-    function Counter({initialValue}) {
-      const e = React.createElement
-      const [count, setCount] = React.useState(initialValue);
-
-      function handleSetCount(newCount) {
-        setCount(newCount)
-      }
-
-      return (
-        e("div", {className: "p-2 rounded border-2 border-dashed"},
-          e("div", {className: "text-3xl"},
-            `Counter: ${count}`),
-          e("button", {
-              className: "w-16 bg-orange-600 border rounded p-1 text-white",
-              onClick: e => handleSetCount(count + 1)
-            },
-            "Up"),
-          e("button", {
-              className: "w-16 bg-orange-600 border rounded p-1 text-white",
-              onClick: e => handleSetCount(count - 1)
-            },
-            "Down"),
-        )
-      )
-    }
-
-    const counter1Root = ReactDOM.createRoot(document.getElementById('counter1'));
-    counter1Root.render(React.createElement(Counter, {initialValue: 3}, null));
-
-    const counter2Root = ReactDOM.createRoot(document.getElementById('counter2'));
-    counter2Root.render(React.createElement(Counter, {initialValue: 5}, null));
-  </script>
 <% end %>
+
+
+<script>
+  function Greeting({message}) {
+    const e = React.createElement
+
+    return e('div', {className: "p-2 rounded border-2 border-dashed"},
+      e('h1', {className: "text-3xl"}, message)
+    )
+  }
+</script>
+
+<script>
+  function Counter({initialValue}) {
+    const e = React.createElement
+    const [count, setCount] = React.useState(initialValue);
+
+    function handleSetCount(newCount) {
+      setCount(newCount)
+    }
+
+    return (
+      e("div", {className: "p-2 rounded border-2 border-dashed"},
+        e("div", {className: "text-3xl"},
+          `Counter: ${count}`),
+        e("button", {
+            className: "w-16 bg-orange-600 border rounded p-1 text-white",
+            onClick: e => handleSetCount(count + 1)
+          },
+          "Up"),
+        e("button", {
+            className: "w-16 bg-orange-600 border rounded p-1 text-white",
+            onClick: e => handleSetCount(count - 1)
+          },
+          "Down"),
+      )
+    )
+  }
+</script>
+
+<script id="data" type="application/json">
+    {
+      "message": "Hello World without JSX",
+      "counter1": 3,
+      "counter2": 5
+    }
+</script>
+
+<script>
+  const data = JSON.parse(document.getElementById("data").textContent);
+
+  const greetingsRoot = ReactDOM.createRoot(document.getElementById('greetings'));
+  greetingsRoot.render(React.createElement(Greeting, {message: data.message}, null));
+
+  const counter1Root = ReactDOM.createRoot(document.getElementById('counter1'));
+  counter1Root.render(React.createElement(Counter, {initialValue: data.counter1}, null));
+
+  const counter2Root = ReactDOM.createRoot(document.getElementById('counter2'));
+  counter2Root.render(React.createElement(Counter, {initialValue: data.counter2}, null));
+</script>
+

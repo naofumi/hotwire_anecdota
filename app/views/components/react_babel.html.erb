@@ -1,3 +1,10 @@
+<%#
+This is an example of using React libraries loaded from a CDN,
+and writing the component code directly in the first-loaded HTML in JSX using Babel from a CDN.
+
+https://legacy.reactjs.org/docs/react-without-jsx.html
+%>
+
 <%= provide :head, javascript_include_tag("https://unpkg.com/react@18/umd/react.production.min.js", "data-turbo-track": "reload", crossorigin: true) %>
 <%= provide :head, javascript_include_tag("https://unpkg.com/react-dom@18/umd/react-dom.production.min.js", "data-turbo-track": "reload", crossorigin: true) %>
 <%= provide :head, javascript_include_tag("https://unpkg.com/@babel/standalone/babel.min.js", "data-turbo-track": "reload") %>

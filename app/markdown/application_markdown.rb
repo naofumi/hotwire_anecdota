@@ -2,6 +2,7 @@
 # delete a bunch of stuff below if you don't need it.
 
 class ApplicationMarkdown < MarkdownRails::Renderer::Rails
+  include ActionView::Helpers::OutputSafetyHelper
   # Reformats your boring punctation like " and " into “ and ” so you can look
   # and feel smarter. Read the docs at https://github.com/vmg/redcarpet#also-now-our-pants-are-much-smarter
   include Redcarpet::Render::SmartyPants
@@ -28,6 +29,19 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
     [:fenced_code_blocks]
   end
 
+  # https://github.com/sitepress/markdown-rails?tab=readme-ov-file#customizing-renderer
+  FORMATTER = Rouge::Formatters::HTMLInline.new("github")
+
+  def block_code(code, language)
+    lexer = Rouge::Lexer.find(language)
+    safe_join([
+                content_tag(:div, language, class: "px-2 border rounded-t text-xs bg-gray-200 text-gray-600 w-fit"),
+                content_tag(:pre, class: "#{language} px-1 py-1 border rounded rounded-tl-none border-gray-300 text-sm") do
+                  raw FORMATTER.format(lexer.lex(code))
+                end
+              ])
+  end
+
   # Example of how you might override the images to show embeds, like a YouTube video.
   def image(link, title, alt)
     url = URI(link)
@@ -40,15 +54,18 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   end
 
   private
+
     # This is provided as an example; there's many more YouTube URLs that this wouldn't catch.
     def youtube_tag(url, alt)
       embed_url = "https://www.youtube-nocookie.com/embed/#{CGI.parse(url.query).fetch("v").first}"
       content_tag :iframe,
-        src: embed_url,
-        width: 560,
-        height: 325,
-        allow: "encrypted-media; picture-in-picture",
-        allowfullscreen: true \
-          do alt end
+                  src: embed_url,
+                  width: 560,
+                  height: 325,
+                  allow: "encrypted-media; picture-in-picture",
+                  allowfullscreen: true \
+        do
+          alt
+        end
     end
 end

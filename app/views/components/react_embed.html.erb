@@ -1,0 +1,10 @@
+<%= provide :head, javascript_include_tag("application_react", "data-turbo-track": "reload", type: "module") %>
+
+<% set_breadcrumbs [["React embedded into Turbo", component_path(:react)]] %>
+
+<%= render 'template',
+           title: "React embedded into Turbo",
+           description: "" do %>
+
+  <div id="root"></div>
+<% end %>

@@ -8,6 +8,7 @@ module.exports = {
     './app/content/layouts/**/*.{md,erb,haml,html,slim}',
     './app/content/pages/**/*.{md,erb,haml,html,slim}',
     './app/content/application/**/*.{md,erb,haml,html,slim}',
+    './app/markdown/**/*.rb',
   ],
   theme: {
     extend: {},

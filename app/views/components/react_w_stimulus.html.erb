@@ -1,0 +1,40 @@
+<%= provide :head, javascript_include_tag("application_react_stimulus", "data-turbo-track": "reload", type: "module") %>
+
+<% set_breadcrumbs [["React wrapped inside Stimulus", component_path(:react)]] %>
+
+<%= render 'template',
+           title: "React wrapped inside Stimulus",
+           description: "" do %>
+
+  <div data-controller="react"
+       id="greeting"
+       data-react-component-value="greeting"
+       data-react-props-value='{"message": "Hello World from JSX Stimulus"}'>
+  </div>
+
+  <script>
+    function changeGreeting(message) {
+      const greetingElement = document.getElementById('greeting');
+      greetingElement.dataset.reactPropsValue = `{"message": "${message}"}`
+    }
+  </script>
+  <div class="mt-3 justify-center flex flex-wrap gap-2">
+    <button onclick="changeGreeting('こんにちは世界')" class="btn-primary p-1 ">
+      Change Greeting to Japanese</button>
+    <button onclick="changeGreeting('Halo Welt!')" class="btn-primary p-1">
+      Change Greeting to German</button>
+    <button onclick="changeGreeting('世界您好')" class="btn-primary p-1">
+      Change Greeting to Chinese</button>
+  </div>
+
+  <div data-controller="react"
+       data-react-component-value="counter"
+       data-react-props-value='{"initialValue": 3}'
+       class="mt-8">
+  </div>
+  <div data-controller="react"
+       data-react-component-value="counter"
+       data-react-props-value='{"initialValue": 5}'
+       class="mt-8">
+  </div>
+<% end %>
