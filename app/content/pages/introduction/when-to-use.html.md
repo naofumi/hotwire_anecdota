@@ -1,5 +1,5 @@
 ---
-title: Hotwireが適している局面
+title: Hotwireは何に向いているか？
 section: Introduction
 layout: section
 order: 005
@@ -25,4 +25,12 @@ OOUI(オブジェクト指向UI)の世界では、デザイナーやフロント
 
 ## いいとこ取りをしたい場合
 
-Hotwireでも難しいUI/UXは作成できます。しかし既にReactの優れたライブラリーが存在していることもあります。この場合はいいとこ取りをしましょう。Hotwireをベースに、Reactを使いたいページだけに埋め込めます。またReactコンポーネントをStimulusで制御できます。
+Hotwireでも難しいUI/UXは作成できます。しかし優れたライブラリーがReact用に既に存在していることもあります。この場合、車輪の再開発は必要ありません。いいとこ取りをしましょう。
+
+HotwireやMPAのページにReactを埋め込むのは簡単です。[Reactの公式サイトによると](https://ja.react.dev/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page)、Facebookも長らくこの使い方がメインでした。
+
+## Reactが向いている場合 --- when-is-react-better
+
+* フロントエンドのチームとバックエンドのチームのコミュニケーションを最小化したい場合。最初にJSON APIを決めて、あとは遠く離れて開発したい場合。例えば各チームが別会社だったり、オフショアだったりする場合など
+* 高度なOptimistic UIが必要な場合。あるいはネットワーク接続しなくてもかなりの操作ができるようにしたい場合
+* フロントエンドチームがRubyを学習したくない場合

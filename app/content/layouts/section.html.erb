@@ -1,14 +1,20 @@
 <%= render_layout "body" do %>
   <div class="lg:max-w-6xl lg:mx-auto">
+    <div class="px-6 pt-8 lg:px-8 lg:pl-80 ">
+      <div class="mx-auto max-w-2xl">
+        <%= render "content_breadcrumbs",
+                   current_page: %>
+      </div>
+    </div>
     <div class="hidden ml-2 max-h-full lg:w-72 lg:fixed lg:block">
       <!-- chapter list -->
     </div>
-    <div class="bg-white px-6 py-16 lg:px-8 lg:pl-80">
+    <div class="bg-white px-6 py-8 lg:px-8 lg:pl-80">
       <div class="mx-auto max-w-2xl text-base leading-7 text-gray-700">
-        <p class="text-base font-semibold leading-7 text-orange-600">
-          <%= current_page.data.section %>
+        <p class="text-base leading-7 text-orange-600">
+          <%= ToplevelPage.first.section_title_for current_section_from(request) %>
         </p>
-        <h1 class="z-10 bg-white sticky top-0 pt-4 text-3xl font-light text-gray-900 sm:text-4xl">
+        <h1 class="z-10 bg-white sticky top-0 pt-1 text-3xl font-light text-gray-900 sm:text-4xl">
           <%= current_page.data.title %>
         </h1>
         <p class="mt-6 text-xl leading-8">

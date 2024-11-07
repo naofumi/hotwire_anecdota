@@ -5,11 +5,12 @@ hide_top_button: true
 hide_title: true
 sections:
   - ["概要", "introduction"]
+  - ["考える手順", "how_to_think"]
   - ["考え方", "concepts"]
   - ["全体的なコツ", "tips"]
-  - ["コンポーネントの作り方", "components"]
+  - ["コンポーネントの作り方", "components_howto"]
   - ["パフォーマンス", "performance"]
-  - ["他ライブラリとの組み合わせ", "other-libraries"]
+  - ["他ライブラリとの組み合わせ", "other_libraries"]
   - ["開発用ツール", "dev-tools"]
   - ["その他", "others"]
 ---
@@ -25,13 +26,11 @@ sections:
       <p class="mt-6 text-lg leading-8 text-gray-600">
         本サイトは、Hotwireについて思ったことをあれこれ綴ったサイトです。
       </p>
-      <p class="text-lg leading-8 text-gray-600">
-
-      </p>
+      <%= link_to "コンポーネント一覧", components_path %>
 
       <% current_page.data.sections.each_entry do |section| %>
         <% title, folder = section[0], section[1] %>
-        <h3 class="mt-12 text-2xl font-light text-gray-600"><%= title %></h3>
+        <h3 id="<%= folder %>" class="mt-12 text-2xl font-light text-gray-600"><%= title %></h3>
         <div class="flex flex-wrap gap-4 mt-4">
           <% site.glob("#{folder}/*.html.*")
                  .sort_by { _1.data.order }.each do |page| %>

@@ -54,8 +54,15 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
     end
   end
 
+  # Create a link with a hash target.
+  #
+  # Split the displayed text and the hash fragment with "---"
+  #
+  # example:
+  #   ## どの技術を使うべきか？ --- technology-choice
+  #
   def header(text, header_level)
-    title, fragment = text.split("--").map(&:strip)
+    title, fragment = text.split(/---/).map(&:strip)
     if fragment.present?
       content_tag("h#{header_level}", id: fragment) do
         link_to title, "\##{fragment}"
