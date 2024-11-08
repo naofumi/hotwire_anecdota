@@ -1,6 +1,7 @@
 class TodosController < ApplicationController
   before_action :set_todo, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  set_available_variants :mpa, :ts
 
   # GET /todos or /todos.json
   def index
@@ -9,11 +10,6 @@ class TodosController < ApplicationController
 
   # GET /todos/1 or /todos/1.json
   def show
-  end
-
-  # GET /todos/new
-  def new
-    @todo = Todo.new
   end
 
   # GET /todos/1/edit

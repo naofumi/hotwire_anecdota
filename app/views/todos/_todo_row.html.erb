@@ -2,27 +2,7 @@
   <td class="<%= 'highlight-on-appear' if flash[:new_todo_id] == todo.id %> p-2 border-gray-400 border-t group-[:first-child]:border-none">
     <div class="flex justify-between">
       <div class="flex items-center">
-        <%= form_with url: todo_likes_path(todo), method: :post,
-                      class: "flex items-center w-16 aria-busy:opacity-30",
-                      data: { controller: "todo-likes",
-                              action: "submit->todo-likes#optimistic" } do %>
-          <%= label_tag nil, class: "group flex cursor-pointer select-none" do %>
-            <%= check_box_tag :like, "1",
-                              todo.liked_by?(current_user),
-                              class: "opacity-0 w-0",
-                              data: { action: "change->todo-likes#submit",
-                                      todo_likes_target: "checkbox" } %>
-            <div class="hidden group-has-[:checked]:block">
-              <%= liked_icon %>
-            </div>
-            <div class="block group-has-[:checked]:hidden">
-              <%= unliked_icon %>
-            </div>
-          <% end %>
-          <div>
-            : <span data-todo-likes-target="count"><%= todo.likes_count %></span>
-          </div>
-        <% end %>
+        <%= render 'like_button', todo: %>
         <%= todo.title %>
       </div>
       <%= button_to todo, method: :delete, data: { action: "click->todo#delete", todo_row_param: dom_id(todo) }, class: "w-6" do %>
