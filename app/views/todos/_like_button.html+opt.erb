@@ -1,6 +1,7 @@
 <% todo = local_assigns.fetch(:todo) %>
 
-<%= form_with url: todo_likes_path(todo), method: :post,
+<%= form_with id: dom_id(todo, :like_button),
+              url: todo_likes_path(todo), method: :post,
               class: "flex items-center w-16 aria-busy:opacity-30",
               data: { controller: "todo-likes",
                       action: "submit->todo-likes#optimistic" } do %>
@@ -21,7 +22,3 @@
     : <span data-todo-likes-target="count"><%= todo.likes_count %></span>
   </div>
 <% end %>
-
-
-
-

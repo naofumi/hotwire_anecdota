@@ -1,19 +1,20 @@
 ---
-title: Hotwire開発の考え方
+title: HotwireはMVPから作る
 section: Tips
 layout: section
-order: 030
+order: 010
 ---
 
-## HotwireはMVP的に作る
+## MVPとは --- start-with-an-mvp 
 
 [「MVP（Minimum Viable Product）の意味を理解する。そして、なぜ私はEarliest Testable / Usable / Lovableを好むのか。」](https://www.ankr.design/designtips/making-sense-of-mvp)という有名なブログポストでCrisp DesignのHenrik Kniberg氏はアジャイル開発やリーン開発について解説をしています。
 
+これはHotwireにも当てはまります。**最初から完成したUI/UXを作ろうとしないことが大切です。あえて簡単すぎるものから作るぐらいがちょうど良いぐらいです。**
+
 ![mvp-not-like-this.png](content_images/mvp-not-like-this.png)
 
-これがHotwireによる開発の本質だと私は考えています。
 
-## MVPを作るということ 
+## MVPを作るということ --- creating-an-mvp
 
 「顧客に対してテストができ、かつフィードバッグをもらえるような、思いつく限りで最も小さなものを提供する」のがMVPです。「ただただ学ぶ」ためのものをまず作ります。
 
@@ -21,9 +22,21 @@ order: 030
 
 > カギとなる問いは「一番コストをかけずに早く学べる方法は何か？」である。スケートボードよりもさらに前に、何かを提供することはできるだろうか？バスのチケットはどうだろう？
 
-そして**ウェブフロントエンドにおいて、一番コストがかからないのはMPAを作ることです。** だからほとんどのケースにおいて、HotwireはMPAから開発を始めるのが良いでしょう。
+そして一番コストがかからないのは**MPAを作ることです。** だからほとんどのケースにおいて、HotwireはMPAから開発を始めるのが良いでしょう。
 
-以下、具体例を見ていきましょう
+## 具体例 --- example
 
-## 「いいね」ボタンを作る
+具体例は「いいね」ボタンを作るで紹介しています。
+
+1. 最初にMPAを作る
+2. Turbo Streamsで部分置換をする
+3. 楽観的UI (Optimistic UI)として実装する
+
+詳細はそちらを確認していただきたいと思いますが、一番先にMVPを作り、段階的にUI/UXを改善する感覚をわかっていただければ良いと思います。
+
+## 私の場合 --- personal-experience
+
+私の場合ですと、「簡単だから最初からTurbo FramesやTurbo Streamsで作ろう」って思ってしまうことが多いのですが、しばらくすると少しこんがらがってしまって、**「やっぱりMPAから出発した方がよかった」** って思ってしまうことが多いです。
+
+段階的に開発をするとトラブルシューティングもワンステップずつ行えますので、結果として早いことが多いと感じています。
 

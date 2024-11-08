@@ -1,5 +1,3 @@
-<%= turbo_stream.append dom_id(@todo) do %>
-  <template>
-    <%= render partial: "todos/like_button", locals: { todo: @todo } %>
-  </template>
+<%= turbo_stream.replace dom_id(@todo, :like_button) do %>
+  <%= render partial: "todos/like_button", locals: { todo: @todo } %>
 <% end %>

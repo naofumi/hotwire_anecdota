@@ -1,0 +1,18 @@
+<% todo = local_assigns.fetch(:todo) %>
+
+<%= tag.div class: "flex items-center w-16 aria-busy:opacity-30" do %>
+  <%= label_tag nil, class: "group flex cursor-pointer select-none" do %>
+    <% if todo.liked_by?(current_user) %>
+      <%= button_to todo_likes_path(todo), method: :post do %>
+        <%= liked_icon %>
+      <% end %>
+    <% else %>
+      <%= button_to todo_likes_path(todo), method: :post, params: { like: "1" } do %>
+        <%= unliked_icon %>
+      <% end %>
+    <% end %>
+    <div>
+      : <span><%= todo.likes_count %></span>
+    </div>
+  <% end %>
+<% end %>

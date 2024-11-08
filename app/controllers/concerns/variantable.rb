@@ -30,6 +30,6 @@ module Variantable
     end
 
     def available_variants
-      [] # @@available_variants
+      [] #self.class.class_variable_defined?(:@@available_variants) ? @@available_variants : []
     end
 end

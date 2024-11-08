@@ -5,11 +5,10 @@
 <p style="color: green"><%= notice %></p>
 
 <% content_for :title, "Todos" %>
-
 <div class="max-w-lg mx-auto">
 
   <div class="mb-16">
-    <h1 class="text-4xl text-center">Todos</h1>
+    <h1 class="text-4xl text-center">Todos <%= request.variant %></h1>
     <%= render 'variants_selector' %>
   </div>
   <table id="todos" class="w-full border border-gray-400 rounded-lg border-spacing-0 border-separate"
