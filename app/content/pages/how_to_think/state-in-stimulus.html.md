@@ -2,7 +2,7 @@
 title: Stimulusとステート
 section: Tips
 layout: section
-order: 0020
+order: 030
 ---
 
 ## Stimulusを理解するためのヒント

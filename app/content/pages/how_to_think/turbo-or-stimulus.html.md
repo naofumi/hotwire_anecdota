@@ -2,7 +2,7 @@
 title: "TurboとStimulus: どっちを使う？"
 section: Tips
 layout: section
-order: 001
+order: 020
 ---
 
 ## Hotwireはいろんな技術から構成されている --- hotwire-composition

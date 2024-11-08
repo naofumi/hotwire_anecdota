@@ -18,7 +18,8 @@
 </head>
 
 <body class="relative">
-<div class="container container-lg mx-auto px-4 pt-16">
+<%= render "nav" %>
+<div class="container container-lg mx-auto px-4 pt-8">
   <div><%= content_for(:breadcrumbs) %></div>
   <%= yield %>
 </div>
