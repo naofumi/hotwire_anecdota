@@ -1,7 +1,9 @@
-<% local_assigns.with_defaults(hide_top_button: false, hide_title: false) =>
-           { hide_top_button:, hide_title: } %>
+<% local_assigns.with_defaults(hide_top_button: false,
+                               hide_title: false,
+                               show_data_reset: false) =>
+           { hide_top_button:, hide_title:, show_data_reset: } %>
 
-<nav class="w-full bg-white flex p-1 items-start mx-4">
+<nav class="w-full bg-white flex p-1 items-start mx-4 items-center">
   <% if hide_top_button %>
     <span class="w-52 flex-none basis-24"></span>
   <% else %>
@@ -23,5 +25,10 @@
       </a>
     </div>
   <% end %>
-  <div class="basis-24"></div>
+  <div class="basis-24 pr-2">
+    <% if show_data_reset %>
+      <%= button_to "Reset Data", fixtures_path, method: :post,
+                    class: "border rounded bg-orange-600 px-1 text-white text-sm" %>
+    <% end %>
+  </div>
 </nav>

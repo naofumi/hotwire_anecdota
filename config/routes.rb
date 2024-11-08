@@ -16,11 +16,12 @@ Rails.application.routes.draw do
 
   resource :board
   resources :buckets
-  resources :components, only: [ :index, :show ]
+  resources :components, only: [:index, :show]
   resources :features
   resources :file_nodes do
     get :details, on: :member
   end
+  resources :fixtures, only: [:create]
   resources :hotels do
     resources :features, module: :hotels do
       collection do
@@ -32,13 +33,13 @@ Rails.application.routes.draw do
     end
   end
   resource :iphone
-  resources :react, only: [ :show ]
+  resources :react, only: [:show]
   resources :tasks do
     scope module: :tasks do
       resource :completion
     end
   end
   resources :todos do
-    resource :likes, only: [ :create ], module: :todos
+    resource :likes, only: [:create], module: :todos
   end
 end

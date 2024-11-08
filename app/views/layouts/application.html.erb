@@ -18,7 +18,7 @@
 </head>
 
 <body class="relative">
-<%= render "nav" %>
+<%= render "nav", show_data_reset: true %>
 <div class="container container-lg mx-auto px-4 pt-8">
   <div><%= content_for(:breadcrumbs) %></div>
   <%= yield %>
