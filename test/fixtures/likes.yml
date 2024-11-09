@@ -3,9 +3,9 @@
 one:
   likable: one
   likable_type: Todo
-  user: one
+  user: sazae
 
 two:
   likable: two
   likable_type: Todo
-  user: two
+  user: sazae

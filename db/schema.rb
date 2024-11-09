@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_29_071824) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_09_084044) do
   create_table "activities", force: :cascade do |t|
     t.string "trackable_type", null: false
     t.integer "trackable_id", null: false
@@ -88,6 +88,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_29_071824) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_profiles", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "name"
+    t.string "name_jp"
+    t.integer "age"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_profiles_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -99,4 +109,5 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_29_071824) do
   add_foreign_key "likes", "users"
   add_foreign_key "tasks", "buckets"
   add_foreign_key "tasks", "users"
+  add_foreign_key "user_profiles", "users"
 end

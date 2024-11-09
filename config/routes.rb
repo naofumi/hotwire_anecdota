@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_profiles
   # Defines the root path route ("/")
   # root "components#index"
   sitepress_pages

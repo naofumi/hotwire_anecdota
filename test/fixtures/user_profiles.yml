@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+sazae:
+  user: sazae
+  name: Sazae Fuguta
+  name_jp: フグ田 サザエ
+  age: 24
+
+namihei:
+  user: namihei
+  name: Namihei Isono
+  name_jp: 磯野 波平
+  age: 54

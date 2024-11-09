@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+sazae:
   name: Mr One
-  email: one@example.com
+  email: sazae@example.com
 
-two:
+namihei:
   name: Mr Two
-  email: two@example.com
+  email: namihei@example.com

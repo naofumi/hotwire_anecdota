@@ -1,12 +1,4 @@
-<div id="<%= dom_id user %>">
-  <p>
-    <strong>Name:</strong>
-    <%= user.name %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= user.email %>
-  </p>
-
-</div>
+<tr id="<%= dom_id user %>">
+  <td><%= user.user_profile.name %></td>
+  <td><%= user.email %></td>
+</tr>

@@ -1,16 +1,26 @@
-<p style="color: green"><%= notice %></p>
+<% provide :head, javascript_include_tag("jquery-3.7.1", "data-turbo-track": "reload") %>
+<% set_breadcrumbs [["Users", users_path]] %>
 
 <% content_for :title, "Users" %>
 
-<h1>Users</h1>
-
-<div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-  <% end %>
+<div class="grid grid-cols-2 gap-x-2">
+  <div>
+    <div class="mb-16">
+      <h1 class="text-4xl text-center">Users <%= request.variant %></h1>
+      <%= render 'variants_selector' %>
+    </div>
+    <table id="users" class="min-w-full divide-y divide-gray-300">
+      <thead>
+      <tr>
+        <th>name</th>
+        <th>email</th>
+      </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+      <%= render @users %>
+      </tbody>
+    </table>
+  </div>
+  <div class="border rounded shadow" id="user-profile">
+  </div>
 </div>
-
-<%= link_to "New user", new_user_path %>

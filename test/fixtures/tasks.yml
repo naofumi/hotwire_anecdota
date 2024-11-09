@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 todo1:
-  user: one
+  user: sazae
   name: First Todo
   description: Description for First Todo
   position: 1
@@ -9,7 +9,7 @@ todo1:
   bucket: todo
 
 todo2:
-  user: one
+  user: sazae
   name: Second Todo
   description: Description for Second Todo
   position: 2
@@ -17,7 +17,7 @@ todo2:
   bucket: todo
 
 in_progress_1:
-  user: one
+  user: sazae
   name: In progress 1
   description: Description for First In Progress
   position: 1
