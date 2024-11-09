@@ -1,5 +1,5 @@
-class UserProfilesController < ApplicationController
-  before_action :set_user_profile, only: %i[ show edit update destroy ]
+class Users::UserProfilesController < ApplicationController
+  before_action :set_user
 
   # GET /user_profiles or /user_profiles.json
   def index
@@ -8,6 +8,11 @@ class UserProfilesController < ApplicationController
 
   # GET /user_profiles/1 or /user_profiles/1.json
   def show
+    @user_profile = @user.user_profile
+
+    if request.xhr?
+      render partial: "user_profile", locals: { user_profile: @user_profile }
+    end
   end
 
   # GET /user_profiles/new
@@ -58,9 +63,8 @@ class UserProfilesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user_profile
-      @user_profile = UserProfile.find(params[:id])
+    def set_user
+      @user = User.find(params[:user_id])
     end
 
     # Only allow a list of trusted parameters through.

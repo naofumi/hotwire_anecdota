@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  resources :user_profiles
   # Defines the root path route ("/")
   # root "components#index"
   sitepress_pages
   sitepress_root
-  resources :users
+  resources :users do
+    resource :user_profile, module: :users
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
