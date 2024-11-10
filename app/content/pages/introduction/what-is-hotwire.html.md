@@ -3,6 +3,7 @@ title: Hotwireとは何か？
 section: Introduction
 layout: section
 order: 001
+published: true
 ---
 
 ## HotwireはSPA --- hotwire-is-an-spa

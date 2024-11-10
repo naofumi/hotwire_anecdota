@@ -4,15 +4,15 @@ layout: body
 hide_top_button: true
 hide_title: true
 sections:
-  - ["概要", "introduction"]
-  - ["考える手順", "how_to_think"]
-  - ["考え方", "concepts"]
-  - ["全体的なコツ", "tips"]
-  - ["コンポーネントの作り方", "components_howto"]
-  - ["パフォーマンス", "performance"]
-  - ["他ライブラリとの組み合わせ", "other_libraries"]
-  - ["開発用ツール", "dev-tools"]
-  - ["その他", "others"]
+- ["概要", "introduction"]
+- ["考える手順", "how_to_think"]
+- ["考え方", "concepts"]
+- ["全体的なコツ", "tips"]
+- ["コンポーネントの作り方", "components_howto"]
+- ["パフォーマンス", "performance"]
+- ["他ライブラリとの組み合わせ", "other_libraries"]
+- ["開発用ツール", "dev-tools"]
+- ["その他", "others"]
 ---
 <div class="bg-white py-24 sm:py-32">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
@@ -33,8 +33,12 @@ sections:
         <h3 id="<%= folder %>" class="mt-12 text-2xl font-light text-gray-600"><%= title %></h3>
         <div class="flex flex-wrap gap-4 mt-4">
           <% site.glob("#{folder}/*.html.*")
-                 .sort_by { _1.data.order }.each do |page| %>
-            <%= link_to page.data.title, page.url, class: "py-2 px-4 border rounded-lg border-orange-300 text-gray-600 font-light hover:text-orange-300 active:bg-orange-100" %>
+                 .sort_by { _1.data.order }
+                 .filter { page_showable?(_1) }
+                 .each do |page| %>
+            <%= link_to page.data.title,
+                        page.url,
+                        class: "#{page.data.published ? '' : "opacity-40"} py-2 px-4 border rounded-lg border-orange-300 text-gray-600 font-light hover:text-orange-300 active:bg-orange-100" %>
           <% end %>
         </div>
       <% end %>
