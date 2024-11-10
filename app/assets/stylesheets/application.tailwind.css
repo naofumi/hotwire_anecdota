@@ -63,10 +63,10 @@
 
     .md {
         h2 {
-            @apply mt-4 pt-4 py-2 text-2xl underline underline-offset-4 decoration-1 font-light text-gray-900 sticky bg-white top-12 scroll-mt-12 sm:top-12 sm:scroll-mt-12
+            @apply mt-4 pt-4 pb-0 text-2xl border-b border-dotted border-gray-400 font-light text-gray-900 sticky bg-white top-10 scroll-mt-10 sm:top-10 sm:scroll-mt-10
         }
         h2 > a {
-            @apply text-inherit decoration-1 hover:text-orange-600;
+            @apply text-inherit decoration-0 hover:text-orange-600;
         }
 
         h3 {
