@@ -1,0 +1,14 @@
+<tr>
+  <td class="relative">
+    <%= link_to user_user_profile_path(user), data: {turbo_frame: "user-profile"} do %>
+      <span class="absolute inset-0"></span>
+      <%= user.user_profile.name %>
+    <% end %>
+  </td>
+  <td class="relative">
+    <%= link_to user_user_profile_path(user), data: {turbo_frame: "user-profile"} do %>
+      <span class="absolute inset-0"></span>
+      <%= user.email %>
+    <% end %>
+  </td>
+</tr>

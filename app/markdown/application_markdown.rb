@@ -44,14 +44,21 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   end
 
   # Example of how you might override the images to show embeds, like a YouTube video.
+  # def image(link, title, alt)
+  #   url = URI(link)
+  #   case url.host
+  #   when "www.youtube.com"
+  #     youtube_tag url, alt
+  #   else
+  #     super
+  #   end
+  # end
+
   def image(link, title, alt)
-    url = URI(link)
-    case url.host
-    when "www.youtube.com"
-      youtube_tag url, alt
-    else
-      super
-    end
+    # We use css_classes instead of the title, and use
+    # alt for the title
+    css_classes = title
+    image_tag(link, alt: alt, title: alt, class: css_classes)
   end
 
   # Create a link with a hash target.
@@ -75,16 +82,16 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   private
 
     # This is provided as an example; there's many more YouTube URLs that this wouldn't catch.
-    def youtube_tag(url, alt)
-      embed_url = "https://www.youtube-nocookie.com/embed/#{CGI.parse(url.query).fetch("v").first}"
-      content_tag :iframe,
-                  src: embed_url,
-                  width: 560,
-                  height: 325,
-                  allow: "encrypted-media; picture-in-picture",
-                  allowfullscreen: true \
-        do
-          alt
-        end
-    end
+    # def youtube_tag(url, alt)
+    #   embed_url = "https://www.youtube-nocookie.com/embed/#{CGI.parse(url.query).fetch("v").first}"
+    #   content_tag :iframe,
+    #               src: embed_url,
+    #               width: 560,
+    #               height: 325,
+    #               allow: "encrypted-media; picture-in-picture",
+    #               allowfullscreen: true \
+    #     do
+    #       alt
+    #     end
+    # end
 end

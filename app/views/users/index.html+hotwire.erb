@@ -1,0 +1,24 @@
+<% set_breadcrumbs [["Users", users_path]] %>
+
+<% content_for :title, "Users" %>
+
+<div class="grid grid-cols-2 gap-x-2">
+  <div>
+    <div class="mb-16">
+      <h1 class="text-4xl text-center">Users <%= request.variant %></h1>
+    </div>
+    <table id="users" class="min-w-full divide-y divide-gray-300">
+      <thead>
+      <tr>
+        <th>name</th>
+        <th>email</th>
+      </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+      <%= render @users %>
+      </tbody>
+    </table>
+  </div>
+  <turbo-frame class="border rounded shadow" id="user-profile">
+  </turbo-frame>
+</div>

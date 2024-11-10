@@ -81,7 +81,7 @@
         }
 
         p {
-            @apply text-gray-700 my-3 text-base/6
+            @apply text-gray-700 my-3 text-base/7
         }
 
         code {
@@ -101,7 +101,7 @@
         }
 
         ul {
-            @apply ml-4 my-4 space-y-2 text-base/6
+            @apply ml-4 my-4 space-y-2 text-base/7
         }
 
         ul li {
@@ -117,7 +117,7 @@
         }
 
         ol {
-            @apply ml-12 my-2
+            @apply ml-12 my-2 space-y-2 text-base/7
         }
 
         ol li {

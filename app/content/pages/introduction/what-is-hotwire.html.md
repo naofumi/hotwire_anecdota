@@ -1,34 +1,80 @@
 ---
-title: Hotwireとは何か
+title: Hotwireとは何か？
 section: Introduction
 layout: section
-order: 005
+order: 001
 ---
 
-## HotwireはSPA
+## HotwireはSPA --- hotwire-is-an-spa
 
-言葉の定義によって考え方が異なりますが、Wikipediaの[「シングルページアプリケーション」](https://ja.wikipedia.org/wiki/シングルページアプリケーション)に従えば、HotwireはSPAとなります。HotwireのTurboは、Wikipedia記事から引用した下記の文書の通りに画面遷移をしたり、画面の部分的置換を行なっています。
+Hotwireを使うと下記のことができます。
 
-> 必要なコード（HTML、JavaScript、CSS）は最初にまとめて読み込むか、ユーザの操作などに応じて動的にサーバと通信し、必要なものだけ読み込みを行う。
-> 
-> ...
-> 
-> サーバへリクエストすると、通常は生データ（XMLやJSON）かHTMLのどちらかが送られてくる。HTMLであれば、クライアント側はJavaScriptでDOMの一部を更新する。
+* ページリロードを行わずにページ内容を動的に更新できます
+* 動的なモーダルやスライドメニューなどのインタラクティブなUIコンポーネントが作れます
+* キャッシュなどを活用した高速なレスポンスが実現できます
 
+これはReactやNext.jsの特徴と言われていものと同じです。つまりHotwireを使うと、ReactやNext.jsで作成されたものと同等のことできます。
 
-## HotwireはSSR
+## Hotwireはシンプル
 
-これも言葉の定義によって考え方が変わりますが、HotwireはSSR (サーバサイドレンダリング)です。HTMLコードは専らサーバ側で生成され、ブラウザに送信されます。
+* Hotwireでは主にサーバでHTMLを生成します。Next.jsのSSRやServer Componentと同じです
+    * このため、**ブラウザにデータを送信するためのJSON APIの作成が不要です** 
+* Hotwireは直接DOMを変更します
+    * Reactと異なり、常にステートを介する必要がありません 
+    * ブラウザサイドの**ステート管理をあまり意識する必要がありません**
 
-HotwireはSPAであり、かつSSRであることから、Next.jsで`getServerSideProps()`を使用し、かつ`Link`タグを使用した場合と似たように動作します。
+## Hotwireのアプローチ --- approach-of-hotwire
 
-## HotwireはIKEA家具のような組み立て式
+下記のようなUIを作るときのHotwireのアプローチを、Reactと比べながら解説します。
 
-HotwireはIKEA家具のような部分組み立て工法です。工場（サーバ）で製造されたパーツを、自宅（ブラウザ）で組み立てます。一方でReact等では木材と設計図だけ（JavaScript, JSON）を搬入し、自宅でゼロから組み立てます。
+![What is Hotwire](content_images/what-is-hotwire-objective.webp "max-w-[500px]")
 
-Hotwireはサーバで組み上がったHTMLを取得します。HTMLはページ全体のこともありますし、一部分であることもあります。そしてブラウザに表示されているDOMに、`innerHTML`等を使って適宜挿入・置換します。
+### Hotwireの場合 --- hotwire-case
 
-## HotwireはJSON APIが不要
+Hotwireの場合は以下のように考えます。
 
-HotwireではHTML断片をブラウザに送ります。JSONは送りません。
+* "user_id:2"の行を`a`タグにします
+* `a`タグの`href`属性の`/users/2/user_profile`は`#user-profile`に埋め込むべきHTMLを返してくれるサーバのエンドポイントです
+* `a`タグの`data-turbo-frame`は、サーバから帰ってきたHTMLをどこに埋め込むかを指定しています
 
+![what-is-hotwire-hotwire.webp](content_images/what-is-hotwire-hotwire.webp "max-w-[500px]")
+
+### Reactの場合 --- react-case
+
+Reactの場合は以下のように考えます。
+
+* "user_id:2"の行に`onclick`イベントハンドラを繋げて、クリックしたら`selectedUser`ステートを2に更新します
+* `UserProfile`コンポーネントのpropsにステート`selectedUser=2`を渡し、`UserProfile`コンポーネントは`selectedUser=2`に該当するデータをサーバに要求します
+* サーバは`User.id=2`に該当するUserの情報をJSONで返します
+* JSONは`userProfile`ステートにセットされます
+* JSXと`userProfile`ステートを使って、virtual DOMを作成し、新しい`UserProfile`コンポーネントのHTMLを作ります
+* 新しい`UserProfile`のHTMLと、現在ブラウザに表示されているものを比較して、差分を取り、差分を現在のブラウザ画面に当てはめます
+
+![what-is-hotwire-react.png](content_images/what-is-hotwire-react.png "max-w-[600px]")
+
+### HotwireとReactの比較 --- hotwire-react-comparison
+
+* Hotwireはすぐにサーバからデータを取りにいきます。Reactの場合は、まず`selectedUser`のステートを設定して、**流れの中で**`UserProfile`コンポーネントがサーバにデータを取りに行くようにします
+* Hotwireはサーバから帰ってきたデータを`#user-profile`にすぐに埋め込みます。Reactの場合は、サーバから帰ってきたデータを`userProfile`ステートに設定すると、**流れの中で**新しい情報が表示されるようになります
+
+Hotwireは目標に対して直接的に処理をしています。一方でReactはまずステートに着目して、これを変更した結果として**流れの中で** UIが適切に更新されるような仕掛けを用意しています。ステートを更新して間接的にUIを更新する仕組みです。
+
+直接的ですので、通常はHotwireの方がシンプルでわかりやすいです。
+
+### (参考)jQueryの場合 --- jquery-case
+
+参考までにjQueryのやり方を紹介します。
+
+![what-is-hotwire-jquery.webp](content_images/what-is-hotwire-jquery.webp "max-w-[500px]")
+
+* "user_id:2"の行にイベントハンドラをつなげて、クリックされたらサーバの`/users/2/user_profile`にリクエストが飛ぶようにします
+* 帰ってきた結果は`user-profile`に埋め込まれるようにします
+* 上記の流れはJavaScriptで書きます（HotwireはHTML属性だけで宣言的に指定した）
+
+jQueryのやり方はHotwireとよく似ていて、直接的です。やはりシンプルでわかりやすいです。
+
+## Hotwireのアプローチのまとめ --- approach-of-hotwire-summary
+
+* ブラウザからのリクエストに対して、サーバでHTMLのパーツを作ります
+* ブラウザではパーツをはめ込みます
+* ステートは通常はあまり意識しません（複雑なUIになったら考えることがあります）

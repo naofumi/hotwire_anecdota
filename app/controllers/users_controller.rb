@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  set_available_variants :jquery, :react, :hotwire
+  set_available_variants :hotwire, :react, :jquery
   before_action :set_user, only: %i[ show edit update destroy ]
 
   # GET /users or /users.json
