@@ -10,6 +10,8 @@ class Users::UserProfilesController < ApplicationController
   def show
     @user_profile = @user.user_profile
 
+    # jQuery sets the "X-Requested-With: XMLHttpRequest" header
+    # This header is not used for fetch requests sent by Turbo.
     if request.xhr?
       render partial: "user_profile", locals: { user_profile: @user_profile }
     end

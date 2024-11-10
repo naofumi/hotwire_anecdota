@@ -1,18 +1,13 @@
 import {createRoot} from "react-dom/client"
 import React, {useEffect, useState} from "react"
-import VariantsSelector from "./react/components/VariantsSelector"
-
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = createRoot(document.getElementById("root"))
-  const dataString = document.getElementById("data")?.textContent
-  const data = JSON.parse(dataString)
 
-  root.render(<UsersIndex availableVariants={data.available_variants}
-                          selectedVariant={data.selected_variant} />);
+  root.render(<UsersIndex />);
 });
 
-function UsersIndex({availableVariants, selectedVariant}) {
+function UsersIndex() {
   const [users, setUsers] = useState(null)
   const [selectedUser, setSelectedUser] = useState(null)
 
@@ -27,8 +22,7 @@ function UsersIndex({availableVariants, selectedVariant}) {
     <div className="grid grid-cols-2 gap-x-2">
       <div>
         <div className="mb-16">
-          <h1 className="text-4xl text-center">Users {selectedVariant}</h1>
-          <VariantsSelector {...{availableVariants, selectedVariant}}/>
+          <h1 className="text-4xl text-center">Users React version</h1>
         </div>
         {users
          ? <table id="users" className="min-w-full divide-y divide-gray-300">
