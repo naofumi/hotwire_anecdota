@@ -101,7 +101,11 @@
         }
 
         ul {
-            @apply ml-4 my-4 space-y-2 text-base/7
+            @apply ml-0 my-3 space-y-2 text-base/7
+        }
+
+        ul ul {
+            @apply my-0
         }
 
         ul li {

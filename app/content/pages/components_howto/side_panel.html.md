@@ -87,12 +87,5 @@ end
 
 ## Reactで書いた例 --- react
 
-Reactで書いた例は`app/views/users/index.html+react.erb`から辿っていただけます。またデモはvariantを`react`にすれば確認できます。
-
-ポイントだけ紹介します
-
-* ページをロードすると`app/views/users/index.html+react.erb`が最初に読み込まれます。このページから`app/javascript/application_react_users.jsx`に書かれたReactアプリを読み込みます
-* `DOMContentLoaded`イベントが発火すると、`app/views/users/index.html+react.erb`の`<div id="root">`の中にReactアプリがロードされます
-* Reactアプリは
 
 ## jQueryで書いた例

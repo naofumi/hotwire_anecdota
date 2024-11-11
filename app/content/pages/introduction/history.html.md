@@ -3,16 +3,19 @@ title: Hotwireの歴史
 section: History
 layout: section
 order: 010
+published: true
 ---
 
-## 進化の分岐点はCSR vs SSR 
+## 系統樹 --- evolution-tree
+
+注）下記の系統樹は網羅性・正確性を期したものはなく、大雑把な流れを表現するものです
 
 ![Hotwire History](content_images/hotwire-history.webp)
 
-上記のように、フロントエンドライブラリー・フレームワークは大きくCSRとSSRに分けられると私は考えています。
+* ReactやVueはブラウザでHTMLを生成するCSRとして発展しました。ブラウザでHTMLを書き換えます。[Reactの条件付きレンダー](https://ja.react.dev/learn/conditional-rendering)がその典型です
+* Hotwire, HTMX, Alpine.js, Livewire等はサーバでHTMLを生成するSSRとして発展しました。HTMLの書き換えも主にサーバを使います
+* ルーツであるjQueryの頃は様々なアプローチが混在していました。サーバからHTMLを受け取り、そのままブラウザの表示を書き換えることもありました。またサーバからJSONを受け取り、ブラウザでHTMLを生成し、ブラウザ表示を書き換えることもしました。
 
-こうすることで、ReactやVueのようなライブラリーとHotwire, HTMXの違いをクローズアップできると思います。
+## CSR類とSSR類は別
 
-* ReactやVueはブラウザでHTMLを生成するCSRとして発展しました。そのため、ブラウザでHTMLを書き換えるのが一般的です。[Reactの条件付きレンダー](https://ja.react.dev/learn/conditional-rendering)がその典型です。サーバからHTMLを受け取り、これでDOMを部分置換する使い方はしません
-* 一方でHotwireやHTMXはサーバでHTMLを生成するSSRとして発展しました。したがって大きなHTMLを書き換える場合は原則としてサーバを使います。ブラウザだけで行う変更は主にCSSクラスやHTML属性の変更に限られます。サーバからJSONを受け取り、HTMLを生成することも可能ではありますが、一般的ではありません
-* ルーツであるjQueryではこの区別が明確ではなく、サーバからJSONを受け取り、ブラウザでHTMLを書き換えることは一般的でした。またサーバから帰ってきたHTMLを`innerHTML`で部分的に置換することも行われていました
+系統樹を見てわかるように、CSR類とSSR類はどっちが優れているか劣っているかではなく、別系統です。ウェブのインタラクティブUIを作るアプローチがそもそも異なります。そのため、Reactに詳しい人がHotwireを学ぶ場合、あるいは逆にHotwireの人がReactを学ぶ場合には頭の切り替えが必要になります。
