@@ -70,7 +70,7 @@
         }
 
         h3 {
-            @apply italic mt-4 py-2 text-xl font-light scroll-mt-24 sm:scroll-mt-24
+            @apply font-bold mt-4 py-2 text-lg scroll-mt-24 sm:scroll-mt-24
         }
         h3 > a {
             @apply text-inherit decoration-1 hover:text-orange-600;
@@ -85,7 +85,7 @@
         }
 
         code {
-            @apply px-1 rounded border bg-gray-100 font-mono border-gray-300
+            @apply mx-0.5 px-0.5 rounded border bg-gray-100 font-mono border-gray-300
         }
 
         a {
@@ -105,7 +105,7 @@
         }
 
         ul li {
-            background: url('check-circle.svg') no-repeat left top 4px;
+            background: url('check-circle.svg') no-repeat left top 6px;
             padding: 0px 16px 0px 32px;
             list-style: none;
             margin: 0;

@@ -34,10 +34,11 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   FORMATTER = Rouge::Formatters::HTMLInline.new("github")
 
   def block_code(code, language)
-    lexer = Rouge::Lexer.find(language)
+    language_part, filename_part = language.split(':', 2).map(&:strip)
+    lexer = Rouge::Lexer.find(language_part)
     safe_join([
-                content_tag(:div, language, class: "px-2 border rounded-t text-xs bg-gray-200 text-gray-600 w-fit"),
-                content_tag(:pre, class: "#{language} px-1 py-1 border rounded rounded-tl-none border-gray-300 text-sm") do
+                content_tag(:div, filename_part || language_part, class: "px-2 border rounded-t text-xs bg-gray-200 text-gray-600 w-fit"),
+                content_tag(:pre, class: "#{language_part} px-1 py-1 border rounded rounded-tl-none border-gray-300 text-sm overflow-x-auto") do
                   raw FORMATTER.format(lexer.lex(code))
                 end
               ])
@@ -58,7 +59,16 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
     # We use css_classes instead of the title, and use
     # alt for the title
     css_classes = title
-    image_tag(link, alt: alt, title: alt, class: css_classes)
+    extension = link.match(/\.(\w{3,4})$/)&.captures&.first
+
+    case extension
+    when "webp", "jpg", "jpeg", "gif", "png"
+      image_tag(link, alt: alt, title: alt, class: css_classes)
+    when "mov"
+      tag.video src: video_path(link), width: 733, height: 606, muted: true,
+                autoplay: true, playsinline: true, controls: true,
+                loop: true, class: css_classes, data: { turbo_permanent: true }
+    end
   end
 
   # Create a link with a hash target.

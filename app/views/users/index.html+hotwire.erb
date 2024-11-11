@@ -2,11 +2,12 @@
 
 <% content_for :title, "Users" %>
 
-<div class="grid grid-cols-2 gap-x-2">
+<div class="mb-16">
+  <h1 class="text-4xl text-center">Users</h1>
+</div>
+
+<div class="grid grid-cols-2 gap-x-4">
   <div>
-    <div class="mb-16">
-      <h1 class="text-4xl text-center">Users <%= request.variant %></h1>
-    </div>
     <table id="users" class="min-w-full divide-y divide-gray-300">
       <thead>
       <tr>
@@ -19,6 +20,6 @@
       </tbody>
     </table>
   </div>
-  <turbo-frame class="border rounded shadow" id="user-profile">
+  <turbo-frame class="border rounded shadow h-96" id="user-profile">
   </turbo-frame>
 </div>
