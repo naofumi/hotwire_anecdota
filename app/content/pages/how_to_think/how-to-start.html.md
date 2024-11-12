@@ -1,8 +1,9 @@
 ---
-title: HotwireはMVPから作る
+title: HotwireはMVPのMPAから作る
 section: Tips
 layout: section
 order: 010
+published: true
 ---
 
 ## MVPとは --- start-with-an-mvp 
@@ -36,7 +37,6 @@ order: 010
 
 ## 私の場合 --- personal-experience
 
-私の場合ですと、「簡単だから最初からTurbo FramesやTurbo Streamsで作ろう」って思ってしまうことが多いのですが、しばらくすると少しこんがらがってしまって、**「やっぱりMPAから出発した方がよかった」** って思ってしまうことが多いです。
+私の場合ですと、「簡単だから最初からTurbo FramesやTurbo Streamsで作ろう」って思ってしまうことが多いのですが、しばらくすると混乱することがあります。そのような場合はMPAに立ち返るとうまくいくことがよくあります。
 
-段階的に開発をするとトラブルシューティングもワンステップずつ行えますので、結果として早いことが多いと感じています。
-
+小さいステップで段階的に開発するとうまくいくようです。

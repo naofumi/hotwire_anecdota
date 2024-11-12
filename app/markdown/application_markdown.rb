@@ -31,14 +31,14 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   end
 
   # https://github.com/sitepress/markdown-rails?tab=readme-ov-file#customizing-renderer
-  FORMATTER = Rouge::Formatters::HTMLInline.new("github")
+  FORMATTER = Rouge::Formatters::HTMLInline.new("monokai.sublime")
 
   def block_code(code, language)
     language_part, filename_part = language.split(':', 2).map(&:strip)
     lexer = Rouge::Lexer.find(language_part)
     safe_join([
-                content_tag(:div, filename_part || language_part, class: "px-2 border rounded-t text-xs bg-gray-200 text-gray-600 w-fit"),
-                content_tag(:pre, class: "#{language_part} px-1 py-1 border rounded rounded-tl-none border-gray-300 text-sm overflow-x-auto") do
+                content_tag(:div, filename_part || language_part, class: "px-2 border rounded-t text-sm border-gray-700 bg-gray-700 text-gray-100 w-fit"),
+                content_tag(:pre, class: "#{language_part} bg-black px-1 py-2 border rounded rounded-tl-none border-black text-sm overflow-x-auto") do
                   raw FORMATTER.format(lexer.lex(code))
                 end
               ])

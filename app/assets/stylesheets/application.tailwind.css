@@ -121,7 +121,7 @@
         }
 
         ol {
-            @apply ml-12 my-2 space-y-2 text-base/7
+            @apply ml-6 my-2 space-y-2 text-base/7
         }
 
         ol li {
