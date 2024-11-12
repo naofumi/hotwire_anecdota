@@ -36,12 +36,14 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   def block_code(code, language)
     language_part, filename_part = language.split(':', 2).map(&:strip)
     lexer = Rouge::Lexer.find(language_part)
-    safe_join([
-                content_tag(:div, filename_part || language_part, class: "px-2 border rounded-t text-sm border-gray-700 bg-gray-700 text-gray-100 w-fit"),
-                content_tag(:pre, class: "#{language_part} bg-black px-1 py-2 border rounded rounded-tl-none border-black text-sm overflow-x-auto") do
-                  raw FORMATTER.format(lexer.lex(code))
-                end
-              ])
+    content_tag(:div, class: "my-2") do
+      safe_join([
+                  content_tag(:div, filename_part || language_part, class: "px-2 border rounded-t text-sm border-gray-700 bg-gray-700 text-gray-100 w-fit"),
+                  content_tag(:pre, class: "#{language_part} bg-black px-1 py-2 border rounded rounded-tl-none border-black text-sm overflow-x-auto") do
+                    raw FORMATTER.format(lexer.lex(code))
+                  end
+                ])
+    end
   end
 
   # Example of how you might override the images to show embeds, like a YouTube video.

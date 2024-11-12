@@ -63,10 +63,10 @@
 
     .md {
         h2 {
-            @apply mt-4 pt-4 pb-0 text-2xl border-b border-dotted border-gray-400 font-light text-gray-900 sticky bg-white top-10 scroll-mt-10 sm:top-10 sm:scroll-mt-10
+            @apply mt-4 mb-4 pt-4 pb-0 text-2xl border-b border-dotted border-gray-400 font-light text-gray-900 sticky bg-white top-10 scroll-mt-10 sm:top-10 sm:scroll-mt-10
         }
         h2 > a {
-            @apply text-inherit decoration-0 hover:text-orange-600;
+            @apply text-inherit decoration-0 hover:text-orange-600
         }
 
         h3 {
@@ -105,7 +105,7 @@
         }
 
         ul ul {
-            @apply my-0
+            @apply my-1
         }
 
         ul li {
@@ -114,11 +114,13 @@
             list-style: none;
             margin: 0;
             vertical-align: middle;
+
+            ul li {
+                margin-top: 8px;
+                background: url('check-circle-gray.svg') no-repeat left top 4px;
+            }
         }
 
-        ul li li {
-            background: url('check-circle-gray.svg') no-repeat left top 4px;
-        }
 
         ol {
             @apply ml-6 my-2 space-y-2 text-base/7
@@ -131,7 +133,8 @@
             margin: 0;
             vertical-align: middle;
 
-            li {
+            ol li {
+                margin-top: 8px;
                 list-style: lower-alpha;
             }
         }
