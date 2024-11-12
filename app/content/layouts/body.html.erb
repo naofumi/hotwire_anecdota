@@ -18,7 +18,7 @@
 </head>
 
 <body>
-<% page_block_unless_published?(current_page) %>
+<% page_block_unless_published!(current_page) %>
 <%= render 'nav',
            hide_top_button: current_page.data.hide_top_button,
            hide_title: current_page.data.hide_title %>

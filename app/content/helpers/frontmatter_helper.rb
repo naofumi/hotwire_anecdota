@@ -3,7 +3,7 @@ module FrontmatterHelper
     !Rails.env.production? || page.data.published
   end
 
-  def page_block_unless_published?(page)
+  def page_block_unless_published!(page)
     if Rails.env.production? && !page.data.published
       raise AbstractController::ActionNotFound
     end
