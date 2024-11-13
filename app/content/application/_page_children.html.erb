@@ -1,0 +1,15 @@
+<ol class="ml-6 my-2 space-y-2 text-base/7">
+  <% page.children
+         .sort_by { _1.data.order.to_i }
+         .filter { page_showable?(_1) }
+         .each do |child_page| %>
+    <li class="m-0 ml-8 !mt-0 list-decimal list-outside list-image-none text-xl text-gray-400">
+      <%= link_to child_page.data.title,
+                  child_page.url,
+                  class: "#{child_page.data.published ? '' : "opacity-40"} text-base text-gray-600 hover:text-orange-300" %>
+      <% if Rails.env.development? %>
+        <span class="text-xs"><%= child_page.data.order %></span>
+      <% end %>
+    </li>
+  <% end %>
+</ol>

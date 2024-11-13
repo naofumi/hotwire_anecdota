@@ -1,7 +1,7 @@
 ---
 title: inputタグによるOptimistic UI
 section: Tips
-layout: section
+layout: article
 order: 005
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Turboを使いすぎない
 section: Performance
-layout: section
+layout: article
 order: 05
 ---
 

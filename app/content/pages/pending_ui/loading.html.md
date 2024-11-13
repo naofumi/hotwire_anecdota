@@ -1,6 +1,6 @@
 ---
 title: ローディング・アニメーション
 section: Pending UI
-layout: section
+layout: article
 order: 020
 ---

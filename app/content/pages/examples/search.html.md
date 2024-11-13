@@ -1,7 +1,7 @@
 ---
 title: 検索フィールド
 section: Tips
-layout: section
+layout: article
 order: 005
 ---
 

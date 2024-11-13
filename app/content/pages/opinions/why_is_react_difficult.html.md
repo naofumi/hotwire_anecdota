@@ -1,6 +1,6 @@
 ---
 title: Reactはなぜ習得が難しいか
-layout: section
+layout: article
 order: 005
 published: true
 ---

@@ -1,7 +1,7 @@
 ---
 title: Next.jsのサイトをHotwireに移行する
 section: Tips
-layout: section
+layout: article
 order: 005
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: ステートをStimulusに持たせた例
-layout: section
+layout: article
 order: 005
 published: true
 ---

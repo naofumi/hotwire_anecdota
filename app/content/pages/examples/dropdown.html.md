@@ -1,7 +1,7 @@
 ---
 title: ドロップダウン
 section: Components
-layout: section
+layout: article
 order: 005
 ---
 

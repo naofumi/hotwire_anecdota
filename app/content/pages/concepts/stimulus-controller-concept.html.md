@@ -1,7 +1,7 @@
 ---
 title: Stimulus ControllerはなぜControllerか？
 section: Concept
-layout: section
+layout: article
 order: 60
 ---
 

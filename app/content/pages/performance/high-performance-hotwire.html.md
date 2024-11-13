@@ -1,7 +1,7 @@
 ---
 title: 高性能Hotwire
 section: Performance
-layout: section
+layout: article
 order: 05
 ---
 

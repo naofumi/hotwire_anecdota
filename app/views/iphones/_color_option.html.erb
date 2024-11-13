@@ -1,4 +1,5 @@
-<%# locals: (value:, color:, iphone:) %>
+<% local_assigns => {value:, color:, iphone:} %>
+
 <%= label_tag [:color, value].join('_'),
               data: {
                 action: "mouseenter->image-switcher#setColorText mouseleave->image-switcher#resetColorText",
@@ -8,6 +9,5 @@
   <%= radio_button_tag :color, value, iphone.color == value,
                        class: "hidden",
                        onchange: "this.form.requestSubmit()"
-  %>
-  &nbsp;
+  %>&nbsp;
 <% end %>

@@ -1,7 +1,7 @@
 ---
 title: JavaScriptの活用
 section: Tips
-layout: section
+layout: article
 order: 060
 ---
 

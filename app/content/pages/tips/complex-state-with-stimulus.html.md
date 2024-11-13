@@ -1,7 +1,7 @@
 ---
 title: Stimulusで複雑なステートを使用
 section: Tips
-layout: section
+layout: article
 order: 005
 ---
 

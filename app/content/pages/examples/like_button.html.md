@@ -1,7 +1,7 @@
 ---
 title: 「いいね」ボタン
 section: Tips
-layout: section
+layout: article
 order: 010
 ---
 

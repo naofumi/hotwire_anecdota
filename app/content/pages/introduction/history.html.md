@@ -1,7 +1,7 @@
 ---
 title: Hotwireの歴史
 section: History
-layout: section
+layout: article
 order: 010
 published: true
 ---
@@ -16,6 +16,8 @@ published: true
 * Hotwire, HTMX, Alpine.js, Livewire等はサーバでHTMLを生成するSSRとして発展しました。HTMLの書き換えも主にサーバを使います
 * ルーツであるjQueryの頃は様々なアプローチが混在していました。サーバからHTMLを受け取り、そのままブラウザの表示を書き換えることもありました。またサーバからJSONを受け取り、ブラウザでHTMLを生成し、ブラウザ表示を書き換えることもしました。
 
-## CSR類とSSR類は別
+## CSR類とSSR類は別 --- csr-and-ssr-are-different
 
-系統樹を見てわかるように、CSR類とSSR類はどっちが優れているか劣っているかではなく、別系統です。ウェブのインタラクティブUIを作るアプローチがそもそも異なります。そのため、Reactに詳しい人がHotwireを学ぶ場合、あるいは逆にHotwireの人がReactを学ぶ場合には頭の切り替えが必要になります。
+系統樹を見てわかるように、Reactが属するCSR類とHotwireが属するSSR類はどっちが優れているか劣っているかではなく、別系統です。どちらでもウェブのインタラクティブUIを作れますが、アプローチが異なります。
+
+そのため、Reactに詳しい人がHotwireを学ぶ場合、あるいは逆にHotwireの人がReactを学ぶ場合には頭の切り替えが必要になります。

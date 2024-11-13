@@ -1,7 +1,7 @@
 ---
 title: なるべく<a>や<form>を使用すること
 section: Tips
-layout: section
+layout: article
 order: 050
 published: true
 ---

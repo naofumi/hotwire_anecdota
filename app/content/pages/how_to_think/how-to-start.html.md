@@ -1,7 +1,7 @@
 ---
 title: HotwireはMVPのMPAから作る
 section: Tips
-layout: section
+layout: article
 order: 010
 published: true
 ---
@@ -15,7 +15,7 @@ published: true
 ![mvp-not-like-this.png](content_images/mvp-not-like-this.png)
 
 
-## MVPを作るということ --- creating-an-mvp
+## MVPから作る == MPAから作る --- creating-an-mvp
 
 「顧客に対してテストができ、かつフィードバッグをもらえるような、思いつく限りで最も小さなものを提供する」のがMVPです。「ただただ学ぶ」ためのものをまず作ります。
 

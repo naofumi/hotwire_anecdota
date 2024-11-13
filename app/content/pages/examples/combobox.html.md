@@ -1,7 +1,7 @@
 ---
 title: Combobox
 section: Tips
-layout: section
+layout: article
 order: 005
 ---
 

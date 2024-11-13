@@ -1,8 +1,8 @@
 ---
 title: Stimulus中のHTML生成を避ける理由
-section: Background
-layout: section
+layout: article
 order: 010
+published: true
 ---
 
 ## Hotwireは自主ルール

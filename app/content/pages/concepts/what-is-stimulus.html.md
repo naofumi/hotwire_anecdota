@@ -1,7 +1,7 @@
 ---
 title: Stimulusの考え方
 section: Concept
-layout: section
+layout: article
 order: 060
 published: true
 ---

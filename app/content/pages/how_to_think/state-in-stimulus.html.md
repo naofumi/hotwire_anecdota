@@ -1,7 +1,7 @@
 ---
 title: Stimulusとステート
 section: Tips
-layout: section
+layout: article
 order: 030
 ---
 

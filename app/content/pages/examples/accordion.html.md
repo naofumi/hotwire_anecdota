@@ -1,7 +1,7 @@
 ---
 title: アコーディオンの作成
 section: Components
-layout: section
+layout: article
 order: 005
 ---
 

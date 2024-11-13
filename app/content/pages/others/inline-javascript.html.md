@@ -1,7 +1,7 @@
 ---
 title: Inline JavaScript
 section: Tips
-layout: section
+layout: article
 order: 005
 published: true
 ---

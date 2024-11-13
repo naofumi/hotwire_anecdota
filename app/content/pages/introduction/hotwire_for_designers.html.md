@@ -1,7 +1,7 @@
 ---
 title: ウェブデザイナーのためのHotwire
 section: Introduction
-layout: section
+layout: article
 order: 005
 published: true
 ---

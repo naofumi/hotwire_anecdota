@@ -1,7 +1,7 @@
 ---
 title: Hotwireは複雑さの排除
 section: Introduction
-layout: section
+layout: article
 order: 005
 ---
 

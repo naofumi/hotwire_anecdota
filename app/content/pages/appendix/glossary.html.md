@@ -1,7 +1,7 @@
 ---
 title: 用語集
 section: Appendix
-layout: section
+layout: article
 order: 001
 ---
 

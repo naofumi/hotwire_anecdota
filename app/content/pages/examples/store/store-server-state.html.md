@@ -1,22 +1,24 @@
 ---
-title: 製品選択画面のステートをサーバに持たせた例
-layout: section
+title: Hotwireでステートをサーバに持たせた場合
+layout: article
 order: 005
 published: true
+parent: store
 ---
 
-## サーバにステートを持たせた場合 --- example-with-server-state
+
+## 概略 --- overview
 
 [デモはこちら](/iphone)に用意しています。
 
-1. オプションが選択される都度、サーバにリクエストを送信します
+1. オプションが選択されるたびにサーバにリクエストを送信します
 2. サーバは再計算された価格等をすべて反映したHTMLを返してきます
-3. レスポンスのTurbo Streamsを画面に反映させて、新しい状態の価格等を表示します
+3. レスポンスのHTMLを画面に反映させ、新しい状態の価格等を表示します
 4. この際、単にHTMLを置換するのではなく、Morphing(差分検出処理)を行い、ブラウザステートを維持します。これはReactが再レンダリングのたびに行うものと同じ考えです
 
-* ロジックはすべてサーバサイドに保持されます
+## コード --- server-state-code
 
-### コード --- server-state-code
+### IphonesController#show コントローラアクション --- show-controller
 
 ```rb:app/controllers/iphones_controller.rb
 class IphonesController < ApplicationController
@@ -38,7 +40,9 @@ end
 ```
 
 * `IphonesController#show`をエンドポイントとします
-* `@iphone`インスタンスは`Iphone`オブジェクトのインスタンスです。選択されたオプションは`session`の中に保存しますので、`Iphone`インスタンスは`session`を使って初期化します
+* `@iphone`インスタンスは`Iphone`オブジェクトのインスタンスです。DBを使わずに、ステートはすべて`session`で管理ます。そのため`Iphone`インスタンスは`session`を使って初期化します
+
+### Iphone.rb モデル --- iphone-model
 
 ```rb:app/models/iphone.rb
 class Iphone
@@ -143,7 +147,7 @@ class Iphone
 end
 ```
 
-* `Iphone`クラスはビジネスロジックを収めています
+* `Iphone`クラスに全てのビジネスロジックを収めています
     * 初期状態のモデル・カラー・RAM容量
     * どこまでオプションを入力したかをステートマシン的に管理
     * model, color, ram等のオプションをセットするメソッド
@@ -151,6 +155,8 @@ end
     * 価格情報を算出する処理
 
 本当のストアであれば製品オプションの情報や価格算出はDB等で管理すると思いますが、今回はとりあえずハードコードしました。
+
+### iPhoneモデルオプション選択 view --- iphone-model-select-view
 
 ```erb:app/views/iphones/_iphone.html.erb
   <%= form_with url: iphone_path, method: :post do %>
@@ -190,10 +196,12 @@ end
 <% end %>
 ```
 
-* オプションは`app/views/iphones/_option.html.erb`の中で`radio_button_tag`で実装しています
+* オプションは`app/views/iphones/_option.html.erb`の中で`radio_button_tag`として実装しています。`radio`を使いますので、楽観的UIはブラウザネイティブのものが使えます
 * `radio_button`が変更されたら`onchange`でformをsubmitします
-* 製品オプションは選択されると、<span class="text-blue-600">青い</span>枠がつきます。これはCSSの`has-[:checked]:border-blue-500`で処理されます
-* formは`app/views/iphones/_iphone.html.erb`に記されている普通の`form_with`です。Turboがインストールされていますので、submitされると非同期でサーバにリクエストを送信します
+* 製品オプションは選択されると、<span class="text-blue-600">青い</span>枠がつきます。これはCSSの`has-[:checked]:border-blue-500`で処理されます。これは楽観的UIです
+* formは`app/views/iphones/_iphone.html.erb`に記されている普通の`form_with`で実装しています。Turboがインストールされていますので、submitされると非同期でサーバにリクエストを送信します
+
+### IphonesController#create コントローラアクション --- create-controller
 
 ```ruby:app/controllers/iphones_controller.rb
 class IphonesController < ApplicationController
@@ -217,8 +225,10 @@ end
 ```
 
 * formのsubmitは`IphonesController#submit`に来ます
-* ここで`@iphone` (Iphoneクラスのインスタンス)に`params`が渡され、選択されたオプションがsessionに反映されます
+* ここで`@iphone` (Iphoneクラスのインスタンス)に`params`が渡され、ブラウザで選択されたオプションがsessionに反映されます
 * 最後に`turbo_streams`で応答しています。これは規約に従って`create.turbo_stream.erb`をテンプレートとして使用します
+
+### create後のTurbo Stream --- create-turbo-stream
 
 ```erb:app/views/iphones/create.turbo_stream.erb
 <%= turbo_stream.replace "iphone", method: "morph" do %>
@@ -229,11 +239,59 @@ end
 * Turbo Streamの中ではHTML上のidが`iphone`の場所に、partialの`iphone`を入れ替えています。つまり更新された内容で描き直しています
 * `method: "morph"`をしていますので、単純にDOMを新しいものと入れ替えるのではなく、変更された箇所だけを入れ替えます。ブラウザのステートをなるべくそのままにしますので、よりスムーズなUI/UXになります
 
-### まとめ --- summary-server-state
+### カラーオプションをホバーした時 --- hover-on-color
 
-* ブラウザ側は`form`を送信するだけで、非常に簡単に保たれています
-* サーバ側のControllerも非常に簡単に保たれています。リクエストを受け取り、`Iphone`オブジェクトを作ったり、更新したりするだけです
-* 複雑さは`Iphone`クラスのインスタンスである`@iphone`に集約されています
+```erb:app/views/iphones/_iphone.html.erb
+<%= tag.div data: { controller: "image-switcher", image_switcher_iphone_value: @iphone } do %>
+  <div class="text-xl my-4" data-image-switcher-target="colorText"><%= @iphone.color_name %></div>
+
+  <%= form_with url: iphone_path, method: :post do %>
+    <%= fieldset_tag nil, disabled: !@iphone.color_enterable?, class: "disabled:opacity-30" do %>
+      <% [{ color: "naturaltitanium", class: "bg-gray-400" },
+          { color: "bluetitanium", class: "bg-indigo-800" },
+          { color: "whitetitanium", class: "bg-white" },
+          { color: "blacktitanium", class: "bg-black" }].each do |attributes| %>
+        <%= render 'color_option',
+                   value: attributes[:color],
+                   color: attributes[:class],
+                   iphone: @iphone %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+```
+
+```erb:app/views/iphones/_color_option.html.erb
+<% local_assigns => {value:, color:, iphone:} %>
+
+<%= label_tag [:color, value].join('_'),
+              data: {
+                action: "mouseenter->image-switcher#setColorText mouseleave->image-switcher#resetColorText",
+                image_switcher_color_name_param: iphone.color_name_for_value(value)
+              },
+              class: "#{color} inline-block w-8 h-8 border-2 rounded-full cursor-pointer outline-2 outline outline-offset-0.5 outline-transparent has-[:checked]:outline-blue-500" do %>
+  <%= radio_button_tag :color, value, iphone.color == value,
+                       class: "hidden",
+                       onchange: "this.form.requestSubmit()"
+  %>&nbsp;
+<% end %>
+```
+
+* カラーオプションを表示する箇所です
+    * カラーオプションの上をホバーした時にオプションの上のテキストにカラー名が表示されますが、これはサーバに通信するほどのことでもない上、レスポンスが速くないとUI/UXが悪いので、Stimulusを使ってブラウザ上で実装します
+* 個々のカラーオプションは`_color_option.html.erb` partialで書いています
+* ホバーした時のアクションは`image_switcher` Stimulus Controllerが担当します
+    * 変更されるテキストは `data-image-switcher-target="colorText"`の箇所です
+    * Stimulus Controllerは`action: "mouseenter->image-switcher#setColorText mouseleave->image-switcher#resetColorText"`で、`mouseenter`, `mouseleave`イベントに応じて呼び出されます
+    * 表示するテキストは`image_switcher_color_name_param:`で指定しています
 
 
+## まとめ --- summary-server-state
 
+* ブラウザ側は`form`を送信するだけです。ラジオボタンを押した時にformを自動的に送信するインラインJavaScriptを書いているだけで、ほとんど何もしていません
+* 製品オプションはHTMLネイティブの`radio`で実装していますので、コードを書かなくても楽観的UIが実現できます。CSS擬似要素の`:checked`て適宜UIを更新します
+* サーバ側のControllerも簡単に保たれています。リクエストを受け取り、`Iphone`オブジェクトを作り、更新しているだけです。Railsのごく一般的なControllerです
+* 複雑さはすべて`Iphone`クラスに集約されています
+* 今回はTurbo Streams + Morphingを使っていますが、これはパフォーマンス最適化です。パフォーマンスが気にならなければ、Turbo Drive + Morphingにすることで`app/views/iphones/create.turbo_stream.erb`を省略できます。ただしその場合は POST/Redirect/GETのパターンになりますので、オプション選択時にサーバ通信が２回発生します。今回のようにTurbo Streams + Morphingであれば１回で済みます
+
+上述のように、製品オプションを選択するたびにサーバ通信をするやり方であっても、UI/UX上は特に問題になりません。楽観的UIも実装できますし、

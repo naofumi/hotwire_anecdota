@@ -1,7 +1,7 @@
 ---
 title: Accessibility
 section: Tips
-layout: section
+layout: article
 order: 005
 ---
 

@@ -70,10 +70,10 @@
         }
 
         h3 {
-            @apply font-bold mt-4 py-2 text-lg scroll-mt-24 sm:scroll-mt-24
+            @apply font-bold mt-4 py-2 text-lg sticky bg-white top-[89px] scroll-mt-[89px] sm:top-[89px] sm:scroll-mt-[89px]
         }
         h3 > a {
-            @apply text-inherit decoration-1 hover:text-orange-600;
+            @apply text-inherit decoration-0 hover:text-orange-600;
         }
 
         h4 {

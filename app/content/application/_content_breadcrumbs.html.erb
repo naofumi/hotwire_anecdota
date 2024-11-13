@@ -1,12 +1,6 @@
 <%=
-  breadcrumbs_array = current_page.data.breadcrumbs_array.presence&.unmanage || []
-
-  current_section = current_section_from(request)
-  current_section_title = ToplevelPage.first.section_title_for(current_section)
-  section_breadcrumbs = current_section_title.present? ? [[current_section_title, "/\##{current_section}"]] : []
+  ancestors = current_page.parents[0..-2].reverse.compact
 
   render "breadcrumbs",
-         breadcrumbs: breadcrumbs_array +
-           section_breadcrumbs +
-           [[current_page.data.title, request.original_fullpath]]
+         breadcrumbs: (ancestors + [current_page]).map { [_1.data.title, _1.request_path] }
 %>

@@ -1,7 +1,7 @@
 ---
 title: Chart.jsをStimulusから使う
 section: Tips
-layout: section
+layout: article
 order: 005
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Reactのリプレイス
 section: Tips
-layout: section
+layout: article
 order: 005
 ---
 

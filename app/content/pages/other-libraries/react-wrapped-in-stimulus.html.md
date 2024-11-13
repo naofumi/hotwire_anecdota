@@ -1,7 +1,7 @@
 ---
 title: ReactをStimulusでラップする
 section: Tips
-layout: section
+layout: article
 order: 005
 ---
 

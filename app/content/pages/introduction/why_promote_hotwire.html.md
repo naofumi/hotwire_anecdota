@@ -1,7 +1,7 @@
 ---
 title: Hotwireを推す理由
 section: Introduction
-layout: section
+layout: article
 order: 005
 ---
 

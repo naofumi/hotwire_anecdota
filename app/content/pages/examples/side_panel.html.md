@@ -1,7 +1,7 @@
 ---
 title: サイドパネル
 section: Components
-layout: section
+layout: article
 order: 005
 published: true
 ---

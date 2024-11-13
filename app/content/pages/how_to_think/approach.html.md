@@ -1,7 +1,7 @@
 ---
 title: Hotwire, React, jQueryのアプローチ
 section: Tips
-layout: section
+layout: article
 order: 050
 published: true
 ---

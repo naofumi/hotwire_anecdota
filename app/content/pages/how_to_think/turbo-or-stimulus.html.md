@@ -1,7 +1,7 @@
 ---
 title: "TurboとStimulus: どっちを使う？"
 section: Tips
-layout: section
+layout: article
 order: 020
 published: true
 ---

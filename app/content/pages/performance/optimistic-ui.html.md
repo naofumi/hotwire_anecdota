@@ -1,7 +1,7 @@
 ---
 title: 楽観的UI
 section: Performance
-layout: section
+layout: article
 order: 05
 ---
 

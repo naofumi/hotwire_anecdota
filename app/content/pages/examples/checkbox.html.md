@@ -1,7 +1,7 @@
 ---
 title: チェックボックス
 section: Tips
-layout: section
+layout: article
 order: 005
 ---
 

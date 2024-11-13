@@ -1,7 +1,7 @@
 ---
 title: Post/Redirect/Getパターンと高速化
 section: Performance
-layout: section
+layout: article
 order: 60
 ---
 

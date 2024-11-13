@@ -1,16 +1,16 @@
 ---
 title: Reactと一緒に使う
 section: With Other Frameworks
-layout: section
+layout: article
 order: 010
 published: true
 ---
 
 ## MPAの中にReactを埋め込む
 
-HotwireやMPAのページの中にReactを埋め込むのは簡単です。[Reactの公式サイトによると](https://ja.react.dev/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page)、**Facebookも長らくこの使い方がメインでした**。
+HotwireやMPAのページの中にReactを埋め込むのは簡単です。[Reactの公式サイトによると](https://ja.react.dev/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page)、**Facebookも長らくこの使い方がメインでした**。GitHubも同様です。**GitHubの場合はTurbo中心で作られてページの中の一部分をReactで実装しています**。
 
-Apple StoreもMPAページの中にReactを埋め込んで使っています。ブラウザ側だけで製品のオプションを選択して、価格を表示しています。このような複雑なステートをフロンド側だけで管理するために使っているようです。なおAppleウェブサイトの他のページは、ほとんどがMPAになっています。必要なところだけReactを使っています。
+**Apple StoreもMPAページの中にReactを埋め込んで使っています**。ブラウザ側だけで製品のオプションを選択して、価格を表示しています。このような複雑なステートをフロンド側だけで管理するために使っているようです。なおAppleウェブサイトの他のページは、ほとんどがMPAになっています。必要なところだけReactを使っています。
 
 一般的なページ、特にマーケティング的なページは、ReactよりもMPAの方が向いていると思います。ほとんどのページをMPAで作り、複雑なステート管理が必要なところだけをReactで書くのは賢明な選択です。
 

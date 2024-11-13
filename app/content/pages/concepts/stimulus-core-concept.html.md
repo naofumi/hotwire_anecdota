@@ -1,6 +1,6 @@
 ---
 title: Stimulusのコア・コンセプト
-layout: section
+layout: article
 order: 020
 published: true
 ---
