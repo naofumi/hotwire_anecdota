@@ -1,14 +1,12 @@
 class ComponentsController < ApplicationController
-  AVAILABLE_TEMPLATES = %w[
-    toggle select tabs navigation tiers_with_toggle
-    accordion dropdown_menu static_tabs radio_tabs
-    iphone react_w_stimulus react_embed react_wo_jsx react_babel
-  ]
-  before_action :set_template, only: [ :show ]
-  before_action :set_data , only: [ :show ]
+  include ViewTemplateCollectable
+  collect_view_templates "components"
+
+  before_action :set_template, only: [:show]
+  before_action :set_data, only: [:show]
 
   def index
-    @available_templates = AVAILABLE_TEMPLATES
+    @available_templates = view_templates
     @available_projects = available_projects
     @available_react_templates = ReactController::AVAILABLE_TEMPLATES
   end
@@ -16,6 +14,7 @@ class ComponentsController < ApplicationController
   def show
     render @template
   end
+
 
   private
 
@@ -34,7 +33,7 @@ class ComponentsController < ApplicationController
     end
 
     def set_template
-      @template = params[:id].presence_in(AVAILABLE_TEMPLATES)
+      @template = params[:id].presence_in(view_templates)
       raise ActionController::RoutingError.new("Not Found") unless @template
     end
 end

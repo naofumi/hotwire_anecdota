@@ -1,0 +1,44 @@
+<% set_breadcrumbs [["Toggle switch", component_path(:toggle)]] %>
+
+<%= render 'template',
+           title: "Toggle switch Component",
+           description: "Simple Toggle Switch" do %>
+  <!-- Enabled: "bg-indigo-600", Not Enabled: "bg-gray-200" -->
+  <div>
+    Tailwind + Stimulus:
+    <button type="button"
+            class="!bg-gray-200 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
+            role="switch"
+            aria-checked="false"
+            data-controller="switch"
+            data-switch-element-on-class="!bg-indigo-600"
+            data-switch-element-off-class="!bg-gray-200"
+            data-switch-toggle-on-class="!translate-x-5"
+            data-switch-toggle-off-class="!translate-x-0"
+            data-action="click->switch#toggle keydown.space:stop:prevent->switch#toggle"
+    >
+      <span class="sr-only">Use setting</span>
+      <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
+      <span aria-hidden="true"
+            data-switch-target="toggle"
+            class="!translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
+      ></span>
+    </button>
+  </div>
+
+
+  <div>
+    No Javascript:
+  <label class="group has-[:checked]:bg-indigo-600 bg-gray-200 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out outline-none has-[:focus]:ring-2 active:ring-2 ring-indigo-600
+         ring-offset-2"
+         role="switch"
+  >
+    <input type="checkbox" class="opacity-0 w-0 border-none"/>
+    <span class="sr-only">Use setting</span>
+    <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
+    <span aria-hidden="true"
+          class="group-has-[:checked]:translate-x-5 translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
+    ></span>
+  </label>
+  </div>
+<% end %>

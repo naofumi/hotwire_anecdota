@@ -1,6 +1,6 @@
 import React from "react";
 import {createRoot} from "react-dom/client";
-import {IPhoneShow} from "./i_phone_show"
+import {IPhoneShow} from "./react/components/IPhoneShow"
 
 document.addEventListener("turbo:load", () => {
   const dataJSON = document.getElementById('catalog-data').textContent

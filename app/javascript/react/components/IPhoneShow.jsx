@@ -1,7 +1,7 @@
 import React, {useState} from "react"
-import IPhone from "./models/IPhone"
-import IphoneOption from "./react/components/IphoneOption"
-import IphoneColorOption from "./react/components/IphoneColorOption"
+import IPhone from "../../models/IPhone"
+import IphoneOption from "./IphoneOption"
+import IphoneColorOption from "./IphoneColorOption"
 
 export function IPhoneShow({catalogData}) {
   const [iPhoneState, setIphoneState] = useState(
