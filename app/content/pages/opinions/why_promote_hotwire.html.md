@@ -1,8 +1,7 @@
 ---
 title: Hotwireを推す理由
-section: Introduction
 layout: article
-order: 005
+order: 100
 ---
 
 ## 真のイノベーションは簡略化 --- innovation-is-simplicity
@@ -23,7 +22,7 @@ order: 005
 
 ## Hotwireに期待すること --- hopes-for-hotwire
 
-HotwireはMPAから出発して、段階的にこれを改善するアプローチをとっています。HTML/CSSのコーディングができれば、それだけでHotwireのサイトが作れます。そこからJavaScriptを学びながら、Hotwireの深いことを学習していき、だんだんとUI/UXの改善をしていけば良いのです。
+HotwireはMPAから出発して、段階的にこれを改善するアプローチをとっています。**HTML/CSSのコーディングができれば、それだけでHotwireのサイトが作れます(Turbo Drive)**。そこからJavaScriptを学びながら、Hotwireの深いことを学習していき、だんだんとUI/UXの改善をしていけば良いのです。
 
 スマートフォンとカメラと同じように、複雑な技術を誰でもが使いこなせるようになると世の中は変わります。いまやSNSやメッセージに添付した写真を通して人々は日々の生活を共有します。Youtubeのコンテンツを通して多くの意見を聞き、効率良く学習ができます。そしてガザの虐殺の状況等をリアルタイムに映像として体験できます。
 

@@ -2,7 +2,7 @@
 title: Hotwireは複雑さの排除
 section: Introduction
 layout: article
-order: 005
+order: 100
 ---
 
 ## フロントエンド開発は複雑 --- complexity

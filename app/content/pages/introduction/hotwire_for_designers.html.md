@@ -1,8 +1,8 @@
 ---
-title: ウェブデザイナーのためのHotwire
+title: ウェブデザイナーも使うHotwire
 section: Introduction
 layout: article
-order: 005
+order: 7
 published: true
 ---
 

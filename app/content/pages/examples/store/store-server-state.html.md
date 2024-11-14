@@ -1,13 +1,15 @@
 ---
-title: Hotwireでステートをサーバに持たせた場合
+title: Hotwireでステートをサーバに持たせる
 layout: article
-order: 005
+order: 10
 published: true
 parent: store
 ---
 
 
 ## 概略 --- overview
+
+ここでは価格変更の計算やステートの保持をすべてサーバに持たせる例を紹介します。
 
 [デモはこちら](/iphone)に用意しています。
 
@@ -285,13 +287,41 @@ end
     * Stimulus Controllerは`action: "mouseenter->image-switcher#setColorText mouseleave->image-switcher#resetColorText"`で、`mouseenter`, `mouseleave`イベントに応じて呼び出されます
     * 表示するテキストは`image_switcher_color_name_param:`で指定しています
 
+### カラーオプション変更のStimulus Controller --- image-switcher-stimulus-controller
+
+```js:app/javascript/controllers/image_switcher_controller.js
+import { Controller } from "@hotwired/stimulus"
+
+// Connects to data-controller="image-switcher"
+export default class extends Controller {
+  static values = {iphone: Object}
+  static targets = ["colorText"]
+
+  connect() {
+  }
+
+  setColorText(event) {
+    const colorName = event.params.colorName
+    this.colorTextTargets.forEach(target => target.textContent = colorName)
+  }
+
+  resetColorText(event) {
+    this.colorTextTargets.forEach(target => target.textContent = this.iphoneValue.color_name)
+  }
+}
+```
+
+* Actionから`setColorText`, `resetColorText`が呼び出され、Targetの内容を直接更新するものです
+    * シンプルな更新の場合はコードが複雑になりませんので、Stimulus Controllerの中でステートを管理せず、HTMLに直接書き込んでも問題ありません 
+    * 表示するべき文字は`params.colorName`から読み込んでいます
 
 ## まとめ --- summary-server-state
 
-* ブラウザ側は`form`を送信するだけです。ラジオボタンを押した時にformを自動的に送信するインラインJavaScriptを書いているだけで、ほとんど何もしていません
+* ブラウザ側は`form`を送信するだけです。ラジオボタンを押した時にformを自動的に送信するインラインJavaScriptを書いているのみで、ほとんど何もしていません
 * 製品オプションはHTMLネイティブの`radio`で実装していますので、コードを書かなくても楽観的UIが実現できます。CSS擬似要素の`:checked`て適宜UIを更新します
-* サーバ側のControllerも簡単に保たれています。リクエストを受け取り、`Iphone`オブジェクトを作り、更新しているだけです。Railsのごく一般的なControllerです
+* サーバ側のControllerも簡単なものです。リクエストを受け取り、`Iphone`オブジェクトを作り、更新しているだけです。Railsのごく一般的なControllerです
 * 複雑さはすべて`Iphone`クラスに集約されています
+* カラーオプションの上をホバーした時の動作は簡単なもので、他の要素に影響しませんので、Stimulusで簡単に処理しています
 * 今回はTurbo Streams + Morphingを使っていますが、これはパフォーマンス最適化です。パフォーマンスが気にならなければ、Turbo Drive + Morphingにすることで`app/views/iphones/create.turbo_stream.erb`を省略できます。ただしその場合は POST/Redirect/GETのパターンになりますので、オプション選択時にサーバ通信が２回発生します。今回のようにTurbo Streams + Morphingであれば１回で済みます
 
 上述のように、製品オプションを選択するたびにサーバ通信をするやり方であっても、UI/UX上は特に問題になりません。楽観的UIも実装できますし、

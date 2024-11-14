@@ -42,7 +42,7 @@ HotwireやMPAのページの中にReactを埋め込むのは簡単です。[Reac
 import {createRoot} from "react-dom/client"
 import React, {useEffect, useState} from "react"
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
   const root = createRoot(document.getElementById("root"))
 
   root.render(<UsersIndex />);
@@ -67,8 +67,8 @@ function UsersIndex() {
 }
 ```
 
-* `DOMContentLoaded`イベントに応答して、先ほどの`<div id="root">`の箇所に`UsersIndex`コンポーネントを埋め込んでいます
-* なおHotwireはSPAですので、条件によっては`DOMContentLoaded`イベントが発火しません。場合によってはこのイベント`turbo:load`にするか、このページに向かうリンクはTurboを切る(`data-turbo="false"`属性を設定する)必要があるでしょう
+* `turbo:load`イベントに応答して、先ほどの`<div id="root">`の箇所に`UsersIndex`コンポーネントを埋め込んでいます。`turbo:load`は画面遷移が完了した時に呼び出される、Turboのカスタムイベントです
+* なお通常は`turbo:load`ではなく`DOMContentLoaded`イベントを使います。しかしHotwireはSPAですので、ページをリロードしないページ遷移をします。ページをリロードした時にだけ発火される`DOMContentLoaded`よりも、TurboでSPA的にページ遷移しても発火する`turbo:load`を使うのはこのためです
 
 ### Apple Store模写の例 --- apple-store
 
@@ -108,7 +108,7 @@ Apple Storeを模写した例です。[デモ](/react/iphone)はこちらに用�
 
 // ...
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
   const dataJSON = document.getElementById('catalog-data').textContent
   const data = JSON.parse(dataJSON)
 
@@ -121,13 +121,13 @@ function IPhoneShow({catalogData}) {
 }
 ```
 
-* ページの読み込みが完了すると`DOMContentLoaded`イベントが発火します。そして以下のことを実行します
+* ページの読み込みが完了すると`turbo:load`イベントが発火します。そして以下のことを実行します
 * 上記の`<script type="application/json" id="catalog-data">`にあったJSONのデータを読み込み、`data`オブジェクトにセットします
 * `IPhoneShow`コンポーネントに`data`をprops(`catalogData`)として渡し、これを`<div id="root">`の箇所に埋め込みます
 
 ## まとめ --- summary
 
 * HotwireをReactと一緒に使うことは問題なくできます
-    * 場合によっては、Turboをオフにしたり、Reactを読み込むイベントを`DOMContentLoaded`ではなく`turbo:load`にするなどの変更が必要になります
+  * 通常はReactを読み込むイベントを`DOMContentLoaded`ではなく`turbo:load`にします。ただし事情により`turbo:load`が使えない場合は、そのページでそもそもTurboを読み込まないか、もしくはこのページに遷移するときは`data-turbo="false"`属性を使うなどすると良いと思います
 * `<script type="application/json" ...>...</script>`にデータを埋め込み、ERBからReactにデータを渡せます。Reactがサーバにデータをリクエストする回数が減らせますので、ページロードの高速化に繋がります
     * 同じようなことはStimulusの`values`を使ってエレガントに実現できます

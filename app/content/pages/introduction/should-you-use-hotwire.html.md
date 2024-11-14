@@ -2,7 +2,7 @@
 title: あなたはHotwireを採用するべきか？
 section: Introduction
 layout: article
-order: 010
+order: 50
 published: true
 ---
 
@@ -17,6 +17,7 @@ ReactとHotwireのどっちを採用するべきかは簡単な話ではあり�
 ### 実績について --- track-record
 
 * Hotwireは37signalsのメールアプリ Heyを作るために開発されたライブラリです。また37signalsはプロジェクト管理システム Basecampもこの祖先となる技術で作っています
+* [CookpadはHotwireを採用](https://techlife.cookpad.com/entry/2024/11/13/130000)しています
 * GitHubはHotwireの先祖となる技術(PJAX)で作られ、Turbo/Hotwire系の技術を使用して来ました。現在はTurboを使用しています。一部のページの画面の一部分でReactを使用しています
     * Hotwireのベースは少なくとも2012年のGitHubのPJAXに遡れます。10年以上、世界で有数のアクセス数のあるサイトでの実績があるコンセプトと言えます
 

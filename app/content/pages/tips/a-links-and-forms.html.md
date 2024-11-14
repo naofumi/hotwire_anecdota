@@ -6,7 +6,7 @@ order: 050
 published: true
 ---
 
-## なぜ<a>タグや<form>タグを使用するか？
+## なぜ`<a>`タグや`<form>`タグを使用するか？
 
 React等でインタラクティブなコンポーネントを作るとき、一般に`<button>`タグに`onClick`等のイベントハンドラーをつけます。同様にformを送信する場合も`<form>`タグに`action`属性をつけずに`onSubmit`のイベントハンドラをつけて処理するのが一般的です（ただしNext.jsのServer Action等は除きます）。
 

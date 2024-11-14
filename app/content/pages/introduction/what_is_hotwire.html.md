@@ -2,7 +2,7 @@
 title: Hotwireとは何か？
 section: Introduction
 layout: article
-order: 001
+order: 2
 published: true
 ---
 

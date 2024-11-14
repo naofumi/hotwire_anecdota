@@ -1,22 +1,28 @@
 ---
-title: ステートをStimulusに持たせた例
+title: ステートをStimulusに持たせる
 layout: article
-order: 005
+order: 20
 published: true
 ---
 
-## Stimulusにステートを持たせた場合 --- example-with-stimulus-state
+## 概略 --- introduction
+
+ここではステートをすべてStimulusに持たせて価格表示の変更などをさせるものを紹介します。
 
 [デモはこちら](/components/iphone)に用意しています。
 
-1. 製品ページを表示するとき、Stimulus Controllerのvalue属性に、価格を含めたカタログ情報を送ります。まだ製品の初期状態もvalue属性で送ります
-2. オプションが選択されるとStimulus Controllerのactionが呼び出されると、それに応じてaction属性が修正されます
-3. Simulus Controllerはaction値が変更されると自動的にコールバックが呼び出されますので、そのコールバックの中で`#render`を実行します
-4. `#render`はvalue属性にあるステートの内容に従って、targetとして指定されているHTML要素を更新します
+1. 各オプションごとの製品価格および製品オプションの初期値をStimulus Controllerにあらかじめ渡す必要があります。Stimulusの[Values](https://stimulus.hotwired.dev/reference/values)を使うと、HTMLの`data-*`属性でサーバから値を渡すことができます
+2. オプションが選択されるとStimulus Controllerのactionが呼び出され、actionの中でStimulusのValueを更新します
+3. Valueが更新されると自動的にコールバックが呼ばれますので、その中で`#render`を実行します
+4. `#render`はtargetとして指定されているHTML要素を更新します
 
-* ロジックはすべてクライアントサイドで持ちます
+**Action ==> Values ==> Targets**と情報が流れます。Reactと似た感じで、Values(ステート)を中心にActionを受け取り、Targetを更新するフローになります。
+
+Stimulusはステートを内部に持たず、HTMLにステートを持たせる書き方が多いです。ただし今回はデータが更新される箇所が多数あり、更新ロジックも少し複雑ですので、ステート中心のフローが適切です。
 
 ## コード --- code
+
+### Stimulus Controllerの接続と初期データの受け渡し --- stimulus-initialization-and-data-transfer
 
 ```erb:app/views/components/iphone.html.erb
 <div class="mx-auto min-w-[1028px] lg:max-w-5xl">
@@ -30,8 +36,9 @@ published: true
 </div>
 ```
 
-* `iphone-static`のStimulus Controllerを接続しています。そして`@catalog_data`を`iphoneStaticCatalogDataValue`として渡しています。この書き方をするとJSONとして渡されます
-* その他、ページの初期のHTMLを記述しています
+* `iphone-static`Stimulus Controllerをとの接続です。`@catalog_data`はコントローラから渡された製品オプションと価格のデータです。これを`iphoneStaticCatalogDataValue`としてStimulus Controllerに渡しています（なおRailsはこの時に自動的にJSONに変換してくれます）
+
+### `iphone-static` Stimulus Controller --- stimulus-controller
 
 ```js:app/javascript/controllers/iphone_static_controller.js
 import {Controller} from "@hotwired/stimulus"
@@ -122,13 +129,15 @@ export default class extends Controller {
 }
 ```
 
-* これはStimulus Controllerの`iPhoneStaticController`のコードです
-* `static targets =`では、表示状態を変更したいHTML要素を定義しています
-* `static values =`では、このStimulus Controllerが管理するステートを記述しています。`values`はHTML要素の`data-*`属性として保存されますが、それを自動的に型にキャストするために型を定義します
-* `update*()`のメソッドはすべてactionです。HTMLのradio buttonが変更されたときに呼び出されます。Stimulus Controllerの`value`を更新しています
-* `setColorText()`, `resetColorText()`は色のアイコンの上をホバーした時の処理です。一時的に色の名前を表示するだけですので、ステートに保存する必要がありません。ここでは`value`属性を変更せずにダイレクトにHTML要素の`textContext`属性を書き換えています
-* `iphoneValueChanged()`は`iphoneValue`属性が変更された時に自動的に呼ばれるコールバックです。上記の`update*()`メソッドはいずれも`value`を更新していましたが、そうするとこのメソッドが自動的に呼ばれます。そしてこの中で`#render()`メソッドを呼び出します
-* `#render()`メソッドでは`value`にセットされたステートに従って、各`*target`の表示を変更します。その際、価格計算等のロジックは複雑になりますので、`IPhone`クラスのインスタンスを作り、それに委任しています。
+* `IphoneStatic` Stimulus Controllerでは製品オプション選択イベントを受け取り、`this.iphoneValue`ステートを更新し、`this.#render()`で画面を更新します
+* `static targets =`では、`this.#render()`の中で更新するHTML要素を定義しています
+* `static values =`はステートを記述しています。型も定義します（HTML属性はただのString型なので、キャストが必要なため）
+* `update*()`のメソッドはすべてactionです。`this.iphoneValue`ステートを適宜更新しています
+* `setColorText()`, `resetColorText()`は色のアイコンの上をホバーした時の処理です。一時的に色の名前を表示するだけですので、ステートに保存する必要がありません。ダイレクトにHTML要素の`textContext`属性を書き換えています
+* `iphoneValueChanged()`は`iphoneValue`属性が変更された時に自動的に呼ばれるコールバックです。この中で`#render()`メソッドを呼び出します
+* `#render()`メソッドはステートに従って、各`*target`の表示を変更します。その際、価格計算等のロジックは複雑になりますので、`IPhone`クラスのインスタンスを作り、それに委任しています
+
+### IPhoneモデル --- iphone-model
 
 ```js:app/javascript/models/IPhone.js
 export default class IPhone {
@@ -202,6 +211,8 @@ export default class IPhone {
 
 ## まとめ --- summary
 
-* ステートをサーバに持たせているものと構造としてはよく似ています。結局はロジックが複雑であるという問題を解決するため、iPhoneクラスを作り、そこにビジネスロジックを持たせています
-* `target`を使って、指定したHTML要素を更新しています。ステートをサーバに持たせた例、およびReactの例と異なり、Stimulusの場合はページのHTMLをゼロからレンダリングし直すことはしません。あくまでも`target`で指定された箇所だけをアップデートする感じになります
-* Stimulusでは、必ずしもステートを明確に用意する必要はありません。むしろステートはHTMLにあると考えて、その都度HTML要素の状態を確認するのが普通です。しかし今回のようにステートが複雑である場合やステートが複数のHTML要素を同時に更新する場合は、ステートを一箇所にまとめて、そこから各HTML要素をレンダリングする方がわかりやすくなります。今回のステートを使用したパターンはそのようなものになります。
+* [ステートをサーバに持たせた例](http://localhost:3000/examples/store/store-server-state)と構造としてはよく似ています
+    * ActionのイベントをStimulus Controllerで受け取り、`this.iphoneValue`ステートに保存し、IPhoneオブジェクトでロジックを処理して、targetsを更新しています
+    * ステートをサーバに持たせた場合は、form送信イベントをRails Controllerで受け取り、Iphoneオブジェクトの中でsessionにステートを保存し、Iphoneオブジェクトでロジックを処理し、Turbo Streamを介してブラウザ画面を更新しました
+    * ステートをサーバに持たせた場合は、HTMLを生成しながらステートを反映できました。Stimulus Controllerにステートを持たせた場合は、一度生成されたHTMLを後から修正する形になりますので、その分が煩雑です
+    * Reactも構造はよく似ています。サーバのステートを持たせた場合と同様にHTMLを生成しながらステートを反映しますので、その分ReactはStimulusに比べて書きやすくなっています

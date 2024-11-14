@@ -2,7 +2,7 @@
 title: Hotwireはどいういう時に向いているか？
 section: Introduction
 layout: article
-order: 005
+order: 5
 published: true
 ---
 

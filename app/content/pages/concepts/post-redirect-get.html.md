@@ -1,8 +1,8 @@
 ---
 title: Post/Redirect/Getパターンと高速化
-section: Performance
 layout: article
 order: 60
+published: true
 ---
 
 ## 広く使われているPost/Redirect/Get パターン

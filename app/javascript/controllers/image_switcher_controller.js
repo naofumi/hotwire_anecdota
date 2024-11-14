@@ -16,5 +16,4 @@ export default class extends Controller {
   resetColorText(event) {
     this.colorTextTargets.forEach(target => target.textContent = this.iphoneValue.color_name)
   }
-
 }

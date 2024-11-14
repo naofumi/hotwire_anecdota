@@ -1,7 +1,7 @@
 import {createRoot} from "react-dom/client"
 import React, {useEffect, useState} from "react"
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
   const root = createRoot(document.getElementById("root"))
 
   root.render(<UsersIndex />);

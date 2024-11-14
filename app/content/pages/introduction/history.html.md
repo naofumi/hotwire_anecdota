@@ -2,7 +2,7 @@
 title: Hotwireの歴史
 section: History
 layout: article
-order: 010
+order: 10
 published: true
 ---
 

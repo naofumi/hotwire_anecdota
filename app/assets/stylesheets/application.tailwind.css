@@ -104,16 +104,16 @@
             @apply ml-0 my-3 space-y-2 text-base/7
         }
 
-        ul ul {
-            @apply my-1
-        }
-
         ul li {
             background: url('check-circle.svg') no-repeat left top 6px;
             padding: 0px 16px 0px 32px;
             list-style: none;
             margin: 0;
             vertical-align: middle;
+
+            ul {
+                @apply my-1
+            }
 
             ul li {
                 margin-top: 8px;
@@ -133,8 +133,11 @@
             margin: 0;
             vertical-align: middle;
 
+            ol {
+                @apply my-1
+            }
             ol li {
-                margin-top: 8px;
+                margin-top: 0 !important;
                 list-style: lower-alpha;
             }
         }

@@ -29,6 +29,3 @@ end
 
 Reactのコンポーネントを`<div id="root"></div>`に埋め込む際、下記のように`DOMContentLoaded`イベントを使用することが多いかと思います。しかしHotwire環境で使用する場合は、`turbo:load`イベントを使用した方が無難です。Turbo Driveでページ遷移をする際はSPAになり、`DOMContentLoaded`イベントが発火しないことがあるためです。
 
-```javascript
-document.addEventListener("DOMContentLoaded", () => {})
-```

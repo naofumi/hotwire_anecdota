@@ -39,7 +39,7 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
     content_tag(:div, class: "my-2") do
       safe_join([
                   content_tag(:div, filename_part || language_part, class: "px-2 border rounded-t text-sm border-gray-700 bg-gray-700 text-gray-100 w-fit"),
-                  content_tag(:pre, class: "#{language_part} bg-black px-1 py-2 border rounded rounded-tl-none border-black text-sm overflow-x-auto") do
+                  content_tag(:pre, class: "#{language_part} bg-[#272822] px-1 py-2 text-gray-100 border rounded rounded-tl-none border-black text-sm overflow-x-auto") do
                     raw FORMATTER.format(lexer.lex(code))
                   end
                 ])
@@ -84,10 +84,10 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
     title, fragment = text.split(/---/).map(&:strip)
     if fragment.present?
       content_tag("h#{header_level}", id: fragment) do
-        link_to title, "\##{fragment}"
+        link_to title.html_safe, "\##{fragment}"
       end
     else
-      content_tag("h#{header_level}", text)
+      content_tag("h#{header_level}", text.html_safe)
     end
   end
 
