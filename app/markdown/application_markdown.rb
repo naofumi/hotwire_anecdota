@@ -2,6 +2,7 @@
 # delete a bunch of stuff below if you don't need it.
 
 class ApplicationMarkdown < MarkdownRails::Renderer::Rails
+  THEME = "monokai.sublime"
   include ActionView::Helpers::OutputSafetyHelper
   include ActionView::Helpers::UrlHelper
   # Reformats your boring punctation like " and " into “ and ” so you can look
@@ -27,11 +28,11 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   # about at https://github.com/vmg/redcarpet#and-its-like-really-simple-to-use
   # Make sure you know what you're doing if you're using this to render user inputs.
   def enable
-    [:fenced_code_blocks]
+    [:fenced_code_blocks, :disable_indented_code_blocks, :underline, :footnotes, :tables, :strikethrough, :no_intra_emphasis]
   end
 
   # https://github.com/sitepress/markdown-rails?tab=readme-ov-file#customizing-renderer
-  FORMATTER = Rouge::Formatters::HTMLInline.new("monokai.sublime")
+  FORMATTER = Rouge::Formatters::HTMLInline.new(THEME)
 
   def block_code(code, language)
     language_part, filename_part = language.split(':', 2).map(&:strip)

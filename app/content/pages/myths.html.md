@@ -1,5 +1,5 @@
 ---
 title: 誤解
-layout: article
+layout: section
 order: 015
 ---

@@ -1,5 +1,5 @@
 ---
 title: 他ライブラリとの組み合わせ
-layout: article
+layout: section
 order: 080
 ---

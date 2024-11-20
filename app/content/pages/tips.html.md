@@ -1,5 +1,5 @@
 ---
 title: コツ
-layout: article
+layout: section
 order: 040
 ---

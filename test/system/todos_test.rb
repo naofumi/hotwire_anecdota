@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class TodosTest < ApplicationSystemTestCase
   setup do
-    @todo = todos(:one)
+    @todo = todos(:sazae)
   end
 
   test "visiting the index" do

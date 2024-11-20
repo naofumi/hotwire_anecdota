@@ -1,5 +1,5 @@
 ---
 title: 意見
-layout: article
+layout: section
 order: 120
 ---

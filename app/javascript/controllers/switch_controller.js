@@ -26,17 +26,10 @@ import { Controller } from "@hotwired/stimulus"
 *           Maybe better for certain buttons.
 * */
 export default class extends Controller {
-  static targets = ["toggle"]
-  static classes = ["elementOn", "elementOff", "toggleOn", "toggleOff"]
   connect() {
   }
 
   toggle() {
     this.element.ariaChecked = this.element.ariaChecked === "true" ? "false" : "true"
-
-    this.element.classList.toggle(this.elementOnClass)
-    this.element.classList.toggle(this.elementOffClass)
-    this.toggleTarget.classList.toggle(this.toggleOnClass)
-    this.toggleTarget.classList.toggle(this.toggleOffClass)
   }
 }

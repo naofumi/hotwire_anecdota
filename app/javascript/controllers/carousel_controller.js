@@ -2,7 +2,6 @@ import {Controller} from "@hotwired/stimulus"
 
 // Connects to data-controller="carousel"
 export default class extends Controller {
-  static classes = ["bar"]
   static targets = ["slide", "pagination"]
   static values = {
     currentSlide: {type: Number, default: 0},
@@ -13,16 +12,18 @@ export default class extends Controller {
   #paginationSelectedClasses;
   #paginationUnselectedClasses;
 
+  initialize() {
+    this.#hideClasses = ["invisible", "opacity-0"]
+    this.#paginationSelectedClasses = ["opacity-100"]
+    this.#paginationUnselectedClasses = ["opacity-50"]
+  }
+
   connect() {
     if (this.autoplayValue) {
       this.slideInterval = setInterval(() => {
         this.#moveNext()
       }, this.intervalValue)
     }
-
-    this.#hideClasses = ["invisible", "opacity-0"]
-    this.#paginationSelectedClasses = ["opacity-100"]
-    this.#paginationUnselectedClasses = ["opacity-50"]
   }
 
   disconnect() {
@@ -31,7 +32,6 @@ export default class extends Controller {
 
   move(event) {
     this.currentSlideValue = event.params.index
-    this.#render()
     this.#clearSlideInterval()
   }
 
@@ -43,6 +43,10 @@ export default class extends Controller {
   previous() {
     this.#movePrevious();
     this.#clearSlideInterval()
+  }
+
+  currentSlideValueChanged() {
+    this.#render()
   }
 
   get slideCount() {
@@ -89,7 +93,6 @@ export default class extends Controller {
     } else {
       this.currentSlideValue = 0
     }
-    this.#render()
   }
 
   #movePrevious() {
@@ -98,6 +101,5 @@ export default class extends Controller {
     } else {
       this.currentSlideValue = this.slideCount - 1
     }
-    this.#render()
   }
 }

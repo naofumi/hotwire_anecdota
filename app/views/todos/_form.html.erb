@@ -1,8 +1,9 @@
-<%= form_with(model: todo) do |form| %>
+<%= form_with(
+      model: todo, id: 'todo-form',
+      data: { action: "turbo:submit-end->modal-dialog#hideOnSuccess" },
+    ) do |form| %>
   <% if todo.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
-
+    <div class="text-red-600">
       <ul>
         <% todo.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -12,16 +13,15 @@
   <% end %>
 
   <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+    <%= form.label :title, class: "block text-sm/6 font-semibold text-gray-900" %>
+    <div class="mt-2.5">
+      <%= form.text_field :title,
+                          class: "block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm/6" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :completed_at, style: "display: block" %>
-    <%= form.datetime_field :completed_at %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="mt-8 flex justify-between">
+    <button type="button" class="btn-outline-primary" data-action="click->modal-dialog#hide">キャンセル</button>
+    <%= form.submit class: "btn-primary" %>
   </div>
 <% end %>

@@ -1,0 +1,19 @@
+<% todo = local_assigns.fetch(:todo) %>
+
+<div class="mt-16" id="todo-new-form">
+  <%= form_with model: todo do |f| %>
+    <% if todo.errors.any? %>
+      <div style="color: red">
+        <ul>
+          <% todo.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= f.text_field :title, class: "w-full border border-gray-400 rounded-lg p-1" %>
+    <div class="mt-4 text-right">
+      <%= f.button "Post Todo!", class: "btn-primary" %>
+    </div>
+  <% end %>
+</div>

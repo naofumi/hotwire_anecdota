@@ -6,18 +6,24 @@ order: 005
 published: true
 ---
 
-## 実装例
-
-ここで作成するUIは下記のものです。[実際に動くデモ](/users)もご覧ください
+ここで作成するUIは下記のものです。
+[実際に動くデモ](/users)もご覧ください
 
 ![side-panel-hotwire.mov](content_images/side-panel-hotwire.mov "max-w-[500px] mx-auto")
 
-## ポイント
+## 考えるポイント --- points-to-consider
 
-* サーバからUserProfile情報を取得して、サイドパネルに表示します
-    * これはTurboを使います。Turbo Streamsも使えますが、一般にTurbo Framesが第一選択肢になります。
-* 表の行をクリックした時のイベントハンドラを用意
-    * `a`タグは通常は自分の先祖要素のうち、一番近い`turbo-frame`と結びつきます。しかし今回は別のところにある`turbo-frame`なので、`a`タグに[`data-turbo-frame`属性](https://turbo.hotwired.dev/handbook/frames#targeting-navigation-into-or-out-of-a-frame)をつけます
+1. サーバから非同期でUserProfile情報をもらいます
+   1. サーバからデータをもらうのでTurboを使います
+   2. Turboを使う場合、便利機能が多いのはTurbo Framesで、細かい操作をしたいときはTurbo Streamsです。特に複数の要素を独立に更新したい場合はTurbo Streamsを使います。今回は１つの要素だけを更新すれば良いので、Turbo Framesを選択します
+   3. Turboを使うことが決定しましたので、数の<span class="text-blue-600">青線</span>のところを辿る感じになります
+2. イベント処理にStimulusが必要かどうかを考えます
+   1. 今回は表の行をクリック(`click`イベントに応答)してUserProfileを表示します。`a`タグとTurbo Framesの組み合わせであれば自動的にイベントハンドリングをしてくれますので、これを採用します
+   2. もし他のイベントに応答したい場合（例えば`hover`）、あるいは`a`タグが使えない場合（例えば`tr`タグにイベントを繋げたい）はStimulusを使いますが、今回はその必要はありません
+3. Turboがページを読み込む前後でやることが特にないので、それ以外でStimulusを使う用途もありません
+   1. 例えばモーダルを出すのであれば、モーダルの表示・非表示を切り替えるなどの処理が発生しますが、今回はそれもないのでStimulusを使う必要がありません
+
+![interactive-flow-hotwire.webp](content_images/interactive-flow-hotwire.webp)
 
 なお、比較対象としてjQueryやReactを使った例も紹介しますが、詳しくは解説しません。Hotwire, jQuery, Reactのバージョン(variant)を切り替える方法は[foo](/foo)をご覧ください。
 

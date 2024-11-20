@@ -1,0 +1,14 @@
+<% set_breadcrumbs [["Sidebar Menu Dashboard", component_path(:select)]] %>
+
+<%= render 'template',
+           title: "Sidebar Menu 1",
+           description: "" do %>
+
+
+  <div class="flex">
+    <%= render 'sidebar' %>
+    <div class="flex-grow">
+      <%= image_tag "component_images/demo-dashboard", class: "w-full" %>
+    </div>
+  </div>
+<% end %>

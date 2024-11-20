@@ -1,8 +1,8 @@
 ---
 title: ReactとHotwireの共存
-section: Tips
 layout: article
 order: 005
+published: true
 ---
 
 ## Reactのページを一部残しながらHotwireに移行する

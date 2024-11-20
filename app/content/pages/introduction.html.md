@@ -1,5 +1,5 @@
 ---
 title: 概要
-layout: article
+layout: section
 order: 010
 ---

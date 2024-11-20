@@ -1,5 +1,5 @@
 ---
-title: アコーディオンの作成
+title: アコーディオン
 layout: article
 order: 005
 published: true
@@ -87,7 +87,7 @@ StimulusはこのようにHTMLをcontrollerに接続します。大きく、２�
 * どのHTML要素からStimulus controllerにイベントを送るか
 * どのHTML要素がStimulusから制御され、表示が更新されるか
 
-## Accordion Controller --- accordion-controller
+### Accordion Controller --- accordion-controller
 
 ```js:app/javascript/controllers/accordion_controller.js
 import {Controller} from "@hotwired/stimulus"

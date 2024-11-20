@@ -1,6 +1,24 @@
 module Variantable
   extend ActiveSupport::Concern
 
+  class VariantSelector
+    def initialize(available_variants)
+      @available_variants = available_variants
+    end
+
+    def validated_variant(variant)
+      variant_available?(variant) ? variant.to_sym : default_variant
+    end
+
+    def variant_available?(variant)
+      variant.present? && @available_variants.include?(variant.to_sym)
+    end
+
+    def default_variant
+      @available_variants.first
+    end
+  end
+
   included do
     helper_method :available_variants
   end
@@ -18,15 +36,15 @@ module Variantable
     # If it is not included, then returns the default variant, which is
     # the first variant in @@available_variants
     def validated_variant(variant)
-      variant_available?(variant) ? variant.to_sym : default_variant
+      VariantSelector.new(available_variants).validated_variant(variant)
     end
 
     def variant_available?(variant)
-      variant.present? && available_variants.include?(variant.to_sym)
+      VariantSelector.new(available_variants).variant_available?(variant)
     end
 
     def default_variant
-      available_variants.first
+      VariantSelector.new(available_variants).first
     end
 
     def available_variants

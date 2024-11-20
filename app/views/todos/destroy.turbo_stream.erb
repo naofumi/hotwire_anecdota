@@ -1,0 +1,5 @@
+<%= turbo_stream.remove dom_id(@todo) %>
+
+<%= turbo_stream.replace "global-notification" do %>
+  <%= render "global_notification" %>
+<% end %>

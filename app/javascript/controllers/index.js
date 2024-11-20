@@ -43,6 +43,12 @@ application.register("image-switcher", ImageSwitcherController)
 import IphoneStaticController from "./iphone_static_controller"
 application.register("iphone-static", IphoneStaticController)
 
+import ModalDialogController from "./modal_dialog_controller"
+application.register("modal-dialog", ModalDialogController)
+
+import ModalDialogTriggerController from "./modal_dialog_trigger_controller"
+application.register("modal-dialog-trigger", ModalDialogTriggerController)
+
 import OptionListController from "./option_list_controller"
 application.register("option-list", OptionListController)
 
@@ -60,6 +66,9 @@ application.register("select-menu", SelectMenuController)
 
 import SidePanelOpenerController from "./side_panel_opener_controller"
 application.register("side-panel-opener", SidePanelOpenerController)
+
+import SidebarController from "./sidebar_controller"
+application.register("sidebar", SidebarController)
 
 import SlideDrawerController from "./slide_drawer_controller"
 application.register("slide-drawer", SlideDrawerController)
@@ -81,6 +90,9 @@ application.register("todo", TodoController)
 
 import TodoLikesController from "./todo_likes_controller"
 application.register("todo-likes", TodoLikesController)
+
+import TopPageController from "./top_page_controller"
+application.register("top-page", TopPageController)
 
 import VariantsSelectorController from "./variants_selector_controller"
 application.register("variants-selector", VariantsSelectorController)

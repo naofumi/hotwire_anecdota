@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
   <title><%= current_page.data.title %></title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -15,9 +15,10 @@
 <!--  <link rel="apple-touch-icon" href="/icon.png">-->
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+  <meta name="view-transition" content="same-origin" />
 </head>
 
-<body>
+<body class="bg-orange-50 bg-fixed bg-cover bg-top <%= current_page.data.background ? "!bg-[#97734E] bg-[url('pexels-pixabay-51343.webp')]" : ""%>">
 <% page_block_unless_published!(current_page) %>
 <%= render 'nav',
            hide_top_button: current_page.data.hide_top_button,

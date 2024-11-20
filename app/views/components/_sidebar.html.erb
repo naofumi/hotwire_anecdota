@@ -1,0 +1,42 @@
+<div data-turbo-permanent id="sidebar" data-controller="sidebar">
+  <div class="h-full w-40 flex shrink-0 flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6">
+    <nav class="flex flex-1 flex-col">
+      <ul role="list" class="flex flex-1 flex-col gap-y-7">
+        <li>
+          <ul role="list" class="-mx-2 space-y-1">
+            <li>
+              <!-- Current: "bg-gray-50", Default: "hover:bg-gray-50" -->
+              <%= link_to "Dashboard", component_path(:sidebar),
+                          aria: {current: "page"},
+                          data: { action: "click->sidebar#setCurrent" },
+                          class: "block rounded-md aria-[current=page]:bg-gray-50 py-2 pl-10 pr-2 text-sm/6 text-gray-700" %>
+            </li>
+            <li>
+              <div>
+                <button type="button" class="group peer flex w-full items-center gap-x-3 rounded-md p-2 text-left text-sm/6 font-semibold text-gray-700 hover:bg-gray-50"
+                        data-action="click->sidebar#toggle"
+                        aria-controls="sub-menu-teams"
+                        aria-expanded="false">
+                  <!-- Expanded: "rotate-90 text-gray-500", Collapsed: "text-gray-400" -->
+                  <svg class="size-5 shrink-0 text-gray-400 group-aria-expanded:rotate-90 group-aria-expanded:text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                    <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                  </svg>
+                  Teams
+                </button>
+                <!-- Expandable link section, show/hide based on state. -->
+                <ul class="mt-1 px-2 hidden peer-aria-expanded:block" id="sub-menu-teams">
+                  <li>
+                    <%= link_to "Engineering", component_path(:sidebar_other_page),
+                                aria: {current: "false"},
+                                data: { action: "click->sidebar#setCurrent" },
+                                class: "block rounded-md py-2 pl-9 pr-2 text-sm/6 text-gray-700 hover:bg-gray-50 aria-[current=page]:bg-gray-50" %>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

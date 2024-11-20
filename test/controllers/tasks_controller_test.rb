@@ -17,7 +17,7 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
 
   test "should create task" do
     assert_difference("Task.count") do
-      login_user users(:one) do
+      login_user users(:sazae) do
         post tasks_url, params: { task: { bucket_id: @task.bucket_id, deadline: @task.deadline, description: @task.description, name: @task.name, position: @task.position } }
       end
     end

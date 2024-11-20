@@ -1,0 +1,28 @@
+<% set_breadcrumbs [["Toggle Checkbox", component_path(:toggle)]] %>
+
+<%= render 'template',
+           title: "Toggle Checkbox",
+           description: "Toggle implemented with a Checkbox" do %>
+  <!-- Enabled: "bg-indigo-600", Not Enabled: "bg-gray-200" -->
+
+  <div class="text-center">
+  <label class="group has-[:checked]:bg-indigo-600 bg-gray-200 relative
+                inline-flex h-6 w-11 flex-shrink-0 cursor-pointer select-none
+                rounded-full border-2 border-transparent
+                transition-colors duration-200 ease-in-out outline-none
+                has-[:focus]:ring-2 active:ring-2 ring-indigo-600
+         ring-offset-2"
+         role="switch"
+  >
+    <input type="checkbox" class="opacity-0 w-0 border-none"/>
+    <span class="sr-only">Use setting</span>
+    <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
+    <span aria-hidden="true"
+          class="group-has-[:checked]:translate-x-5 translate-x-0
+                pointer-events-none inline-block h-5 w-5
+                rounded-full bg-white shadow ring-0
+                transition duration-200 ease-in-out"
+    ></span>
+  </label>
+  </div>
+<% end %>

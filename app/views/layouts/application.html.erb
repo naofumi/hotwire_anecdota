@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
   <title><%= content_for(:title) || "Tailwind Rails" %></title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -9,22 +9,25 @@
 
   <%= yield :head %>
 
-<!--  <link rel="manifest" href="/manifest.json">-->
-<!--  <link rel="icon" href="/icon.png" type="image/png">-->
-<!--  <link rel="icon" href="/icon.svg" type="image/svg+xml">-->
-<!--  <link rel="apple-touch-icon" href="/icon.png">-->
+  <!--  <link rel="manifest" href="/manifest.json">-->
+  <!--  <link rel="icon" href="/icon.png" type="image/png">-->
+  <!--  <link rel="icon" href="/icon.svg" type="image/svg+xml">-->
+  <!--  <link rel="apple-touch-icon" href="/icon.png">-->
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
 </head>
 
 <body class="relative">
-<%= render "nav", show_data_reset: true %>
-<div class="container container-lg mx-auto px-4 pt-8">
-  <div><%= content_for(:breadcrumbs) %></div>
-  <%= render 'variants_selector' %>
+<div id="page">
+  <%= render "nav", show_data_reset: true %>
+  <div class="container container-lg mx-auto px-4 pt-8">
+    <div><%= content_for(:breadcrumbs) %></div>
+    <%= render 'variants_selector' %>
 
-  <%= yield %>
+    <%= yield %>
+  </div>
 </div>
+<%= render "modal_dialog" %>
 <%= render 'global_notification' %>
 </body>
 </html>

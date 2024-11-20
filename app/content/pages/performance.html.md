@@ -1,5 +1,5 @@
 ---
 title: パフォーマンス
-layout: article
+layout: section
 order: 070
 ---

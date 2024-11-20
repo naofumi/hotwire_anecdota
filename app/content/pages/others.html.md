@@ -1,5 +1,5 @@
 ---
 title: その他
-layout: article
+layout: section
 order: 110
 ---

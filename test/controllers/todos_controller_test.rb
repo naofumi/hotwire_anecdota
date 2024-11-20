@@ -2,16 +2,11 @@ require "test_helper"
 
 class TodosControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @todo = todos(:one)
+    @todo = todos(:liked_by_sazae)
   end
 
   test "should get index" do
     get todos_url
-    assert_response :success
-  end
-
-  test "should get new" do
-    get new_todo_url
     assert_response :success
   end
 

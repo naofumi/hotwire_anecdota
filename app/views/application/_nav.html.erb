@@ -3,11 +3,11 @@
                                show_data_reset: false) =>
            { hide_top_button:, hide_title:, show_data_reset: } %>
 
-<nav class="w-full bg-white flex py-1 px-4 items-start items-center">
+<nav class="w-full flex py-1 px-4 items-start items-center">
   <% if hide_top_button %>
     <span class="w-52 flex-none basis-24"></span>
   <% else %>
-    <a href="/" class="flex-none basis-24 text-xl p-1 text-orange-600 flex items-center">
+    <a href="/" class="flex-none basis-24 text-xl font-light p-1 text-orange-600 flex items-center">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
            stroke="currentColor" class="size-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
@@ -19,9 +19,9 @@
   <% if hide_title %>
     <span class="grow"></span>
   <% else %>
-    <div class="text-center grow flex flex-col">
-      <a href="/" class="text-xl p-1 font-light text-gray-400 hover:text-orange-300">
-        Anecdotes on Hotwire
+    <div class="text-center grow flex flex-col ">
+      <a href="/" class="group text-xs p-1 font-light text-gray-400 hover:text-orange-300">
+        Anecdotes on <span class="hotwire-text inline-block text-xl font-bold text-orange-600 group-hover:text-orange-300">Hotwire</span>
       </a>
     </div>
   <% end %>

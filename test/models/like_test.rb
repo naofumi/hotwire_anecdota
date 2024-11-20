@@ -8,17 +8,17 @@ class LikeTest < ActiveSupport::TestCase
 
   test "fixture associated to likable" do
     like = likes(:one)
-    assert_equal todos(:one), like.likable
+    assert_equal todos(:liked_by_sazae), like.likable
   end
 
   test "fixture associated to user" do
     like = likes(:one)
-    assert_equal users(:one), like.user
+    assert_equal users(:sazae), like.user
   end
 
   test "duplicate likes are invalid" do
-    todo = todos(:one)
-    duplicate_todo = todo.likes.build(user: users(:one))
+    todo = todos(:liked_by_sazae)
+    duplicate_todo = todo.likes.build(user: users(:sazae))
 
     assert duplicate_todo.invalid?
   end

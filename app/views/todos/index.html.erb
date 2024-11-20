@@ -1,27 +1,16 @@
+<%= turbo_refreshes_with method: :morph, scroll: :preserve %>
 <% set_breadcrumbs [["Todos", todos_path]] %>
-
-<p style="color: green"><%= notice %></p>
 
 <% content_for :title, "Todos" %>
 <div class="max-w-lg mx-auto">
 
   <div class="mb-16">
     <h1 class="text-4xl text-center">Todos <%= request.variant %></h1>
-    <%= render 'variants_selector' %>
   </div>
   <table id="todos" class="w-full border border-gray-400 rounded-lg border-spacing-0 border-separate"
          data-controller="todo">
-    <% @todos.each do |todo| %>
-      <%= render 'todo_row', todo: %>
-    <% end %>
+    <%= render @todos %>
   </table>
 
-  <div class="mt-16">
-    <%= form_with model: Todo.new do |f| %>
-      <%= f.text_field :title, class: "w-full border border-gray-400 rounded-lg p-1" %>
-      <div class="mt-4 text-right">
-        <%= f.button "Post Todo!", class: "border-2 border-orange-600 bg-orange-100 hover:bg-orange-600 p-1 rounded-lg" %>
-      </div>
-    <% end %>
-  </div>
+  <%= render "new", todo: Todo.new %>
 </div>

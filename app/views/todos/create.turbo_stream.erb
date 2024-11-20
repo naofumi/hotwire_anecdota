@@ -1,0 +1,17 @@
+<% if @todo.errors.any? %>
+  <%= turbo_stream.replace "todo-new-form" do %>
+    <%= render "new", todo: @todo %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.append "todos" do %>
+    <%= render @todo, highlight: true %>
+  <% end %>
+
+  <%= turbo_stream.replace "global-notification" do %>
+    <%= render "global_notification" %>
+  <% end %>
+
+  <%= turbo_stream.replace "todo-new-form" do %>
+    <%= render "new", todo: Todo.new %>
+  <% end %>
+<% end %>

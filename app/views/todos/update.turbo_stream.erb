@@ -1,0 +1,13 @@
+<% if @todo.errors.any? %>
+  <%= turbo_stream.replace "todo-form" do %>
+    <%= render "form", todo: @todo %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.replace dom_id(@todo) do %>
+    <%= render @todo, highlight: true %>
+  <% end %>
+
+  <%= turbo_stream.replace "global-notification" do %>
+    <%= render "global_notification" %>
+  <% end %>
+<% end %>

@@ -1,10 +1,10 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+liked_by_sazae:
   title: 歯を磨く
   completed_at: <%= 1.hour.ago %>
 
-two:
+liked_by_namihei:
   title: 朝ごはんを食べる
   completed_at: null
 

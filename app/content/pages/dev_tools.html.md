@@ -1,5 +1,5 @@
 ---
 title: 開発用ツール
-layout: article
+layout: section
 order: 090
 ---

@@ -1,5 +1,5 @@
 ---
 title: コンセプト
-layout: article
+layout: section
 order: 030
 ---

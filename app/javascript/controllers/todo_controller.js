@@ -6,7 +6,7 @@ export default class extends Controller {
   }
 
   delete(event) {
-    const row = document.getElementById(event.params.row)
+    const row = document.getElementById(event.params.id)
     const element = row.querySelector("td > div")
     element.classList.remove('opacity-100')
     element.classList.add("transition-all", "duration-200", 'opacity-0')

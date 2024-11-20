@@ -1,10 +1,6 @@
 class Users::UserProfilesController < ApplicationController
   before_action :set_user
-
-  # GET /user_profiles or /user_profiles.json
-  def index
-    @user_profiles = UserProfile.all
-  end
+  before_action :set_user_profile, only: %i[show update destroy]
 
   # GET /user_profiles/1 or /user_profiles/1.json
   def show
@@ -18,17 +14,14 @@ class Users::UserProfilesController < ApplicationController
     @user_profile = UserProfile.new
   end
 
-  # GET /user_profiles/1/edit
-  def edit
-  end
-
   # POST /user_profiles or /user_profiles.json
   def create
     @user_profile = UserProfile.new(user_profile_params)
 
     respond_to do |format|
       if @user_profile.save
-        format.html { redirect_to @user_profile, notice: "User profile was successfully created." }
+        format.html { redirect_to user_user_profile_path(@user_profile.user),
+                                  notice: "User profile was successfully created." }
         format.json { render :show, status: :created, location: @user_profile }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,10 +34,10 @@ class Users::UserProfilesController < ApplicationController
   def update
     respond_to do |format|
       if @user_profile.update(user_profile_params)
-        format.html { redirect_to @user_profile, notice: "User profile was successfully updated." }
+        format.html { redirect_to user_user_profile_path(@user_profile.user), notice: "User profile was successfully updated." }
         format.json { render :show, status: :ok, location: @user_profile }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { render :update, status: :unprocessable_entity }
         format.json { render json: @user_profile.errors, status: :unprocessable_entity }
       end
     end
@@ -55,7 +48,7 @@ class Users::UserProfilesController < ApplicationController
     @user_profile.destroy!
 
     respond_to do |format|
-      format.html { redirect_to user_profiles_path, status: :see_other, notice: "User profile was successfully destroyed." }
+      format.html { redirect_to user_user_profile_path(@user_profile.user), status: :see_other, notice: "User profile was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -63,6 +56,10 @@ class Users::UserProfilesController < ApplicationController
   private
     def set_user
       @user = User.find(params[:user_id])
+    end
+
+    def set_user_profile
+      @user_profile = @user.user_profile
     end
 
     # Only allow a list of trusted parameters through.

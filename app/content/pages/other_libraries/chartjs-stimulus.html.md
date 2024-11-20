@@ -1,8 +1,8 @@
 ---
 title: Chart.jsをStimulusから使う
-section: Tips
 layout: article
 order: 005
+published: true
 ---
 
 ## Next.jsと同程度以上のUI/UXが可能

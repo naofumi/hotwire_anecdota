@@ -1,0 +1,32 @@
+<% content_for :title, "Customers" %>
+
+<div class="max-w-lg mx-auto">
+  <div class="mb-16">
+    <h1 class="text-4xl text-center">Customers</h1>
+  </div>
+
+  <%= render "search" %>
+
+  <%= turbo_frame_tag "customers" do %>
+    <table class="table table-striped w-full">
+      <thead>
+      <tr class="border-b-2 border-gray-900">
+        <th class="p-2 text-left">Name</th>
+        <th class="p-2 text-left">JP Name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @customers.each do |customer| %>
+        <tr class="group border-t border-gray-400 [:first-child]:border-none">
+          <td class="p-2">
+            <%= customer.name %>
+          </td>
+          <td class="p-2">
+            <%= customer.jp_name %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>

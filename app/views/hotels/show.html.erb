@@ -1,6 +1,6 @@
 <div data-controller="carousel" class="relative">
   <div class="w-full h-[360px]">
-    <% ["10543662.jpg", "11471947.jpg", "11471976.jpg", "11471978.jpg"].each_with_index do |filename, i| %>
+    <% @carousel_images.each_with_index do |filename, i| %>
       <div class="<%= "invisible opacity-0" unless i == 0 %> transition-all duration-1000"
            data-carousel-target="slide"
            data-carousel-key="<%= i %>">
@@ -8,7 +8,7 @@
       </div>
     <% end %>
   </div>
-  <%= button_tag "<", type: "button",
+  <%= button_tag type: "button",
                  class: "absolute w-8 h-8 p-1 rounded-full block top-[170px] left-[10px] bg-white opacity-40 hover:opacity-100",
                  data: { action: "click->carousel#previous" } do %>
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -23,7 +23,7 @@
     </svg>
   <% end %>
   <div class="inline-block absolute bottom-4 left-[50%] -translate-x-1/2">
-    <% 0.upto(3).each do |index| %>
+    <% 0.upto(@carousel_images.size - 1).each do |index| %>
       <%= button_tag "⚫︎",
                      type: :button,
                      class: "text-white #{index == 0 ? "opacity-100" : "opacity-50"}",

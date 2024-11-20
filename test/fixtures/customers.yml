@@ -1,0 +1,47 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+sazae:
+  name: sazae fuguta
+  jp_name: フグ田 サザエ
+
+namihei:
+  name: namihei isono
+  jp_name: 磯野 波平
+
+fune:
+  name: fune isono
+  jp_name: 磯野 フネ
+
+masuo:
+  name: masuo fuguta
+  jp_name: フグ田 マスオ
+
+katsuo:
+  name: katsuo isono
+  jp_name: 磯野 カツオ
+
+wakame:
+  name: wakame isono
+  jp_name: 磯野 ワカメ
+
+tarao:
+  name: tarao fuguta
+  jp_name: フグ田 タラオ
+
+tama:
+  name: tama
+  jp_name: タマ
+
+norisuke:
+  name: norisuke namino
+  jp_name: 波野 ノリスケ
+
+taiko:
+  name: taiko namino
+  jp_name: 波野 タイコ
+
+ikura:
+  name: ikura namino
+  jp_name: 波野 イクラ
+
+

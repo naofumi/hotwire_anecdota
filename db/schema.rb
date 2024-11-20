@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_09_084044) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_16_041304) do
   create_table "activities", force: :cascade do |t|
     t.string "trackable_type", null: false
     t.integer "trackable_id", null: false
@@ -25,6 +25,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_09_084044) do
   create_table "buckets", force: :cascade do |t|
     t.string "name", null: false
     t.integer "position", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "jp_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

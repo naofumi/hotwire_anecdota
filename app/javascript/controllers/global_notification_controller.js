@@ -3,41 +3,31 @@ import {classTokenize} from "../utilities/utilities";
 
 // Connects to data-controller="global-notification"
 export default class extends Controller {
-  static values = {version: Number}
+  static values = { shown: {type: Boolean, default: true} }
+  static targets = ["toast"]
 
-  // Morphing tends to morph the contents of the controller
-  // without disconnecting. Therefore, `connect()` will not be
-  // called. Instead, send a `version` value in the controller
-  // sent through morphing. This will trigger versionValueChanged()
-  // and so you can respond to it.
   connect() {
   }
 
   close() {
-    this.element.classList.remove(...classTokenize("transform ease-out duration-300 transition opacity-100"))
-    this.element.classList.add(...classTokenize("transition ease-in duration-500 opacity-0"))
+    this.shownValue = false
+    // The CSS transition has a duration of 100ms, so we remove the DOM element
+    // after allowing the transition to finish.
+    setInterval(() => this.element.remove(), 200)
   }
 
   /*
-  * This is a workaround to enable transitions on load without using
-  * @starting-style (which is not yet supported by Tailwind).
+  * The @starting-style CSS @rule allows you to set starting values on transitions
+  * when an element is first added to the DOM. https://developer.mozilla.org/en-US/docs/Web/CSS/@starting-style#description
   *
-  * We detect that a new notification has been sent through the version value
-  * on the controller. Then we initially render the screen with the css classes
-  * from the server, and update them later with a setTimeout.
-  *
-  * @starting-style should make this unnecessary since it can set the transition
-  * start style.
-  *
-  * With React, useEffect separates the initial rendering from later renders,
-  * and this replaces setTimeout.
-  *
+  * However, since this is still an experimental feature as of Nov. 2024, we use a
+  * JavaScript workaround.
   * */
-  versionValueChanged(value, previousValue) {
-    console.log("Value changed")
+  toastTargetConnected(element) {
+    // We wait 10 ms to allow the DOM to render with the Toast in the hidden state and then
+    // show the Toast.
     setTimeout(() => {
-      this.element.classList.remove(...classTokenize("translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"));
-      this.element.classList.add(...classTokenize("translate-y-0 opacity-100 sm:translate-x-0"));
-    }, 100)
+      this.shownValue = true
+    }, 10)
   }
 }

@@ -1,6 +1,5 @@
 ---
 title: コンポーネントの粒度
-section: Concepts
 layout: article
 order: 005
 ---

@@ -5,7 +5,7 @@ order: 010
 published: true
 ---
 
-## Hotwireは自主ルール
+## HTML生成を避けるのは自主ルール
 
 Stimulus Controllerの中でHTMLを生成することはできます。jQuery時代のように、JavaScriptコードで自在にHTMLは作れます。しかしそれを自主的に避けるのがHotwireの流儀です。
 

@@ -1,5 +1,5 @@
 ---
 title: 付録
-layout: article
+layout: section
 order: 130
 ---

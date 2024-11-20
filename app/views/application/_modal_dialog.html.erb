@@ -1,0 +1,57 @@
+<div class="group relative z-10 collapse opacity-0 transition-all duration-200
+            data-[modal-dialog-shown-value=true]:visible
+            data-[modal-dialog-shown-value=true]:duration-300
+            data-[modal-dialog-shown-value=true]:opacity-100"
+     id="modal-dialog"
+     data-controller="modal-dialog"
+     data-modal-dialog-page-value="#page"
+     data-action="keydown.esc@window->modal-dialog#hide:stop:prevent"
+     aria-labelledby="modal-title"
+     role="dialog"
+     aria-modal="true">
+  <!--
+    Background backdrop, show/hide based on modal state.
+
+    Entering: "ease-out duration-300"
+      From: "opacity-0"
+      To: "opacity-100"
+    Leaving: "ease-in duration-200"
+      From: "opacity-100"
+      To: "opacity-0"
+  -->
+  <div class="fixed inset-0 bg-gray-500/75 transition-all
+              opacity-0 ease-in duration-200
+              group-data-[modal-dialog-shown-value=true]:opacity-100
+              group-data-[modal-dialog-shown-value=true]:ease-out
+              group-data-[modal-dialog-shown-value=true]:duration-300"
+       aria-hidden="true"></div>
+
+  <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+    <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
+         data-action="click->modal-dialog#hide">
+      <!--
+        Modal panel, show/hide based on modal state.
+
+        Entering: "ease-out duration-300"
+          From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+          To: "opacity-100 translate-y-0 sm:scale-100"
+        Leaving: "ease-in duration-200"
+          From: "opacity-100 translate-y-0 sm:scale-100"
+          To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+      -->
+      <div class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl
+                  sm:my-8 sm:w-full sm:max-w-sm sm:p-6 transition-all
+                  opacity-0 translate-y-4 sm:translate-y-80 sm:scale-95 ease-in duration-200
+                  group-data-[dialog-shown=true]:opacity-100
+                  group-data-[dialog-shown=true]:translate-y-0
+                  group-data-[dialog-shown=true]:scale-100
+                  group-data-[dialog-shown=true]:ease-out
+                  group-data-[dialog-shown=true]:duration-200"
+           data-action="click->modal-dialog#void:stop"
+      >
+        <turbo-frame id="modal-dialog__frame">
+        </turbo-frame>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 ---
 title: Pending UI
-layout: article
+layout: section
 order: 060
 ---

@@ -1,5 +1,5 @@
 ---
 title: 考える手順
-layout: article
+layout: section
 order: 020
 ---

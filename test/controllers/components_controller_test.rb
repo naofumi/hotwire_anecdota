@@ -1,19 +1,15 @@
 require "test_helper"
 
 class ComponentsControllerTest < ActionDispatch::IntegrationTest
-  class IndexTest < ComponentsControllerTest
-    test "success" do
-      get components_path
+  test "should get index" do
+    get components_path
 
-      assert_response :success
-    end
+    assert_response :success
   end
 
-  class ShowTest < ComponentsControllerTest
-    test ":toggle returns success" do
-      get component_path(:toggle)
+  test "get show comoponents/toggle_stimulus returns success" do
+    get component_path(:toggle_stimulus)
 
-      assert_response :success
-    end
+    assert_response :success
   end
 end
