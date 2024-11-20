@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include Variantable
-  before_action :set_current_variant
+  # before_action :set_current_variant
 
   helper_method :current_user
 

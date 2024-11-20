@@ -30,6 +30,6 @@ module Variantable
     end
 
     def available_variants
-      @@available_variants
+      [] # @@available_variants
     end
 end
