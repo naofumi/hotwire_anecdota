@@ -17,12 +17,12 @@ published: true
         </p>
         <h1 class="text-3xl font-thin text-gray-600 sm:text-4xl">
           Anecdotes on
-          <div class="inline-block hotwire-text font-bold text-6xl text-orange-600">Hotwire</div>
+          <div class="inline-block hotwire-text font-bold text-6xl text-orange-600 tracking-tight">Hotwire</div>
         </h1>
       </div>
       <div>
-        <p class="mt-6 text-lg leading-8 text-gray-400">
-          本サイトは、私が<span class="font-bold">Ruby on Railsのフロントエンド エンジニア</span>を目指しながら、<a href="https://hotwired.dev" class="text-orange-600 underline hover:opacity-70 active:text-orange-800">Hotwire</a>について感じたことを綴ったものです
+        <p class="mt-6 text-lg font-normal leading-8 text-gray-400">
+          本サイトは、私が<span class="font-bold italic">Ruby on Railsのフロントエンド エンジニア</span>を目指しながら、<a href="https://hotwired.dev" class="text-orange-600 underline hover:opacity-70 active:text-orange-800">Hotwire</a>について感じたことを綴ったものです
         </p>
       </div>
       <%= link_to "コンポーネント一覧", components_path %>
@@ -33,7 +33,7 @@ published: true
         <!-- manually set [&:nth-child](number):mb-0 due to differences between Safari and Chrome/Firefox -->
         <div class="mb-6 md:[&:nth-child(6)]:mb-0 p-6 break-inside-avoid border border-gray-200 rounded-lg bg-white/70 backdrop-blur"
              data-top-page-target="section">
-          <h3 class="text-2xl font-light text-gray-600">
+          <h3 class="text-2xl mb-4 font-light text-gray-600">
             <%= link_to section_page.data.title, section_page.request_path, class: "inline-block hover:text-orange-600" %>
             <% if Rails.env.development? %>
               <span class="text-xs"><%= section_page.data.order %></span>

@@ -31,12 +31,30 @@ Hotwireを使うと下記のことができます。
 * Hotwireはこれらをほとんど使いません。JavaScript入門チュートリアルレベルの言語機能だけ理解できていれば十分です
 * **HTML/CSSには詳しいけれども、高度なJavaScriptはイマイチ自信がない人（特にデザイナー）でもHotwireは使いこなせます**
 
-## HotwireはReactとは異なります
+## Hotwireはセミオーダー、Reactはフルオーダー --- hotwire-semi-order-react-full-order
 
-* Hotwireの考え方はReactとは多くの点で異なります
-* Hotwireは従来のMPAを拡張する考え方です。先にHTMLを考えます
-* Reactは先にステートを考えます。先にステートがあり、これをHTMLに反映させます
+* Hotwireはサーバで出来上がったパーツ（HTML短編）を工事現場で繋ぎ合わせます
+* Reactは工事現場で具材（JSON API）から組み立てます
+
+Reactの方がブラウザステートに合わせて柔軟にUIを調節しやすいのですが、フロントエンドの作業は増えます。HotwireはDBに近い工場で効率的にパーツを作り、現場でパッと組み立てます。
+
+![what-is-hotwire-hotwire.webp](content_images/what-is-hotwire-hotwire.webp "max-w-[600px] mx-auto")
+
+![what-is-hotwire-react.png](content_images/what-is-hotwire-react.png "max-w-[600px] mx-auto")
+
+## Hotwireは直接的、Reactは間接的
+
+* HotwireはHTMLをサーバから受け取り、HTMLを制御します
+* Reactはステートをサーバから受け取り、ステートを制御します。そして必ずステートを介して、間接的にHTMLを操作します
+
+## とにかくHotwireはReactとは異なる
+
+* HotwireとReactは幼稚園の時は一緒に遊んだけれども、小学校から別々の国に行った従兄弟同士みたいなものです
+* 今では喋る言葉も、考え方も変わっています
+
+![hotwire-history.webp](content_images/hotwire-history.webp "mx-auto max-w-[500px]")
 
 Reactの考え方は公式サイトの[Reactの流儀](https://ja.react.dev/learn/thinking-in-react)で解説されています。またHotwireとReactのアプローチの違いについては[Hotwire, React, jQueryのアプローチ](/how_to_think/approach)で解説しています。
+
 
 ReactとHotwireの考え方が分岐した歴史については[Hotwireの歴史](/introduction/history)で解説しています。

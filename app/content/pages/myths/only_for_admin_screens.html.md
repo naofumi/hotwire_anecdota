@@ -5,7 +5,19 @@ order: 10
 published: true
 ---
 
-## Hotwireはエンドユーザ向けもこなします
+Hotwireは決して管理画面限定ではありません。**管理画面が非常に得意だというだけで、エンドユーザ向け画面も十分にこなせます**
+
+## Hotwireは管理画面が得意 --- hotwire-is-good-for-admin
+
+HotwireとRuby on Railsの組み合わせは、管理画面を高速にたくさん作っていくのを非常に得意としてます。自動的にコードを生成するScaffold機能が充実しており、自動テストも込みでCRUDのコードを作ってくれます。
+
+もちろん[ActiveAdmin](https://github.com/activeadmin/activeadmin)、[RailsAdmin](https://www.ruby-toolbox.com/projects/rails_admin)、[Administrate](https://administrate-demo.herokuapp.com)や最近は[Avo](https://avohq.io)などのアドミ画面ライブラリも充実していますが、多くの場合はこれすら不要なぐらいにRuby on Railsは高速に管理画面が作れます。
+
+JSON APIを設計し、フロントエンドエンジニアと協議している間に管理画面が出来上がってしまうぐらいの感覚です。
+
+でもエンドユーザ画面もすごいんです。
+
+## 論より証拠なHotwireのエンドユーザ画面 --- hotwire-is-good-for-end-user
 
 Hotwireが管理画面に適しているのは間違いありません。JSON APIを作る手間がありませんので、多数の画面を次から次へと作るのにはとても向いています。しかし**管理画面だけ**に向いているわけではありません。
 
