@@ -2,7 +2,7 @@
 require "fileutils"
 
 APP_ROOT = File.expand_path("..", __dir__)
-APP_NAME = "tailwind-rails"
+APP_NAME = "anecdotes-on-hotwire"
 
 def system!(*args)
   system(*args, exception: true)

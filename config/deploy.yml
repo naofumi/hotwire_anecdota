@@ -1,8 +1,8 @@
 # Name of your application. Used to uniquely configure containers.
-service: tailwind-rails
+service: anecdotes-on-hotwire
 
 # Name of the container image.
-image: naofumik/tailwind-rails
+image: naofumik/anecdotes-on-hotwire
 
 # Deploy to these servers.
 servers:
@@ -17,7 +17,7 @@ servers:
 # Set ssl: false if using something like Cloudflare to terminate SSL (but keep host!).
 proxy:
   ssl: true
-  host: "tailwind-rails.castle104.com"
+  host: "anecdotes-on-hotwire.castle104.com"
   app_port: 80
 
 # Credentials for your image host.
@@ -58,7 +58,7 @@ ssh:
 # Use a persistent storage volume.
 #
 volumes:
-  - "tailwind_rails_storage:/rails/storage"
+  - "anecdotes_on_hotwire_storage:/rails/storage"
 
 # Bridge fingerprinted assets, like JS and CSS, between versions to avoid
 # hitting 404 on in-flight requests. Combines all files from new and old
