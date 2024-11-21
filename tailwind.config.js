@@ -6,7 +6,6 @@ module.exports = {
     './app/javascript/react/components/**/*.{js,jsx}',
     './app/content/helpers/**/*.rb',
     './app/content/layouts/**/*.erb',
-    './app/content/pages/index.html',
     './app/content/pages/index.html.erb',
     './app/content/pages/**/*.{md,erb}',
     './app/content/application/**/*.erb',
