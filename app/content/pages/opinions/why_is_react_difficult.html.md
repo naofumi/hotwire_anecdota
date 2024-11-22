@@ -1,5 +1,5 @@
 ---
-title: Reactはなぜ習得が難しいか
+title: Reactが難しい要因はJavaScript
 layout: article
 order: 005
 published: true
@@ -31,21 +31,15 @@ JavaScriptをしっかり勉強しなければならないのは、一見する�
   * `useEffect()`は高階関数で、中に記述するのはクロージャー（無名関数）です
 * Reactはasync awaitやコールバック関数を多用します
   * サーバからデータを取得するために`fetch()`を多用しますので、async awaitもしくはPromiseが必要になります
-  * Server Componentも、その中でデータを取得する場合はasync awaitを多用することになります
+  * SSRになってくるとasyncだらけになってきます。DBとの通信がasyncなのはもちろんですが、Next.js v15からはそれだけではなく、[ほぼすべてがasync](https://nextjs.org/blog/next-15-rc2#async-request-apis-breaking-change)になります。
 
 これらはJavaScriptの入門書に言及されていないことすら珍しくないものです。あったとしても最後の方に言及されているものです。これに加えてReactのプロジェクトではTypeScriptがよく使われています。
 
 ## Hotwireは入門書レベルのJavaScriptで書ける
 
-一方でHotwireはJavaScriptの入門書程度のJavaScriptで十分に書けます。
+一方でHotwireはJavaScriptの入門書程度のJavaScriptで十分に書けます。これについては[別記事で掘り下げています](/opinions/hotwire_javascript_is_simple)。
 
-* Hotwireでは高階関数はほとんど使いません。`Array.forEach()`とか`Array.filter()`などの初歩的なものを使ってDOM操作はしますが、高階関数を意識することはまずありません。
-* Hotwireではasync awaitやPromise、コールバック等は滅多に書きません
-   * Reactでasync await等が必要になるのは主に`fetch()`というでサーバと通信をするときです。Hotwireの場合は、これはすべてTurboが担当します。そしてTurboは通常はJavaScriptすら必要なく、HTMLの属性を書くだけで十分です
-   * Hotwireの場合は、Promiseを返すライブラリAPIを扱う時
-   * だけasync awaitを使う感じになります
-
-Hotwireの方が入門者、もしくはJavaScriptに特に詳しくないウェブデザイナーにとって優しいライブラリーと言えるかもしれません。
+## 最後に
 
 Hotwireの方がシンプルで、Reactの方が複雑だと言っているのではありません。熟練者にとっては高度な機能を使っている方が簡単にプログラムが書けるのかもしれません。しかし入門者やウェブデザイナー等にとってはハードルが高いフレームワークと言って良いと思います。
 

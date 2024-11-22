@@ -17,6 +17,6 @@ Hotwire, 特にStimulusはデザイン性が重視されるマーケティング
 * スライダーの実装
 * ...等々...
 
-予想ですが、Reactを学ぶ必要がないこと、ビルドが不要であること、JavaScriptコードを綺麗に管理できること、再利用性が高いことなどが採用されている理由だと思います。
+予想ですが、[Reactを学ぶ必要がない](/opinions/why_is_react_difficult)こと、Reactと比べて[簡単なJavaScriptで書けること](/opinions/why_is_react_difficult)、ビルドが不要であること、JavaScriptコードを綺麗に管理できること、再利用性が高いことなどが採用されている理由だと思います。
 
 ![check-webtech.webp](content_images/check-webtech.webp)

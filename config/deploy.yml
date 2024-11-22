@@ -17,7 +17,7 @@ servers:
 # Set ssl: false if using something like Cloudflare to terminate SSL (but keep host!).
 proxy:
   ssl: true
-  host: "anecdotes-on-hotwire.castle104.com"
+  host: "hotwire-anecdota.castle104.com"
   app_port: 80
 
 # Credentials for your image host.
