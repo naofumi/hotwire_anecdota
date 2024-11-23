@@ -49,7 +49,15 @@
                   group-data-[modal-dialog-shown-value=true]:duration-200"
            data-action="click->modal-dialog#void:stop"
       >
-        <turbo-frame id="modal-dialog__frame">
+        <turbo-frame id="modal-dialog__frame"
+                     data-modal-dialog-target="clearable"
+                     class="aria-busy:before:absolute
+                            aria-busy:before:block
+                            aria-busy:before:inset-0
+                            aria-busy:before:bg-contain
+                            aria-busy:before:bg-no-repeat
+                            aria-busy:before:bg-center
+                            aria-busy:before:bg-[url('/Rolling@1x-1.4s-200px-200px.svg')]">
         </turbo-frame>
       </div>
     </div>

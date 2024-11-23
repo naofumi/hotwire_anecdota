@@ -11,6 +11,7 @@ class TodosController < ApplicationController
   # GET /todos/1 or /todos/1.json
   # GET /todos/1/edit
   def edit
+    sleep 1
   end
 
   # POST /todos or /todos.json

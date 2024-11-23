@@ -2,6 +2,13 @@
 <% set_breadcrumbs [["Todos", todos_path]] %>
 
 <% content_for :title, "Todos" %>
+<% content_for :variant_explainer do %>
+  <div class="text-xs">
+    <div><strong>mpa:</strong> 「いいね」ボタンをMPAで実装</div>
+    <div><strong>streams:</strong> 「いいね」ボタンをTurbo Streamsで実装</div>
+    <div><strong>optimistic:</strong> 「いいね」ボタンを楽観的UIで実装</div>
+  </div>
+<% end %>
 <div class="max-w-lg mx-auto">
 
   <div class="mb-16">

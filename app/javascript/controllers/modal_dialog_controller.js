@@ -2,6 +2,7 @@ import {Controller} from "@hotwired/stimulus"
 
 // Connects to data-controller="modal-dialog"
 export default class extends Controller {
+  static targets = ["clearable"]
   static values = {
     shown: {type: Boolean, default: false},
     page: String
@@ -19,24 +20,34 @@ export default class extends Controller {
     this.shownValue = false
   }
 
-  shownValueChanged() {
-    this.element.dataset.dialogShown = this.shownValue
-    if (this.shownValue) {
-      this.pageElement.inert = true
-    } else {
-      setTimeout(() => this.pageElement.inert = false, 100)
-    }
-  }
-
   hideOnSuccess(event) {
-    if (!event.detail.success) {
-      return
-    }
+    if (!event.detail.success) return
 
     this.hide(event)
   }
 
   // Used to prevent browser default behavior on specific elements.
   void(event) {
+  }
+
+  shownValueChanged() {
+    if (this.shownValue) {
+      this.#removeClearableTargetChildren()
+      this.#makePageUnresponsive()
+    } else {
+      this.#restorePageResponsiveness()
+    }
+  }
+
+  #removeClearableTargetChildren() {
+    this.clearableTarget.replaceChildren()
+  }
+
+  #makePageUnresponsive() {
+    this.pageElement.inert = true
+  }
+
+  #restorePageResponsiveness() {
+    setTimeout(() => this.pageElement.inert = false, 100)
   }
 }

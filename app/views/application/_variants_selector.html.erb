@@ -1,13 +1,18 @@
 <% if available_variants.present? %>
-  <div class="text-center mt-1 my-8" data-controller="variants-selector">
-    <%= form_with url: variants_path, scope: :variant,
-                  method: :patch,
-                  class: "flex flex-row justify-center items-baseline" do |f| %>
-      <%= f.label :name, "variantを選択", class: "text-xs font-bold mr-3" %>
-      <%= f.select :name, available_variants,
-                   { selected: (available_variants & request.variant).first },
-                   { class: "w-44 text-sm border border-gray-400 rounded-lg p-1",
-                     data: { action: "change->variants-selector#submit" } } %>
-    <% end %>
+  <div class="mt-1 py-2 px-4 my-8 flex justify-between rounded-lg gap-x-4 max-w-xl mx-auto bg-orange-50" data-controller="variants-selector">
+    <div class="">
+      <%= form_with url: variants_path, scope: :variant,
+                    method: :patch,
+                    class: "flex flex-row justify-end items-baseline" do |f| %>
+        <%= f.label :name, "variantを選択", class: "text-xs font-bold mr-3" %>
+        <%= f.select :name, available_variants,
+                     { selected: (available_variants & request.variant).first },
+                     { class: "focus:[--tw-ring-color:#ea580c] focus:border-orange-600 text-sm border border-gray-400 rounded-full py-1",
+                       data: { action: "change->variants-selector#submit" } } %>
+      <% end %>
+    </div>
+    <div class=" text-left">
+      <%= content_for(:variant_explainer) %>
+    </div>
   </div>
 <% end %>

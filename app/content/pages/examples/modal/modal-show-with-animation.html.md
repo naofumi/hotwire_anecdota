@@ -9,7 +9,11 @@ published: true
 
 ## 考えるポイント --- points-to-consider
 
-モーダルは簡単に作れると考える人が多くいます。しかし実際にはモーダルの表示・非表示だけでも、かなり多くの機能が必要になります。これがなければ十分な機能を持ったモーダルとはいえず、そもそもモーダルではなく、普通のMPAの機能で十分な可能性がありますので、[UIの選択としてモーダルが間違っている可能性があり、再考が必要です]((/opinions/should_you_use_modals))。
+モーダルは簡単に作れると考える人が多くいます。しかし実際にはモーダルの表示・非表示だけでも、かなり多くの機能が必要になります。これがなければ十分な機能を持ったモーダルとはいえず、そもそもモーダルではなく、普通のMPAの機能で十分な可能性がありますので、[UIの選択としてモーダルが間違っている可能性があり、再考が必要です](/opinions/should_you_use_modals)。
+
+本サイトではHotwireを使って本格的なUI/UXを作成するのが目的です。Hotwireを使って[付随的な(Accidental)複雑さを迂回しつつ、必須の(Essential)複雑さとは真剣に向き合います](https://tech.uzabase.com/entry/2021/05/20/141950)。この点はご容赦ください。
+
+![modal-dialog-show.png](content_images/modal-dialog-show.png "max-w-full")
 
 1. **モーダルの内容はサーバから非同期通信で取得します**。何らかの形でTurboを使用します
    1. モーダルは画面の一部分だけを覆いますので、Turbo Drive, Turbo Frames, Turbo Streamsのうち、部分置換ができるTurbo FramesかTurbo Streamsから選択します
@@ -17,16 +21,17 @@ published: true
 2. Turboはネットワーク通信です。したがって**ネットワーク遅延を想定する必要があります**
    1. ネットワーク待ちであることをユーザに伝えるために、ボタンをクリックした瞬間にモーダルを開き、「ロード中」の画面を表示します
    2. サーバレスポンスを待たずに画面表示を変更しますので、Stimulusを使用します
-   3. Stimulusを使うとアニメーションも表示しやすくなりますので、モーダル表示アニメーションも用意します
-3. Stimulusを使う場合はステートの持ち方も検討します。モーダルのインタラクションは意外と複雑ですので、Stimulus Valuesステートを使うことにします
+   3. Stimulusを使うとアニメーションも表示しやすくなりますので、モーダル表示アニメーションも用意します（今回は下から浮いてくる感じにしました）
+3. モーダルのインタラクションは意外と複雑ですので、Stimulus Valuesステートを使うことにします
    1. 表示を切り替える箇所はモーダル「枠」だけでなく、 背景画面を覆う黒い幕も同時に表示させないといけません
    2. モーダルの表示・非表示は複数の箇所から制御します
       1. Todoの行をクリックするとモーダルが表示されます
       2. 背景画面を覆う黒い幕をクリックした時、モーダルを非表示にします
       3. ESCキーのショートカットでモーダルを非表示にします
-   3. さらに背景画面は誤って操作できないようにしなければなりません。例えばスクロールされないようにしたり、フォーカスを取得してしまわないようにする必要があります。このためには[HTMLの`inert`属性](https://developer.mozilla.org/ja/docs/Web/API/HTMLElement/inert)を使います
-   4. **複数のHTML要素を制御する必要があります**ので、直接CSSクラスを操作すると煩雑になります。Stimulus Valuesを使って整理しやすく保ちます
-   5. 加えてStimulus Valuesを使うと、HTMLの`data-*-value`属性を外部から変更してモーダルの開閉状態を制御でき、便利です
+   3. 一覧表の異なる行を選択した際も同じHTML要素を使ってモーダルを表示します。Reactの場合はゼロから再レンダリングしますので勝手に古い内容をクリアしますが、Hotwireの場合は明示的に古いデータをクリアする必要があります
+   4. さらに背景画面は誤って操作できないようにしなければなりません。例えばスクロールされないようにしたり、フォーカスを取得してしまわないようにする必要があります。このためには[HTMLの`inert`属性](https://developer.mozilla.org/ja/docs/Web/API/HTMLElement/inert)を使います
+   5. **複数のHTML要素を制御する必要があります**ので、直接CSSクラスを操作すると煩雑になります。Stimulus Valuesを使って整理しやすく保ちます
+   6. 加えてStimulus Valuesを使うと、HTMLの`data-*-value`属性を外部から変更してモーダルの開閉状態を制御でき、便利です
 4. モーダルはHTML `body`要素の直下ぐらいに配置するの一般的です（一方で黒い幕を使わないポップアップダイアログであれば、モーダルのHTMLはボタンの近くに用意することが多いです）。今回もそのようにします
    1. モーダルを表示するためのActionボタン（例えばTodoを表示している行）と、モーダル自身がDOM上で完全に別々になります
       1. モーダルおよびActionボタン双方を制御するStimulus controllerを作ってしまうと、ページ全体を覆うほどの大きさになってしまいます。絶対に悪いわけではありませんが、コードの関係性がわかりにくくなるのが気がかりです
@@ -59,8 +64,8 @@ published: true
 ```
 
 * これはメインのレイアウトページです。一番`<body>`タグに近いところです
-* モーダルのHTMLはここに配置します
-* またページコンテンツは`<div id="page">`内に配置します。モーダルが表示された時に背面で隠される部分です。
+* モーダルのHTMLはここの直下に配置します（`modal_dialog` partialとして）
+* またページコンテンツは`<div id="page">`内に配置します。これはモーダルが表示された時に背面になり、黒い幕で隠される部分です。
 
 ### モーダルの枠 --- modal-frame
 
@@ -116,7 +121,15 @@ published: true
                   group-data-[modal-dialog-shown-value=true]:duration-200"
            data-action="click->modal-dialog#void:stop"
       >
-        <turbo-frame id="modal-dialog__frame">
+        <turbo-frame id="modal-dialog__frame"
+                     data-modal-dialog-target="clearable"
+                     class="aria-busy:before:absolute
+                            aria-busy:before:block
+                            aria-busy:before:inset-0
+                            aria-busy:before:bg-contain
+                            aria-busy:before:bg-no-repeat
+                            aria-busy:before:bg-center
+                            aria-busy:before:bg-[url('/Rolling@1x-1.4s-200px-200px.svg')]">
         </turbo-frame>
       </div>
     </div>
@@ -125,16 +138,24 @@ published: true
 ```
 
 * 実際のモーダルを表示するpartialです
-    * アニメーション用のTailwind CSSおよびcontrollerを接続するコードがほとんどです
-* モーダル全体には`id="modal-dialog"`をつけます。今回はDOMのルートに近いところにモーダルを配置しました
+    * 長いですが、アニメーション用のTailwind CSSおよびcontrollerを接続するシンプルなコードです
+* モーダル全体には`id="modal-dialog"`をつけます
+    * 上述していますが、今回は`ModalDialogTriggerController`と`ModalDialogController`のcontroller間通信をします
     * Stimulusでは主に`target`を使ってHTML要素を指定します。しかし今回はStimulus controller間通信を行いますので、controller外のHTML要素もアクセスします。この要素も`ModalDialogTriggerController` Stimulus Controllerからアクセスされます。その時は`target`ではなく、通常のCSSセレクタを使ってHTML要素を指定します。そのための`id`になります
-* `data-controller="modal-dialog"`属性で、`ModalDialogController` Stimulus controllerと繋げます
+* `data-controller="modal-dialog"`属性で、モーダルのHTMLを`ModalDialogController`Stimulus controllerに繋げます
 * モーダルに`modal-dialog-shown-value`属性を持たせます。これがStimulus controllerのステートになります
-    * CSSでは`group-data-[modal-dialog-shown-value=true]`を使って、この属性に応じたCSSをだし分けています
+    * CSSでは`group-data-[modal-dialog-shown-value=true]`を使って、この属性に応じたCSSを出し分けています。`modal-dialog-shown-value="true"`ならモーダルが表示され、`"false"`なら非表示になります
 * モーダルの枠の中に`<turbo-frame id="modal-dialog__frame">`タグを持たせています。サーバから読み込まれた内容はここに挿入されます
-
-## データロード中の進行中表示 --- loading
-
+    * `<turbo-frame>`にロードするデータをサーバにリクエストしている間、[Turboは自動的に`aria-busy`を`<turbo-frame>`タグに追加してくれます](https://turbo.hotwired.dev/reference/attributes#automatically-added-attributes)
+    * このため、CSSだけでローディング画面を適切に表示・非表示できます
+* モーダルの背景の黒い幕をクリックするとモーダルが閉じられるようにします
+   * `data-action="click->modal-dialog#hide"`の属性を持つHTML要素が黒い幕の`<div>`です。これをクリックすると後述する`ModalDialogController`の`hide()`メソッドが呼ばれて、モーダルが非表示になります
+   * ただし、モーダルの白いコンテンツを表示した場合はモーダルが閉じては困ります。この箇所はクリックを無視する必要があります
+   * `data-action="click->modal-dialog#void:stop`の属性を持つHTML用紙がモーダルのコンテンツの枠です
+       * ここをクリックすると`ModalDialogController`の`void()`メソッドが呼ばれますが、`void()`メソッド自身は何もしません
+       * **注目して欲しいのは先ほどの`click->modal-dialog#void:stop`の`stop`の部分です**。これは`event.stopPropagation()`を呼んでくれます
+       * `event.stopPropagation()`が呼ばれますので、クリックイベントは後ろの黒い背景に伝播しません。そのため、`ModalDialogController`の`hide()`メソッドが呼ばれることはなく、このクリックは無視されます
+  
 ### モーダル表示のトリガー --- trigger
 
 ```erb:app/views/todos/_todo.html.erb
@@ -164,13 +185,13 @@ published: true
 ```
 
 * `link_to`は`<a>`タグを作成します。これをクリックするとモーダルが表示されるようにしています
-* `data: {controller: "modal-dialog-trigger"}`で、この`<a>`タグを`ModalDialogTriggerController`に接続しています
-   * これは`ModalDialogController`に接続するControllerです。クリックされたことをリレーします
-   * `modal_dialog_trigger_modal_dialog_outlet: "#modal-dialog"`のところは、接続先のStimulus Controllerを選択するCSSセレクタです。この場合は`id="modal-dialog"`のHTML要素が選択されています
-* `action: "click->modal-dialog#show"`を設定し、クリックすると`ModalDialogTriggerController`の`show()`メソッドが実行されます。これは最終的にモーダルダイアログを表示させます
-* `turbo_frame: "modal-dialog__frame"`の属性が指定されていますので、`<a>`タグのリンク先からレスポンスは`<turbo-frame>`の中に表示されます
+* `data-controller-modal-dialog-trigger`で、この`<a>`タグを`ModalDialogTriggerController`に接続しています
+   * `ModalDialogTriggerController`は`ModalDialogController`にメッセージを中継するだけのControllerです。クリックされたことをリレーします
+   * `data-modal-dialog-trigger-modal-dialog-outlet="#modal-dialog"`のところは、接続先のStimulus Controllerを選択するCSSセレクタです。この場合は`id="modal-dialog"`のHTML要素が選択されています
+* `data-action="click->modal-dialog#show"`を設定し、クリックすると`ModalDialogTriggerController`の`show()`メソッドが実行されるようにしています。中継されたメッセージは`ModalDialogController`の`show()`メソッドに到達し、モーダルダイアログが表示されます
+* `turbo_frame: "modal-dialog__frame"`の属性が指定されていますので、`<a>`タグのリンク先からのレスポンスは`<turbo-frame>`の中に表示されます
 
-### リンクのクリックイベントをリレーするModalDialogTriggerController --- code-modal-dialog-controller
+### リンクのクリックイベントをリレーするModalDialogTriggerController --- code-modal-dialog-trigger-controller
 
 ```js:app/javascript/controllers/modal_dialog_trigger_controller.js
 import { Controller } from "@hotwired/stimulus"
@@ -192,9 +213,9 @@ export default class extends Controller {
 }
 ```
 
-* これはTodoリストのリンクがクリックされたとき、そのイベントを`ModalDialogController`にリレーして、モーダルを表示してもらうためのStimulus Controllerです（イベントを新たに発火していませんので、JavaScriptイベントをリレーしているわけではありません。メッセージをリレーしていると呼んだ方が良いかもしれませんが、ここでは単に「リレー」という表現を使いました）
-* これが必要なのはモーダルダイアログがページの`root`近くに配置されていて、DOM的に距離が遠いためです。一つのStimulus Controllerで制御しようと思うと、Todoリストを覆い、かつモーダルダイアログも覆わなければなりませんが、これだと制御範囲が大きくなりすぎて、コードがわかりにくくなることを懸念しています。そのための分割です
-* リレー先の`ModalDialogController`は`static outlets = [ "modal-dialog" ]`で指定しています
+* これはTodoリストのリンクがクリックされたとき、そのイベントを`ModalDialogController`にリレーして、モーダルを表示してもらうためのStimulus Controllerです
+* 中継用のStimulus controllerが必要なのはモーダルダイアログがページの`root`近くに配置されていて、（Todoリストの中の）モーダルを開くボタンとはDOM的に距離が遠いためです。一つのStimulus Controllerで制御しようと思うと、Todoリストを覆い、かつモーダルダイアログも覆わなければなりませんが、これだと制御範囲が大きくなりすぎて、コードがわかりにくくなることを懸念しています。そのための分割です
+* リレー先の`ModalDialogController`は`static outlets = [ "modal-dialog" ]`で宣言しています
 * `show()`メソッドでは、`ModalDialogController`の`show()`メソッドを呼び出しているだけです。`hide()`も同様です。
 
 ### モーダル表示用のModalDialogController --- code-modal-dialog-controller
@@ -204,6 +225,7 @@ import {Controller} from "@hotwired/stimulus"
 
 // Connects to data-controller="modal-dialog"
 export default class extends Controller {
+  static targets = ["clearable"]
   static values = {
     shown: {type: Boolean, default: false},
     page: String
@@ -221,19 +243,8 @@ export default class extends Controller {
     this.shownValue = false
   }
 
-  shownValueChanged() {
-    this.element.dataset.dialogShown = this.shownValue
-    if (this.shownValue) {
-      this.pageElement.inert = true
-    } else {
-      setTimeout(() => this.pageElement.inert = false, 100)
-    }
-  }
-
   hideOnSuccess(event) {
-    if (!event.detail.success) {
-      return
-    }
+    if (!event.detail.success) return
 
     this.hide(event)
   }
@@ -241,30 +252,49 @@ export default class extends Controller {
   // Used to prevent browser default behavior on specific elements.
   void(event) {
   }
+
+  shownValueChanged() {
+    if (this.shownValue) {
+      this.#removeClearableTargetChildren()
+      this.#makePageUnresponsive()
+    } else {
+      this.#restorePageResponsiveness()
+    }
+  }
+
+  #removeClearableTargetChildren() {
+    this.clearableTarget.replaceChildren()
+  }
+
+  #makePageUnresponsive() {
+    this.pageElement.inert = true
+  }
+
+  #restorePageResponsiveness() {
+    setTimeout(() => this.pageElement.inert = false, 100)
+  }
 }
 ```
 
-* モーダルを表示・非表示にするActionは`show()`, `hide()`です
+* `static targets =`でStimulus targetsを宣言しています
+    * 今回は`data-modal-dialog-value`をCSSで読み取ってモーダルの表示・非表示をしますので、これ自体のためのtargetは不要です
+    * ここで宣言している`clearable`のターゲットはデータを読み込む`<turbo-frame>`を指しています
+       * HotwireはReactと異なり、頻繁に自動的な再レンダリングをしません。したがって一回`<turbo-frame>`を読み込むと内容はそのまま残ります
+       * そのため、新たにモーダルを表示して新しいデータを読み込むたびに`<turbo-frame>`の中身を明示的にクリアしなければなりません
+       * この処理のために`<turbo-frame>`をtargetを用意しています
 * `static values =`でValues ステートを宣言しています
-    * `data-modal-dialog-shown-value`は、ダイアログボックスの表示・非表示を指定するステートです
-    * `data-modal-dialog-page-value`は、モーダルによって隠蔽される背景画面を指定するCSSセレクタです。この要素の`inert`属性を指定することで、モーダルが開いた時に操作を受け付けなくします。なお、この要素は`ModalDialogController`の制御よりも外側にあるため、`target`ではなく、CSSセレクタで指定するようにしています
-      * モーダルを表示しているときは背景画面が操作できないようにします。黒い幕のDIV被せるとマウスクリックはブロックできますが、キーボードショートカット（エンター、タブなど）やスクロールは背景画面に届きます。これらを完全にブロックするのが`inert`属性です。なおモーダルを隠すときはすぐに`intert`を解除せずに、少しだけ時間を空けています。そうしないとエンターキーで`<input>`タグが選択せれてしまうようなので、これを防ぐためです。
-* `show()`, `hide()`ともに`data-modal-dialog-shown-value`ステートをセットしています。この値はHTML要素の属性となりますので、CSSレセクタで読まれます。そしてモーダルダイアログの表示・非表示が制御されます
-* `shownValueChanged()`は、`data-modal-dialog-shown-value`ステートが変更された時に自動的に呼び出されるコールバックです。この中で背景画面に`inert`属性をつけたり外したりして、背景画面が操作できないようにしています
-
-## ポイント --- points-to-note
-
-* 今回のモーダルダイアログはHTMLのルートの近くに配置しています。一方でモーダルダイアログを開くためのリンクはTodo一覧の中にあります
-   * この全体を１つのStimulus controllerで制御するとなると、結局ページ全体を覆うStimulus controllerを作ることになります。しかしそうなると対応関係がわかりにくいだけでなく、１つのページにいくつものモーダルが存在するケースに対応しにくくなります
-   * そこで今回はトリガーのStimulus controllerからモーダルを指定する方法として、Stimulusの`target`を使用せず、直接IDを指定するようにしています
-   * 上記はモーダルを表示する`show()`の時の話です。一方でモーダルを閉じるときの`hide()`は、モーダルダイアログの内部要素がトリガーになります。例えば背景のクリックであるとか、閉じるボタンだったりとかです
-   * そこで同じModalDialogControllerクラスを a) モーダルダイアログそのものを制御するため、b) モーダルを表示するトリガーを制御するための双方に使っています。`show()`用のStimulus controllerと`hide()`用のStimulus controllerを用意しても良いのですが、それでは却ってわかりにくいと考えたためです
-* [比較的新しいHTML属性の`inert`を使っています](https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes/inert)。これはアクセシビリティ上の重要な機能を提供していますが、`inert`以前は実現が難しいものでした。そして多くのウェブサイトでは正しく実装されていませんでした。モーダルは簡単に考えてはいけないよという実例です
-
-なおReactの場合は[`createPortal()`](https://ja.react.dev/reference/react-dom/createPortal)を使って、上記の問題に対応します。似たような機能はStimulusにはありませんが、Stimulusの場合は完全に独立したControllerであってもHTML属性を外部から変更するだけでステートを制御できますので、十分に対処可能です。
+    * `data-modal-dialog-shown-value`は、ダイアログボックスの表示・非表示を指定するステートです。CSSはこれを読み取り、モーダルダイアログの表示・非表示を自動的に切り替えてくれます
+    * `data-modal-dialog-page-value`は、モーダルによって隠蔽される背景画面を指定するCSSセレクタです。この要素の`inert`属性を指定することで、モーダルが開いた時に操作を受け付けなくします。なお、この要素は`ModalDialogController`の制御よりも外側にあるため、`target`で指定できません。そのためにCSSセレクタで指定しています
+      * モーダルを表示しているときは背景画面が操作できないようにする必要があります。黒い幕(`div`を)被せるとマウスクリックはブロックできますが、キーボードショートカット（エンター、タブなど）やスクロールは背景画面に届きます。これらを完全にブロックするのが`inert`属性です。なおモーダルを隠すときはすぐに`inert`を解除せずに、少しだけ時間を空けています。そうしないとエンターキーで`<input>`タグが選択せれてしまうようなので、これを防ぐためです。
+* `show()`, `hide()`はStimulus Actionで、ともに`data-modal-dialog-shown-value`ステートをセットしているだけです。この値はHTML要素の属性となりますので、CSSが監視しています。そしてモーダルダイアログの表示・非表示が制御されます
+* `shownValueChanged()`は、`data-modal-dialog-shown-value`ステートが変更された時に自動的に呼び出されるコールバックです。CSSで制御できないものについてはここで処理します。
+     * `clearable` targetが指している`<turbo-frame>`の中身を消去して、新しいデータを読み込む前にモーダルの中身を初期化しています
+     * 背景画面（`this.pageElement`）に`inert`属性をつけたり外したりして、背景画面が操作できないようにします
+* `void()`のStimulus Actionは何もしません。上述の黒い幕をクリックした時の動作で使用しました。
 
 ## まとめ --- summary
 
-* クオリティの高いUI/UXを実現するためには、ある程度アニメーションを用意する必要があります
-* このためにはTurboだけではなく、その前後でStimulus controllerによる制御をつけることができます
-* Reactと比べて、Stimulusはcontrollerを外部から制御しやすいようにできています。今回はHTML属性を外部から直接変更することで制御しています。こうすることで、controllerの制御範囲を小さく保ち、管理のしやすさを保っています
+* 今回はStimulus controller間の通信を使用しました。Stimulus controllerを細かく分割して、わかりやすくするために有効な方法です
+    * なおReactの場合は[`createPortal()`](https://ja.react.dev/reference/react-dom/createPortal)を使って、制御したいパーツが分散する問題に対応します。似たような機能はStimulusにはありませんが、controller間通信で解決できます
+* インタラクションの制御に関わるコード分量は多くないのですが、考えるポイントは少なくありません。これは[モーダルの表示・非表示の必須の複雑さに真剣に向き合った結果](https://tech.uzabase.com/entry/2021/05/20/141950)ですので、モーダル専用のライブラリでも使わない限りなかなか避けられません
+* 今回はモーダルの表示・非表示をやりました。次はモーダルの中でCRUDをした場合のコードを見ていきます

@@ -1,6 +1,8 @@
 class Todos::LikesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_todo
+  set_available_variants :mpa, :streams, :optimistic
+
   def create
     if params[:like]
       @todo.like_by! current_user
