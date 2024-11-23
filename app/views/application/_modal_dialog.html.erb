@@ -51,14 +51,17 @@
       >
         <turbo-frame id="modal-dialog__frame"
                      data-modal-dialog-target="clearable"
-                     class="aria-busy:before:absolute
-                            aria-busy:before:block
-                            aria-busy:before:inset-0
-                            aria-busy:before:bg-contain
-                            aria-busy:before:bg-no-repeat
-                            aria-busy:before:bg-center
-                            aria-busy:before:bg-[url('/Rolling@1x-1.4s-200px-200px.svg')]">
+                     class="peer aria-busy:hidden">
         </turbo-frame>
+        <div class="hidden peer-aria-busy:absolute
+                           peer-aria-busy:block
+                           peer-aria-busy:inset-0
+                           peer-aria-busy:bg-contain
+                           peer-aria-busy:bg-no-repeat
+                           peer-aria-busy:bg-center
+                           peer-aria-busy:bg-[url('/Rolling@1x-1.4s-200px-200px.svg')]">
+
+        </div>
       </div>
     </div>
   </div>

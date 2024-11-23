@@ -2,7 +2,6 @@ import {Controller} from "@hotwired/stimulus"
 
 // Connects to data-controller="modal-dialog"
 export default class extends Controller {
-  static targets = ["clearable"]
   static values = {
     shown: {type: Boolean, default: false},
     page: String
@@ -32,15 +31,10 @@ export default class extends Controller {
 
   shownValueChanged() {
     if (this.shownValue) {
-      this.#removeClearableTargetChildren()
       this.#makePageUnresponsive()
     } else {
       this.#restorePageResponsiveness()
     }
-  }
-
-  #removeClearableTargetChildren() {
-    this.clearableTarget.replaceChildren()
   }
 
   #makePageUnresponsive() {
