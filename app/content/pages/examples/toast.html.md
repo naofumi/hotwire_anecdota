@@ -86,13 +86,13 @@ published: true
 * `data-global-notification-target="toast"`はStimulus Controllerのコールバックを起動するために使っています（次の項目に解説しています）
 * トーストを表示する時は下記のようにします
    * **Turbo Driveを使う場合:**<br>
-       Turbo Driveを使う場合、`<form>`によるPOST送信は必ずPOST/redirect/GETのパターンに沿っている必要があります(Hotwireではこれが前提になっています)。一般にRails controllerの最後に`redirect_to "...", notice: "[トーストに表示する内容]"`と記載したり、あるいは`flash.notice = [トーストに表示する内容]`と記載するかと思いますが、上記のコードの`if notice.present?`の`notice`はこの`[トーストに表示する内容]`が格納されています。Turbo Driveの場合はそうやってトーストのHTML要素をブラウザに送り、DOMに反映させます
+       Turbo Driveを使う場合、`<form>`によるPOST送信は必ずPOST/redirect/GETのパターンに沿っている必要があります(Hotwireではこれが前提になっています)。一般にRails controllerの最後に`redirect_to "...", notice: "[トーストに表示する内容]"`と記載したり、あるいは`flash.notice = [トーストに表示する内容]`と記載するかと思いますが、上記のコードの`if notice.present?`の`notice`はこの`[トーストに表示する内容]`が格納されています。こうしてトーストの内容を含むHTMLがブラウザに送られます
    * **Turbo Streamsを使う場合:**<br>
-       Turbo Streamsを使う場合もこのpartialに相当する部分をTurbo Streamに追加してブラウザに送ります。ただしTurbo Streamsの場合はPOST/redirect/GETのパターンを使いません。POSTでいきなりDOMをブラウザに返します。したがってRails controllerの方では`flash.notice`ではなく、`flash.now.notice`で`notice`に`[トーストに表示する内容]`を格納しておく必要があります
+       Turbo Streamsを使う場合もこのトーストpartialに相当する部分をTurbo Streamに載せてブラウザに送ります。ただしTurbo Streamsの場合はPOST/redirect/GETのパターンを使わずに、POSTでいきなりHTMLをブラウザに返します。したがってRails controllerの方では`flash.notice`ではなく、`flash.now.notice`で`notice`に`[トーストに表示する内容]`を格納しておく必要があります
    * いずれの場合もStimulusは`data-global-notification-target="toast"`を持ったtargetが追加されたことを検知し、トーストをアニメーション付きで表示します
-   * なおTurbo Framesの場合は画面の一箇所しかできません。したがってTurbo Framesでトーストを表示するのはかなり難しくなります
+   * なおTurbo Framesの場合は画面の一箇所しかできません。したがってTurbo Framesでトーストを表示するのはかなり難しくなります。Turbo DriveもしくはTurbo Streamsを使います
 
-### Stimulus Controller --- stimulus-controller
+### GlobalNotificationControler Stimulus Controller --- stimulus-controller
 
 ```js
 import {Controller} from "@hotwired/stimulus"

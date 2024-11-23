@@ -30,6 +30,8 @@ class TodosController < ApplicationController
 
   # PATCH/PUT /todos/1 or /todos/1.json
   def update
+    sleep 1
+
     respond_to do |format|
       if @todo.update(todo_params)
         # format.html { redirect_to @todo }

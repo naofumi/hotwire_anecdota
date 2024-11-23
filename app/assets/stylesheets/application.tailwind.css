@@ -50,15 +50,15 @@
 
     /* general component classes */
     .btn-primary {
-        @apply rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600
+        @apply rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600 hover:cursor-pointer
     }
 
     .btn-primary-muted {
-        @apply rounded-md bg-orange-400 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400
+        @apply rounded-md bg-orange-400 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 hover:cursor-pointer
     }
 
     .btn-outline-primary {
-        @apply border-orange-100 rounded-md border border-orange-600 bg-white px-3.5 py-2.5 text-sm font-semibold text-orange-600 hover:bg-orange-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600
+        @apply border-orange-100 rounded-md border border-orange-600 bg-white px-3.5 py-2.5 text-sm font-semibold text-orange-600 hover:bg-orange-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600 hover:cursor-pointer
     }
 
     /* Top Page */

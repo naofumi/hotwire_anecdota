@@ -1,6 +1,9 @@
 <%= form_with(
       model: todo, id: 'todo-form',
-      data: { action: "turbo:submit-end->modal-dialog#hideOnSuccess" },
+      data: {
+        action: "turbo:submit-end->modal-dialog#hideOnSuccess",
+        turbo_frame: "_top",
+      },
     ) do |form| %>
   <% if todo.errors.any? %>
     <div class="text-red-600">
@@ -22,6 +25,6 @@
 
   <div class="mt-8 flex justify-between">
     <button type="button" class="btn-outline-primary" data-action="click->modal-dialog#hide">キャンセル</button>
-    <%= form.submit class: "btn-primary" %>
+    <%= form.submit class: "btn-primary", data: {turbo_submits_with: "更新中..."} %>
   </div>
 <% end %>
