@@ -5,6 +5,7 @@ class TodosController < ApplicationController
 
   # GET /todos or /todos.json
   def index
+    sleep 1
     @todos = Todo.all
   end
 
@@ -16,6 +17,7 @@ class TodosController < ApplicationController
 
   # POST /todos or /todos.json
   def create
+    sleep 1
     @todo = Todo.new(todo_params)
 
     respond_to do |format|
@@ -50,6 +52,7 @@ class TodosController < ApplicationController
 
   # DELETE /todos/1 or /todos/1.json
   def destroy
+    sleep 1
     @todo.destroy!
 
     respond_to do |format|

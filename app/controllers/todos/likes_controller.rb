@@ -4,6 +4,8 @@ class Todos::LikesController < ApplicationController
   set_available_variants :mpa, :streams, :optimistic
 
   def create
+    sleep 1
+
     if params[:like]
       @todo.like_by! current_user
     else

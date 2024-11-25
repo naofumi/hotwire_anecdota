@@ -13,7 +13,7 @@
     <% end %>
     <%= f.text_field :title, class: "w-full border border-gray-400 rounded-lg p-1" %>
     <div class="mt-4 text-right">
-      <%= f.button "Post Todo!", class: "btn-primary" %>
+      <%= f.button "送信する", class: "btn-primary disabled:opacity-50", data: { turbo_submits_with: "送信中..." } %>
     </div>
   <% end %>
 </div>
