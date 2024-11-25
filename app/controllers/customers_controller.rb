@@ -3,6 +3,7 @@ class CustomersController < ApplicationController
 
   # GET /customers or /customers.json
   def index
+    sleep 1
     @customers = Customer.search(params[:query])
   end
 

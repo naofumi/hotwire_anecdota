@@ -1,5 +1,4 @@
 import {Controller} from "@hotwired/stimulus"
-import {debounce} from "../utilities/utilities"
 
 // Connects to data-controller="autosubmit"
 export default class extends Controller {
@@ -7,6 +6,7 @@ export default class extends Controller {
 
   connect() {
     this.form = this.element
+    this.timeoutId = null
   }
 
   submit() {
@@ -14,7 +14,9 @@ export default class extends Controller {
   }
 
   submitWithDebounce() {
-    debounce(() => this.submit(), this.waitValue)()
+    console.log("submitWithDebounce")
+    clearTimeout(this.timeoutId)
+    this.timeoutId = setTimeout(() => this.submit(), this.waitValue)
   }
 }
 
