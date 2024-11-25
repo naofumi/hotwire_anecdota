@@ -1,8 +1,8 @@
 ---
 title: 「いいね」ボタン
-section: Tips
 layout: article
 order: 010
+published: true
 ---
 
 ここでは「いいね」ボタンの実装を通して、UI/UXを段階的に改善していきます。最終的にはoptimistic UI (楽観的UI)まで実装し、ネイティブアプリのような操作性を実現します。

@@ -2,7 +2,10 @@
 We are using the "span inset-0" pattern to expand the `a` tag (link)
 to accept click from the whole of the `td` tag.
 %>
-<tr>
+<tr data-controller="radioable"
+    data-radioable-radioable-outlet=".user-row"
+    data-action="click->radioable#select"
+    class="user-row data-[radioable-selected-value=true]:bg-yellow-200">
   <td class="relative">
     <%= link_to user_user_profile_path(user), data: {turbo_frame: "user-profile"} do %>
       <span class="absolute inset-0"></span>

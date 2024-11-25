@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react"
 document.addEventListener("turbo:load", () => {
   const root = createRoot(document.getElementById("root"))
 
-  root.render(<UsersIndex />);
+  root.render(<UsersIndex/>);
 });
 
 function UsersIndex() {
@@ -33,7 +33,11 @@ function UsersIndex() {
            </thead>
            <tbody className="divide-y divide-gray-200">
            {users.map(user =>
-             <tr key={`user-${user.id}`} className="cursor-pointer" onClick={() => setSelectedUser(user)}>
+             <tr key={`user-${user.id}`}
+                 className={`cursor-pointer ${selectedUser?.id === user.id
+                                              ? "bg-yellow-200"
+                                              : ""}`}
+                 onClick={() => setSelectedUser(user)}>
                <td>{user.email}</td>
              </tr>)}
            </tbody>
@@ -52,36 +56,37 @@ function UserProfile({userId}) {
   const [userProfile, setUserProfile] = useState(null)
 
   useEffect(() => {
-    fetch(`/users/${userId}/user_profile`, {
+    fetch(` /users/${userId}/user_profile`, {
       headers: {Accept: "application/json"},
     }).then(res => res.json())
       .then(data => setUserProfile(data))
-  },[userId])
+  }, [userId])
 
   return (<>
-    {userProfile
-     ? <div>
-       <p>
-         <strong>User:</strong>
-         {userProfile.user_id}
-       </p>
+      {userProfile
+       ? <div>
+         <p>
+           <strong>User:</strong>
+           {userProfile.user_id}
+         </p>
 
-       <p>
-         <strong>Name:</strong>
-         {userProfile.name}
-       </p>
+         <p>
+           <strong>Name:</strong>
+           {userProfile.name}
+         </p>
 
-       <p>
-         <strong>Name jp:</strong>
-         {userProfile.name_jp}
-       </p>
+         <p>
+           <strong>Name jp:</strong>
+           {userProfile.name_jp}
+         </p>
 
-       <p>
-         <strong>Age:</strong>
-         {userProfile.age}
-       </p>
-     </div>
-     : <div>Loading...</div>
-    }
-  </>)
+         <p>
+           <strong>Age:</strong>
+           {userProfile.age}
+         </p>
+       </div>
+       : <div>Loading...</div>
+      }
+    </>
+  )
 }

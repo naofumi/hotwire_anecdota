@@ -1,6 +1,7 @@
 class Users::UserProfilesController < ApplicationController
   before_action :set_user
   before_action :set_user_profile, only: %i[show update destroy]
+  set_available_variants :hotwire, :react, :jquery
 
   # GET /user_profiles/1 or /user_profiles/1.json
   def show

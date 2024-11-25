@@ -58,6 +58,9 @@ application.register("popup", PopupController)
 import RadioTabsController from "./radio_tabs_controller"
 application.register("radio-tabs", RadioTabsController)
 
+import RadioableController from "./radioable_controller"
+application.register("radioable", RadioableController)
+
 import RevealerController from "./revealer_controller"
 application.register("revealer", RevealerController)
 
