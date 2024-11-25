@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.field_with_errors > input {
+    @apply !bg-red-500 !bg-opacity-10 !border-red-500 !border-2
+}
+
 @layer components {
     *[data-controller="select-menu"] {
         > ul {
@@ -44,8 +48,14 @@
         }
     }
 
-    .field_with_errors input {
-        @apply !bg-red-500 !bg-opacity-10 !border-red-500 !border-2
+    .global-notification {
+        @starting-style {
+            opacity: 0 !important;
+            transform: translateY(8px);
+            @media (min-width: 640px) {
+                transform: translateY(0px) translateX(8px);
+            }
+        }
     }
 
     /* general component classes */
@@ -58,7 +68,7 @@
     }
 
     .btn-outline-primary {
-        @apply border-orange-100 rounded-md border border-orange-600 bg-white px-3.5 py-2.5 text-sm font-semibold text-orange-600 hover:bg-orange-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600 hover:cursor-pointer
+        @apply rounded-md border border-orange-600 bg-white px-3.5 py-2.5 text-sm font-semibold text-orange-600 hover:bg-orange-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600 hover:cursor-pointer
     }
 
     /* Top Page */
@@ -132,7 +142,7 @@
 
         ul li {
             background: url('/check-circle.svg') no-repeat left top 6px;
-            padding: 0px 16px 0px 32px;
+            padding: 0 16px 0 32px;
             list-style: none;
             margin: 0;
             vertical-align: middle;
@@ -154,7 +164,7 @@
 
         ol li {
             /*background: url('check-circle.svg') no-repeat left top 12px;*/
-            padding: 0px 16px 0px 4px;
+            padding: 0 16px 0 4px;
             list-style: decimal outside none;
             margin: 0;
             vertical-align: middle;

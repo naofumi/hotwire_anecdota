@@ -28,7 +28,7 @@
 
   <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
     <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
-         data-action="click->modal-dialog#hide">
+         data-action="mousedown->modal-dialog#hide">
       <!--
         Modal panel, show/hide based on modal state.
 
@@ -47,7 +47,7 @@
                   group-data-[modal-dialog-shown-value=true]:scale-100
                   group-data-[modal-dialog-shown-value=true]:ease-out
                   group-data-[modal-dialog-shown-value=true]:duration-200"
-           data-action="click->modal-dialog#void:stop"
+           data-action="mousedown->modal-dialog#void:stop"
       >
         <turbo-frame id="modal-dialog__frame"
                      data-modal-dialog-target="clearable"

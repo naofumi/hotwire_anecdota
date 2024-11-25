@@ -13,9 +13,8 @@
     -->
     <% if notice.present? %>
       <div data-controller="global-notification"
-           data-global-notification-target="toast"
-           data-global-notification-shown-value="false"
-           class="transform transition
+           data-global-notification-shown-value="true"
+           class="global-notification transition-all
                   data-[global-notification-shown-value=false]:ease-in
                   data-[global-notification-shown-value=false]:duration-100
                   data-[global-notification-shown-value=false]:opacity-0

@@ -17,7 +17,10 @@ published: true
 
 1. `<form>`リクエストへの応答ですので、非同期でサーバとの通信をしたことが前提です
 2. トーストはユーザによって消します。この際はサーバとの通信は不要です。Stimulusで行います
-   1. CSS transitionがあるため、Tailwindのクラスが複雑になります。Stimulus controllerの中でHTML属性にCSSクラスを当てるよりも、controllerにValue属性を持たせて、CSSがこれを参照するようにした方がわかりやすいでしょう
+   1. ボタンをクリックしてトーストを非表示にするだけですので、StimulusのValuesステートを使わずに、一見するとCSSクラスを切り替えるだけ十分な気がします
+      1. しかしトーストはアニメーション付きで表示することが多いと思いますので、ここでもアニメーションを使います
+      2. そしてアニメーションをつけるためにCSSクラスが多くなりましたので、CSS擬似セレクタで表示・非表示を切り替えた方がコードがスッキリします
+   2. CSS擬似セレクタを使う際、適切な`aria-*`属性があればこれを使いますが、特になさそうなのでStimulusのValuesステートを使います。今回`*ChangedCallback`を使いませんので、StimulusのValuesのメリットは大してないのですが...
 
 ## コード --- code
 
@@ -39,9 +42,8 @@ published: true
     -->
     <% if notice.present? %>
       <div data-controller="global-notification"
-           data-global-notification-target="toast"
-           data-global-notification-shown-value="false"
-           class="transform transition
+           data-global-notification-shown-value="true"
+           class="global-notification transition-all
                   data-[global-notification-shown-value=false]:ease-in
                   data-[global-notification-shown-value=false]:duration-100
                   data-[global-notification-shown-value=false]:opacity-0
@@ -54,7 +56,7 @@ published: true
         <div class="p-4">
           <div class="flex items-start">
             <div class="flex-shrink-0">
-              <svg class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <svg class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
               </svg>
             </div>
@@ -79,29 +81,26 @@ published: true
   </div>
 </div>
 ```
-* 
+ 
 * 上記のpartialは`application.html.erb`に挿入され、全ての画面で表示されるようにします
 * `data-controller="global-notification"`により、Stimulusの`GlobalNotificationController`に接続します
-* `data-global-notification-shown-value="false"`はControllerが制御するValuesステートです
-* `data-global-notification-target="toast"`はStimulus Controllerのコールバックを起動するために使っています（次の項目に解説しています）
+* `data-global-notification-shown-value="true"`はControllerが制御するValuesステートです。初期状態では表示されます
 * トーストを表示する時は下記のようにします
    * **Turbo Driveを使う場合:**<br>
        Turbo Driveを使う場合、`<form>`によるPOST送信は必ずPOST/redirect/GETのパターンに沿っている必要があります(Hotwireではこれが前提になっています)。一般にRails controllerの最後に`redirect_to "...", notice: "[トーストに表示する内容]"`と記載したり、あるいは`flash.notice = [トーストに表示する内容]`と記載するかと思いますが、上記のコードの`if notice.present?`の`notice`はこの`[トーストに表示する内容]`が格納されています。こうしてトーストの内容を含むHTMLがブラウザに送られます
    * **Turbo Streamsを使う場合:**<br>
        Turbo Streamsを使う場合もこのトーストpartialに相当する部分をTurbo Streamに載せてブラウザに送ります。ただしTurbo Streamsの場合はPOST/redirect/GETのパターンを使わずに、POSTでいきなりHTMLをブラウザに返します。したがってRails controllerの方では`flash.notice`ではなく、`flash.now.notice`で`notice`に`[トーストに表示する内容]`を格納しておく必要があります
-   * いずれの場合もStimulusは`data-global-notification-target="toast"`を持ったtargetが追加されたことを検知し、トーストをアニメーション付きで表示します
-   * なおTurbo Framesの場合は画面の一箇所しかできません。したがってTurbo Framesでトーストを表示するのはかなり難しくなります。Turbo DriveもしくはTurbo Streamsを使います
+   * なおTurbo Framesの場合は画面の一箇所しか画面更新ができません。したがってTurbo Framesでトーストを表示するのはかなり難しくなります。Turbo DriveもしくはTurbo Streamsを使います
 
 ### GlobalNotificationControler Stimulus Controller --- stimulus-controller
 
-```js
+```js:app/javascript/controllers/global_notification_controller.js
 import {Controller} from "@hotwired/stimulus"
 import {classTokenize} from "../utilities/utilities";
 
 // Connects to data-controller="global-notification"
 export default class extends Controller {
   static values = { shown: {type: Boolean, default: true} }
-  static targets = ["toast"]
 
   connect() {
   }
@@ -112,41 +111,44 @@ export default class extends Controller {
     // after allowing the transition to finish.
     setInterval(() => this.element.remove(), 200)
   }
-
-  /*
-  * The @starting-style CSS @rule allows you to set starting values on transitions
-  * when an element is first added to the DOM. https://developer.mozilla.org/en-US/docs/Web/CSS/@starting-style#description
-  *
-  * However, since this is still an experimental feature as of Nov. 2024, we use a
-  * JavaScript workaround.
-  * */
-  toastTargetConnected(element) {
-    // We wait 10 ms to allow the DOM to render with the Toast in the hidden state and then
-    // show the Toast.
-    setTimeout(() => {
-      this.shownValue = true
-    }, 10)
-  }
 }
 ```
 
-* CSSのtransitionを使ったアニメーションの場合、最初の表示状態を指定する必要があります。新たに要素を追加する場合は初期状態がありませんので、[`@starting-style`ルール](https://developer.mozilla.org/ja/docs/Web/CSS/@starting-style)を使って指定します。しかしこの機能はまだ実験的(2024年11月時点でFirefoxが未対応です)です。そこでここではStimulus ControllerのJavaScriptによる迂回策を実施します
-   * `data-global-notification-target="toast"`を指定して、Stimulusのtargetを設定します。こうすることによって、新たにtargetが追加されるとcallbackの`toastTargetConnected()`が自動的に呼ばれます
-   * `toastTargetConnected()`が呼ばれたら、10ms後にValuesステートを変更して`data-global-notification-shown-value="true"`にします。こうするとtransitionアニメーションとともにトーストが表示されます
-   * なお`@starting-style`ルールが使える環境だったり、アニメーションが不要な要件だったりした場合は、この対策は不要になります。Targetを設定する必要もありません。最初から`data-global-notification-shown-value="true"`にしておけばトーストが表示されます
-* トーストは`close()`で消せます。CSSで非表示にするだけでなく、完全にDOM要素を取り除いた方が良いでしょう 
-* なお、`toastTargetConnected()`を使わずに、今回は`connected()`を使っても良いと思います。まずは`target`の接続の監視ができることを覚えていただければと思います
+* トーストは`close()`で削除します
+   * CSSで非表示にするだけでなく、完全にDOM要素を取り除く処理も行います（`this.element.remove()`）
 
+### アニメーション --- animations
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    /* ... */
+    
+    .global-notification {
+        @starting-style {
+            opacity: 0 !important;
+            transform: translateY(8px);
+            @media (min-width: 640px) {
+                transform: translateY(0px);
+                transform: translateX(8px);
+            }
+        }
+    }
+    
+    /* ... */
+}
+```
+
+* Stimulusはなるべくならば[HTMLをあまり書き換えない](/tips/why-avoid-rendering-html-in-stimulus)ため、画面表示の変化はなるべくCSSで実現します
+* `@starting-style`は2024年11月時点ではFirefoxがまだサポートしていませんが、無かったとしてもトーストが登場する時のアニメーションがないだけですので、許容範囲と考えました。ここにあるように`@starting-style`でアニメーションを処理させる選択肢を採用しました
 
 ## まとめ --- summary
 
-* Hotwireでトーストを表示する方法を紹介しました。Turbo Driveを使っているか、それともTurbo Streamsを使っているかによって、通知内容をブラウザに送る方法が異なることを紹介しました（POST/redirect/GETパターンを使用するか否かによって変わります）
-* `@starting-style`ルールを使わずにトーストのアニメーションを表示する方法を紹介しました
-* トーストを使ったUIはそれなりに多いのですが、細かい動作の違いがいろいろあります。この辺りの仕様次第で、やらなければならないことが追加になったりします
+* Hotwireでトーストを表示する方法を紹介しました。Turbo Driveを使うか、それともTurbo Streamsを使うかによって、通知内容をブラウザに送る方法が異なることを紹介しました（POST/redirect/GETパターンを使用するか、POSTだけでダイレクトにレスポンスするかによって変わります）。ただしRailsの`flash#new`を使用すると、ERBに条件分岐を入れずに使えることを確認しました
+* トーストを使ったUIはそれなりに多いのですが、細かい動作の違いがいろいろあります。この辺りの仕様次第で実装が変わりますが、すべてHotwireで対応できると考えています
     * 過去のトーストと最新のトーストを並べて表示するか？
     * 自動的に消えるようにするか？
     * 画面遷移をしたときにも、移動先の画面で表示させるべきか？
-
-個人的にはトーストの内容は「通知」ほど重要ではなく、通常は無視しても差し支えない情報だと感じています。大事なものは別に通知のページが別途にあるべきです。
-
-したがってあまり複雑に作り込む必要はなく、実際のウェブアプリを触っていても無い方が良いのではないかとすら思うことが個人的には多いです。あったとしてもすぐに自動的に消えるようにした方がよく、これのためにコードが複雑になるのは避けたいと思っています。いずれにしてもHotwireで実装することは特に複雑なことでは無いのですが、どこまでやるかはよく考えたら良いかと思います。
