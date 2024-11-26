@@ -13,9 +13,6 @@ application.register("autosubmit", AutosubmitController)
 import CarouselController from "./carousel_controller"
 application.register("carousel", CarouselController)
 
-import DrawerTriggerController from "./drawer_trigger_controller"
-application.register("drawer-trigger", DrawerTriggerController)
-
 import DropdownController from "./dropdown_controller"
 application.register("dropdown", DropdownController)
 

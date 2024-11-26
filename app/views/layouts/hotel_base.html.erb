@@ -18,46 +18,52 @@
 </head>
 
 <body>
-<div class="w-full min-w-[768px]">
-  <nav class="flex h-16">
-    <div class="h-14 w-14">
-      <%= image_tag "orange-tabby-cat-dribbble.jpg",
-                    size: "56x56",
-                    class: "object-cover h-14 w-14",
-                    alt: "logo" %>
-    </div>
-    <div class="h-14 grow flex pl-6 items-center">
-      <%= link_to "レストラン予約", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
-      <%= link_to "スパ予約", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
-      <%= link_to "海外宿泊予約", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
-      <%= link_to "お取り寄せ", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
-      <%= link_to "ふるさと納税", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
-      <%= link_to "宿泊＋航空券", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
-    </div>
-  </nav>
-  <div><%= content_for(:breadcrumbs) %></div>
-  <%= yield %>
-</div>
-
-<div id="slide-drawer"
-     data-controller="slide-drawer"
-     data-slide-drawer-backdrop-hide-class="!opacity-0 invisible"
-     data-slide-drawer-drawer-hide-class="translate-x-[768px]"
+<div data-controller="slide-drawer"
+     data-slide-drawer-shown-value="false"
+     class="group/slide-drawer"
 >
-  <div class="!opacity-0 invisible transition-all duration-500 fixed h-full w-full z-20 bg-black opacity-50 top-0 left-0"
-       data-slide-drawer-target="backdrop"
-       data-action="click->slide-drawer#hide:prevent">
+  <div class="w-full min-w-[768px]">
+    <nav class="flex h-16">
+      <div class="h-14 w-14">
+        <%= image_tag "orange-tabby-cat-dribbble.jpg",
+                      size: "56x56",
+                      class: "object-cover h-14 w-14",
+                      alt: "logo" %>
+      </div>
+      <div class="h-14 grow flex pl-6 items-center">
+        <%= link_to "レストラン予約", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
+        <%= link_to "スパ予約", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
+        <%= link_to "海外宿泊予約", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
+        <%= link_to "お取り寄せ", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
+        <%= link_to "ふるさと納税", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
+        <%= link_to "宿泊＋航空券", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
+      </div>
+    </nav>
+    <div><%= content_for(:breadcrumbs) %></div>
+    <%= yield %>
   </div>
-  <div class="translate-x-[768px] transition-all duration-500 ease-out fixed h-full w-[768px] z-20 bg-white top-0 right-0 overflow-auto"
-       data-slide-drawer-target="drawer">
-    <%= button_tag type: :button,
-                   data: {action: "click->slide-drawer#hide"},
-                   class: "absolute top-2 right-2 h-14 w-14 p-1 bg-gray-500 text-white hover:bg-gray-400 active:bg-gray-600" do %>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
-      </svg>
-    <% end %>
-    <%= turbo_frame_tag :slide_drawer %>
+
+  <div id="slide-drawer">
+    <div class="peer transition-all duration-500 ease-out fixed h-full w-[768px] z-20 bg-white top-0 right-0 overflow-auto
+                aria-hidden:translate-x-[768px]"
+         aria-hidden="true"
+         data-slide-drawer-target="drawer">
+      <%= button_tag type: :button,
+                     data: { action: "click->slide-drawer#hide" },
+                     class: "absolute top-2 right-2 h-14 w-14 p-1 bg-gray-500 text-white hover:bg-gray-400 active:bg-gray-600" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+        </svg>
+      <% end %>
+      <%= turbo_frame_tag :slide_drawer %>
+    </div>
+    <div class="transition-all duration-500 fixed h-full w-full z-19 bg-black opacity-50 top-0 left-0
+                peer-aria-hidden:opacity-0
+                peer-aria-hidden:invisible "
+         aria-hidden="true"
+         data-slide-drawer-target="backdrop"
+         data-action="click->slide-drawer#hide:prevent">
+    </div>
   </div>
 </div>
 </body>

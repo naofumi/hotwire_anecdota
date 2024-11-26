@@ -1,47 +1,40 @@
 import { Controller } from "@hotwired/stimulus"
 
-/*
-* SlideDrawer
-* ====
-*
-* This is a controller for modal dialogs with a backdrop.
-* You can directly show()/hide() or you can control the state remotely
-* from a DrawerTriggerController or the data-slide-drawer-show-value attribute.
-*
-* This current implementation is for a slide-drawer, but it can also be used for
-* regular modal dialogs.
-* */
 // Connects to data-controller="slide-drawer"
 export default class extends Controller {
-  static values = {show: {type: Boolean, default: false}};
-  static targets = ["backdrop", "drawer"]
-  // example:
-  // backdropHide: "!opacity-0 invisible"
-  // drawerHide: "translate-x-[768px]"
-  static classes = ["backdropHide", "drawerHide"]
+  static values = {
+    shown: {type: Boolean, default: false},
+    selectedTab: {type: Number, default: 0},
+  };
+  static targets = ["backdrop", "drawer", "tab"]
 
   connect() {
   }
 
-  show() {
-    this.showValue = true
-    this.#render()
+  show(event) {
+    this.shownValue = true
+    this.selectedTabValue = this.tabTargets.indexOf(event.currentTarget)
   }
 
   hide() {
-    this.showValue = false
+    this.shownValue = false
+    this.selectedTabValue = 0
+  }
+
+  shownValueChanged() {
     this.#render()
   }
 
   #render() {
-    if (this.showValue) {
-      this.backdropTarget.classList.remove(...this.backdropHideClasses)
-      this.drawerTarget.classList.remove(...this.drawerHideClasses)
+    if (this.shownValue) {
       document.body.style.overflow = "hidden"
+      this.drawerTarget.ariaHidden = false
     } else {
-      this.backdropTarget.classList.add(...this.backdropHideClasses)
-      this.drawerTarget.classList.add(...this.drawerHideClasses)
       document.body.style.overflow = "auto"
+      this.drawerTarget.ariaHidden = true
     }
+    this.tabTargets.forEach((target, i) => {
+      target.ariaSelected = (i === this.selectedTabValue)
+    })
   }
 }
