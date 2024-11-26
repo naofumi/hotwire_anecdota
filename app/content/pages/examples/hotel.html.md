@@ -1,11 +1,11 @@
 ---
-title: Apple Store模写（複雑なステート）
+title: 一休 模写
 layout: article
 order: 005
 published: true
 ---
 
-## Apple Storeの模写 --- complex-state
+##一休 模写 --- ikkyuu
 
 ここではApple Storeを模写しながら、Turbo, Stimulusのステートの使い方を考えてみます。Apple Storeの場合は以下のようになっています
 

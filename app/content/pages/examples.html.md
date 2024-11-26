@@ -1,5 +1,5 @@
 ---
 title: コード例
 layout: section
-order: 050
+order: 015
 ---
