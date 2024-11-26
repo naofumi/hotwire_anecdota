@@ -2,7 +2,7 @@ require "test_helper"
 
 class FeaturesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @feature = features(:halekulani_topic1)
+    @feature = features(:manareaserina_topic1)
   end
 
   test "should get index" do

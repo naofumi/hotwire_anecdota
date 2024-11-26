@@ -7,14 +7,14 @@ class Catalog
       "blacktitanium" => { full_name: "Color – Black Titanium" },
     },
     images: {
-      "6-1inch-blacktitanium" => "iphone_images/iphone-15-pro-finish-select-202309-6-1inch-blacktitanium.webp",
-      "6-1inch-bluetitanium" => "iphone_images/iphone-15-pro-finish-select-202309-6-1inch-bluetitanium.webp",
-      "6-1inch-naturaltitanium" => "iphone_images/iphone-15-pro-finish-select-202309-6-1inch-naturaltitanium.webp",
-      "6-1inch-whitetitanium" => "iphone_images/iphone-15-pro-finish-select-202309-6-1inch-whitetitanium.webp",
-      "6-7inch-blacktitanium" => "iphone_images/iphone-15-pro-finish-select-202309-6-7inch-blacktitanium.webp",
-      "6-7inch-bluetitanium" => "iphone_images/iphone-15-pro-finish-select-202309-6-7inch-bluetitanium.webp",
-      "6-7inch-naturaltitanium" => "iphone_images/iphone-15-pro-finish-select-202309-6-7inch-naturaltitanium.webp",
-      "6-7inch-whitetitanium" => "iphone_images/iphone-15-pro-finish-select-202309-6-7inch-whitetitanium.webp",
+      "6-1inch-blacktitanium" => "iphone_images/smartphone-image-6-1inch-blacktitanium.webp",
+      "6-1inch-bluetitanium" => "iphone_images/smartphone-image-6-1inch-bluetitanium.webp",
+      "6-1inch-naturaltitanium" => "iphone_images/smartphone-image-6-1inch-naturaltitanium.webp",
+      "6-1inch-whitetitanium" => "iphone_images/smartphone-image-6-1inch-whitetitanium.webp",
+      "6-7inch-blacktitanium" => "iphone_images/smartphone-image-6-7inch-blacktitanium.webp",
+      "6-7inch-bluetitanium" => "iphone_images/smartphone-image-6-7inch-bluetitanium.webp",
+      "6-7inch-naturaltitanium" => "iphone_images/smartphone-image-6-7inch-naturaltitanium.webp",
+      "6-7inch-whitetitanium" => "iphone_images/smartphone-image-6-7inch-whitetitanium.webp",
     },
     prices: {
       model: {

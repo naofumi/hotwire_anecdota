@@ -2,7 +2,7 @@ require "test_helper"
 
 class SitepressPagesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @hotel = hotels(:halekulani)
+    @hotel = hotels(:manareaserina)
   end
 
   test "should get top page" do

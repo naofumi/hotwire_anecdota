@@ -3,12 +3,12 @@ class HotelsController < HotelBaseController
 
   # GET /hotels or /hotels.json
   def index
-    @hotels = Hotel.all
+    redirect_to Hotel.first
   end
 
   # GET /hotels/1 or /hotels/1.json
   def show
-    @carousel_images = ["10543662.jpg", "11471947.jpg", "11471976.jpg", "11471978.jpg"]
+    @carousel_images = ["10543662.webp", "11471947.webp", "11471976.webp", "11471978.webp"]
   end
 
   # GET /hotels/new

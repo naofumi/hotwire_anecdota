@@ -44,7 +44,7 @@ export function IPhoneShow({catalogData}) {
         <div className="float-right mr-6">
           <a href="" className="bg-orange-600 p-1 border rounded text-white active:bg-orange-700">Clear Order</a>
         </div>
-        <h1 className="text-5xl">Buy iPhone 15 Pro</h1>
+        <h1 className="text-5xl">Buy オラのスマホ Pro</h1>
         <div className="text-sm mt-4 text-light">From $1399 or $58.29/mo. for 24 mo.<sup>*</sup></div>
       </div>
 
@@ -55,11 +55,11 @@ export function IPhoneShow({catalogData}) {
         </div>
         <div className="pl-10">
           <div>
-            <h2 className="mb-6 text-2xl">Model. <span className="text-gray-400">Which is best for you?</span></h2>
+            <h2 className="mb-6 text-2xl">Model. <span className="text-gray-400">どれにするか？</span></h2>
             <div>
               <fieldset disabled={!iPhone.canEnterModel()} className="disabled:opacity-30">
-                {[{model: "6-1inch", title: "iPhone 15 Pro", subtitle: "6.1-inch display"},
-                  {model: "6-7inch", title: "iPhone 15 Pro Max", subtitle: "6.7-inch display"}
+                {[{model: "6-1inch", title: "オラのスマホ Pro", subtitle: "6.1-inch display"},
+                  {model: "6-7inch", title: "オラのスマホ Pro Max", subtitle: "6.7-inch display"}
                 ].map(attributes => <IphoneOption
                   name="model"
                   value={attributes.model}
@@ -72,8 +72,8 @@ export function IPhoneShow({catalogData}) {
               </fieldset>
               <div className="flex justify-between mt-4 p-4 block bg-gray-100 rounded-lg w-full">
                 <div className="text-sm">
-                  <div className="font-bold">Need help choosing a model?</div>
-                  <div className="font-light">Explore the differences in screen size and battery life</div>
+                  <div className="font-bold">助けが欲しいですか？</div>
+                  <div className="font-light">画面の大きさや電池の違いを調べるよ</div>
                 </div>
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
@@ -87,7 +87,7 @@ export function IPhoneShow({catalogData}) {
           </div>
 
           <div className="mt-48">
-            <h2 className="mb-6 text-2xl">Finish. <span className="text-gray-400">Pick your favorite</span></h2>
+            <h2 className="mb-6 text-2xl">Finish. <span className="text-gray-400">好きなの選んで</span></h2>
             <div>
               <div className="text-xl my-4">
                 {colorText}
@@ -112,7 +112,7 @@ export function IPhoneShow({catalogData}) {
           </div>
 
           <div className="mt-48">
-            <h2 className="mb-6 text-2xl">Storage. <span className="text-gray-400">How much space do you need?</span>
+            <h2 className="mb-6 text-2xl">Storage. <span className="text-gray-400">容量はいくらにする？</span>
             </h2>
             <div>
               <fieldset disabled={!iPhone.canEnterRam()} className="disabled:opacity-30">
@@ -130,8 +130,8 @@ export function IPhoneShow({catalogData}) {
               </fieldset>
               <div className="flex justify-between mt-4 p-4 block bg-gray-100 rounded-lg w-full">
                 <div className="text-sm">
-                  <div className="font-bold">Need help choosing a model?</div>
-                  <div className="font-light">Explore the differences in screen size and battery life</div>
+                  <div className="font-bold">助けが欲しいですか？</div>
+                  <div className="font-light">画面の大きさや電池の違いを調べるよ</div>
                 </div>
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"

@@ -52,9 +52,6 @@ application.register("option-list", OptionListController)
 import PopupController from "./popup_controller"
 application.register("popup", PopupController)
 
-import RadioTabsController from "./radio_tabs_controller"
-application.register("radio-tabs", RadioTabsController)
-
 import RadioableController from "./radioable_controller"
 application.register("radioable", RadioableController)
 
@@ -73,14 +70,8 @@ application.register("sidebar", SidebarController)
 import SlideDrawerController from "./slide_drawer_controller"
 application.register("slide-drawer", SlideDrawerController)
 
-import StaticTabsController from "./static_tabs_controller"
-application.register("static-tabs", StaticTabsController)
-
 import SwitchController from "./switch_controller"
 application.register("switch", SwitchController)
-
-import TablistController from "./tablist_controller"
-application.register("tablist", TablistController)
 
 import TiersWithToggleController from "./tiers_with_toggle_controller"
 application.register("tiers-with-toggle", TiersWithToggleController)

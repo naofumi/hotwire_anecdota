@@ -47,19 +47,19 @@
                       aria: { selected: false },
                       turbo_frame: :slide_drawer },
               class: "px-4 inline-block py-4 h-16 text-lg aria-selected:border-b-4 aria-selected:border-blue-500" %>
-  <%= link_to "クチコミ", "",
+  <%= link_to "---", "",
               data: { slide_drawer_target: "tab" },
               aria: { selected: false },
               class: "px-4 inline-block py-4 h-16 text-lg aria-selected:border-b-4 aria-selected:border-blue-500" %>
-  <%= link_to "アクセス", "",
+  <%= link_to "---", "",
               data: { slide_drawer_target: "tab" },
               aria: { selected: false },
               class: "px-4 inline-block py-4 h-16 text-lg aria-selected:border-b-4 aria-selected:border-blue-500" %>
-  <%= link_to "空室カレンダー", "",
+  <%= link_to "---", "",
               data: { slide_drawer_target: "tab" },
               aria: { selected: false },
               class: "px-4 inline-block py-4 h-16 text-lg aria-selected:border-b-4 aria-selected:border-blue-500" %>
-  <%= link_to "写真", "",
+  <%= link_to "---", "",
               data: { slide_drawer_target: "tab" },
               aria: { selected: false },
               class: "px-4 inline-block py-4 h-16 text-lg aria-selected:border-b-4 aria-selected:border-blue-500" %>
@@ -79,9 +79,3 @@
 </main>
 
 
-<div>
-  <%= link_to "Edit this hotel", edit_hotel_path(@hotel) %> |
-  <%= link_to "Back to hotels", hotels_path %>
-
-  <%= button_to "Destroy this hotel", @hotel, method: :delete %>
-</div>

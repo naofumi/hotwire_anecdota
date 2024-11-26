@@ -72,7 +72,7 @@ class Iphone
   end
 
   def image_path
-    "iphone_images/iphone-15-pro-finish-select-202309-#{model || DEFAULT_MODEL}-#{color || DEFAULT_COLOR}.webp"
+    "iphone_images/smartphone-image-#{model || DEFAULT_MODEL}-#{color || DEFAULT_COLOR}.webp"
   end
 
   def pricing

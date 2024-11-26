@@ -120,7 +120,7 @@ class Iphone
   end
 
   def image_path
-    "iphone_images/iphone-15-pro-finish-select-202309-#{model || DEFAULT_MODEL}-#{color || DEFAULT_COLOR}.webp"
+    "iphone_images/smartphone-image-#{model || DEFAULT_MODEL}-#{color || DEFAULT_COLOR}.webp"
   end
 
   def pricing
@@ -163,8 +163,8 @@ end
 ```erb:app/views/iphones/_iphone.html.erb
   <%= form_with url: iphone_path, method: :post do %>
     <%= fieldset_tag nil, disabled: !@iphone.model_enterable?, class: "disabled:opacity-30" do %>
-      <% [{ model: "6-1inch", title: "iPhone 15 Pro", subtitle: "6.1-inch display" },
-          { model: "6-7inch", title: "iPhone 15 Pro Max", subtitle: "6.7-inch display" }].each do |attributes| %>
+      <% [{ model: "6-1inch", title: "オラのスマホ Pro", subtitle: "6.1-inch display" },
+          { model: "6-7inch", title: "オラのスマホ Pro Max", subtitle: "6.7-inch display" }].each do |attributes| %>
         <%= render 'option',
                    name: :model,
                    value: attributes[:model],
