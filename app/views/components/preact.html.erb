@@ -1,0 +1,8 @@
+<% provide :head, javascript_include_tag("application_preact", "data-turbo-track": "reload", type: "module") %>
+<% set_breadcrumbs [["Preact", component_path(:navigation)]] %>
+
+<%= render 'template',
+           title: "Preact",
+           description: "" do %>
+  <div id="root"></div>
+<% end %>
