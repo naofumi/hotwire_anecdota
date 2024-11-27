@@ -1,7 +1,7 @@
 ---
 title: Stimulus Controllerの構造
 layout: article
-order: 020
+order: 30
 published: true
 ---
 

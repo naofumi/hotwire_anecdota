@@ -1,7 +1,7 @@
 ---
 title: コンポーネントの粒度
 layout: article
-order: 005
+order: 500
 ---
 
 ## 視覚的とインタラクションのコンポーネント粒度

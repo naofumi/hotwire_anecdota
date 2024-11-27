@@ -1,7 +1,7 @@
 ---
 title: Turbo FramesとTurbo Streamsの違い
 layout: article
-order: 005
+order: 20
 published: true
 ---
 

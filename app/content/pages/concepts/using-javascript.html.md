@@ -1,7 +1,7 @@
 ---
 title: JavaScriptは使おう！
 layout: article
-order: 060
+order: 10
 published: true
 ---
 

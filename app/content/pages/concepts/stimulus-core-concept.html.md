@@ -1,7 +1,7 @@
 ---
 title: Stimulusのコア・コンセプト
 layout: article
-order: 020
+order: 40
 published: true
 ---
 

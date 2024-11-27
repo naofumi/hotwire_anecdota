@@ -2,7 +2,7 @@
 title: Stimulus ControllerはなぜControllerか？
 section: Concept
 layout: article
-order: 60
+order: 500
 ---
 
 ## Stimulus Controllerのイメージ
