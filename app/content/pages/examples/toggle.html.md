@@ -1,7 +1,7 @@
 ---
 title: トグル
 layout: article
-order: 005
+order: 10
 published: true
 ---
 

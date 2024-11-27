@@ -1,7 +1,7 @@
 ---
 title: サイドバーメニュー
 layout: article
-order: 005
+order: 60
 published: true
 ---
 

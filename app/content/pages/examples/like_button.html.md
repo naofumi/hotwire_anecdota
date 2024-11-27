@@ -1,7 +1,7 @@
 ---
 title: 「いいね」ボタン
 layout: article
-order: 010
+order: 110
 published: true
 ---
 

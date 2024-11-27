@@ -3,7 +3,6 @@ title: ウェブデザイナーも使うHotwire
 section: Introduction
 layout: article
 order: 7
-published: true
 ---
 
 ## Hotwireはウェブデザイナーにも向いている

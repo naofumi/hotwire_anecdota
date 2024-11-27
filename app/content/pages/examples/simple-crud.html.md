@@ -1,9 +1,9 @@
 ---
-title: フォーム
+title: 簡単なCRUD
 section: Tips
 layout: article
-order: 005
-published: false
+order: 5
+published: true
 ---
 
 Hotwireを開発した37signals社は、Ruby on Railsを使って（発明して）ずっとプロジェクト管理ソフトウェアを作ってきた会社です。ですからHotwireおよびその全身のRails UJS(Unobtrusive JavaScript)はCRUDが得意ですし、そのためのちょっとした工夫があります。

@@ -2,7 +2,7 @@
 title: サイドパネル
 section: Components
 layout: article
-order: 005
+order: 40
 published: true
 ---
 

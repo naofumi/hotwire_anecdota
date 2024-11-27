@@ -2,7 +2,7 @@
 title: リアルタイム検索
 section: Tips
 layout: article
-order: 005
+order: 50
 published: true
 ---
 

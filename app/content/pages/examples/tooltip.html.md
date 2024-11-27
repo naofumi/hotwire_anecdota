@@ -2,6 +2,6 @@
 title: ツールチップ
 section: Components
 layout: article
-order: 005
+order: 500
 ---
 
