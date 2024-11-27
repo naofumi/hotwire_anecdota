@@ -9,11 +9,11 @@ export default class DropdownController extends Controller {
   }
 
   show(event) {
-    this.switchTargets.forEach((target) => target.ariaExpanded = true)
+    this.switchTargets.forEach((target) => target.ariaExpanded = "true")
   }
 
   hide(event) {
-    this.switchTargets.forEach((target) => target.ariaExpanded = false)
+    this.switchTargets.forEach((target) => target.ariaExpanded = "false")
   }
 
   void(event) {}

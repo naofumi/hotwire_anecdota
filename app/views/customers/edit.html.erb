@@ -1,12 +1,9 @@
-<% content_for :title, "Editing customer" %>
+<% content_for :title, "Edit Customer" %>
 
-<h1>Editing customer</h1>
+<div class="max-w-lg mx-auto">
+  <div class="mb-16">
+    <h1 class="text-4xl text-center">Edit Customer</h1>
+  </div>
 
-<%= render "form", customer: @customer %>
-
-<br>
-
-<div>
-  <%= link_to "Show this customer", @customer %> |
-  <%= link_to "Back to customers", customers_path %>
+  <%= render "form", customer: @customer %>
 </div>

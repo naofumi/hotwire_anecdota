@@ -2,15 +2,14 @@ import {Controller} from "@hotwired/stimulus"
 
 // Connects to data-controller="accordion"
 export default class extends Controller {
-  static targets = ["revealable", "switch"]
-  static classes = ["toggleSwitch"]
+  static targets = ["revealable"]
 
   connect() {
   }
 
   toggle(event) {
+    event.currentTarget.ariaExpanded = event.currentTarget.ariaExpanded == "true" ? "false" : "true"
     this.#toggleRevealableTargets()
-    this.#toggleSwitchTargets()
   }
 
   #toggleRevealableTargets() {
@@ -27,12 +26,6 @@ export default class extends Controller {
         const scrollHeight = target.scrollHeight
         target.style.height = scrollHeight + "px"
       }
-    })
-  }
-
-  #toggleSwitchTargets() {
-    this.switchTargets.forEach(target => {
-      target.classList.toggle(this.toggleSwitchClass)
     })
   }
 }

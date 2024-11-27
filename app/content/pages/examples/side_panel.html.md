@@ -3,7 +3,6 @@ title: サイドパネル
 section: Components
 layout: article
 order: 40
-published: true
 ---
 
 ここで作成するUIは下記のものです。

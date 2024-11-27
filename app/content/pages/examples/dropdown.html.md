@@ -13,14 +13,16 @@ published: true
 
 ## 考えるポイント --- points-to-consider
 
+![interactive-flow-hotwire.webp](content_images/interactive-flow-hotwire.webp "mx-auto max-w-[500px]")
+
 1. サーバから非同期でデータをもらう必要はありません
    1. したがってStimulusだけで実装できます
    2. ネイティブでの実装（チェックボックスを使う）も可能ですが、今回は使いません
-2. Stimulusを使うことが決定しましたので、次はStimulus Controllerの制御範囲を考えます
+2. 次はStimulus Controllerの制御範囲を考えます
    1. UI要素は大きく、ボタン（顔のアイコン）と表示されるメニューがあります
    2. 表示されるメニューからマウスが離れるとメニューが消えますが、これも制御対象になります
    3. したがって顔のアイコンとメニュー自身の双方を囲むStimulus Controllerを用意します
-3. ステートを変更するActionはホバー状態の１つです。またステートの変更で変わるのはボタンの`aria-expanded`とメニューの表示・非表示です。これならばステートはボタンの`aria-expanded`に持たせて、CSSでメニューの表示・非表示を制御できそうです。Stimulusの[Values](https://stimulus.hotwired.dev/reference/values)でステート管理をする必要はなさそうです
+3. ステートを変更するActionはマウスのホバー状態のだけで単純です。またまたメニューの表示・非表示の際に`aria-expanded`を変更するべきです。このようなシンプルなケースでは、[Stimulusの`Values`ステート](https://stimulus.hotwired.dev/reference/values)を使わずに、`aria-expanded`だけで十分に管理できそうです。
 
 ## コード --- code
 
@@ -46,7 +48,7 @@ published: true
               aria-haspopup="true">
         <span class="absolute -inset-1.5"></span>
         <span class="sr-only">Open user menu</span>
-        <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+        <%= image_tag("content_images/avatar.webp", class: "h-8 w-8 rounded-full") %>
       </button>
 
       <!--
@@ -84,7 +86,7 @@ published: true
 
 * `data-controller="dropdown"`でStimulus Controllerと繋げています。ボタン（顔の写真があるところ）とメニューを囲むようにStimulus Controllerを繋げます
 * Actionは`data-action="mouseenter->dropdown#show"`と`data-action="mouseleave->dropdown#hide"`のところです。`mouseenter`と`mouseleave`イベントに反応してStimulus controllerの`show()`と`hide()`を呼び出しています
-* 今回は`aria-expanded="false"`のところをステートとします。これが`"false"`になったり`"true"`になっているのをCSSが読み取って、メニューを表示・非表示にします
+* 今回は`aria-expanded="false"`のところをステートとします。これが`"false"`になったり`"true"`になっているのをCSS擬似セレクタが読み取って、メニューを表示・非表示にします
 * `peer-aria-[expanded=true]:`となっているところでTailwind CSSが`aria-expanded=`のステートを監視します。これに応じてメニューの表示・非表示を切り替えます
 
 ### Stimulus controller --- stimulus
@@ -100,11 +102,11 @@ export default class DropdownController extends Controller {
   }
 
   show(event) {
-    this.switchTargets.forEach((target) => target.ariaExpanded = true)
+    this.switchTargets.forEach((target) => target.ariaExpanded = "true")
   }
 
   hide(event) {
-    this.switchTargets.forEach((target) => target.ariaExpanded = false)
+    this.switchTargets.forEach((target) => target.ariaExpanded = "false")
   }
 }
 ```
@@ -115,5 +117,6 @@ export default class DropdownController extends Controller {
 
 ## まとめ --- summary
 
-* ドロップダウンメニューをStimulusで作るにあたって、特にステートの持ち方に着目して実装方法を検討しました
-* Stimulusで実装する方法を紹介しました
+* ドロップダウンメニューをStimulusで作るにあたって以下のことを検討しました
+  * Stimulus controllerの制御範囲（どこをカバーするべきか）
+  * ステートをどのように持つか（今回は`aria-expanded`属性で十分と判断しました）

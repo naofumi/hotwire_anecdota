@@ -13,10 +13,10 @@
 
     <div class="hidden ml-2 max-h-full md:w-52 md:fixed md:block">
       <!-- chapter list -->
-      <%= link_to current_page.parent.data.title, "#" %>
+      <%= link_to current_page.data.title, "#" %>
       <%= safe_join extract_toc(full_document) %>
     </div>
-    <div class="px-6 py-8 md:px-8 md:pl-52">
+    <div class="px-6 py-8 md:px-8 md:pl-60">
       <div class="mx-auto max-w-2xl text-base leading-7 text-gray-700">
         <p class="text-base leading-7 text-orange-600">
           <%= current_page.parent.data.title %>

@@ -13,17 +13,21 @@ module TocHelper
     def toc
       document.children.each_with_object([]) do |node, memo|
         if /^h[2-3]$/.match?(node.name)
-          memo << if node.child['href']
-            link_to(node.text, node.child['href'],
-                            class: "#{toc_indent_class(node.name)} block my-1 text-base text-orange-600")
-                  else
-                    tag.span(node.text, class: "#{toc_indent_class(node.name)} block my-1 text-base text-gray-600")
-          end
+          memo << link_or_span(node)
         end
       end
     end
 
     private
+
+      def link_or_span(node)
+        if node.child['href']
+          link_to(node.text, node.child['href'],
+                  class: "#{toc_indent_class(node.name)} block my-1 text-base text-orange-600")
+        else
+          tag.span(node.text, class: "#{toc_indent_class(node.name)} block my-1 text-base text-gray-600")
+        end
+      end
 
       def document
         html_fragment(@html_document)

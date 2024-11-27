@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :customers
   # Defines the root path route ("/")
   # root "components#index"
   sitepress_pages
@@ -20,6 +19,7 @@ Rails.application.routes.draw do
   resource :board
   resources :buckets
   resources :components, only: [:index, :show]
+  resources :customers, only: [:index, :edit, :update]
   resources :features
   resources :file_nodes do
     get :details, on: :member

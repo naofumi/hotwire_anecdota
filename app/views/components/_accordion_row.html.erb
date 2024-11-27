@@ -1,14 +1,14 @@
 <div class="py-4 border-b border-gray-300"
-     data-controller="accordion"
-     data-accordion-toggle-switch-class="rotate-180">
+     data-controller="accordion">
   <h3 class="flex justify-between text-xl cursor-pointer">
     <span><%= title %></span>
-    <div data-accordion-target="switch" class="pt-2 transition-all duration-300"
-         data-action="click->accordion#toggle">
+    <button aria-expanded="false"
+            class="aria-[expanded=true]:rotate-180 pt-2 transition-all duration-300"
+            data-action="click->accordion#toggle">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
       </svg>
-    </div>
+    </button>
   </h3>
   <div data-accordion-target="revealable" class="h-0 overflow-hidden transition-all duration-300 text-sm">
     <div class="mt-4"><%= yield %></div>
