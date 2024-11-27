@@ -1,4 +1,4 @@
-<% provide :head, javascript_include_tag("application_react_users", "data-turbo-track": "reload") %>
+<% provide :head, javascript_include_tag("application_react_users", "data-turbo-track": "reload", type: "module") %>
 <% set_breadcrumbs [["Users", users_path]] %>
 
 <% content_for :title, "Users" %>
