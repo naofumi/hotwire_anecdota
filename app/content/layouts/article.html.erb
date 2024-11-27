@@ -6,21 +6,30 @@
                    current_page: %>
       </div>
     </div>
-    <div class="hidden ml-2 max-h-full lg:w-72 lg:fixed lg:block">
+
+    <% full_document = capture do %>
+      <%= yield %>
+    <% end %>
+
+    <div class="hidden ml-2 max-h-full md:w-52 md:fixed md:block">
       <!-- chapter list -->
+      <%= link_to current_page.parent.data.title, "#" %>
+      <%= safe_join extract_toc(full_document) %>
     </div>
-    <div class="px-6 py-8 lg:px-8 lg:pl-80">
+    <div class="px-6 py-8 md:px-8 md:pl-52">
       <div class="mx-auto max-w-2xl text-base leading-7 text-gray-700">
         <p class="text-base leading-7 text-orange-600">
           <%= current_page.parent.data.title %>
         </p>
-        <h1 class="bg-orange-50 z-10 sticky top-0 pt-1 text-3xl font-light text-gray-900 sm:text-4xl">
+        <h1 class="bg-orange-50 pt-1 text-3xl font-light text-gray-900 sm:text-4xl">
           <%= current_page.data.title %>
         </h1>
         <p class="mt-6 text-xl leading-8">
           <%= current_page.data.subtitle %>
         </p>
-        <div class="lg:hidden">
+
+        <div class="md:hidden">
+          <%= safe_join extract_toc(full_document) %>
           <!-- chapter list -->
         </div>
         <div class="mt-10 max-w-3xl mx-auto">
@@ -32,7 +41,7 @@
           <% end %>
 
           <div class="md">
-            <%= yield %>
+            <%= full_document %>
           </div>
 
           <% if current_page.children.any? %>

@@ -89,14 +89,14 @@
     /* Markdown */
     .md {
         h2 {
-            @apply mt-4 mb-4 pt-4 pb-0 text-2xl border-b border-dotted border-gray-400 font-light text-gray-900 sticky bg-orange-50 top-10 scroll-mt-10 sm:top-10 sm:scroll-mt-10
+            @apply mt-4 mb-4 pt-4 pb-0 text-2xl border-b border-dotted border-gray-400 font-light text-gray-900  bg-orange-50 top-10 sm:top-10
         }
         h2 > a {
             @apply text-inherit decoration-0 hover:text-orange-600
         }
 
         h3 {
-            @apply font-bold mt-4 py-2 text-lg sticky bg-orange-50 top-[89px] scroll-mt-[89px] sm:top-[89px] sm:scroll-mt-[89px]
+            @apply font-bold mt-4 py-2 text-lg bg-orange-50 top-[89px] sm:top-[89px]
         }
         h3 > a {
             @apply text-inherit decoration-0 hover:text-orange-600;
