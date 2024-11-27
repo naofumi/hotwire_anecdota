@@ -1,9 +1,10 @@
 <div data-controller="carousel" class="relative">
   <div class="w-full h-[360px]">
     <% @carousel_images.each_with_index do |filename, i| %>
-      <div class="<%= "invisible opacity-0" unless i == 0 %> transition-all duration-1000"
+      <div class="aria-[hidden=true]:invisible aria-[hidden=true]:opacity-0 transition-all duration-1000"
            data-carousel-target="slide"
-           data-carousel-key="<%= i %>">
+           aria-hidden="<%= i == 0 ? "true" : "false" %>"
+      >
         <%= image_tag "hotel_images/#{filename}", class: "absolute w-full h-[360px] object-cover" %>
       </div>
     <% end %>
@@ -26,7 +27,8 @@
     <% 0.upto(@carousel_images.size - 1).each do |index| %>
       <%= button_tag "⚫︎",
                      type: :button,
-                     class: "text-white #{index == 0 ? "opacity-100" : "opacity-50"}",
+                     aria: {selected: (index == 0 ? "true" : "false")},
+                     class: "aria-[selected=true]:opacity-100 opacity-50 text-white",
                      data: { action: "click->carousel#move",
                              carousel_index_param: index,
                              carousel_target: "pagination"

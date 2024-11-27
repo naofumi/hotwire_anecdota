@@ -5,19 +5,19 @@ class TodosController < ApplicationController
 
   # GET /todos or /todos.json
   def index
-    sleep 1
+    sleep 1 unless Rails.env.test?
     @todos = Todo.all
   end
 
   # GET /todos/1 or /todos/1.json
   # GET /todos/1/edit
   def edit
-    sleep 1
+    sleep 1 unless Rails.env.test?
   end
 
   # POST /todos or /todos.json
   def create
-    sleep 1
+    sleep 1 unless Rails.env.test?
     @todo = Todo.new(todo_params)
 
     respond_to do |format|
@@ -32,7 +32,7 @@ class TodosController < ApplicationController
 
   # PATCH/PUT /todos/1 or /todos/1.json
   def update
-    sleep 1
+    sleep 1 unless Rails.env.test?
 
     respond_to do |format|
       if @todo.update(todo_params)
@@ -52,7 +52,7 @@ class TodosController < ApplicationController
 
   # DELETE /todos/1 or /todos/1.json
   def destroy
-    sleep 1
+    sleep 1 unless Rails.env.test?
     @todo.destroy!
 
     respond_to do |format|

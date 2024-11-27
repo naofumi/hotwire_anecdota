@@ -7,7 +7,8 @@ class HotelsControllerTest < ActionDispatch::IntegrationTest
 
   test "should get index" do
     get hotels_url
-    assert_response :success
+
+    assert_redirected_to hotel_url(Hotel.first)
   end
 
   test "should get new" do

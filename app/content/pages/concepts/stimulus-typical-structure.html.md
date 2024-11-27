@@ -5,17 +5,29 @@ order: 30
 published: true
 ---
 
+![stimulus-structure.webp](content_images/stimulus-structure.webp "max-w-[400px] mx-auto")
+
 ## はじめに --- intro
 
-ここでは私がStimulus Controllerを書くときのパターンを紹介します。他人のものとの比較は十分にやっているわけではありませんので、今のところは私の書き方の紹介になります。
+ここでは私がStimulus Controllerを書くときのパターンを紹介します。他人のものとの比較は十分にやっているわけではありませんが、概ね似ているのではないかと思います。
 
-## Action, Renderingを分ける
+## 単方向データフロー
+
+Reactが普及させた単方向データフローはロジックがわかりやすく、デバッグしやすいのが特徴です。特に複数のActionが複数のTargetを更新しているケースではロジックが追いやすくなります。
+
+## 具体例
 
 下記は比較的複雑なStimulus Controllerの例です。各セクションをコメントしていますので、コードの中をご確認ください。
 
-私が気を使っているのはActionのメソッドの行数を少なくして、RailsのThin Controllerのようにし、ステートの更新に集中させることです（ただしステートを介さないような簡単な処理の場合は直接targetを更新させます）。
+私は**Actionのメソッドの行数を少なくして、RailsのThin Controllerのようにしています**。ステートの更新に集中させることで、責務を明確にします（ただしステートを介さないような簡単な処理の場合は直接targetを更新させます）。
 
-またレンダリングを簡単にするために、すべてのtargetをまとめてレンダリングします。どのActionがどのtargetを更新するかを管理するのは、数が多くなると大変なので、多少の無駄が発生しても良いぐらいの気持ちですべてをまとめてレンダリングします。
+ActionハンドラーとRenderを明確に分けるのは大きなメリットがあると感じています。
+
+また下記では`IPhone`クラスを用意し、ビジネスロジックは完全にそこに収納しています。下記のような処理の流れになります。
+
+1. Actionで`this.iphoneValue`ステートを更新する
+2. `#render()`するとき、上記ステートで`IPhone`クラスを初期化
+3. `IPhone`クラスのビジネスロジックに応じて、画面を変更する
 
 ```js:app/javascript/controllers/iphone_static_controller.js
 import {Controller} from "@hotwired/stimulus"
@@ -134,3 +146,4 @@ export default class extends Controller {
   }
 }
 ```
+

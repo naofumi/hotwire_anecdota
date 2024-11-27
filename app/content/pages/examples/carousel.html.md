@@ -5,13 +5,13 @@ order: 70
 published: true
 ---
 
-カルーセルはよく使われるUIウィジェットで広く使われているライブラリも存在します。しかし自作できるのであれば、設定方法に悩む必要もなくなり、却って使いやすくなることも珍しくありません。ここではStimlusで自作したカルーセルを紹介します。
+カルーセルはよく使われるUIウィジェットで広く使われているライブラリも存在します。しかし自作できるのであれば、細かい設定方法に悩む必要もなくなり、却って使いやすくなることも珍しくありません。ここではStimlusで自作したカルーセルを紹介します。
 
 下記のようなUIになります。
 
 ![carousel.mov](content_images/carousel.mov)
 
-[デモはこちら]からご覧ください。
+[デモはこちら](/hotels)からご覧ください。
 
 ## 考えるポイント --- points-to-consider
 
@@ -30,9 +30,10 @@ published: true
 <div data-controller="carousel" class="relative">
   <div class="w-full h-[360px]">
     <% @carousel_images.each_with_index do |filename, i| %>
-      <div class="<%= "invisible opacity-0" unless i == 0 %> transition-all duration-1000"
+      <div class="aria-[hidden=true]:invisible aria-[hidden=true]:opacity-0 transition-all duration-1000"
            data-carousel-target="slide"
-           data-carousel-key="<%= i %>">
+           aria-hidden="<%= i == 0 ? "true" : "false" %>"
+      >
         <%= image_tag "hotel_images/#{filename}", class: "absolute w-full h-[360px] object-cover" %>
       </div>
     <% end %>
@@ -52,10 +53,11 @@ published: true
     </svg>
   <% end %>
   <div class="inline-block absolute bottom-4 left-[50%] -translate-x-1/2">
-    <% 0.upto(@carousel_images.size).each do |index| %>
+    <% 0.upto(@carousel_images.size - 1).each do |index| %>
       <%= button_tag "⚫︎",
                      type: :button,
-                     class: "text-white #{index == 0 ? "opacity-100" : "opacity-50"}",
+                     aria: {selected: (index == 0 ? "true" : "false")},
+                     class: "aria-[selected=true]:opacity-100 opacity-50 text-white",
                      data: { action: "click->carousel#move",
                              carousel_index_param: index,
                              carousel_target: "pagination"
@@ -64,13 +66,13 @@ published: true
     <% end %>
   </div>
 </div>
-
 <!-- ... -->
 ```
 
 * `data-controller="carousel"`のところでStimulus controllerを繋げています
-* イベントにControllerに伝えるのは`data-action`を設定している箇所です。`data: { action: "click->carousel#previous" }`（左矢印ボタン）, `data: { action: "click->carousel#next" }`（右矢印ボタン）, `data: { action: "click->carousel#move"...`（ページネーションボタン）の箇所です。それぞれ`carouse` controllerの`previous()`, `next()`, `move()`を読んでいます。`move()`のところは`carousel_index_param: index`がありますので、何番目のボタンがクリックされたかも`move()`に[伝えています](https://stimulus.hotwired.dev/reference/actions#action-parameters)
+* イベントにControllerに伝えるのは`data-action`を設定している箇所です。`data: { action: "click->carousel#previous" }`（左矢印ボタン）, `data: { action: "click->carousel#next" }`（右矢印ボタン）, `data: { action: "click->carousel#move"...`（ページネーションボタン）の箇所です。それぞれ`carousel` controllerの`previous()`, `next()`, `move()`を読んでいます。`move()`のところは`carousel_index_param: index`がありますので、何番目のボタンがクリックされたかも`move()`メソッドに[伝えています](https://stimulus.hotwired.dev/reference/actions#action-parameters)
 * イベントに呼応してControllerが書き換えるのは`target`となっている箇所です。`data-carousel-target="slide"`は画像の箇所です。選択されている画像を表示し、他を非表示にする必要があります。`carousel_target: "pagination"`のところはページネーションボタンです。現在選択されているものだけをハイライトする必要があります
+* `slide`の箇所、および`pagination`の箇所は、それぞれ`aria-[hidden=true]` `aria-[selected=true]`の擬似CSSセレクタを使用して、表示をだし分けています（`aria-*`属性はStimulus controllerが設定します）
 
 ```js:app/javascript/controllers/carousel_controller.js
 import {Controller} from "@hotwired/stimulus"
@@ -83,16 +85,7 @@ export default class extends Controller {
     autoplay: {type: Boolean, default: true},
     interval: {type: Number, default: 4000},
   }
-  #hideClasses;
-  #paginationSelectedClasses;
-  #paginationUnselectedClasses;
-
-  initialize() {
-    this.#hideClasses = ["invisible", "opacity-0"]
-    this.#paginationSelectedClasses = ["opacity-100"]
-    this.#paginationUnselectedClasses = ["opacity-50"]
-  }
-
+  
   connect() {
     if (this.autoplayValue) {
       this.slideInterval = setInterval(() => {
@@ -143,11 +136,9 @@ export default class extends Controller {
   #renderPaginationTargets() {
     this.paginationTargets.forEach((target, index) => {
       if (index === this.currentSlideValue) {
-        target.classList.remove(...this.#paginationUnselectedClasses)
-        target.classList.add(...this.#paginationSelectedClasses)
+        target.ariaSelected = "true"
       } else {
-        target.classList.remove(...this.#paginationUnselectedClasses)
-        target.classList.add(...this.#paginationUnselectedClasses)
+        target.ariaSelected = "false"
       }
     })
   }
@@ -155,9 +146,9 @@ export default class extends Controller {
   #renderSlideTargets() {
     this.slideTargets.forEach((target, index) => {
       if (index === this.currentSlideValue) {
-        target.classList.remove(...this.#hideClasses)
+        target.ariaHidden = "false"
       } else {
-        target.classList.add(...this.#hideClasses)
+        target.ariaHidden = "true"
       }
     })
   }
@@ -187,24 +178,15 @@ export default class extends Controller {
     * `autoplay`は自動再生をするかどうかのブール値です
     * `interval`は自動再生する時の時間間隔です
     * なおこれらの値はHTML要素の`data-carousel-*-value`などで外部から指定することもできます。つまりサーバでERBを生成するときに`data-carousel-*-value`を設定すれば、Stimulus controllerの初期値を任意に設定できるわけです。**またStimulus controllerの外から別のJavaScriptなどで変えることもできます。実際開発者用コンソールからこの値を変更すれば、瞬時に反映されます。**
-* `initialize()`はStimulus controllerの初期化です。接続されるよりも先に実行されるべき内容を記述します
-    * 今回は`*ValueChanged()`を使っていますが、これは`connect()`よりも先に呼び出されます。したがってその中で使われるような初期設定は`initialize()`の中で行っておく必要があります
-    * 今回はCSSクラスをプライベートフィールドとして設定しています。画像を隠したり、ページネーションのハイライトをするときに使用するCSSクラスです。Stimulusでは[CSS Classes](https://stimulus.hotwired.dev/reference/css-classes)を使ってこういうクラスを指定しても良いのですが、その都度HTMLに記載するのが面倒くさいと思えば、このようにStimulus controllerにハードコードしても良いと思います。Stimulus controllerの再利用性を考えすぎると、却って使いにくくなりますので、ここは適切な塩梅で使い分けます。今回は再利用性は重要ではないと考えてハードコーディングを選択しました。そしてこれは`currentSlideValueChanged()`の中の`#render()`で使用されますので、ここで設定しています
 * `connect()`はStimulus controllerが接続されたときに呼び出されるものです。ここでは自動再生をするために`setInterval()`を使っています
 * `disconnect()`はStimulus controllerが消える時（例えば接続されているHTML要素が消える時など）に呼び出されます。先ほどの`setInterval()`をclearしています
 * `move()`, `next()`, `previous()`はそれぞれイベントハンドラです。HTMLに記載したActionから呼び出されます。それぞれ`currentSlideValue`ステートを更新し、さらに自動再生をオフにする処理をしています。
-* `currentSlideValueChanged()`は`currentSlideValue`ステートが変更された時に自動的に呼ばれるコールバックです。ここで`#render()`を呼び、Stimulus controllerが管理するtargetを再描画します。こうすることで **action ==> value (ステート) ==> targetの再描画** のデータフローになりますので、アクションとステートの管理がしやすくなります。これはReactのデータフローと似ています
-* `#renderPaginationTargets()`, `#renderSlideTargets()`は実際にtargetを再描画しているところです。`currentSlideValue`ステートに応じて、古いCSSクラスを外して、新しいCSSクラスを当てるパターンになっています
+* `currentSlideValueChanged()`は`currentSlideValue`ステートが変更された時に自動的に呼ばれるコールバックです。ここで`#render()`を呼び、Stimulus controllerが管理するtargetを再描画します。これは[Stimulus Controllerの構造](/concepts/stimulus-typical-structure)で紹介しているものです
+* `#renderPaginationTargets()`, `#renderSlideTargets()`は実際にtargetを再描画しているところです。`currentSlideValue`ステートに応じて、`aria-*`属性を指定しています
 
 ## まとめ --- summary
 
 * Stimulusを使ってカルーセルを自作しました
-* ３つのActionと２つの画面要素の書き換えが必要ですので、Valuesステートを使って集中管理した方がスッキリします。これはReactでも使われている考え方です
-* ActionによってValuesステートを更新するメソッドと、Valuesを元にtargetを更新するメソッドを明確に分けた方が良いと思います。Actionのハンドラーの中から直接targetを更新することは避けて、`currentSlideValueChanged()`に委ねるべきです
+* ３つのActionと２つの画面要素の書き換えが必要ですので、Valuesステートを使って集中管理した方がスッキリします。これはReactでも使われている考え方で、私も[Stimulus Controllerの構造](/concepts/stimulus-typical-structure)で解説しています
+* Stimulus Controllerの`#render()`では、ActionによってValuesステートから`aria-*`属性を更新します。そしてCSS擬似セレクタで`aria-*`を画面表示に反映させています
 * Valuesは`data-*-values`としてHTML要素の属性になっています。これを変更すれば、リアルタイムでStimulus controllerのステートを変更できますので、バックエンドのERBからカスタマイズしたり、他のライブラリと接続する時に便利です
-
-今回のカルーセルは一通りの機能を持っていますが、コードの流れが直線的でわかりやすくなっています。これはReactと同様のデータフローを採用したためです。StimulusでもReactのようなデータフローを簡単に実装できることが実感できたのではないかと思います。
-
-Stimulusのキャッチフレーズが["modest JavaScript framework"](https://stimulus.hotwired.dev)であることからも分かるとおり、多機能は目指していません。今回やったことはもちろんjQueryでもできます。ただしjQueryは複雑なUIを作る時にスパゲッティコードになりやすいという悪評がありました。Stimulusが目指しているのは、jQueryの欠点を解消し、クリーンでメンテナンスしやすいコードを書くための枠組みです。それはこういう小さな機能で実現されています。
-
-https://www.nngroup.com/articles/designing-effective-carousels/

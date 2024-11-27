@@ -42,7 +42,7 @@ Rails.application.routes.draw do
       resource :completion
     end
   end
-  resources :todos do
+  resources :todos, only: [:index, :edit, :create, :update, :destroy] do
     resource :likes, only: [:create], module: :todos
   end
   resource :variants, only: [:update]

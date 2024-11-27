@@ -3,7 +3,7 @@ class CustomersController < ApplicationController
 
   # GET /customers or /customers.json
   def index
-    sleep 1
+    sleep 1 unless Rails.env.test?
     @customers = Customer.search(params[:query])
   end
 
@@ -13,7 +13,7 @@ class CustomersController < ApplicationController
 
   # PATCH/PUT /customers/1 or /customers/1.json
   def update
-    sleep 1
+    sleep 1 unless Rails.env.test?
 
     respond_to do |format|
       if @customer.update(customer_params)

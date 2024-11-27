@@ -11,15 +11,13 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create todo" do
-    assert_difference("Todo.count") do
-      post todos_url, params: { todo: { completed_at: @todo.completed_at, title: @todo.title } }
+    with_variant(:streams) do
+      assert_difference("Todo.count") do
+        post todos_url, params: { todo: { completed_at: @todo.completed_at, title: @todo.title } },
+             headers: { accept: "text/vnd.turbo-stream.html" }
+      end
     end
 
-    assert_redirected_to todos_url
-  end
-
-  test "should show todo" do
-    get todo_url(@todo)
     assert_response :success
   end
 
@@ -29,8 +27,9 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update todo" do
-    patch todo_url(@todo), params: { todo: { completed_at: @todo.completed_at, title: @todo.title } }
-    assert_redirected_to todo_url(@todo)
+    patch todo_url(@todo), params: { todo: { completed_at: @todo.completed_at, title: @todo.title } },
+          headers: { accept: "text/vnd.turbo-stream.html" }
+    assert_turbo_stream action: :replace, count: 2
   end
 
   test "should destroy todo" do
