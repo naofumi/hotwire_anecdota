@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   # root "components#index"
   sitepress_pages
   sitepress_root
-  resources :users do
-    resource :user_profile, module: :users
+  resources :users, only: [:index] do
+    resource :user_profile, module: :users, only: [:show]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

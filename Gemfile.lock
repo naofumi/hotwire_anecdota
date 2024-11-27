@@ -357,7 +357,7 @@ DEPENDENCIES
   rubocop-rails-omakase
   selenium-webdriver
   sitepress-rails (~> 4.0)
-  sqlite3
+  sqlite3 (>= 2.3)
   stimulus-rails
   thruster
   turbo-rails
