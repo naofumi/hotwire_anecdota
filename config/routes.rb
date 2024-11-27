@@ -18,15 +18,14 @@ Rails.application.routes.draw do
 
   resource :board
   resources :buckets
-  resources :components, only: [:index, :show]
-  resources :customers, only: [:index, :edit, :update]
-  resources :features
+  resources :components, only: [ :index, :show ]
+  resources :customers, only: [ :index, :edit, :update ]
   resources :file_nodes do
     get :details, on: :member
   end
-  resources :fixtures, only: [:create]
+  resources :fixtures, only: [ :create ]
   resources :hotels do
-    resources :features, module: :hotels do
+    resources :features, module: :hotels, only: [ :index ] do
       collection do
         get :room
         get :restaurant
@@ -36,14 +35,14 @@ Rails.application.routes.draw do
     end
   end
   resource :iphone
-  resources :react, only: [:show]
+  resources :react, only: [ :show ]
   resources :tasks do
     scope module: :tasks do
       resource :completion
     end
   end
-  resources :todos, only: [:index, :edit, :create, :update, :destroy] do
-    resource :likes, only: [:create], module: :todos
+  resources :todos, only: [ :index, :edit, :create, :update, :destroy ] do
+    resource :likes, only: [ :create ], module: :todos
   end
-  resource :variants, only: [:update]
+  resource :variants, only: [ :update ]
 end

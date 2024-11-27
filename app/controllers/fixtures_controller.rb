@@ -1,4 +1,4 @@
-require 'rake'
+require "rake"
 
 class FixturesController < ApplicationController
   def create

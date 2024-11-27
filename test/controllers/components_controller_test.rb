@@ -12,4 +12,10 @@ class ComponentsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
   end
+
+  test "get show comoponents/non_existant_name returns 404" do
+    assert_raises ActionController::RoutingError do
+      get component_path(:non_existant_name)
+    end
+  end
 end

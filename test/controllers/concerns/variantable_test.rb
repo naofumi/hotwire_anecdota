@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require "test_helper"
 
 class VariantableTest < ActionDispatch::IntegrationTest
-
   class MockVariantableController < ApplicationController
     include Variantable
 
@@ -19,6 +18,6 @@ class VariantableTest < ActionDispatch::IntegrationTest
   end
 
   test "available_variants returns correct values" do
-    assert [:default_variant, :available_variant], MockVariantableController.new.send(:available_variants)
+    assert [ :default_variant, :available_variant ], MockVariantableController.new.send(:available_variants)
   end
 end

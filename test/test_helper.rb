@@ -23,7 +23,7 @@ class ActionDispatch::IntegrationTest
   end
 
   def with_variant(variant, &block)
-    selector_mock = Minitest::Mock.new.expect :validated_variant, variant, [nil]
+    selector_mock = Minitest::Mock.new.expect :validated_variant, variant, [ nil ]
     Variantable::VariantSelector.stub :new, selector_mock do
       block.call
     end

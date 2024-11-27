@@ -45,7 +45,7 @@ class TodosController < ApplicationController
         format.turbo_stream
       else
         # format.html { render :edit, status: :unprocessable_content }
-        format.turbo_stream { render status: :unprocessable_content}
+        format.turbo_stream { render status: :unprocessable_content }
       end
     end
   end

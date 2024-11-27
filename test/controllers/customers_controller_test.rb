@@ -25,7 +25,10 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update customer" do
-    patch customer_url(@customer), params: { customer: { jp_name: @customer.jp_name, name: @customer.name } }
+    patch customer_url(@customer), params: { customer: { jp_name: @customer.jp_name, name: "new name" } }
+
     assert_redirected_to customers_url
+    @customer.reload
+    assert "new name", @customer.name
   end
 end

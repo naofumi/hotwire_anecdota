@@ -8,7 +8,7 @@ class HotelsController < HotelBaseController
 
   # GET /hotels/1 or /hotels/1.json
   def show
-    @carousel_images = ["10543662.webp", "11471947.webp", "11471976.webp", "11471978.webp"]
+    @carousel_images = [ "10543662.webp", "11471947.webp", "11471976.webp", "11471978.webp" ]
   end
 
   # GET /hotels/new

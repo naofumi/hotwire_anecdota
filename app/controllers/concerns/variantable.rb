@@ -48,4 +48,3 @@ class Variantable::VariantSelector
     @available_variants.first
   end
 end
-

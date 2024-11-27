@@ -13,7 +13,7 @@ class Todos::LikesController < ApplicationController
     end
 
     if request.variant.mpa?
-      return redirect_to todos_path
+      redirect_to todos_path
     end
   end
 

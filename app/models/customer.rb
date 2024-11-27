@@ -5,7 +5,7 @@ class Customer < ApplicationRecord
     return all if query.blank?
 
     sanitized_query = sanitize_sql_like query
-    Customer.where(["name LIKE ? OR jp_name LIKE ?",
-                    "%#{sanitized_query}%", "%#{sanitized_query}%"])
+    Customer.where([ "name LIKE ? OR jp_name LIKE ?",
+                    "%#{sanitized_query}%", "%#{sanitized_query}%" ])
   }
 end

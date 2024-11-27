@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class ApplicationMarkdownTest < ActiveSupport::TestCase
   test "fixture values are valid" do

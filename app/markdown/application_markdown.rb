@@ -28,14 +28,14 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   # about at https://github.com/vmg/redcarpet#and-its-like-really-simple-to-use
   # Make sure you know what you're doing if you're using this to render user inputs.
   def enable
-    [:fenced_code_blocks, :disable_indented_code_blocks, :underline, :footnotes, :tables, :strikethrough, :no_intra_emphasis]
+    [ :fenced_code_blocks, :disable_indented_code_blocks, :underline, :footnotes, :tables, :strikethrough, :no_intra_emphasis ]
   end
 
   # https://github.com/sitepress/markdown-rails?tab=readme-ov-file#customizing-renderer
   FORMATTER = Rouge::Formatters::HTMLInline.new(THEME)
 
   def block_code(code, language)
-    language_part, filename_part = language.split(':', 2).map(&:strip)
+    language_part, filename_part = language.split(":", 2).map(&:strip)
     lexer = Rouge::Lexer.find(language_part)
     content_tag(:div, class: "my-2") do
       safe_join([
@@ -94,17 +94,17 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
 
   private
 
-    # This is provided as an example; there's many more YouTube URLs that this wouldn't catch.
-    # def youtube_tag(url, alt)
-    #   embed_url = "https://www.youtube-nocookie.com/embed/#{CGI.parse(url.query).fetch("v").first}"
-    #   content_tag :iframe,
-    #               src: embed_url,
-    #               width: 560,
-    #               height: 325,
-    #               allow: "encrypted-media; picture-in-picture",
-    #               allowfullscreen: true \
-    #     do
-    #       alt
-    #     end
-    # end
+  # This is provided as an example; there's many more YouTube URLs that this wouldn't catch.
+  # def youtube_tag(url, alt)
+  #   embed_url = "https://www.youtube-nocookie.com/embed/#{CGI.parse(url.query).fetch("v").first}"
+  #   content_tag :iframe,
+  #               src: embed_url,
+  #               width: 560,
+  #               height: 325,
+  #               allow: "encrypted-media; picture-in-picture",
+  #               allowfullscreen: true \
+  #     do
+  #       alt
+  #     end
+  # end
 end

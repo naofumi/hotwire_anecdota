@@ -2,8 +2,8 @@ class ComponentsController < ApplicationController
   include ViewTemplateCollectable
   collect_view_templates "components"
 
-  before_action :set_template, only: [:show]
-  before_action :set_data, only: [:show]
+  before_action :set_template, only: [ :show ]
+  before_action :set_data, only: [ :show ]
 
   def index
     @available_templates = view_templates
