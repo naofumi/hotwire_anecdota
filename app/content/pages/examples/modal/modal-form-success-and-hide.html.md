@@ -24,19 +24,19 @@ Hotwireで作成したモーダル中のフォームからリクエストを送�
       2. Turbo Driveが実装としては一番楽になります
       3. ただしモーダルを消すときにアニメーションが出しにくいので今回は採用しません
       4. また（これはTurbo Framesでも同じですが）POST/redirect/GETを使わなければならないため、遅延が大きくなり、レスポンスが悪くなります
-   5. 実は「`form`の送信をTurbo Streamsで行う」というのは正確ではありません。なぜならTurbo Streamsで応答するかどうかは`form`送信時には決まらないからです。Turbo Streamsでレスポンスするかどうかはあくまでもサーバ側が決めます。詳しくは[Turbo FramesとTurbo Streamsの違い](/concepts/frames-vs-streams)で紹介しています。したがって、例えば更新が成功したときはTurbo Driveでredirectして、失敗したときはTurbo Streamsでエラーメッセージを出すなどということも可能です（今回は双方ともTurbo Streamsで処理していますが）
-2. `form`送信のpending UI（処理中のUI）は、Ruby on Railsが昔からデフォルトで提供している機能を使います（UJS: Unobtrusive JavaScript）。Hotwireでも同じ機能が引き継がれています
+   5. 実は「`form`の送信をTurbo Streamsで行う」というのは正確ではありません。なぜならTurbo Streamsで応答するかどうかは`form`送信時には決まらないからです。Turbo Streamsでレスポンスするかどうかはあくまでもサーバ側が決めます。詳しくは[Turbo FramesとTurbo Streamsの違い](/concepts/frames-vs-streams)で紹介しています。したがって、**例えば更新が成功したときはTurbo Driveでredirectして、失敗したときはTurbo Streamsでエラーメッセージを出すなどということも可能です**（今回は双方ともTurbo Streamsで処理していますが）
+2. `form`送信のpending UI（待ちUI）は、Ruby on Railsが昔からデフォルトで提供している機能を使います（UJS: Unobtrusive JavaScript）。Hotwireでも同じ機能が引き継がれています
    1. Turboは[`form`のsubmitterを自動的にdisabledにします](https://turbo.hotwired.dev/reference/attributes#automatically-added-attributes) [^disabled]
    2. 上記のdisabledをCSSで検知し、ボタンの彩度を落とします 
    3. ボタンの名前を変更します（「更新する」から「更新中...」へ）
 3. `form`送信が成功した場合に限り、モーダルを閉じます
-   1. `form`送信結果を受け取り、JavaScriptを起動する必要がありますので、Stimulusを使います
+   1. `form`送信結果を受け取り、JavaScriptでモーダルを閉じる必要がありますので、Stimulusを使います
    2. `form`送信が失敗した場合の処理は別途解説します
 4. `form`送信が成功した場合はTurbo Streamsを使って、裏画面の書き換えを行います
    1. トーストを表示します
    2. 背景画面のデータを更新します
 
-[^disabled]: 私はRails出身ということもあり、`form`送信時にdisabledにするのは二重送信防止策として一般的だと思いましたが、Next.jsなどではやっておらず、MDNなどでも言及していないようでした。ただし二重送信対策としては依然として一般的なようです。
+[^disabled]: 私はRails出身ということもあり、`form`送信時にdisabledにするのは二重送信防止策として一般的だと思いましたが、Next.jsなどではやっておらず、MDNなどでも言及していないようです。ただし実際に試してみるとNext.jsは二重送信をしてしまいますし、二重送信対策としてのdisabledはウェブ上でも広く推奨されています。なるべくならばやった方が間違いないでしょう
 
 ## コード --- code
 
@@ -73,8 +73,8 @@ Hotwireで作成したモーダル中のフォームからリクエストを送�
    * `hideOnSuccess()`メソッドはレスポンスステータスを確認し、`success`の場合にモーダルを非表示します
 * `form`の`data-turbo-frame="_top"`の箇所はpending UI（待ちUI）の関係で使っています
    * Turboで`form`を送信すると、`form`自身、およびそれが関連する`turbo-frame`に`aria-busy="true"` 属性が自動的に付与されます
-   * しかし今回は[モーダル表示のpending UI](/examples/modal/modal-show-with-animation#modal-frame)でも同様にpending UIを出しています
-   * モーダル表示のpending UIは表示したくないので、上記の`form`が`<turbo-frame id="modal-dialog__frame">`と敢えて紐づかいないようにしています。そのために`"_top"`を指定しています
+   * しかし今回は[モーダル表示のpending UI](/examples/modal/modal-show-with-animation#modal-frame)でも同様にpending UI（待ちUI）を出しています
+   * モーダル表示時のpending UIは表示したくないので、上記の`form`が`<turbo-frame id="modal-dialog__frame">`と敢えて紐づかいないようにしています。そのために`"_top"`を指定しています
 * 一番下の`<button>`(キャンセル)のところは、クリックしたら`ModalDialogController`の`hide()`を呼ぶようにしています。モーダルを非表示にするものです
 * `form.submit`のところは「更新する」ボタンです。これに`data-turbo-submits-with`属性がついていて、"更新中..."となっています。これはTurboが用意してくれているoptimistic UI (楽観的UI)です。ボタンをクリックして`form`を送信すると、ボタンの名前が自動的に"更新中..."に切り替わってくれます
    * さらにTurboはボタンを自動的に`disabled`にもしてくれますので、`form`の二重送信防止になります
@@ -128,12 +128,12 @@ end
 
 * `update`のActionでリクエストを受け取り、レスポンスを返します
 * ここでは`flash.now`にトーストのメッセージをセットし、Turbo Streamのレスポンスを返しています
-  * 通常は`flash`を使うところを、ここでは`flash.now`を使っています。`flash`はリダイレクト後にトーストを表示するときに使いますので、「次回のリクエスト」で使いたい時に使用します
+  * RailsでMPAやTurbo Driveで`update`をするときは、`flash`を使うことがほとんどです。一方、ここでは`flash.now`を使っています。`flash`はリダイレクト後にトーストを表示するときに使いますので、「次回のリクエスト」で使いたい時に使用します
   * それに対して`flash.now`は「現在のリクエスト」が対象です。すぐに使いたい時に使います
   * POST/Redirect/GETのパターンを使う時はredirectを挟むので`flash`を、今回のようにPOSTに対して直接レスポンスを返している場合は`flash.now`と使い分ける形になります
   * なお[トーストを表示する方法](/examples/toast)については、別途解説しています
 * 今はまず正常系だけ見ていますので、Turbo StreamのERBテンプレートでは、`if ... else`の`else`の方だけみます
-  * Turbo Streamの`turbo_stream.replace dom_id(@todo)`でデータが更新された行を`replace`で置換しています。具体的背景画面`app/views/todos/index.html.erb`の`app/views/todos/_todo.html.erb` partialを使っているところのうち、`@todo`に該当する箇所だけを置換しています
+  * Turbo Streamの`turbo_stream.replace dom_id(@todo)`でデータが更新された行を`replace`で置換しています。背景画面である`app/views/todos/index.html.erb`では、各行を`app/views/todos/_todo.html.erb` partialでレンダリングしていますが、`@todo`に該当する行だけを置換しています
   * Turbo Streamの`turbo_stream.replace "global-notification"`ではトーストを表示します。トーストの内容は`global_notification` partialからとっています。なおトーストをよく使用するのであれば、丸ごとhelperにしてしまった方が便利かもしれません（下の`global_notification_stream` helperのコードを参照）
 
 ```rb:app/helpers/global_notification_helper.rb

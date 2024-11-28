@@ -5,22 +5,22 @@ order: 90
 published: true
 ---
 
+トーストは`<form>`リクエストの送信後に表示して、成功したことをユーザに伝えるのが主な目的です。
+
 ここで作るのは下記のようなUIです。
 
-**トーストの画像**
+![toast.mov](content_images/toast.mov "mx-auto max-w-[500px]")
 
 [デモはこちら](/components/accordion)に用意しています。
 
 ## 考えるポイント --- thinking-points
 
-トーストは`<form>`リクエストの送信後に表示して、成功したことをユーザに伝えるのが主な目的です。他にも任意に通知を表示するときも使用できますが、今回は`<form>`送信のユースケースのみを想定します。
-
-1. `<form>`リクエストへの応答ですので、非同期でサーバとの通信をしたことが前提です
-2. トーストはユーザによって消します。この際はサーバとの通信は不要です。Stimulusで行います
-   1. ボタンをクリックしてトーストを非表示にするだけですので、StimulusのValuesステートを使わずに、一見するとCSSクラスを切り替えるだけ十分な気がします
-      1. しかしトーストはアニメーション付きで表示することが多いと思いますので、ここでもアニメーションを使います
-      2. そしてアニメーションをつけるためにCSSクラスが多くなりましたので、CSS擬似セレクタで表示・非表示を切り替えた方がコードがスッキリします
-   2. CSS擬似セレクタを使う際、適切な`aria-*`属性があればこれを使いますが、特になさそうなのでStimulusのValuesステートを使います。今回`*ChangedCallback`を使いませんので、StimulusのValuesのメリットは大してないのですが...
+1. `<form>`送信後のレスポンスとして、Turbo DriveもしくはTurbo Streamsにより、トーストのHTMLがDOMに挿入されるものとします
+   1. 挿入時にアニメーションとともにトーストが表示されるようにしますが、これはCSSだけで十分です
+2. トーストには「消す」ボタンがあります。これはサーバ通信しませんので、Stimulusでの実装になります
+3. Stimulusを使う時はまずステートを考えます
+   1. トーストを消したもう表示することがありません。DOMからトーストを削除できます。したがって本来であれば、敢えてステートを持つ必要はありません
+   2. しかしアニメーションの都合上で、一旦（アニメーション付きで）非表示にしてから、DOMから削除します。アニメーション制御のためだけにステートを持たせます
 
 ## コード --- code
 
@@ -90,7 +90,7 @@ published: true
        Turbo Driveを使う場合、`<form>`によるPOST送信は必ずPOST/redirect/GETのパターンに沿っている必要があります(Hotwireではこれが前提になっています)。一般にRails controllerの最後に`redirect_to "...", notice: "[トーストに表示する内容]"`と記載したり、あるいは`flash.notice = [トーストに表示する内容]`と記載するかと思いますが、上記のコードの`if notice.present?`の`notice`はこの`[トーストに表示する内容]`が格納されています。こうしてトーストの内容を含むHTMLがブラウザに送られます
    * **Turbo Streamsを使う場合:**<br>
        Turbo Streamsを使う場合もこのトーストpartialに相当する部分をTurbo Streamに載せてブラウザに送ります。ただしTurbo Streamsの場合はPOST/redirect/GETのパターンを使わずに、POSTでいきなりHTMLをブラウザに返します。したがってRails controllerの方では`flash.notice`ではなく、`flash.now.notice`で`notice`に`[トーストに表示する内容]`を格納しておく必要があります
-   * なおTurbo Framesの場合は画面の一箇所しか画面更新ができません。したがってTurbo Framesでトーストを表示するのはかなり難しくなります。Turbo DriveもしくはTurbo Streamsを使います
+   * なおTurbo Framesの場合は画面の一箇所しか画面更新ができません。したがってTurbo Framesでトーストを表示するのはかなり難しくなります。Turbo DriveもしくはTurbo Streamsを使った方が良いでしょう
 
 ### GlobalNotificationControler Stimulus Controller --- stimulus-controller
 
@@ -142,13 +142,13 @@ export default class extends Controller {
 }
 ```
 
-* Stimulusはなるべくならば[HTMLをあまり書き換えない](/tips/why-avoid-rendering-html-in-stimulus)ため、画面表示の変化はなるべくCSSで実現します
+* Stimulusはなるべくならば[HTMLをあまり書き換えたくない](/tips/why-avoid-rendering-html-in-stimulus)ため、画面表示の変化はなるべくCSSで実現します
 * `@starting-style`は2024年11月時点ではFirefoxがまだサポートしていませんが、無かったとしてもトーストが登場する時のアニメーションがないだけですので、許容範囲と考えました。ここにあるように`@starting-style`でアニメーションを処理させる選択肢を採用しました
 
 ## まとめ --- summary
 
-* Hotwireでトーストを表示する方法を紹介しました。Turbo Driveを使うか、それともTurbo Streamsを使うかによって、通知内容をブラウザに送る方法が異なることを紹介しました（POST/redirect/GETパターンを使用するか、POSTだけでダイレクトにレスポンスするかによって変わります）。ただしRailsの`flash#new`を使用すると、ERBに条件分岐を入れずに使えることを確認しました
-* トーストを使ったUIはそれなりに多いのですが、細かい動作の違いがいろいろあります。この辺りの仕様次第で実装が変わりますが、すべてHotwireで対応できると考えています
-    * 過去のトーストと最新のトーストを並べて表示するか？
-    * 自動的に消えるようにするか？
-    * 画面遷移をしたときにも、移動先の画面で表示させるべきか？
+* Hotwireでトーストを表示する方法を紹介しました
+  * Turbo Driveを使うか、それともTurbo Streamsを使うかによって、通知内容をブラウザに送る方法が異なることを紹介しました
+    * Turbo DriveはPOST/redirect/GETパターンを使用しますので、リダイレクト後の画面描画に反映させます
+    * Turbo StreamsはPOSTだけでダイレクトにレスポンスを返しますので、同じリクエストの画面描画に反映させます
+  * Railsの`flash`と`flash#new`を使用すると、ERBに条件分岐を入れずに、Controller側から上記の２つのケースにうまく対応できることを解説しました

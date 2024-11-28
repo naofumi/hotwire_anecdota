@@ -13,13 +13,11 @@ HotwireとRuby on Railsの組み合わせは、管理画面を高速にたくさ
 
 もちろん[ActiveAdmin](https://github.com/activeadmin/activeadmin)、[RailsAdmin](https://www.ruby-toolbox.com/projects/rails_admin)、[Administrate](https://administrate-demo.herokuapp.com)や最近は[Avo](https://avohq.io)などのアドミ画面ライブラリも充実していますが、多くの場合はこれすら不要なぐらいにRuby on Railsは高速に管理画面が作れます。
 
-JSON APIを設計し、フロントエンドエンジニアと協議している間に管理画面が出来上がってしまうぐらいの感覚です。
-
-でもエンドユーザ画面もすごいんです。
+**React用のJSON APIを設計するよりも早く、CRUDが出来上がってしまうこともあります。**
 
 ## 論より証拠なHotwireのエンドユーザ画面 --- hotwire-is-good-for-end-user
 
-Hotwireが管理画面に適しているのは間違いありません。JSON APIを作る手間がありませんので、多数の画面を次から次へと作るのにはとても向いています。しかし**管理画面だけ**に向いているわけではありません。
+Hotwireが管理画面に適しているのは間違いありません。しかし**管理画面だけ**に向いているわけではありません。
 
 下記の企業では、Hotwire（もしくは近い技術）をエンドユーザ画面で使用し、成功しています。
 

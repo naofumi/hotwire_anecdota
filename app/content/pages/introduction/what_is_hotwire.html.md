@@ -14,22 +14,21 @@ Hotwireを使うと下記のことができます。
 * 動的なモーダルやスライドメニューなどのインタラクティブなUIコンポーネントが作れます
 * キャッシュなどを活用した高速なレスポンスが実現できます
 
-これはReactやNext.jsの特徴と言われていものと同じです。つまりHotwireを使うと、ReactやNext.jsで作成されたものと同等のことできます。
+つまりHotwireはSPAです。ReactやNext.jsと同じです。**基盤技術が同じですので、Hotwireを使えばReactやNext.jsと同じことができます**。
 
 ## Hotwireはシンプル --- hotwire-is-simple
 
-* Hotwireでは主にサーバでHTMLを生成します。Next.jsのSSRやServer Componentと同じです
+* Hotwireでは主にサーバでHTMLを生成します。Next.jsのSSRやReact Server Componentと同じです
     * このため、**ブラウザにデータを送信するためのJSON APIの作成が不要です** 
-* Hotwireは直接DOMを変更します
-    * Reactは常にステートを介さないDOM変更は原則禁止ですが、Hotwireの場合はシンプルな場合はステートを介さなくても良いです
-    * 基本的に**ステート管理をあまり意識する必要がありません**
-* 複雑なUI/UXを作るときに初めてStimulusのステート管理を学べば十分です 
+* Hotwireは直接DOMを変更できます
+    * Reactはステートを介さないDOM変更は原則禁止です。常にステートを介します。一方でHotwireはステートを使っても良いですし、シンプルな場合は省略しても構いません
+* Hotwireは、複雑なUI/UXを作るときにStimulusの[Valuesによるステート管理](https://stimulus.hotwired.dev/reference/values)を行います
 
 ## HotwireのJavaScriptは簡単 --- hotwire-javascript-is-simple
 
-* Reactを書くためには、JavaScriptのES6記述、高階関数、async await非同期処理など、高いレベルの知識が必要です。React自身も難解ですが、その前にJavaScriptの難解な機能を理解する必要があります
-* Hotwireはこれらをほとんど使いません。JavaScript入門チュートリアルレベルの言語機能だけ理解できていれば十分です
-* **HTML/CSSには詳しいけれども、高度なJavaScriptはイマイチ自信がない人（特にデザイナー）でもHotwireは使いこなせます**
+* Reactを書くためには、JavaScriptのES6記述、高階関数、async await非同期処理など、高いレベルの知識が必要です。React自身も難解ですが、その前にJavaScriptをしっかり理解する必要があります
+* Hotwireは入門チュートリアルレベルのJavaScriptだけ理解できていれば十分です。JavaScriptの難しい機能は知らなくてもHotwireは書けます
+* **HTML/CSSは使いこなせるけれども、高度なJavaScriptはイマイチ自信がない人（特にデザイナー）でもHotwireは使いこなせます**
 
 ## Hotwireはセミオーダー、Reactはフルオーダー --- hotwire-semi-order-react-full-order
 
@@ -42,19 +41,17 @@ Reactの方がブラウザステートに合わせて柔軟にUIを調節しや�
 
 ![what-is-hotwire-react.png](content_images/what-is-hotwire-react.png "max-w-[600px] mx-auto")
 
-## Hotwireは直接的、Reactは間接的
+## Hotwireは直接的、Reactは間接的 --- hotwire-is-direct-react-is-indirect
 
-* HotwireはHTMLをサーバから受け取り、HTMLを制御します
-* Reactはステートをサーバから受け取り、ステートを制御します。そして必ずステートを介して、間接的にHTMLを操作します
+* HotwireはTurboでHTMLをサーバから受け取り、StimulusでHTML/CSSを制御します
+* Reactはサーバからデータを受け取り、ステートに保存します。そして必ずステートを介して、間接的にHTMLを操作します。直接HTML/CSSを変更してはいけません
 
 ## とにかくHotwireはReactとは異なる
 
-* HotwireとReactは幼稚園の時は一緒に遊んだけれども、小学校から別々の国に行った従兄弟同士みたいなものです
-* 今では喋る言葉も、考え方も変わっています
+* HotwireとReactは結局はJavaScriptです。したがってやれることは同じです
+* しかしHotwireとReactは同じことをやるにしても、アプローチが大きく異なります
 
 ![hotwire-history.webp](content_images/hotwire-history.webp "mx-auto max-w-[500px]")
 
 Reactの考え方は公式サイトの[Reactの流儀](https://ja.react.dev/learn/thinking-in-react)で解説されています。またHotwireとReactのアプローチの違いについては[Hotwire, React, jQueryのアプローチ](/how_to_think/approach)で解説しています。
 
-
-ReactとHotwireの考え方が分岐した歴史については[Hotwireの歴史](/introduction/history)で解説しています。

@@ -2,7 +2,6 @@
 title: Hotwireは複雑なUIに不向き？
 layout: article
 order: 10
-published: true
 ---
 
 「Reactなら複雑なUI/UXに向いているけれども、Hotwireでは無理ではないか？」という意見があります。これは本当でしょうか？それ以前に「複雑なUI/UX」とな何を指すのでしょうか？

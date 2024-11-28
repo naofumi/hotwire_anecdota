@@ -6,7 +6,7 @@ export default class extends Controller {
     shown: {type: Boolean, default: false},
     selectedTab: {type: Number, default: 0},
   };
-  static targets = ["backdrop", "drawer", "tab"]
+  static targets = ["drawer", "tab"]
 
   connect() {
   }

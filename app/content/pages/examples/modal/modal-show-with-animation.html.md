@@ -17,17 +17,17 @@ published: true
 
 モーダルは簡単に作れると考える人が多くいます。しかし実際にはモーダルの表示・非表示だけでも、かなり多くの機能が必要になります。これがなければ十分な機能を持ったモーダルとはいえず、そもそもモーダルではなく、普通のMPAの機能で十分な可能性がありますので、[UIの選択としてモーダルが間違っている可能性があり、再考が必要です](/opinions/should_you_use_modals)。
 
-本サイトではHotwireを使って本格的なUI/UXを作成するのが目的です。[偶有的な複雑性(accidental complexity)](https://ja.wikipedia.org/wiki/銀の弾などない)はHotwireを使うことで回避できます。しかし本質的な複雑性(essential complexity)とは真剣に向き合うしかありません。この点はご容赦ください。
+本サイトではHotwireを使って本格的なUI/UXを作成するのが目的です。[偶有的な複雑性(accidental complexity)](https://ja.wikipedia.org/wiki/銀の弾などない)はHotwireを使うことで回避できます。しかし本質的な複雑性(essential complexity)とは真剣に向き合うしかありません。そのため、解説はかなりの分量になっていますが、ご容赦ください。
 
 ![modal-dialog-show.png](content_images/modal-dialog-show.png "max-w-full")
 
 1. **モーダルの内容はサーバから非同期通信で取得します**。何らかの形でTurboを使用します
    1. モーダルは画面の一部分だけを覆いますので、Turbo Drive, Turbo Frames, Turbo Streamsのうち、部分置換ができるTurbo FramesかTurbo Streamsから選択します
-   2. モーダルそのものは一つの「枠」になっています。複数箇所を更新する必要がありませんので、Turbo Framesを選択します
+   2. モーダルそのものは一つの「枠」になっています。Turbo FramesとTurbo Streamsのどっちを選択するべきかですが、複数箇所を更新する必要がありませんので、Turbo Framesを選択します
 2. Turboはネットワーク通信です。したがって**ネットワーク遅延を想定する必要があります**
    1. ネットワーク待ちであることをユーザに伝えるために、ボタンをクリックした瞬間にモーダルを開き、「ロード中」の画面を表示します
    2. サーバレスポンスを待たずに画面表示を変更しますので、Stimulusを使用します
-   3. Stimulusを使うとアニメーションも表示しやすくなりますので、モーダル表示アニメーションも用意します（今回は下から浮いてくる感じにしました）
+   3. モーダル表示アニメーションも用意します（今回は下から浮いてくる感じにしました）
 3. モーダルのインタラクションは意外と複雑ですので、Stimulus Valuesステートを使うことにします
    1. 表示を切り替える箇所はモーダル「枠」だけでなく、 背景画面を覆う黒い幕も同時に表示させないといけません
    2. モーダルの表示・非表示は複数の箇所から制御します
@@ -44,6 +44,7 @@ published: true
    2. これを回避するためには**複数間Stimulus controller間通信機能**を使います
       1. モーダル自身を制御するModalDialogController、およびモーダルを遠隔的に制御するModalDialogTriggerControllerの２つを用意します
       2. Outlet機能を使い、controller間通信をします 
+   3. なお今回のように複数間Stimulus controller間通信機能で対処できた理由の一つは、controller間の通信が限定的だからです。一方で[引き出しUI](/examples/drawer)の場合は、遠隔的に制御するTriggerの表示状態も制御していました。今回の例で言うとModalDialogTriggerController→ModalDialogControllerの通信だけでなく、ModalDialogTriggerController ↔︎ ModalDialogControllerの双方向通信が必要な状況でした。この場合は複数間Stimulus controller間通信機能では煩雑になりますので、１つのStimulus controllerにまとめた方が良いと思われます
 5. 完璧なアクセシビリティは目指しませんが、ESCキーによってモーダルを閉じたり、[`inert`を使って裏の画像を制御できないようにする](https://developer.mozilla.org/ja/docs/Web/API/HTMLElement/inert)などの工夫は実施します
 
 ## コード --- code
@@ -158,7 +159,7 @@ published: true
       * TailwindCSSの[`peer`](https://tailwindcss.com/docs/hover-focus-and-other-states#styling-based-on-sibling-state)を使って、`<turbo-frame>`の下にある`<div class="...peer-aria-busy:...">`属性の表示・非表示をコントロールしています。これはローディングアニメーションを表示する箇所です
 * モーダルの背景の黒い幕をクリックするとモーダルが閉じられるようにします
    * `data-action="click->modal-dialog#hide"`の属性を持つHTML要素が黒い幕の`<div>`です。これをクリックすると後述する`ModalDialogController`の`hide()`メソッドが呼ばれて、モーダルが非表示になります
-   * ただし、モーダルの白いコンテンツを表示した場合はモーダルが閉じては困ります。この箇所はクリックを無視する必要があります
+   * ただし、モーダルのコンテンツをクリックした場合にモーダルが閉じては困ります。この箇所はクリックを無視する必要があります
       * `data-action="click->modal-dialog#void:stop`の属性を持つHTML用紙がモーダルのコンテンツの枠です
       * ここをクリックすると`ModalDialogController`の`void()`メソッドが呼ばれますが、`void()`メソッド自身は何もしません
       * **注目して欲しいのは先ほどの`click->modal-dialog#void:stop`の`stop`の部分です**。これは`event.stopPropagation()`を呼んでくれます
@@ -291,5 +292,6 @@ export default class extends Controller {
 
 * 今回はStimulus controller間の通信を使用しました。Stimulus controllerを細かく分割して、わかりやすくするために有効な方法です
     * なおReactの場合は[`createPortal()`](https://ja.react.dev/reference/react-dom/createPortal)を使って、制御したいパーツが分散する問題に対応します。似たような機能はStimulusにはありませんが、controller間通信で解決できます
+    * とはいえ、Stimulus controller間通信によって複雑になっている部分は間違いなくあります。[引き出し](/examples/drawer)で示したように、大きくなってしまうものの、１つのStimulus Controllerにまとめる方が良い可能性もあります。ケースバイケースで判断していただければと思います
 * インタラクションの制御に関わるコード分量は多くないのですが、考えるポイントは少なくありません。これは[モーダルの表示・非表示の必須の複雑さに真剣に向き合った結果](/opinions/why-isnt-hotwire-simpler)ですので、モーダル用のライブラリを使ったり、さらにUI/UXをそれに合わせていかない限り、なかなか避けられません
 * 今回はモーダルの表示・非表示をやりました。次はモーダルの中でCRUDをした場合のコードを見ていきます

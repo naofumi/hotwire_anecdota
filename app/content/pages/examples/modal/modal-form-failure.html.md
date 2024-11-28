@@ -70,14 +70,35 @@ end
 * Turbo StreamのERBテンプレートは異常系が走りますので、`if ... else`の`if`の方だけみます
   * `app/views/todos/_form.html.erb` partialがレンダリングされます。これは通常のRailsのバリデーションエラー処理と同じで、入力フォームに`@todo.errors`の内容を重ねて表示します
   * 上記のpartialが`turbo_stream.replace "todo-form"`に囲まれていますので、`id="todo-form"`で指定されたHTML要素（モーダルの中に表示されて`form`）を置換するように画面が更新されます
+
+```js:app/javascript/controllers/modal_dialog_controller.js
+import {Controller} from "@hotwired/stimulus"
+
+// Connects to data-controller="modal-dialog"
+export default class extends Controller {
+  // ...
+  
+  hide(event) {
+    this.shownValue = false
+  }
+
+  hideOnSuccess(event) {
+    if (!event.detail.success) return
+
+    this.hide(event)
+  }
+  // ...
+}
+```
+
 *  [フォーム送信成功と後処理](/examples/modal/modal-form-success-and-hide#code-to-hide-modal)では、`form`送信が成功するとモーダルが自動的に閉じました。今回も`form`送信後に`turbo:submit-end``ModalDialog#hideOnSuccess()`が実行されますが、`event.detail.success`がfalseなので、モーダルは表示されたままになります
 
 ## まとめ --- summary
 
-* 成功・失敗に応じたUI/UXの出しわけは、サーバ側から制御が可能です
-   * statusを変えたり異なるTurbo Streamを返したりします
+* 成功・失敗に応じたUI/UXの出し分けは、サーバ側から制御が可能です
+   * statusを変えたり異なるTurbo Streamを返したりすることで、サーバ側からブラウザの表示を制御します
    * 他にもredirectやTurbo Drive/Framesでレスポンスして出し分ける方法もあります（今回は紹介していませんが）
-* 今回はStatusの違いを解釈して、UI/UXを出し分けるのはStimulus controllerの責務としました
-   * ただしこれもTurbo Streamsで制御することが可能です
+* 今回はStatusの違いを読み取り、UI/UXを出し分けるのはStimulus controllerの中でやりました
+   * これをTurbo Streamsでやる方法もあります
  
 サーバサイドバリデーションをする場合は、レスポンスに応じてブラウザ側のUIを出し分ける必要があります。Hotwireの場合はそのロジックを完全にサーバに持たせる方法と、一部分をブラウザに任せる方法があります。UI/UXの要件や設計方針に応じて選択します。
