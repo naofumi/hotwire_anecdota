@@ -4,7 +4,7 @@ module ViewTemplateCollectable
   class_methods do
     def collect_view_templates(view_directory)
       base = Rails.root.join("app/views/#{view_directory}")
-      @@templates = Dir.glob("*", base:)
+      @templates = Dir.glob("*", base:)
                        .map { _1.split(".").first } # remove extension
                        .reject { _1 == "index" } # remove index
                        .filter { _1 =~ /\A[a-z]/ } # remove partials
@@ -12,6 +12,6 @@ module ViewTemplateCollectable
   end
 
   def view_templates
-    @@templates
+    self.class.instance_variable_get(:@templates)
   end
 end
