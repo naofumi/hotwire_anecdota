@@ -1,8 +1,8 @@
 class ReactController < ApplicationController
-  AVAILABLE_TEMPLATES = %w[ iphone ]
+  AVAILABLE_TEMPLATES = %w[ iphone first second]
   before_action :set_template
   before_action :set_data
-  layout false
+  layout "react_layout"
 
   def show
     render @template

@@ -1,31 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title><%= content_for(:title) || "Tailwind Rails React" %></title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-
-  <%= yield :head %>
-
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-  <%= javascript_include_tag "react_iphone", "data-turbo-track": "reload", type: "module" %>
-</head>
-
-<body>
+<%= provide :head, javascript_include_tag("react_iphone", "data-turbo-track": "reload", type: "module") %>
 <div class="container container-lg mx-auto px-4 pt-16">
   <div class="mx-auto min-w-[1028px] lg:max-w-5xl">
     <div id="root"></div>
   </div>
 </div>
-</body>
-
 <% if @catalog_data %>
   <script type="application/json" id="catalog-data">
     <% @catalog_data[:images].transform_values! { image_path(_1) } %>
     <%= @catalog_data.to_json.html_safe %>
   </script>
 <% end %>
-</html>

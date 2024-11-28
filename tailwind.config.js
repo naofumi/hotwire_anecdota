@@ -3,7 +3,7 @@ module.exports = {
     './app/views/**/*.erb',
     './app/helpers/**/*.rb',
     './app/javascript/controllers/**/*.js',
-    './app/javascript/react/components/**/*.{js,jsx}',
+    './app/javascript/react/**/*.{js,jsx}',
     './app/content/helpers/**/*.rb',
     './app/content/layouts/**/*.erb',
     './app/content/pages/index.html.erb',
