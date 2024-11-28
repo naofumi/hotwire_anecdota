@@ -1,5 +1,5 @@
 class ReactController < ApplicationController
-  AVAILABLE_TEMPLATES = %w[ iphone first second]
+  AVAILABLE_TEMPLATES = %w[ iphone toggle second]
   before_action :set_template
   before_action :set_data
   layout "react_layout"
