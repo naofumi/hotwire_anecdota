@@ -13,6 +13,9 @@ application.register("autosubmit", AutosubmitController)
 import CarouselController from "./carousel_controller"
 application.register("carousel", CarouselController)
 
+import ChapterListController from "./chapter_list_controller"
+application.register("chapter-list", ChapterListController)
+
 import DropdownController from "./dropdown_controller"
 application.register("dropdown", DropdownController)
 
