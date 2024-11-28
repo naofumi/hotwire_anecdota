@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= content_for(:title) || "Rails React" %></title>
+  <title><%= content_for(:title) || "iPhone React" %></title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <%= csrf_meta_tags %>
@@ -13,12 +13,7 @@
   <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
 </head>
 
-<body data-turbo="false" class="relative">
-<%= render "nav", show_data_reset: true %>
-<div class="container container-lg mx-auto px-4 pt-8">
-  <%= content_for(:breadcrumbs) %>
-</div>
+<body>
 <%= yield %>
-<div id="overlay" class="w-dvh h-dvh inset-0 absolute bg-white visible transition-all duration-500"></div>
 </body>
 </html>

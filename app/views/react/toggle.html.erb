@@ -1,9 +1,1 @@
-<% provide :head, javascript_include_tag("application_react_splitting", "data-turbo-track": "reload", type: "module") %>
-<% set_breadcrumbs [["Tailwind Toggle", react_path(:toggle)]] %>
-<% content_for :title, "Tailwind Toggle" %>
-
-<div class="container container-lg mx-auto px-4 pt-16">
-  <div class="mx-auto min-w-[1028px] lg:max-w-5xl">
-    <div id="root" data-page="toggle"></div>
-  </div>
-</div>
+<%= render "react_base", title: "Simple Toggle" %>

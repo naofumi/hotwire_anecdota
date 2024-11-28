@@ -2,12 +2,12 @@ import React from "react"
 import SimpleToggle from "../tailwindui/SimpleToggle"
 
 export default function TogglePage() {
-  return <div>
-    <h1 className="text-5xl">Toggle Page</h1>
-    <a href="/react/second" className="underline text-orange-600">GOTO Second page</a>
-
-
-    <div><SimpleToggle/></div>
+  return <div className="container container-lg mx-auto px-4 pt-16">
+    <div className="mx-auto min-w-[1028px] lg:max-w-5xl">
+      <h1 className="text-5xl">Toggle Page</h1>
+      <a href="/react/second" className="underline text-orange-600">GOTO Second page</a>
+      <div><SimpleToggle/></div>
+    </div>
   </div>
 }
 
