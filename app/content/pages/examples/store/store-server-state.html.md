@@ -48,13 +48,9 @@ end
 
 ```rb:app/models/iphone.rb
 class Iphone
-  Price = Data.define(:lump, :monthly)
-  DEFAULT_MODEL = "6-1inch"
-  DEFAULT_COLOR = "naturaltitanium"
-  DEFAULT_RAM = "256GB"
-
   def initialize(iphone_session)
     @iphone_session = iphone_session
+    @catalog = Catalog.new
   end
 
   def state
@@ -106,41 +102,15 @@ class Iphone
   end
 
   def color_name
-    color_name_for_value(color)
-  end
-
-  def color_name_for_value(value)
-    color_table = {
-      "naturaltitanium" => "Color – Natural Titanium",
-      "bluetitanium" => "Color – Blue Titanium",
-      "whitetitanium" => "Color – White Titanium",
-      "blacktitanium" => "Color – Black Titanium"
-    }
-    color_table[value || DEFAULT_COLOR]
+    @catalog.color_name(color)
   end
 
   def image_path
-    "iphone_images/smartphone-image-#{model || DEFAULT_MODEL}-#{color || DEFAULT_COLOR}.webp"
+    @catalog.image_path(model, color)
   end
 
   def pricing
-    Iphone.pricing_for(model, ram)
-  end
-
-  def self.pricing_for(model, ram)
-    Price.new(lump: 0, monthly: 0).then do |price|
-      case model || DEFAULT_MODEL
-      when "6-1inch" then Price.new(lump: price.lump + 999, monthly: price.monthly + 41.62)
-      when "6-7inch" then Price.new(lump: price.lump + 1199, monthly: price.monthly + 49.95)
-      else raise "bad model: #{model}"
-      end
-    end.then do |price|
-      case ram || DEFAULT_RAM
-      when "256GB" then price
-      when "512GB" then Price.new(lump: price.lump + 200, monthly: price.monthly + 8.34)
-      when "1TB" then Price.new(lump: price.lump + 400, monthly: price.monthly + 26.77)
-      end
-    end
+    @catalog.pricing(model, ram)
   end
 
   def to_hash
@@ -149,33 +119,33 @@ class Iphone
 end
 ```
 
-* `Iphone`クラスに全てのビジネスロジックを収めています
-    * 初期状態のモデル・カラー・RAM容量
+* `Iphone`クラスには注文状況とそこから導出される関連情報が収まっています
     * どこまでオプションを入力したかをステートマシン的に管理
     * model, color, ram等のオプションをセットするメソッド
-    * 色の名前や画像URLを算出する処理
-    * 価格情報を算出する処理
-
-本当のストアであれば製品オプションの情報や価格算出はDB等で管理すると思いますが、今回はとりあえずハードコードしました。
+    * 色の名前や画像URLを算出する処理 => `Iphone::Catalog`クラスに移譲
+    * 価格情報を算出する処理 => `Iphone::Catalog`クラスに移譲
 
 ### iPhoneモデルオプション選択 view --- iphone-model-select-view
 
 ```erb:app/views/iphones/_iphone.html.erb
-  <%= form_with url: iphone_path, method: :post do %>
-    <%= fieldset_tag nil, disabled: !@iphone.model_enterable?, class: "disabled:opacity-30" do %>
-      <% [{ model: "6-1inch", title: "オラのスマホ Pro", subtitle: "6.1-inch display" },
-          { model: "6-7inch", title: "オラのスマホ Pro Max", subtitle: "6.7-inch display" }].each do |attributes| %>
-        <%= render 'option',
-                   name: :model,
-                   value: attributes[:model],
-                   selected: @iphone.model == attributes[:model],
-                   title: attributes[:title],
-                   subtitle: attributes[:subtitle],
-                   pricing_lines: item_pricing(attributes[:model], @iphone.ram)
-        %>
+<% local_assigns => {catalog:, iphone:} %>
+  <!-- ... -->
+    <%= form_with url: iphone_path, method: :post do %>
+      <%= fieldset_tag nil, disabled: !iphone.model_enterable?, class: "disabled:opacity-30" do %>
+        <% [{ model: "6-1inch", title: "オラのスマホ Pro", subtitle: "6.1-inch display" },
+            { model: "6-7inch", title: "オラのスマホ Pro Max", subtitle: "6.7-inch display" }].each do |attributes| %>
+          <%= render 'option',
+                     name: :model,
+                     value: attributes[:model],
+                     selected: iphone.model == attributes[:model],
+                     title: attributes[:title],
+                     subtitle: attributes[:subtitle],
+                     pricing_lines: item_pricing(attributes[:model], iphone.ram, catalog)
+          %>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
+  <!-- ... -->
 ```
 
 ```erb:app/views/iphones/_option.html.erb
@@ -200,7 +170,7 @@ end
 
 * オプションは`app/views/iphones/_option.html.erb`の中で`radio_button_tag`として実装しています。`radio`を使いますので、楽観的UIはブラウザネイティブのものが使えます
 * `radio_button`が変更されたら`onchange`でformをsubmitします
-* 製品オプションは選択されると、<span class="text-blue-600">青い</span>枠がつきます。これはCSSの`has-[:checked]:border-blue-500`で処理されます。これは楽観的UIです
+* 製品オプションは選択されると、<span class="text-blue-600">青い</span>枠がつきます。これはCSSの`has-[:checked]:border-blue-500`で処理されます。`radio_button`の`check`は楽観的に入りますので、この枠も楽観的UIです
 * formは`app/views/iphones/_iphone.html.erb`に記されている普通の`form_with`で実装しています。Turboがインストールされていますので、submitされると非同期でサーバにリクエストを送信します
 
 ### IphonesController#create コントローラアクション --- create-controller
@@ -209,6 +179,7 @@ end
 class IphonesController < ApplicationController
   layout "iphone"
   before_action :set_iphone
+  before_action :set_catalog
 
   # ...
 
@@ -234,7 +205,7 @@ end
 
 ```erb:app/views/iphones/create.turbo_stream.erb
 <%= turbo_stream.replace "iphone", method: "morph" do %>
-  <%= render "iphone", iphone: @iphone %>
+  <%= render "iphone", iphone: @iphone, controller: @catalog %>
 <% end %>
 ```
 
@@ -244,11 +215,11 @@ end
 ### カラーオプションをホバーした時 --- hover-on-color
 
 ```erb:app/views/iphones/_iphone.html.erb
-<%= tag.div data: { controller: "image-switcher", image_switcher_iphone_value: @iphone } do %>
-  <div class="text-xl my-4" data-image-switcher-target="colorText"><%= @iphone.color_name %></div>
+<%= tag.div data: { controller: "image-switcher", image_switcher_iphone_value: iphone } do %>
+  <div class="text-xl my-4" data-image-switcher-target="colorText"><%= iphone.color_name %></div>
 
   <%= form_with url: iphone_path, method: :post do %>
-    <%= fieldset_tag nil, disabled: !@iphone.color_enterable?, class: "disabled:opacity-30" do %>
+    <%= fieldset_tag nil, disabled: !iphone.color_enterable?, class: "disabled:opacity-30" do %>
       <% [{ color: "naturaltitanium", class: "bg-gray-400" },
           { color: "bluetitanium", class: "bg-indigo-800" },
           { color: "whitetitanium", class: "bg-white" },
@@ -256,7 +227,7 @@ end
         <%= render 'color_option',
                    value: attributes[:color],
                    color: attributes[:class],
-                   iphone: @iphone %>
+                   iphone: iphone %>
       <% end %>
     <% end %>
   <% end %>
@@ -317,11 +288,16 @@ export default class extends Controller {
 
 ## まとめ --- summary-server-state
 
-* ブラウザ側は`form`を送信するだけです。ラジオボタンを押した時にformを自動的に送信するインラインJavaScriptを書いているのみで、ほとんど何もしていません
+* ブラウザ側は`form`を送信するだけです。ラジオボタンを押した時にformを自動的に送信するインラインJavaScriptを書いているのみで、ほとんど何もしていません（今回はインラインで書ける程度のJavaScriptでしたので、Stimulusも省略しました）
 * 製品オプションはHTMLネイティブの`radio`で実装していますので、コードを書かなくても楽観的UIが実現できます。CSS擬似要素の`:checked`て適宜UIを更新します
 * サーバ側のControllerも簡単なものです。リクエストを受け取り、`Iphone`オブジェクトを作り、更新しているだけです。Railsのごく一般的なControllerです
-* 複雑さはすべて`Iphone`クラスに集約されています
-* カラーオプションの上をホバーした時の動作は簡単なもので、他の要素に影響しませんので、Stimulusで簡単に処理しています
-* 今回はTurbo Streams + Morphingを使っていますが、これはパフォーマンス最適化です。パフォーマンスが気にならなければ、Turbo Drive + Morphingにすることで`app/views/iphones/create.turbo_stream.erb`を省略できます。ただしその場合は POST/Redirect/GETのパターンになりますので、オプション選択時にサーバ通信が２回発生します。今回のようにTurbo Streams + Morphingであれば１回で済みます
+* ロジックの複雑さはすべて`Iphone`クラスに集約されています
+   * 注文に関する情報は`Iphone`クラスに、カタログに関する情報は`Iphone::Catalog`クラスに分けています 
+* カラーオプションの上をホバーした時の動作は簡単なもので、他の要素に影響しませんので、ステートを持たずにStimulusで簡単に処理しています
+* 画面の更新はTurbo Streams + Morphingを使っています
+    * Turbo Streamsではありますが、細かく複数箇所を更新するのではなく、一気に全画面を更新しています（`app/views/iphones/create.turbo_stream.erb`）
+       * 複数箇所を更新しないため、最初の画面描画とのちのTurbo Streamsによる更新はほぼ同じコードになります 
+    * Turbo Streamsは画面の複数箇所を更新する機能の他、パフォーマンス最適化でも有効です。Turbo Drive, Turbo Framesだと必要なPOST/Redirect/GETパターンを省略し、直接POSTから画面更新ができるためです。今回はパフォーマンス最適化のために使っています
+    * Morphingはブラウザステート（フォーカスなど）をなるべく維持するために使っています。今回は不要ですが、そういうフィールドがある時は有効です
 
-上述のように、製品オプションを選択するたびにサーバ通信をするやり方であっても、UI/UX上は特に問題になりません。楽観的UIも実装できますし、
+上述のように、製品オプションを選択するたびにサーバ通信をするやり方であっても、UI/UX上は特に問題になりません。楽観的UIも実現していますので、ネットワークが遅くてもUI/UXへの悪影響は最小化できています。

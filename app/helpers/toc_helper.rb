@@ -5,6 +5,7 @@ module TocHelper
 
   class TocExtractor
     include ActionView::Helpers::UrlHelper
+    include ActionView::Helpers::AssetUrlHelper
 
     def initialize(html_document)
       @html_document = html_document
@@ -23,7 +24,7 @@ module TocHelper
       def link_or_span(node)
         if node.child["href"]
           link_to(node.text, node.child["href"],
-                  class: "#{toc_indent_class(node.name)} block my-1 text-base text-orange-600")
+                  class: "#{toc_indent_class(node.name)} before:-ml-2 before:inline-block before:w-2 before:content-[' '] before:bg-cover before:bg-left before:bg-[url('check-circle-gray.svg')] block my-2 text-sm text-orange-600")
         else
           tag.span(node.text, class: "#{toc_indent_class(node.name)} block my-1 text-base text-gray-600")
         end
@@ -36,7 +37,7 @@ module TocHelper
       def toc_indent_class(node_name)
         {
           "h2" => "",
-          "h3" => "ml-3"
+          "h3" => "ml-4"
         }[node_name]
       end
 

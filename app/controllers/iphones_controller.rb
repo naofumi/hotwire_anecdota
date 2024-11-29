@@ -1,6 +1,7 @@
 class IphonesController < ApplicationController
   layout "iphone"
   before_action :set_iphone
+  before_action :set_catalog
   def show
   end
 
@@ -21,6 +22,10 @@ class IphonesController < ApplicationController
   end
 
   private
+
+    def set_catalog
+      @catalog = Iphone::Catalog.new
+    end
 
     def set_iphone
       session[:iphone] ||= {}

@@ -2,7 +2,6 @@
 title: ReactとHotwireの共存
 layout: article
 order: 005
-published: true
 ---
 
 ## Reactのページを一部残しながらHotwireに移行する

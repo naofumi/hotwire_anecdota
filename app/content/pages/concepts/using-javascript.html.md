@@ -11,8 +11,10 @@ Turboは場合によっては、カスタムJavaScript(アプリ固有のJavaScr
 
 実際、Hotwireを発明した37signals社のGmail様のメールアプリ(Hey.com)では、百数十個のStimulus Controllerが使用されているようです。大切なことは不必要なJavaScriptを書かないことです。
 
-## HotwireのJavaScriptは"sprinkles"
+## 大切なことは良いUI/UXを作ること
 
-HotwireのJavaScriptは"sprinkles"なのですが、"sprinkles"がどういう意味かがわかりにくいと思います。下記が参考になると思います
+Hotwireは37signalsをはじめ、[Cookpad](https://techlife.cookpad.com/entry/2024/11/13/130000)の一般ユーザ向けのBtoCビジネスで使用されています。UI/UXの妥協ができないところも使われているがHotwireです。
 
-* [「TurboとStimulus: どっちを使う？」](/how_to_think/turbo-or-stimulus)が
+UI/UXを犠牲にしてでもJavaScriptの量を減らすのはHotwireのやり方ではありません。
+
+**大切なのはあくまでも良いUI/UXを実現することです**。

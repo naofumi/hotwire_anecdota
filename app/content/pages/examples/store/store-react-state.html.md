@@ -11,47 +11,35 @@ published: true
 
 [デモはこちら](/react/iphone)に用意しています。
 
-1. ReactをHotwireのページに埋め込む必要があります。これはGitHubでも行われていることですので、一般的です。方法は[「Reactと一緒に使う」](/with_other_frameworks/using_with_react)で紹介しています
-2. 各オプションごとの製品価格および製品オプションの初期値をReactにあらかじめ渡す必要があります。これも[「Reactと一緒に使う」](/with_other_frameworks/using_with_react)で紹介しています
-3. オプションが選択されるとReactでイベントハンドラが呼び出され、イベントハンドラの中で`useState`で作成されたステートを更新します
-4. Reactはステートが変更されると再レンダリングが自動的に行われます。ページ全体が再レンダリングされて、変更が反映されます
+* ReactをHotwireのページに埋め込む必要があります。これはGitHubでも行われていることですので、一般的です。方法は[「Reactと一緒に使う」](/other_libraries/using_with_react)で紹介しています
+* 各オプションごとの製品価格および製品オプションの初期値をReactにあらかじめ渡す必要があります。これも[「Reactと一緒に使う」](/other_libraries/using_with_react)で紹介しています
+* オプションが選択されるとReactでイベントハンドラが呼び出され、イベントハンドラの中で`useState`で作成されたステートを更新します
+* Reactはステートが変更されると再レンダリングが自動的に行われます。ページ全体が再レンダリングされて、変更が反映されます
 
-Reactはステートを中心とした情報の流れを強制しています。
-
-**イベントハンドラ ==> ステート ==> 再レンダリング**と情報が流れます。
+Reactはステートを中心とした情報の流れを強制しています。**イベントハンドラ ==> ステート ==> 再レンダリング**と情報が流れます。
 
 ## コード --- code
 
 ### Reactの読み込みとデータの受け渡し --- react-load-and-data-transfer
 
 ```erb:app/views/react/iphone.html.erb
-<!DOCTYPE html>
-<html>
-  <!-- ... -->
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-  <%= javascript_include_tag "react_iphone", "data-turbo-track": "reload", type: "module" %>
-</head>
-
-<body>
+<%= provide :head, javascript_include_tag("react_iphone", "data-turbo-track": "reload", type: "module") %>
 <div class="container container-lg mx-auto px-4 pt-16">
   <div class="mx-auto min-w-[1028px] lg:max-w-5xl">
     <div id="root"></div>
   </div>
 </div>
-</body>
-
 <% if @catalog_data %>
   <script type="application/json" id="catalog-data">
     <% @catalog_data[:images].transform_values! { image_path(_1) } %>
     <%= @catalog_data.to_json.html_safe %>
   </script>
 <% end %>
-</html>
 ```
 
 * `javascript_include_tag "react_iphone"`でReactで書かれたコードを読み込みます。後述しますが、Reactは`<div id="root"></div>`の箇所に挿入されます
 * 製品オプションごとの価格などをReactに渡す必要があります。これは`<script type="application/json" id="catalog-data">`で行います。`@catalog_data`としてコントローラから渡されたデータを、この中にJSON形式で書き込みます
+   * `image_path()`で`@catalog_data`を処理しているところは、[Railsがアセットのフィンガープリントをするため](https://railsguides.jp/asset_pipeline.html#フィンガープリントと注意点)です
 
 
 ### Reactコードの接続とデータの読み込み --- react-code
@@ -118,8 +106,8 @@ export function IPhoneShow({catalogData}) {
 
 * Apple Storeページのコンポーネントです
 * 選択された製品オプションを`iPhoneState`のステートに保持します
-* カラー選択のところのテキストを`colorText`のステートに保持します。これはホバー時に表示するだけの内容なので、製品オプションとは別に保持します
-* ビジネスロジックを収めた`Iphone`クラスのインスタンスを作成します。これはStimulusで使用したものと全く同じものです
+* カラー選択のところのテキストを`colorText`のステートに保持します。これはホバー時に表示するだけの内容なので、製品オプションのステートとは別に保持します
+* ビジネスロジックを収めた`Iphone`クラスのインスタンスを作成します。これは**Stimulusで使用したモデルをそのまま再利用しています**
 * `handleOptionChange`, `handleColorChange`の関数はオプション選択イベントを処理するイベントハンドラです。`iPhoneState`を更新します
 * `handleResetColorText`はホバー時のカラーテキストを更新するものです
 
@@ -127,5 +115,7 @@ export function IPhoneShow({catalogData}) {
 
 * [Hotwireでステートをサーバに持たせた例](/examples/store/store-server-state)と構造としてはよく似ています
     * イベントハンドラの中で`iphoneState`ステートに保存し、IPhoneオブジェクトでロジックを処理して、コンポーネントを再レンダリングしています
-    * ステートをサーバに持たせた場合は、form送信イベントをRails Controllerで受け取り、Iphoneオブジェクトの中でsessionにステートを保存し、Iphoneオブジェクトでロジックを処理し、Turbo Streamを介してブラウザ画面を更新しました
-    * Stimulus Controllerにステートを持たせた場合は、一度生成されたHTMLを後から修正する形になり、その点が煩雑でした。しかしReactの場合はJSXでHTMLを生成しながらステートを反映させますので、より簡略化されています。これはHotwireでステートをサーバに持たせた例と同じです
+    * Reactはステートを更新すると自動的に再レンダリングします。そのため、Stimulusで必要だった`#render*`のメソッドが不要になります
+* Stimulus Controller版では`#render*`メソッドを使ってステートをDOMに反映させました。一方でReactの場合は`IphoneShow`コンポーネント(`app/javascript/react/components/IPhoneShow.jsx`)のJSXの中にロジックが埋め込まれています
+    * テンプレートの中にロジックを埋め込むのはRails ERBと同じやり方です。（つまり[ステートをサーバに持たせた例](http://localhost:3000/examples/store/store-server-state)と同じです）。なお、今回は解説を省略しました
+    * テンプレートの中にロジックを埋め込むことは賛否両論ありますが、HTMLとロジックの関係がわかりやすいと思います

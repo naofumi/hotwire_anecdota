@@ -33,6 +33,8 @@ published: true
 
 ## 私のオススメ
 
-HotwireとRailsの大きな特徴は、あまりUI/UXの細かいことに拘らない場合、非常に高速にCRUD画面が作れることです。画面がたくさん必要な案件ならば、Turbo DriveやTurbo Framesを使って、どんどんCRUD画面をたくさん作っていくのが良いでしょう。Turbo Framesすら不要で、MPA的な画面遷移で十分、いやむしろMPA的な画面遷移の方が良いことも多々あります。
+* 開発の初期ではTurbo DriveやTurbo Framesを使い、高速にCRUD画面を作っていきます。この際はPOST/Redirect/GETのパターンを使うことになります
+* 開発が落ち着いて、UI/UXの改善の取り掛かる余裕が生まれたらTurbo Streamsなどを使って、パフォーマンスの最適化をします
+   * その中でPOST/Redirect/GETパターンの見直しをします
+   * その他、待ちUIや楽観的UIも検討します
 
-**ここはUI/UXにこだわりたい**という画面についてはTurbo Streamsで処理し、レスポンス遅延の最小化を含めて最適化をすれば良いでしょう。サーバ側からはどんなリクエストに対しても、いつでもTurbo Streamsで応答できますので、大きな変更をせずにTurbo Streamsにアップグレードすることは容易です。

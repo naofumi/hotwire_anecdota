@@ -2,24 +2,24 @@
   <div class="group/chapter-list lg:max-w-6xl lg:mx-auto"
        data-controller="chapter-list"
        data-chapter-list-shown-value="false">
-    <div class="px-6 pt-8 lg:px-8 lg:pl-80 ">
-      <div class="mx-auto max-w-2xl">
+    <div class="px-6 pt-8 lg:px-8 lg:pl-80">
+      <div class="mx-auto max-w-2xl lg:mx-0">
         <%= render "content_breadcrumbs",
                    current_page: %>
       </div>
     </div>
 
-    <% full_document = capture do %>
-      <%= yield %>
-    <% end %>
+    <% full_document = capture { yield } %>
 
-    <div class="hidden ml-2 max-h-full md:w-52 md:fixed md:block">
-      <!-- chapter list -->
-      <%= link_to current_page.data.title, "#" %>
-      <%= safe_join extract_toc(full_document) %>
+    <div class="hidden pl-6 max-h-full lg:pl-8 lg:w-72 lg:fixed lg:block">
+      <div class="p-4 border-md rounded bg-white/80">
+        <!-- chapter list -->
+        <%= link_to current_page.data.title, "#" %>
+        <%= safe_join extract_toc(full_document) %>
+      </div>
     </div>
-    <div class="px-6 py-8 md:px-8 md:pl-60">
-      <div class="mx-auto max-w-2xl text-base leading-7 text-gray-700">
+    <div class="px-6 py-8 lg:px-8 lg:pl-80">
+      <div class="mx-auto max-w-2xl lg:max-w-full text-base leading-7 text-gray-700">
         <p class="text-base leading-7 text-orange-600">
           <%= current_page.parent.data.title %>
         </p>
@@ -30,7 +30,7 @@
           <%= current_page.data.subtitle %>
         </p>
 
-        <div class="fixed top-4 right-4 max-w-96 border rounded-md p-2 bg-white/90 md:hidden">
+        <div class="fixed top-4 right-4 max-w-96 border rounded-md p-2 bg-white/90 lg:hidden">
           <!-- chapter list -->
           <div class="flex justify-end">
             <button class="block" data-action="click->chapter-list#toggle">

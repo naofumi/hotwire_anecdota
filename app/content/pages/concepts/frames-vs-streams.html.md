@@ -9,9 +9,7 @@ published: true
 
 画面の一部分だけを書き換える方法としてTurbo FramesとTurbo Streamsがあります。そして大きな違いは、Turbo Framesは画面の一箇所を書き換えるものであるのに対して、Turbo Streamsは複数箇所を書き換えられる点があります。
 
-ただしここではTurbo FramesとTurbo Streamsの違いではなく、何が同じかを説明したいと思います。
-
-### いつTurbo Framesになるのか？いつTurbo Streamsになるのか？
+### Turbo Framesはブラウザで指定、Turbo Streamsはサーバで指定
 
 * Turbo Framesのリクエストを飛ばすには、リクエストの中で指定する必要があります。以下の方法があります
     * `<turbo-frame>`タグに囲まれた箇所に存在する`<a>`タグ、もしくは`<form>`タグからリクエストを送信する
@@ -37,4 +35,4 @@ published: true
 * サーバサイドバリデーションなど、異常系で複雑な処理をしたい場合はTurbo Streamsを使います
    * 例えば正常系はTurbo Framesのリクエスト・レスポンス処理をする一方で、異常系の時だけTurbo Streamsで応答するやり方もできます
 * サーバからのレスポンスの処理方法がシンプルな場合はTurbo Framesでずっとやることもできます
-   * 実際に問題になりやすいのはredirectです。Turbo Framesのリクエストに対してredirectをする際、Turbo Frame内のredirectをするのか、それともTurbo Frameを抜けてredirectするのかを指定するのが困難になります
+  * 気をつけなければならないのはredirectです。Turbo Framesのリクエストに対してredirectをする際、Turbo Frame内のredirectをするのか、それともTurbo Frameを抜けてredirectするのかを指定するのかはサーバで指定できません。事前にブラウザ側で`data-turbo-frame`属性や`target`属性を使って指定します

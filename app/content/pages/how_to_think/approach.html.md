@@ -37,8 +37,12 @@ Reactの場合は以下のように考えます。
 
 ### HotwireとReactの比較 --- hotwire-react-comparison
 
-* Hotwireはすぐにサーバからデータを取りにいきます。Reactの場合は、まず`selectedUser`のステートを設定して、**流れの中で**`UserProfile`コンポーネントがサーバにデータを取りに行くようにします
-* Hotwireはサーバから帰ってきたデータを`#user-profile`にすぐに埋め込みます。Reactの場合は、サーバから帰ってきたデータを`userProfile`ステートに設定すると、**流れの中で**新しい情報が表示されるようになります
+* リクエスト送信
+   * Hotwireはすぐにサーバからデータを取りにいきます
+   * Reactの場合は、まず`selectedUser`のステートを設定して、**流れの中で**`UserProfile`コンポーネントがサーバにデータを取りに行くようにします
+* レスポンス受信から表示
+   * Hotwireはサーバから帰ってきたデータを`#user-profile`にすぐに埋め込みます
+   * Reactの場合は、サーバから帰ってきたデータを`userProfile`ステートに設定すると、**流れの中で**新しい情報が表示されるようになります
 
 Hotwireは目標に対して直接的に処理をしています。一方でReactはまずステートに着目して、これを変更した結果として**流れの中で** UIが適切に更新されるような仕掛けを用意しています。ステートを更新して間接的にUIを更新する仕組みです。
 
@@ -52,12 +56,24 @@ Hotwireは目標に対して直接的に処理をしています。一方でReac
 
 * "user_id:2"の行にイベントハンドラをつなげて、クリックされたらサーバの`/users/2/user_profile`にリクエストが飛ぶようにします
 * 帰ってきた結果は`user-profile`に埋め込まれるようにします
-* 上記の流れはJavaScriptで書きます（HotwireはHTML属性だけで宣言的に指定した）
+* 上記の流れはJavaScriptで書きます（HotwireがHTML属性で宣言的に指定するのた対照的です）
 
 jQueryのやり方はHotwireとよく似ていて、直接的です。やはりシンプルでわかりやすいです。
+
+### (参考)HTMX, Alpine.jsなどとの比較
+
+Hotwireと似たアプローチで、かつどのバックエンドでも使用できる技術としては[HTMX](https://htmx.org)や[Alpine.js](https://alpinejs.dev/)があります。特にHTMXは注目されていて、[Astro](https://astro.build/blog/astro-340/), Python, Java Spring, [Hono](https://zenn.dev/yusukebe/articles/e8ff26c8507799)と組み合わせた例がしばしば報告されています。
+
+私も十分にHTMXを試していないのではっきりしたことは言えませんが、Hotwireと比較した場合、大きな違いはHTML属性をどれだけ用意しているかだと感じています。
+
+1. jQueryはHTML属性を使わずにJavaScriptを主に使う
+2. HotwireはStimulusを使って、自分で新しいHTML属性とそれに結びついたJavaScriptを書く
+3. HTMXは出来合いのHTML属性をたくさん用意し、それを組み合わせてUIを作る
+
+Hotwireは37signalsの製品で誕生し、実際の製品の複雑なUIでもわかりやすく作るために生まれた技術です。大きなところは出来合いのHTML属性で対応しますが、多くのエッジケースに対応するために、その都度カスタムJavaScriptを書くことを重視しています。それに対して、HTMXはHTML属性中心の宣言的アプローチをより深く追求した、より野心的なものだと感じています。
 
 ## Hotwireのアプローチのまとめ --- approach-of-hotwire-summary
 
 * ブラウザからのリクエストに対して、サーバでHTMLのパーツを作ります
 * ブラウザではパーツをはめ込みます
-* ステートは通常はあまり意識しません（複雑なUIになったら考えることがあります）
+* ステートのことは、必要な時に考えます。何でもかんでもステートというルールはありません
