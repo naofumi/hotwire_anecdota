@@ -1,3 +1,4 @@
+import React, {Suspense, lazy} from "react"
 import {createRoot} from "react-dom/client"
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -10,8 +11,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!dispatchImport) {
     alert(`No dispatcher found for "${key}"`)
   }
-  const {default: component} = await dispatchImport()
-  root.render(component());
+  const MyComponent = lazy(dispatchImport)// (await dispatchImport()).default
+  root.render(<Suspense fallback={<div>Loading...</div>}>
+    <MyComponent />
+  </Suspense>)
 });
 
 // Page transition
@@ -26,7 +29,7 @@ window.addEventListener("load", () => {
 function dispatcher(key) {
   const table = {
     "toggle": () => import("./react/pages/TogglePage"),
-    "second": () => import("./react/pages/SecondPage"),
+    "customers": () => import("./react/pages/CustomersPage"),
   }
   return table[key]
 }

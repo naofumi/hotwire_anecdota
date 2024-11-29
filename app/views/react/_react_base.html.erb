@@ -2,7 +2,7 @@
   local_assigns => {title:}
 %>
 
-<% provide :head, javascript_include_tag("application_react_splitting", "data-turbo-track": "reload", type: "module") %>
+<% provide :head, javascript_include_tag("application_react", "data-turbo-track": "reload", type: "module") %>
 <% set_breadcrumbs [[title, react_path(@template)]] %>
 <% content_for :title, title %>
 
