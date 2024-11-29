@@ -1,3 +1,19 @@
+/*
+* # Purpose of React inside the Hotwire Anecdota project.
+*
+* 1. Provide examples of embedding React inside Turbo or MPA pages.
+* 2. Study React-based UI libraries.
+*
+* Despite router libraries for React, there are a large number of
+* websites using React embedded inside MPA pages.
+* This is a good approach to add reactivity to the few pages where
+* reactivity is important, while keeping the rest of your site simple.
+*
+* Examples of sites using React embedded in an MPA
+* * Apple Store
+* * https://camp.travel.rakuten.co.jp
+*
+* */
 import React, {Suspense, lazy} from "react"
 import {createRoot} from "react-dom/client"
 
@@ -11,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!dispatchImport) {
     alert(`No dispatcher found for "${key}"`)
   }
-  const MyComponent = lazy(dispatchImport)// (await dispatchImport()).default
+  const MyComponent = lazy(dispatchImport)
   root.render(<Suspense fallback={<div>Loading...</div>}>
     <MyComponent />
   </Suspense>)
