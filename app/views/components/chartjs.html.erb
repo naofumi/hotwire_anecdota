@@ -1,0 +1,32 @@
+<% set_breadcrumbs [["ChartJS", component_path(:chartjs)]] %>
+
+<%= render 'template',
+           title: "ChartJS",
+           description: "" do %>
+  <div data-controller="chartjs"
+       data-chartjs-label-value="UFO sightings per year!!!!"
+       data-chartjs-data-value="<%= [{ year: 2010, count: 10 },
+                                     { year: 2011, count: 20 },
+                                     { year: 2012, count: 15 },
+                                     { year: 2013, count: 25 },
+                                     { year: 2014, count: 22 },
+                                     { year: 2015, count: 30 },
+                                     { year: 2016, count: 28 },
+                                    ].to_json %>">
+
+    <div class="flex justify-between">
+      <% [2010, 2011, 2012, 2013, 2014, 2015, 2016].each_with_index do |year, index| %>
+        <div>
+          <div><%= year %>:</div>
+          <input type="range" min="0" max="100" value="10" step="10" class="w-20"
+                 data-chartjs-bar-param="<%= index %>"
+                 data-action="input->chartjs#changeBar"/>
+        </div>
+      <% end %>
+    </div>
+    <div class="w-full">
+      <canvas data-chartjs-target="chart"></canvas>
+    </div>
+  </div>
+<% end %>
+

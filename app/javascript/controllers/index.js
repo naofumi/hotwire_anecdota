@@ -16,6 +16,9 @@ application.register("carousel", CarouselController)
 import ChapterListController from "./chapter_list_controller"
 application.register("chapter-list", ChapterListController)
 
+import ChartjsController from "./chartjs_controller"
+application.register("chartjs", ChartjsController)
+
 import DropdownController from "./dropdown_controller"
 application.register("dropdown", DropdownController)
 
