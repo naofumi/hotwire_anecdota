@@ -1,7 +1,7 @@
 ---
 title: はじめに
 layout: article
-order: 2
+order: 20
 published: false
 ---
 

@@ -2,7 +2,7 @@
 title: 高性能Hotwire
 section: Performance
 layout: article
-order: 05
+order: 500
 ---
 
 ## ウェブサイトの遅さの原因

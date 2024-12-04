@@ -1,7 +1,7 @@
 ---
 title: Reactが難しい要因はJavaScript
 layout: article
-order: 005
+order: 20
 published: true
 ---
 
@@ -21,7 +21,7 @@ published: true
 
 JavaScriptをしっかり勉強しなければならないのは、一見すると当たり前です。ReactはJavaScriptで書かれていますので、それが読み書きできなければならないのは当然に思えます。
 
-しかし、私を含め、多くのRuby on Rails開発者はRubyから始めていません。Ruby on Railsで一通りウェブサイトが作れるぐらいになった後にRubyをしっかり学び直す人が多いのではないかと思います。**JavaScriptをしっかり勉強しないとReactが難しいというのは違和感があります。**
+しかし、私を含め、多くのRuby on Rails開発者はRubyから始めていません。Ruby on Railsで一通りウェブサイトが作れるぐらいになった後に、改めてRubyをしっかり学び直す人が多いのではないかと思います。**JavaScriptをしっかり勉強しないとReactの学習が始められないというのは、実は違和感があります。**
 
 ## ReactはJavaScriptのかなり難しい機能を使っている --- react-uses-difficult-javascript-features
 
@@ -33,7 +33,11 @@ JavaScriptをしっかり勉強しなければならないのは、一見する�
   * サーバからデータを取得するために`fetch()`を多用しますので、async awaitもしくはPromiseが必要になります
   * SSRになってくるとasyncだらけになってきます。DBとの通信がasyncなのはもちろんですが、Next.js v15からはそれだけではなく、[ほぼすべてがasync](https://nextjs.org/blog/next-15-rc2#async-request-apis-breaking-change)になります。
 
-これらはJavaScriptの入門書に言及されていないことすら珍しくないものです。あったとしても最後の方に言及されているものです。これに加えてReactのプロジェクトではTypeScriptがよく使われています。
+これらは簡単な機能ではありません。JavaScriptの入門書に含まれていないこともあります。あったとしても必ず最後の方です。
+
+そして最近では、これに加えてTypeScriptも必要です。TypeScriptがわからないと、いつまでもコンパイラに怒られて先に進みません。
+
+**振り返ると、確かにReactに要求されるJavaScriptのレベルは高く、難しいです**。
 
 ## Hotwireは入門書レベルのJavaScriptで書ける
 
@@ -41,5 +45,5 @@ JavaScriptをしっかり勉強しなければならないのは、一見する�
 
 ## 最後に
 
-Hotwireの方がシンプルで、Reactの方が複雑だと言っているのではありません。熟練者にとっては高度な機能を使っている方が簡単にプログラムが書けるのかもしれません。しかし入門者やウェブデザイナー等にとってはハードルが高いフレームワークと言って良いと思います。
+Hotwireの方がシンプルで、Reactの方が複雑だと言っているのではありません。熟練者にとっては、TypeScriptを含めた高度な機能を使っている方が簡単にプログラムが書けるのかもしれません。しかし入門者やウェブデザイナー等にとっては、Reactはハードルが高いフレームワークと言って良いと思います。
 

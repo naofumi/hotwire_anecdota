@@ -3,6 +3,7 @@ title: ステートをReactに持たせる
 layout: article
 order: 30
 published: true
+siblings: true
 ---
 
 ## 概略 --- introduction
@@ -117,5 +118,5 @@ export function IPhoneShow({catalogData}) {
     * イベントハンドラの中で`iphoneState`ステートに保存し、IPhoneオブジェクトでロジックを処理して、コンポーネントを再レンダリングしています
     * Reactはステートを更新すると自動的に再レンダリングします。そのため、Stimulusで必要だった`#render*`のメソッドが不要になります
 * Stimulus Controller版では`#render*`メソッドを使ってステートをDOMに反映させました。一方でReactの場合は`IphoneShow`コンポーネント(`app/javascript/react/components/IPhoneShow.jsx`)のJSXの中にロジックが埋め込まれています
-    * テンプレートの中にロジックを埋め込むのはRails ERBと同じやり方です。（つまり[ステートをサーバに持たせた例](http://localhost:3000/examples/store/store-server-state)と同じです）。なお、今回は解説を省略しました
+    * テンプレートの中にロジックを埋め込むのはRails ERBと同じやり方です。（つまり[ステートをサーバに持たせた例](/examples/store/store-server-state)と同じです）。なお、今回は解説を省略しました
     * テンプレートの中にロジックを埋め込むことは賛否両論ありますが、HTMLとロジックの関係がわかりやすいと思います

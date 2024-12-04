@@ -2,7 +2,7 @@
 title: Hotwireは学習しやすい
 section: Introduction
 layout: article
-order: 50
+order: 100
 ---
 
 Hotwireは学習しやすいフロントエンドフレームワークです。Reactと比べて学びやすいのはもちろんのこと、jQueryと比べてもわかりやすいと思います。

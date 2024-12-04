@@ -6,7 +6,7 @@ order: 010
 published: true
 ---
 
-## MPAの中にReactを埋め込む
+## MPAの中にReactを埋め込む --- embed-react-in-an-mpa
 
 HotwireやMPAのページの中にReactを埋め込むのは簡単です。[Reactの公式サイトによると](https://ja.react.dev/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page)、**Facebookも長らくこの使い方がメインでした**。GitHubも同様です。**GitHubの場合はTurbo中心で作られてページの中の一部分をReactで実装しています**。
 
@@ -18,7 +18,7 @@ HotwireやMPAのページの中にReactを埋め込むのは簡単です。[Reac
 
 ## Apple Store模写の例 --- apple-store
 
-Apple Storeを模写した例です。[デモ](/react/iphone)はこちらに用意しています。
+Apple Storeを模写した例です。[詳しい解説はこちら](/examples/store/store-react-state)を確認してください。また[デモはこちら](/react/iphone)に用意しています。
 
 ```erb:app/views/react/iphone.html.erb
 <%= provide :head, javascript_include_tag("react_iphone", "data-turbo-track": "reload", type: "module") %>
@@ -38,8 +38,8 @@ Apple Storeを模写した例です。[デモ](/react/iphone)はこちらに用�
 * `javascript_include_tag "react_iphone"`でReactアプリの本体の`react_iphone.jsx`を読み込んでいます
 * Reactアプリを埋め込む先の`<div id="root"></div>`を設置しています
 * `<script type="application/json" id="catalog-data">`の箇所ではカタログのデータ（オプションごとの価格など）をJSON形式に変換し、記載しています
-   * これはカタログデータを読み込むためのブラウザからサーバへのリクエストを減らすためで、こうするとページロードの遅延を減らせます
-   * より一般的なのは`@catalog_data`をJSONとして出力するJSON APIを用意し、Reactページを読み込んだら`fetch()`で読み込むことです。しかしこれは無駄なリクエストが発生しますので、遅延が大きくなります
+   * 一般的には`@catalog_data`をJSONとして出力するJSON APIを用意し、Reactコンポーネントから`fetch()`で読み込みます。しかしこれは無駄なリクエストが発生しますので、遅延が大きくなります
+   * 今回はこの遅延を嫌って、最初のHTMLページにJSONデータを埋め込んでいます。これはNext.jsがHydrationで使う手法とほぼ同じです
 
 ```jsx:app/javascript/react_iphone.jsx
 import React from "react";
@@ -56,12 +56,11 @@ document.addEventListener("turbo:load", () => {
 
 ```
 
-* ページの読み込みが完了すると`turbo:load`イベントが発火します。そして以下のことを実行します
-   * `turbo:load`はTurboが用意しているカスタムイベントです。Turboを使用しない場合は`DOMContentLoaded`イベントを使うのが一般的です 
+* ページの読み込みが完了すると`turbo:load`イベントが発火し、以下の処理が行われます。なお`turbo:load`はTurboが用意しているカスタムイベントで、Turboを使用しない場合は`DOMContentLoaded`イベントを使うのが一般的です 
 * 上記の`<script type="application/json" id="catalog-data">`にあったJSONのデータを読み込み、`data`オブジェクトにセットします
 * `IPhoneShow`コンポーネントに`data`をprops(`catalogData`)として渡し、これを`<div id="root">`の箇所に埋め込みます
 
 ## まとめ --- summary
 
-* HotwireをReactと一緒に使うことは問題なくできます
+* HotwireをReactと一緒に使うことは簡単にできます
 * `<script type="application/json" ...>...</script>`にデータを埋め込めばERBからReactにデータを渡せます。ダイナミックなコンテンツであっても、無駄なリクエストを送信せずに、Next.jsのSSRと同等の早さでページを表示できます

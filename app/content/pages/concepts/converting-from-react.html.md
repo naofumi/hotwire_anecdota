@@ -2,7 +2,7 @@
 title: Reactのリプレイス
 section: Tips
 layout: article
-order: 005
+order: 500
 ---
 
 ## HTMLを移す

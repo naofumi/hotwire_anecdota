@@ -24,9 +24,9 @@ module TocHelper
       def link_or_span(node)
         if node.child["href"]
           link_to(node.text, node.child["href"],
-                  class: "#{toc_indent_class(node.name)} before:-ml-2 before:inline-block before:w-2 before:content-[' '] before:bg-cover before:bg-left before:bg-[url('check-circle-gray.svg')] block my-2 text-sm text-orange-600")
+                  class: "#{toc_indent_class(node.name)} before:-ml-2 before:inline-block before:w-2 before:content-[' '] before:bg-cover before:bg-left before:bg-[url('check-circle-gray.svg')] block my-2 font-light text-sm text-orange-600 active:opacity-50 hover:text-orange-700")
         else
-          tag.span(node.text, class: "#{toc_indent_class(node.name)} block my-1 text-base text-gray-600")
+          tag.span(node.text, class: "#{toc_indent_class(node.name)} block my-1 text-base bg-red-600 text-white")
         end
       end
 

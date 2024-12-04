@@ -2,7 +2,7 @@
 title: PartialとHelperを使用したコンポーネント
 section: Tips
 layout: article
-order: 005
+order: 500
 ---
 
 ## ViewComponent, Phlexの登場

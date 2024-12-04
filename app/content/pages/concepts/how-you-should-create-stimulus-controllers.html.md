@@ -2,7 +2,6 @@
 title: Stimulus Controllerの作り方
 layout: article
 order: 050
-published: true
 ---
 
 ## `bin/rails g stimulus [controller名]`

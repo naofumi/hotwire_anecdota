@@ -1,7 +1,7 @@
 ---
 title: Hotwireでどれだけ簡単になるか？
 layout: article
-order: 50
+order: 100
 ---
 
 ## JSON APIを作る必要がなくなります

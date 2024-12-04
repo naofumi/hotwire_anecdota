@@ -137,7 +137,7 @@ end
 * 上記のMPAの場合とほとんど変わりません
    * 唯一 `tag.div id: dom_id(todo, :like_button)`のところでIDをつけています
    * IDをつけるのは、Turbo Streamsで置換する際の目印をつけるためです
-   * [Turbo FramesとTurbo Streamsの違い](/concepts/frames-vs-streams)でも解説している通り、リクエストを出す時は通常のTurbo DriveとTurbo Streamでは何も変わりません。Turbo Driveで応答するかTurbo Streamsで応答するかは、すべてサーバ側で決定されます
+   * [サーバから見たTurbo FramesとTurbo Streamsの違い](/concepts/server-perspective-frames-vs-streams)でも解説している通り、リクエストを出す時は通常のTurbo DriveとTurbo Streamでは何も変わりません。Turbo Driveで応答するかTurbo Streamsで応答するかは、すべてサーバ側で決定されます
 
 コントローラは上述のものと同じです。ただし`request.variant.mpa?`はfalseを返しますので、`app/views/todos/likes/create.turbo_stream.erb`をテンプレートとしたレスポンスを返します。
 

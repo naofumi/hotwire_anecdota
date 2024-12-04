@@ -2,7 +2,7 @@
 title: Hotwireの歴史
 section: History
 layout: article
-order: 10
+order: 100
 ---
 
 ## 系統樹 --- evolution-tree

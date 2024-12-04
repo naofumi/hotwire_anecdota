@@ -2,7 +2,7 @@
 title: Stimulusとステート
 section: Tips
 layout: article
-order: 030
+order: 100
 ---
 
 ## Stimulusのステートの考え方

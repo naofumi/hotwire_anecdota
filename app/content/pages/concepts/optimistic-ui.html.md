@@ -2,7 +2,7 @@
 title: 楽観的UI
 section: Performance
 layout: article
-order: 05
+order: 500
 ---
 
 ## 楽観的(Optimistic) UI 

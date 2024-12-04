@@ -2,7 +2,6 @@
 title: 用語集
 layout: article
 order: 001
-published: true
 ---
 
 #### Pending UI (待機状態のUI) --- pending-ui

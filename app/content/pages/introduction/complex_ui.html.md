@@ -1,7 +1,7 @@
 ---
 title: Hotwireは複雑なUIに不向き？
 layout: article
-order: 10
+order: 100
 ---
 
 「Reactなら複雑なUI/UXに向いているけれども、Hotwireでは無理ではないか？」という意見があります。これは本当でしょうか？それ以前に「複雑なUI/UX」とな何を指すのでしょうか？
@@ -36,7 +36,7 @@ Reactに当てはまる点で言えば、ステート管理に苦労するのは
 
 上述より、StimulusでReact同様の複雑なUI/UXが作れるかどうかの論点は、Stimulusで単一データフローができるか否かにかかっているように思えます。これが実現できれば、Reactが解決した課題は大方Stimulusでも解決可能と言えます。
 
-本サイトでは[「Stimulus Controllerの構造」](http://localhost:3000/concepts/stimulus-typical-structure)の項で、**Action ==> Controller ==> Target**のデータフローを意識したStimulus controllerの書き方を紹介しています。Stimulusでは`*ValueChanged`のコールバックが用意され、これをサポートしていることも紹介しています。
+本サイトでは[「Stimulus Controllerの構造」](/concepts/stimulus-typical-structure)の項で、**Action ==> Controller ==> Target**のデータフローを意識したStimulus controllerの書き方を紹介しています。Stimulusでは`*ValueChanged`のコールバックが用意され、これをサポートしていることも紹介しています。
 
 そして、少なくとも私の意見としていうと、Stimulus Controllerを使って単一データフローは作れると思っています。結果として、複雑なUI/UXはStimulusでも十分に作成できるのではないかと思います。
 

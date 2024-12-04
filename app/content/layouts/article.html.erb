@@ -1,3 +1,4 @@
+<% provide :head, turbo_exempts_page_from_preview %>
 <%= render_layout "body" do %>
   <div class="group/chapter-list lg:max-w-6xl lg:mx-auto"
        data-controller="chapter-list"
@@ -13,8 +14,8 @@
 
     <div class="hidden pl-6 max-h-full lg:pl-8 lg:w-72 lg:fixed lg:block">
       <div class="p-4 border-md rounded bg-white/80">
-        <!-- chapter list -->
-        <%= link_to current_page.data.title, "#" %>
+        <!-- desktop chapter list -->
+        <%= link_to current_page.data.title, "#", class: "font-semibold hover:text-orange-600 active:opacity-50" %>
         <%= safe_join extract_toc(full_document) %>
       </div>
     </div>
@@ -31,9 +32,10 @@
         </p>
 
         <div class="fixed top-4 right-4 max-w-96 border rounded-md p-2 bg-white/90 lg:hidden">
-          <!-- chapter list -->
+          <!-- mobile chapter list -->
           <div class="flex justify-end">
-            <button class="block" data-action="click->chapter-list#toggle">
+            <button class="block text-orange-600"
+                    data-action="click->chapter-list#toggle">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
               </svg>
@@ -44,6 +46,17 @@
           </div>
         </div>
         <div class="mt-10 max-w-3xl mx-auto">
+          <% if current_page.data.siblings %>
+            <div class="border rounded-lg p-2 mb-8 bg-white/80">
+              <h3 class="text-xl ml-4 font-light" id="sibling-pages">
+                <%= link_to current_page.parent.data.title,
+                            current_page.parent.url,
+                            class: "hover:text-orange-600 active:opacity-50"
+                %>
+              </h3>
+              <%= render "page_children", page: current_page.parent %>
+            </div>
+          <% end %>
           <% if current_page.children.any? %>
             <div class="border rounded-lg p-2 mb-8 bg-white/80">
               <h3 class="text-xl ml-4 font-light" id="related-pages">関連ページ</h3>

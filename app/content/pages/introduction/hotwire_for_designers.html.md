@@ -2,7 +2,7 @@
 title: ウェブデザイナーも使うHotwire
 section: Introduction
 layout: article
-order: 7
+order: 100
 ---
 
 ## Hotwireはウェブデザイナーにも向いている

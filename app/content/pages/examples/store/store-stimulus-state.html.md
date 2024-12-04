@@ -209,7 +209,7 @@ export default class IPhone {
 
 ## まとめ --- summary
 
-* [ステートをサーバに持たせた例](http://localhost:3000/examples/store/store-server-state)と構造としてはよく似ています
+* [ステートをサーバに持たせた例](/examples/store/store-server-state)と構造としてはよく似ています
     * ActionのイベントをStimulus Controllerで受け取り、`this.iphoneValue`ステートに保存し、`IPhone`オブジェクトでロジックを処理して、targetsを更新しています。この処理の流れは[Stimulus Controllerの構造](/concepts/stimulus-typical-structure)で紹介しているもので、制御の流れがわかりやすくなります
        * StimulusのActionがRails ControllerのAction、`IPhone`オブジェクトがRailsのモデル、targetsの更新がERB viewの作成と考えると、この処理の流れとRails MVCがとても似ていることに気づきます
 * Stimulusはすでに用意されたHTMLを後から修正する形を主にとります。そのため[Stimulus Controller](#stimulus-controller)の中の`#render*`メソッドがどのようにHTMLに反映されるかが少しわかりにくくなっています

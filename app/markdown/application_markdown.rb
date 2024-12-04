@@ -66,7 +66,9 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
 
     case extension
     when "webp", "jpg", "jpeg", "gif", "png"
-      image_tag(link, alt: alt, title: alt, class: css_classes)
+      link_to image_path(link), target: "image", class: "#{css_classes} block" do
+        image_tag(link, alt: alt, title: alt)
+      end
     when "mov"
       tag.video src: video_path(link), width: 733, height: 606, muted: true,
                 autoplay: true, playsinline: true, controls: true,

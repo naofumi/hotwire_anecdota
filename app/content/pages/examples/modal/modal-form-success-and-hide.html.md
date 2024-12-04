@@ -24,7 +24,7 @@ Hotwireで作成したモーダル中のフォームからリクエストを送�
       2. Turbo Driveが実装としては一番楽になります
       3. ただしモーダルを消すときにアニメーションが出しにくいので今回は採用しません
       4. また（これはTurbo Framesでも同じですが）POST/redirect/GETを使わなければならないため、遅延が大きくなり、レスポンスが悪くなります
-   5. 実は「`form`の送信をTurbo Streamsで行う」というのは正確ではありません。なぜならTurbo Streamsで応答するかどうかは`form`送信時には決まらないからです。Turbo Streamsでレスポンスするかどうかはあくまでもサーバ側が決めます。詳しくは[Turbo FramesとTurbo Streamsの違い](/concepts/frames-vs-streams)で紹介しています。したがって、**例えば更新が成功したときはTurbo Driveでredirectして、失敗したときはTurbo Streamsでエラーメッセージを出すなどということも可能です**（今回は双方ともTurbo Streamsで処理していますが）
+   5. 実は「`form`の送信をTurbo Streamsで行う」というのは正確ではありません。なぜならTurbo Streamsで応答するかどうかは`form`送信時には決まらないからです。Turbo Streamsでレスポンスするかどうかはあくまでもサーバ側が決めます。詳しくは[サーバから見たTurbo FramesとTurbo Streamsの違い](/concepts/server-perspective-frames-vs-streams)で紹介しています。したがって、**例えば更新が成功したときはTurbo Driveでredirectして、失敗したときはTurbo Streamsでエラーメッセージを出すなどということも可能です**（今回は双方ともTurbo Streamsで処理していますが）
 2. `form`送信のpending UI（待ちUI）は、Ruby on Railsが昔からデフォルトで提供している機能を使います（UJS: Unobtrusive JavaScript）。Hotwireでも同じ機能が引き継がれています
    1. Turboは[`form`のsubmitterを自動的にdisabledにします](https://turbo.hotwired.dev/reference/attributes#automatically-added-attributes) [^disabled]
    2. 上記のdisabledをCSSで検知し、ボタンの彩度を落とします 
