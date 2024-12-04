@@ -11,5 +11,5 @@ Vanilla JavaScriptには多くの便利なライブラリがあります。**Rea
 
 Reactはエコシステムが凄いとよくいわれています。しかし多くの場合、ライブラリのコアはvanilla JavaScriptですので、Stimulusからも使えます。
 
-Stimulusはvanilla JavaScriptの核と接続し、サーバのデータや他のUI部品と繋げるのを得意としています。[Chart.jsの例を解説しています](/examples/chartjs#stimulus-controller)ので、ご覧ください。
+Stimulusはvanilla JavaScriptの核と接続し、サーバのデータや他のUI部品と繋げるのを得意としています。[Chart.jsの例を解説しています](/examples/chartjs)ので、ご覧ください。
 

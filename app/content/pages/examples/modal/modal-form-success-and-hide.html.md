@@ -3,6 +3,7 @@ title: フォーム送信成功と後処理
 layout: article
 order: 0010
 published: true
+siblings: true
 ---
 
 Hotwireで作成したモーダル中のフォームからリクエストを送信し、成功するところまでを解説します。下記のビデオのものになります。
@@ -78,7 +79,7 @@ Hotwireで作成したモーダル中のフォームからリクエストを送�
 * 一番下の`<button>`(キャンセル)のところは、クリックしたら`ModalDialogController`の`hide()`を呼ぶようにしています。モーダルを非表示にするものです
 * `form.submit`のところは「更新する」ボタンです。これに`data-turbo-submits-with`属性がついていて、"更新中..."となっています。これはTurboが用意してくれているoptimistic UI (楽観的UI)です。ボタンをクリックして`form`を送信すると、ボタンの名前が自動的に"更新中..."に切り替わってくれます
    * さらにTurboはボタンを自動的に`disabled`にもしてくれますので、`form`の二重送信防止になります
-   * 加えて`form`を送信中は、Turboが`form`要素に`aria-busy`属性を自動でつけてくれます。これをCSS擬似セレクタで検知して、楽観的UIを追加することもできます（今回は用意していませんが）
+   * 加えて`form`を送信中は、Turboが`form`要素に`aria-busy`属性を自動でつけてくれます。これをCSS擬似セレクタで検知して、待ちUI (pending UI)を追加することもできます
 
 [^form-events]: リクエストが成功したかどうかはサーバが決定することです。そしてこれをブラウザに表示しなければなりませんが、どのようにメッセージを伝播するべきかは難しい問題です。Hotwireの場合は大きく２つの選択肢があります。１つ目はレスポンスのbodyであるTurbo Streamを使うことです。この場合はサーバが「モーダルのHTML要素を変えろ！」と指示します。２つ目はレスポンスのstatusで200系や400系を返し、ブラウザ側でstatusを読み取り、ブラウザ側が自ら「モーダルを消すぞ！」と判断する形です。開発者によって、どのやり方を選択するかが異なります。なお、ReactだとJSON APIしかないので、必然的に後者の形になります。私はモーダルの表示・非表示はあくまでもブラウザが管理することであり、なるべくならサーバは関わるべきではないと思っていますので、後者を採用しています。
 
@@ -133,7 +134,7 @@ end
   * POST/Redirect/GETのパターンを使う時はredirectを挟むので`flash`を、今回のようにPOSTに対して直接レスポンスを返している場合は`flash.now`と使い分ける形になります
   * なお[トーストを表示する方法](/examples/toast)については、別途解説しています
 * 今はまず正常系だけ見ていますので、Turbo StreamのERBテンプレートでは、`if ... else`の`else`の方だけみます
-  * Turbo Streamの`turbo_stream.replace dom_id(@todo)`でデータが更新された行を`replace`で置換しています。背景画面である`app/views/todos/index.html.erb`では、各行を`app/views/todos/_todo.html.erb` partialでレンダリングしていますが、`@todo`に該当する行だけを置換しています
+  * Turbo Streamの`turbo_stream.replace dom_id(@todo)`でデータが更新された行を`replace`で置換しています。背景画面である`app/views/todos/index.html.erb`では、各行を`app/views/todos/_todo.html.erb` partialでレンダリングしていますが、ここでは`@todo`に該当する行だけを置換しています
   * Turbo Streamの`turbo_stream.replace "global-notification"`ではトーストを表示します。トーストの内容は`global_notification` partialからとっています。なおトーストをよく使用するのであれば、丸ごとhelperにしてしまった方が便利かもしれません（下の`global_notification_stream` helperのコードを参照）
 
 ```rb:app/helpers/global_notification_helper.rb

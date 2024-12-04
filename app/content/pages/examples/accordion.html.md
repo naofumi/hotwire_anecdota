@@ -18,13 +18,14 @@ published: true
 1. 今回はサーバから非同期でデータを受け取る必要がありません
    1. Stimulusだけで実装します
    2. HTMLのcheckboxやradioを使う方法もありますが、今回は紹介しません
+   3. HTMLのdetails, summaryを使う方法もありますが、今回は紹介しません
 2. Stimulus Controllerの制御範囲を考えます。つまり画面のどこをカバーするかです
-   1. 今回のアコーディオンは、各行が独立して動いています。例えば一つの行を開いたら他の行が閉じるというアコーディオンも考えられますが、それではないです
-   2. 各行が独立していますので、Stimulus Controllerの制御範囲は行単位で良さそうです
+   1. 今回のアコーディオンは、各行が独立して動いています。一方で一つの行を開いたら他の行が閉じるというアコーディオンも考えられますが、今回はそれではないです
+   2. 各行が独立していますので、Stimulus Controllerの制御範囲は各行単位で良さそうです
 3. Stimulus Controllerのステートを検討します
    1. アクセシビリティを調べると、アコーディオンでは[`aria-expanded`を使うのが良さそうです](https://www.accessibility-developer-guide.com/examples/widgets/accordion/)
-   2. `aria-expanded`をCSSで読み取るアプローチを採用します
-   3. ただしアコーディオンを拡大する時のCSSトランジションは、拡大時の高さが指定されないとうまくいきません。このためCSSではなくStimulus controllerで表示を変更します
+   2. 基本的には`aria-expanded`をCSS擬似セレクタで読み取るアプローチを採用します
+   3. ただしアコーディオンを拡大する時のCSSトランジションは、拡大時の高さが指定されないとうまくいきません。このため一部ではCSSではなくStimulus controllerでJavaScriptを使って直接HTML要素の`style`を変更します
 
 ## コード --- code
 
@@ -77,7 +78,7 @@ published: true
 
 * アコーディオンの各行をコードしているpartialです
 * `data-controller="accordion"`となっているところで、`AccordionController` Stimulus controllerに接続します
-* `<button>`のところは`class="aria-[expanded=true]:rotate-180"`がありますので、`aria-expanded`属性の値によって表示が変わります
+* `<button>`のところは`class="aria-[expanded=true]:rotate-180"`がありますので、`aria-expanded`属性の値によって表示が変えるCSS擬似セレクタです
 * `data-action="click->accordion#toggle"`のところはアコーディオン開閉ボタンです
     * `data-action="click->accordion#toggle"`は、「クリックしたら`accordion` controllerの`toggle()`メソッドを実行すること」という意味です。イベントハンドラになります
 * `data-accordion-target="revealable"`となっているところが、アコーディオンの開閉で見え隠れする箇所です

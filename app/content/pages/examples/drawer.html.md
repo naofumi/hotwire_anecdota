@@ -5,7 +5,7 @@ order: 80
 published: true
 ---
 
-引き出し(drawer)はよく使われるUIです。ページ遷移をせずに詳細を表示するのに使います。モーダルと似ていますが、モーダルは一般に情報を少しだけ見せ、パッと閉じるものが多いのに対して、引き出しは情報が多く、データ更新ができるものも多いです。
+引き出し(drawer)はよく使われるUIです。ページ遷移をせずに詳細を表示するのに使います。モーダルと似ていますが、モーダルは一般に情報を少しだけ見せ、パッと閉じるものが多いのに対して、引き出しは情報が多く、データ更新も可能で複雑な処理をさせているものをよく見かけます。
 
 ![drawer.mov](content_images/drawer.mov "mx-auto max-w-[500px]")
 
@@ -20,7 +20,7 @@ published: true
 3. Stimulusの制御範囲
    1. 引き出しを表示させるアクションは、引き出しとは離れた場所にあるタブです
    2. また引き出しを閉じる時、タブの選択状態を変える必要があります。このとき、表示状態だけでなく、`aria-selected`属性も変更する必要がありますので、CSS擬似セレクタだけでは不十分です
-   3. タブ↔︎引き出し が双方向に連携する必要がありますので、Stimulusはこの双方を制御範囲とする必要があります
+   3. タブ <=> 引き出し が双方向に連携する必要がありますので、Stimulusはこの双方を制御範囲とする必要があります
 4. Stimulusのステート
    1. 引き出しの開閉および何番目のタブが選択されたがステートになります（今回はタブは１つしか使用しませんが、複数のタブから引き出しを制御する想定でいます
    2. ステートの変更はタブボタンの他、引き出しの閉じるボタンから制御します
@@ -28,7 +28,7 @@ published: true
    4. ２つのアクションから、２つのステートを制御し、３つの項目の表示が変更されます
    5. 比較的複雑ですので、[StimulusのValuesステート](https://stimulus.hotwired.dev/reference/values)でまとめることにします。表示の変更はなるべくCSS擬似セレクタで制御します
 
-なお、本来であれば[モーダル表示で解説しているポイント](/examples/modal/modal-show-with-animation#points-to-consider)もすべて検討する必要がありますが、今回は省略しています。実装する場合は[モーダルの解説](/examples/modal/modal-show-with-animation#points-to-consider)もご確認ください。
+なお、本来であれば[モーダル表示で解説しているポイント](/examples/modal/modal-show-with-animation#points-to-consider)もすべて検討する必要がありますが、今回は省略しています。UI/UXで満たすべき項目を全て実装する場合は、[モーダルの解説](/examples/modal/modal-show-with-animation#points-to-consider)もご確認ください。
 
 ## コード --- code
 
@@ -79,11 +79,11 @@ published: true
 ```
 
 * レイアウトのERBテンプレートです。引き出しはモーダルと同様、HTMLのbody近くに作ることが一般的ですので、レイアウトの中に作っています。
-* `<div data-controller="slide-drawer" ...>`の箇所で`SlideDrawerController` Stimulus controllerと接続しています。初期状態では引き出しは閉じていますので、`data-slide-drawer-shown-value="false"`でStimulusのValuesステートを記述しています
-* `<div id="slide-drawer">`の箇所が引き出しのコードです。ここに記載しているのは引き出しの「枠」であり、中身は`<%= turbo_frame_tag :slide_drawer %>`の箇所に入ってきます
-* `button_tag`は「閉じる」ボタンで、`data: { action: "click->slide-drawer#hide" }`がアクションになります。クリックすると`SlideDrawerController`の`hide()`メソッドを呼びます。
+* `<div data-controller="slide-drawer" ...>`の箇所で`SlideDrawerController` Stimulus controllerと接続しています。初期状態では引き出しは閉じていますので、`data-slide-drawer-shown-value="false"`でStimulusのValuesステートの初期状態を記述しています
+* `<div id="slide-drawer">`の箇所が引き出しのコードです。ここに記載しているのは引き出しの「枠」であり、引き出しの中身は`turbo-frame_tag id="slide_drawer">`の挿入されます
+* `button_tag`は「閉じる」ボタンで、`data-action="click->slide-drawer#hide"`がアクションになります。クリックすると`SlideDrawerController`の`hide()`メソッドを呼びます。
 * 最後の`<div ... data-action="click->slide-drawer#hide:prevent">`の箇所は引き出しの背景の黒い幕です。ここをクリックしたときに引き出しを閉じる必要がありますので、`SlideDrawerController`の`hide()`メソッドを呼ぶようにしています
-* 引き出しや背景の黒い幕の表示・非表示は`aria-hidden`属性をCSS擬似セレクタで監視して実現しています
+* 引き出しや背景の黒い幕の表示・非表示は`aria-hidden`属性をCSS擬似セレクタで監視して実現しています（初期設定は`aria-hidden="true"`）
 
 ### タブボタンがある画面 --- page-with-tab-buttons
 
@@ -118,7 +118,7 @@ published: true
 * タブボタンがある画面です（一番最初に表示される画面）
 * `data-action="click->slide-drawer#show"`となっているところがタブボタンのActionで、これをクリックすると`SlideDrawerController`の`show()`メソッドが呼ばれ、引き出すが表示されます
 * 同時に引き出しのコンテンツをサーバにリクエストする必要があります。今回は`<a>`タグに`data-turbo-frame="slide_drawer"`属性をつけていますので、クリックすると自動的にTurbo Framesでリクエストが送信され、`<turbo-frame id="slide_drawer">`にレスポンスが挿入されます
-* このタブボタンはCSS擬似セレクタで表示を変えるだけでなく、`aria-selected`属性も変更する必要があります（アクセシビリティの要件）。そのため`data-slide-drawer-target="tab"`として、`SlideDrawerController`からtargetとして制御できるようにしなければなりません
+* このタブボタンはCSS擬似セレクタに応答して表示を変えるだけでなく、`aria-selected`属性も変更する必要があります（アクセシビリティの要件）。そのため`data-slide-drawer-target="tab"`として、`SlideDrawerController`からtargetとして制御できるようにしなければなりません
 * タブボタンが選択されているときは下に青い線を引いていますが、これは`aria-selected`をCSS擬似セレクタで監視することによって実装しています
 
 ### 引き出しの中身 --- drawer-contents
@@ -197,11 +197,11 @@ export default class extends Controller {
    * しかし`aria-*`属性を変更するには、JavaScriptでDOMを書き換える必要があります。このために`targets`を使用しています
 * `show()`, `hide()`はタブボタンや「閉じる」ボタン、背景の黒い幕をクリックしたときに引き出しを開閉するアクションです。アクションの中ではValuesステートだけを変更して、ここではDOM操作を行いません
 * `showValueChanged()`は、Valuesステートが変更された時に自動的に呼ばれるコールバックです。ここでは`#render()`メソッドを呼び出します。
-* `#render()`でValuesステートに応じて、実際にDOMを変更します。眼にみえる表示状態はCSS擬似セレクタで十分に制御できますので、ここでは`aria-*`属性のみを変更します
+* `#render()`でValuesステートに応じて、実際にDOMを変更します。眼にみえる表示状態はCSS擬似セレクタですでに制御されていますので、ここでは`aria-*`属性のみを変更します
 
 ## まとめ --- summary
 
-* 引き出しUIをTurboとStimulusを組み合わせて実装しました
-* 複雑には見えないのですが、それでも複数のアクション、表示変更箇所、`aria-*`属性設定箇所があり、気をつけないと複雑になりがちです
-* [Stimulus Controllerの構造](/concepts/stimulus-typical-structure)にしたがい、データのフローを型にハメました。そのため、処理の流れがわかりやすくなっています
+* TurboとStimulusを組み合わせて引き出しUIを実装しました
+* 複数のアクション、表示変更箇所、`aria-*`属性設定箇所があるため、気をつけないとコードは複雑になりがちです
+* [Stimulus Controllerの構造](/concepts/stimulus-typical-structure)にしたがい、データのフローを型にはめています。そのため、処理の流れがわかりやすくなっています
 * 表示の変更だけであればCSS擬似セレクタで対応できます。ただしアクセシビリティのために`aria-*`属性を変更する場合は、Stimulusの`target`を使って、JavaScriptでDOM操作をすることになります

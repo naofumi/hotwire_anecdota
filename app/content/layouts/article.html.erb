@@ -68,6 +68,17 @@
             <%= full_document %>
           </div>
 
+          <% if current_page.data.siblings %>
+            <div class="border rounded-lg p-2 mt-12 bg-white/80">
+              <h3 class="text-xl ml-4 font-light" id="sibling-pages">
+                <%= link_to current_page.parent.data.title,
+                            current_page.parent.url,
+                            class: "hover:text-orange-600 active:opacity-50"
+                %>
+              </h3>
+              <%= render "page_children", page: current_page.parent %>
+            </div>
+          <% end %>
           <% if current_page.children.any? %>
             <div class="border rounded-lg p-2 mt-12 bg-white/80">
               <h3 class="text-xl ml-4 font-light" id="related-pages">関連ページ</h3>

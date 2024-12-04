@@ -3,6 +3,7 @@ title: モーダルの表示・非表示
 layout: article
 order: 006
 published: true
+siblings: true
 ---
 
 十分な機能を持ったモーダルをHotwireで自作する方法を紹介します。下記のビデオのものになります。
@@ -26,7 +27,7 @@ published: true
    2. モーダルそのものは一つの「枠」になっています。Turbo FramesとTurbo Streamsのどっちを選択するべきかですが、複数箇所を更新する必要がありませんので、Turbo Framesを選択します
 2. Turboはネットワーク通信です。したがって**ネットワーク遅延を想定する必要があります**
    1. ネットワーク待ちであることをユーザに伝えるために、ボタンをクリックした瞬間にモーダルを開き、「ロード中」の画面を表示します
-   2. サーバレスポンスを待たずに画面表示を変更しますので、Stimulusを使用します
+   2. サーバレスポンスを待たずに画面表示を変更してモーダルを表示しますので、Stimulusを使用します
    3. モーダル表示アニメーションも用意します（今回は下から浮いてくる感じにしました）
 3. モーダルのインタラクションは意外と複雑ですので、Stimulus Valuesステートを使うことにします
    1. 表示を切り替える箇所はモーダル「枠」だけでなく、 背景画面を覆う黒い幕も同時に表示させないといけません
@@ -72,7 +73,7 @@ published: true
 
 * これはメインのレイアウトページです。一番`<body>`タグに近いところです
 * モーダルのHTMLはここの直下に配置します（`modal_dialog` partialとして）
-* またページコンテンツは`<div id="page">`内に配置します。これはモーダルが表示された時に背面になり、黒い幕で隠される部分です。
+* またページのメインコンテンツは`<div id="page">`内に配置します。これはモーダルが表示された時に背面になり、黒い幕で隠される部分です。
 
 ### モーダルの枠 --- modal-frame
 
@@ -147,7 +148,7 @@ published: true
 ```
 
 * 実際のモーダルを表示するpartialです
-    * 長いですが、アニメーション用のTailwind CSSおよびcontrollerを接続するシンプルなコードです
+    * コードが長くなってしまっているのはアニメーション用のTailwind CSSのためです。中身はcontrollerを接続するシンプルなコードです
 * モーダル全体には`id="modal-dialog"`をつけます
     * 今回は`ModalDialogTriggerController`と`ModalDialogController`の複数controller間通信をします。そしてStimulusでcontroller間通信をする場合、`querySelector()`で使うようなCSSセレクタでHTML要素を指定します。`id`をつけているのはそのためです
 * `data-controller="modal-dialog"`属性で、モーダルのHTMLを`ModalDialogController`Stimulus controllerに繋げます
@@ -163,7 +164,7 @@ published: true
       * `data-action="click->modal-dialog#void:stop`の属性を持つHTML用紙がモーダルのコンテンツの枠です
       * ここをクリックすると`ModalDialogController`の`void()`メソッドが呼ばれますが、`void()`メソッド自身は何もしません
       * **注目して欲しいのは先ほどの`click->modal-dialog#void:stop`の`stop`の部分です**。これは`event.stopPropagation()`を呼んでくれます
-      * `event.stopPropagation()`が呼ばれますので、クリックイベントは後ろの黒い背景に伝播しません。そのため、`ModalDialogController`の`hide()`メソッドが呼ばれることはなく、このクリックは無視されます
+      * `event.stopPropagation()`が呼ばれますので、クリックイベントはこのレイヤーでブロックされ、後ろの黒い背景に伝播しません。そのため、`ModalDialogController`の`hide()`メソッドが呼ばれることはなく、このクリックは無視されます
   
 ### モーダル表示のトリガー --- trigger
 
@@ -293,5 +294,5 @@ export default class extends Controller {
 * 今回はStimulus controller間の通信を使用しました。Stimulus controllerを細かく分割して、わかりやすくするために有効な方法です
     * なおReactの場合は[`createPortal()`](https://ja.react.dev/reference/react-dom/createPortal)を使って、制御したいパーツが分散する問題に対応します。似たような機能はStimulusにはありませんが、controller間通信で解決できます
     * とはいえ、Stimulus controller間通信によって複雑になっている部分は間違いなくあります。[引き出し](/examples/drawer)で示したように、大きくなってしまうものの、１つのStimulus Controllerにまとめる方が良い可能性もあります。ケースバイケースで判断していただければと思います
-* インタラクションの制御に関わるコード分量は多くないのですが、考えるポイントは少なくありません。これは[モーダルの表示・非表示の必須の複雑さに真剣に向き合った結果](/opinions/why-isnt-hotwire-simpler)ですので、モーダル用のライブラリを使ったり、さらにUI/UXをそれに合わせていかない限り、なかなか避けられません
+* インタラクションの制御に関わるコード分量は多くないのですが、考えるポイントは少なくありません。これは[モーダルの表示・非表示の必須の複雑さに真剣に向き合った結果](/opinions/why-isnt-hotwire-simpler)ですので、HTMLネイティブの`dialog`を使ったり、モーダル用のライブラリを使ったり、さらにUI/UXをそれに合わせていかない限り、なかなか避けられません
 * 今回はモーダルの表示・非表示をやりました。次はモーダルの中でCRUDをした場合のコードを見ていきます

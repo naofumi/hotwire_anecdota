@@ -22,10 +22,10 @@ published: true
 ![interactive-flow-hotwire.webp](content_images/interactive-flow-hotwire.webp "max-w-[700px] mx-auto")
 
 1. 「いいね」はサーバと同期する必要があります。したがってTurboを使います。Turboの中にもやり方は複数あります
-   1. Turbo Driveを使う方法。「いいね」ボタンを押すたびに画面全体をサーバで再レンダリングして、ブラウザに送ります
-   2. Turbo Streamsを使う方法。「いいね」ボタンを押すたびに、該当の行だけを再レンダリングして、ブラウザに送ります
-   3. 楽観的UIを使う方法。「いいね」ボタンを押すと、ブラウザのネイティブ機能やJavaScriptを使い、ユーザにフィードバックを与えます。同時にTurboを使ってサーバと同期します
-4. 最後の楽観的UI(optimistic UI)はサーバからレスポンスを受け取る前に画面を更新します。「いいね」アイコンの表示はCSS擬似セレクタだけで対応していますが、いいね数の更新はStimulus Controllerを使用しています
+   1. **Turbo Driveを使う方法:** 「いいね」ボタンを押すたびに画面全体をサーバで再レンダリングして、ブラウザに送ります
+   2. **Turbo Streamsを使う方法:** 「いいね」ボタンを押すたびに、該当の行だけを再レンダリングして、ブラウザに送ります
+   3. **楽観的UIを使う方法** 「いいね」ボタンを押すと、ブラウザのネイティブ機能やJavaScriptを使い、ユーザにフィードバックを与えます。同時にTurboを使ってサーバと同期します
+4. 最後の楽観的UI(optimistic UI)はサーバからレスポンスを受け取る前に画面を更新します。「いいね」アイコンの表示はCSS擬似セレクタだけで対応し、いいね数の更新はStimulus Controllerを使用しています
 
 ## コード --- code
 
@@ -105,9 +105,9 @@ end
 ```
 
 * `def create`のところが「いいね」ボタンのアクションを受け取るメソッドになります
-* MPAからのリクエストの場合は、DBを更新後、`return redirect_to todos_path`をしています。いわゆるPOST/redirect/GETのパターンです
+* MPAからのリクエストの場合は、DBを更新後、`return redirect_to todos_path`をしています。いわゆる[POST/redirect/GETのパターン](/concepts/post-redirect-get)です
 * 通常のMPAやTurbo Driveであれば、redirect後にTodo一覧ページを再描画するとき、スクロール位置がリセットされます（画面の最上部にスクロールします）
-   * しかし今回は`app/views/todos/index.html.erb`で`turbo_refreshes_with method: :morph, scroll: :preserve`を設定しているため、Morphingを使った再レンダリングをしています。そのためスクロール位置は維持されます
+   * しかし今回は[`app/views/todos/index.html.erb`](https://github.com/naofumi/hotwire_anecdota/tree/master/app/views/todos/index.html.erb)で`turbo_refreshes_with method: :morph, scroll: :preserve`を設定しているため、Morphingを使った再レンダリングをしています。そのためスクロール位置は維持されます
    * **最もシンプルなPOST/redirect/GETパターンを使いつつ、スクロール位置を含めたブラウザステートを維持したい場合、Morphingは非常に有効です**
 
 ### 「いいね」ボタン Turbo Streamsバージョン --- likes-turbo-streams
@@ -141,7 +141,7 @@ end
 
 コントローラは上述のものと同じです。ただし`request.variant.mpa?`はfalseを返しますので、`app/views/todos/likes/create.turbo_stream.erb`をテンプレートとしたレスポンスを返します。
 
-```erb
+```erb:app/views/todos/likes/create.turbo_stream.erb
 <%= turbo_stream.replace dom_id(@todo, :like_button) do %>
   <%= render partial: "todos/like_button", locals: { todo: @todo } %>
 <% end %>
@@ -182,15 +182,15 @@ end
    * クリックされたらすぐに「いいね」ボタンを変えます。<span class="font-bold text-red-600">赤塗り</span>のものから<span class="font-bold">白塗り</span>のものに変えます
    * クリックされたらすぐに「いいね」数を１つ増やしたり減らしたりします
    * クリックされたらすぐにPending UI(待ちUI)として、Turboリクエストを出すと同時にボタン全体を半透明にします
-* 上記のTurbo Streamsを拡張するやり方もありますが、**今回はブラウザネイティブなチェックボックスを使った簡略化を同時に行います**
+* 上記のTurbo Streamsを拡張するやり方もありますが、**今回は大きく変えて、ブラウザネイティブなチェックボックスを使って楽観的UIを実現します**
    * ブラウザネイティブのチェックボックスは、何もしなくてもoptimistic UI（楽観UI）になっています。つまりサーバ通信しなくても、ブラウザ側だけで表示を変えてくれます 
    * さらにチェックボックスのステート（`checked`属性）はCSS擬似セレクタで読み取れますので、周辺の表示も楽観的に変えられます（`group-has-[:checked]:block/hidden`の箇所）
    * ただし今回の楽観的UIでは「いいね」数も変えないといけません。これはCSS擬似セレクタでは無理なので、Stimulusを使います
      * `data-action="submit->todo-likes#optimistic`で行います
 * Pending UI（待ちUI）は通信中は`<form>`に`aria-busy`が自動的につくのを利用して、`aria-busy:opacity-30`で行います。 
-* 上記のTurbo Streamsの場合は`<button>`を使用しましたので、クリックイベントを受け取り、サーバにリクエストを投げるのはブラウザネイティブな機能でやってくれました
+* 上記のTurbo Streamsの場合では`<form>`の中に配置された`<button>`を使用しましたので、クリックイベントを受け取り、サーバにリクエストを投げるのはブラウザネイティブな機能でやってくれました
    * 今回はチェックボックスを使用しますので、クリックイベントからサーバにリクエストを投げるところはブラウザネイティブにはやってくれません。Stimulusを使います。`data-action="change->todo-likes#submit`で`form`の自動送信を行います
-* 大きく言うと、楽観的UIはブラウザのチェックボックスを利用して簡略化できましたが、`<button>`を使わなくしたためにデータの送信にStimulusが必要になりました。 また「いいね」数の楽観的な更新はStimulusを使う必要があります
+* 大きく言うと、楽観的UIはブラウザのチェックボックスを利用して簡略化できましたが、`<form>` `<button>`を使わなくしたためにデータの送信にStimulusが必要になりました。 また「いいね」数の楽観的な更新はStimulusを使う必要があります
 
 ```js:app/javascript/controllers/todo_likes_controller.js
 import { Controller } from "@hotwired/stimulus"
@@ -228,7 +228,9 @@ export default class extends Controller {
 
 * Turbo Drive + Morphingの場合は、Rails controller側はredirectするだけですので一番簡単です。スクロール位置も維持されますので、ネットワークが速ければ問題のないUIです。ただし遅延があると、ユーザにフィードバックがなく、もたつくUI/UXになってしまいます。POST/redirect/GETで２回サーバ通信を行うので、尚更です
 * Turbo Streamsを使った場合はPOST/redirect/GETを使わないで済むため、１回のサーバ通信で済みます
-* 楽観的UI(optimistic UI)をつけるのがUI/UX的には一番良いです。フィードバックは瞬時に得られ、かつ通信中であることも伝わります。追加で書くJavaScriptは増えますが、大きな負担はありません
+* 楽観的UI(optimistic UI)をつけるのがUI/UX的には一番良いです。フィードバックは瞬時に得られ、かつ通信中であることも伝わります。追加で書くJavaScriptは少しだけ増えますが、大きな負担ではありません
 * 今回は楽観的UIでチェックボックスを使いましたが、StimulusのValuesステートを使ったり、あるいはCSSセレクタではなく、直接的に「いいね」ボタンを変更するやり方もできます。ただしなるべくならばネイティブのHTML要素の性質を使った方がアクセシビリティ的にも有利ですので（キーボードでの操作など）、一般的にはこちらをお勧めします
 
 このようにちょっとした楽観的UI(optimistic UI)もHotwireで簡単に実装できます。もちろんやることは増えますが、特別に苦労するものではありません。UI/UX効果は大きいので、ポイントポイントではおすすめです。
+
+なお、Reactのカナリア版(2024年12月4日現在)でも[`useOptimistic`](https://react.dev/reference/react/useOptimistic)が用意されていて、楽観的UIのサポートがもうすぐ使えそうです。Hotwireの考え方とはかなり異なります。Hotwireの場合はより直接的に楽観的UIを実装しています。

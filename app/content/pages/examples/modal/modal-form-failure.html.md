@@ -3,6 +3,7 @@ title: フォーム送信バリデーション失敗
 layout: article
 order: 0030
 published: true
+siblings: true
 ---
 
 Hotwireで作成したモーダルでフォームを送信し、サーバサイドバリデーションが失敗した時の処理を紹介します。下記のビデオのものになります。

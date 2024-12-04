@@ -119,4 +119,5 @@ export default class DropdownController extends Controller {
 
 * ドロップダウンメニューをStimulusで作るにあたって以下のことを検討しました
   * Stimulus controllerの制御範囲（どこをカバーするべきか）
-  * ステートをどのように持つか（今回は`aria-expanded`属性で十分と判断しました）
+  * ステートをどのように持つかどうか（今回は`aria-expanded`属性で十分と判断しました）
+  * `aria-expanded`属性を監視するCSS擬似セレクタを使って、実際の表示変更をする方法

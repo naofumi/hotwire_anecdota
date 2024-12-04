@@ -19,7 +19,7 @@ published: true
 1. データはサーバから非同期で受け取る必要があります
    1. Hotwireではサーバとの非同期通信は必ずTurboを使います。Turbo Drive, Turbo Frames, Turbo Streamsのどれを使うかだけ、選択する必要があります
    3. **Turbo Drive, Turbo Frames, Turbo Streamsの選択基準は、画面のどこを更新し、どこはステートを更新せずに維持したいかになります**
-      1. 今回は検索結果の箇所を更新しつつ、検索窓のステートを維持する必要があります。検索窓のステートを維持しないと、入力中にフォーカスがずれたり、日本語入力がうまくいかなかったりします
+      1. 今回は検索結果の箇所を更新しつつ、検索窓のステートを維持する必要があります。検索窓のステートを維持しないと、入力中にフォーカスがずれたり、日本語入力がうまくいかなかったりするためです
       2. ステートを維持したい箇所があること、かつ更新する箇所が１つにまとめられることからTurbo Framesを選択します
          1. 更新する箇所が複数の場合はTurbo Streamsを検討します
          2. Turbo Drive + Morphingという選択肢もありますが、今回は省略します
@@ -72,8 +72,9 @@ published: true
 ```
 
 * 検索窓は`search` partialで分けています
-* `turbo_frame_tag "customers"`を設置しています
-    * 更新されるたび、変更されるのはこのTurbo Frameの範囲だけに絞ることができるようになります
+* `<turbo-frame id="customers>`を設置しています
+    * 更新されるたび、変更されるのはこのTurbo Frameの範囲だけです
+    * 画面の他の箇所はそのままです。検索窓のカーソル位置、入力されている文字等、そのままです
 
 ### 検索窓 --- search-input
 
@@ -97,10 +98,10 @@ published: true
 ```
 
 * 検索窓のpartialです
-* `data: {controller: "autosubmit"}`のところで`autosubmit` Stimulus Controllerと接続しています
-    * その際`autosubmit_wait_value: 300`でリアルタイム検索をするときのdebounceの待ち時間を設定しています 
-* また`turbo_frame: "customers"`により、サーバからのレスポンスはTurbo Frameの`id="customers"`のところに入れように指示しています
-* `search_field_tag`は検索窓の`<input type="search">`を作りますが、そこには`data: { action: "input->autosubmit#submitWithDebounce"`が属性としてついています
+* `data-controller="autosubmit"`属性のところで`autosubmit` Stimulus Controllerと接続しています
+    * その際`data-autosubmit-wait-value="300"`属性ではリアルタイム検索をするときのdebounceの待ち時間を設定しています 
+* また`data-turbo-frame="customers"`属性により、サーバからのレスポンスは`<turbo-frame id="customers">` Turbo Frameのところに入れように指示しています
+* `search_field_tag`は検索窓の`<input type="search">`を作りますが、そこには`data-action="input->autosubmit#submitWithDebounce"`属性がついています
    * この`input`タグの`input`イベントを受け取ると、`autosubmit` Stimulus Controllerの`submitWithDebounce()`が呼ばれる仕組みになっています
 * Turboはリクエスト送信中に、該当する`<form>`属性および`<turbo-frame>`に`aria-busy`属性を自動的につけます
     * `group-aria-busy:bg-[url('/Rolling@1x-1.4s-200px-200px.svg')]`のところで`aria-busy`をCSS擬似セレクタによって検出し、pending UI（待ちUI）を表示しています
@@ -134,27 +135,29 @@ export default class extends Controller {
 * 自動的にformを送信するためのStimulus controllerです
 * リアルタイム検索を行いますので、サーバに負荷をかけすぎないように[debounce処理](https://developer.mozilla.org/ja/docs/Glossary/Debounce)をしています
 * `static values =`ではdebounce処理の待ち時間(wait)を設定しています。デフォルトは300msですが、HTML属性の`data-autosubmit-wait-value="..."`を設定すれば自由に変えられます
-* `submit()`がメインの処理です。単にformに対して`requestSubmit()`を読んでいるだけです
-* `submitWithDebounce()`はdebounce処理を施した`submit()`を実行するものです
+* `submit()`がメインの処理です。やっていることはformに対して`requestSubmit()`を呼んでいるだけです
+* `submitWithDebounce()`は`submit()`にdebounce処理を追加したものです
 
 ## まとめ --- summary
 
 ![interactive-flow-hotwire.webp](content_images/interactive-flow-hotwire.webp "max-w-[600px] mx-auto")
 
 * 今回はStimulus経由でTurboを実行している形をとっています。一番下の<span class="text-green-600">緑</span>のルートです
-   * Turboは`<a>`タグのクリックや`<form>`内の`<button>`押下には反応しますが、それ以外のイベントに反応する時はStimulusを使わなければなりません
+   * Turboは`<a>`タグのクリックや`<form>`内の`<button>`押下には反応します。しかし今回は`input`イベントに応答しますのでStimulusを使わなければなりません
 * Turbo Drive, Turbo Frames, Turbo Streamsの選択については、下記を考慮してTurbo Framesを選択しています
     * 画面の一部についてはステートを維持しなければならないこと（`<input>`タグのフォーカス）
     * 更新する箇所が一つにまとめられること
-    * ステートを維持する必要がない場合はTurbo Driveで十分なことが多くなります。また複数箇所を独立に更新する必要がある場合はTurbo Streamsを使います。ただしMorphingも使えますので、各選択肢が使えるシチュエーションはかなり重なります
-* 今回のStimulus Controllerが非常にシンプルだったこともあり、これはかなり再利用性が高いことが最初からわかります。今回はcontrollerの命名を`realtime-search`のようにせず、最初から`autosubmit`にしていますが、これはそのためです。検索以外の用途でも使えるような名前にしています
-    * ただし最初から再利用できそうだと確信できるのは比較的稀だと私は感じています。通常はあまり再利用性を考えず、後で気づいたら検討するぐらいで良いと思います
+    * ステートを維持する必要がない場合はTurbo Driveで十分なことが多くなります。また複数箇所を独立に更新する必要がある場合はTurbo Streamsを使います。ただしMorphingも使えますので、各選択肢が使えるシチュエーションはかなり重複してきます
+* 今回のStimulus Controllerが非常にシンプルだったこともあり、再利用性が高いことが最初からわかります。Controllerの命名を`realtime-search`のようにせず、最初から`autosubmit`にしていますが、これは再利用性が予見できたためです。検索以外の用途でも使えるような名前にしています
+    * ただし最初から再利用できそうだと確信できるのは比較的稀だと私は感じています。[通常はあまり再利用性を考えず](/opinions/reusability)、後で気づいたら検討するぐらいで良いと思います
 
 ## メモ --- memo
 
 Next.jsはversion 15になって、非同期通信で[クライアントサイドナビゲーションをする`<Form>`コンポーネント](https://nextjs.org/blog/next-15#form-component)を用意しました。一方でHotwireは当初から`<form>`でGETリクエストをするようにできており、前身の[UJS (Unobtrusive JavaScript)の頃](https://railsguides.jp/v6.1/working_with_javascript_in_rails.html#組み込みヘルパー)からこの機能を用意しています。
 
-Hotwireは`<input>`タグに`data-turbo-submits-with`などでpending UI（待ちUI）をつけられたり、`disabled`属性が自動的についたり、さらに`<form>`要素に自動的に`aria-busy`がついたりするなど、自動でやってくれる範囲が広いです。React/Next.jsであれば新しい`<Form>`要素を使う上に、`useFormStatus()`等を使う必要があります。 CRUD周りの機能にはHotwireに一日の長があると言えそうです。
+Hotwireは`<input>`タグに`data-turbo-submits-with`などでpending UI（待ちUI）をつけられたり、`disabled`属性が自動的についたり、さらに`<form>`要素に自動的に`aria-busy`がついたりするなど、自動でやってくれる範囲が広いです。React/Next.jsであれば新しい`<Form>`要素を使う上に、`useFormStatus()`等を使う必要があります。
+
+さすがに[Basecampプロジェクト管理システム](https://basecamp.com)や[Hey電子メールシステム](https://www.hey.com)で育っただけあって、Next.jsと比較した場合、CRUD周りの機能にはHotwireに一日の長があると言えそうです。
 
 
 

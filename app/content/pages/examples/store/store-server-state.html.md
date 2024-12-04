@@ -3,7 +3,7 @@ title: Hotwireでステートをサーバに持たせる
 layout: article
 order: 10
 published: true
-parent: store
+siblings: true
 ---
 
 
