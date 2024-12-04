@@ -18,7 +18,9 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
   test "should create task" do
     assert_difference("Task.count") do
       login_user users(:sazae) do
-        post tasks_url, params: { task: { bucket_id: @task.bucket_id, deadline: @task.deadline, description: @task.description, name: @task.name, position: @task.position } }
+        post tasks_url,
+             params: { task: { bucket_id: @task.bucket_id, deadline: @task.deadline, description: @task.description,
+                               name: @task.name, position: @task.position } }
       end
     end
 
@@ -36,7 +38,9 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update task" do
-    patch task_url(@task), params: { task: { bucket_id: @task.bucket_id, deadline: @task.deadline, description: @task.description, name: @task.name, position: @task.position } }
+    patch task_url(@task),
+          params: { task: { bucket_id: @task.bucket_id, deadline: @task.deadline, description: @task.description,
+                            name: @task.name, position: @task.position } }
     assert_redirected_to task_url(@task)
   end
 

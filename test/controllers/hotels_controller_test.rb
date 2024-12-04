@@ -18,7 +18,9 @@ class HotelsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create hotel" do
     assert_difference("Hotel.count") do
-      post hotels_url, params: { hotel: { city: @hotel.city, description: @hotel.description, name: @hotel.name, prefecture: @hotel.prefecture, tagline: @hotel.tagline } }
+      post hotels_url,
+           params: { hotel: { city: @hotel.city, description: @hotel.description, name: @hotel.name,
+                              prefecture: @hotel.prefecture, tagline: @hotel.tagline } }
     end
 
     assert_redirected_to hotel_url(Hotel.last)
@@ -35,7 +37,9 @@ class HotelsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update hotel" do
-    patch hotel_url(@hotel), params: { hotel: { city: @hotel.city, description: @hotel.description, name: @hotel.name, prefecture: @hotel.prefecture, tagline: @hotel.tagline } }
+    patch hotel_url(@hotel),
+          params: { hotel: { city: @hotel.city, description: @hotel.description, name: @hotel.name,
+                             prefecture: @hotel.prefecture, tagline: @hotel.tagline } }
     assert_redirected_to hotel_url(@hotel)
   end
 

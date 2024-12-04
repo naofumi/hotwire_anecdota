@@ -27,6 +27,7 @@ class Iphone
 
   def model=(string)
     return unless model_enterable?
+
     @iphone_session["model"] = string
   end
 
@@ -36,6 +37,7 @@ class Iphone
 
   def color=(string)
     return unless color_enterable?
+
     @iphone_session["color"] = string
   end
 
@@ -45,6 +47,7 @@ class Iphone
 
   def ram=(string)
     return unless ram_enterable?
+
     @iphone_session["ram"] = string
   end
 

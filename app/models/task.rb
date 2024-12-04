@@ -1,7 +1,7 @@
 class Task < ApplicationRecord
   belongs_to :user
   belongs_to :bucket
-  has_many :activities, as: :trackable, dependent: :restrict_with_exception, dependent: :destroy
+  has_many :activities, as: :trackable, dependent: :restrict_with_exception
 
   after_save :create_activity
 

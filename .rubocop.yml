@@ -6,3 +6,16 @@ inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 # # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
 # Layout/SpaceInsideArrayLiteralBrackets:
 #   Enabled: false
+
+Layout:
+  Enabled: true
+
+# Rails style does not have an empty line after private.
+Layout/EmptyLinesAroundAccessModifier:
+  Enabled: false
+
+Lint:
+  Enabled: true
+
+#Metrics:
+#  Enabled: true

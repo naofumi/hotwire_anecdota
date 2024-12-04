@@ -14,7 +14,7 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
     with_variant(:streams) do
       assert_difference("Todo.count") do
         post todos_url, params: { todo: { completed_at: @todo.completed_at, title: @todo.title } },
-             headers: { accept: "text/vnd.turbo-stream.html" }
+                        headers: { accept: "text/vnd.turbo-stream.html" }
       end
     end
 
@@ -28,7 +28,7 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
 
   test "should update todo" do
     patch todo_url(@todo), params: { todo: { completed_at: @todo.completed_at, title: @todo.title } },
-          headers: { accept: "text/vnd.turbo-stream.html" }
+                           headers: { accept: "text/vnd.turbo-stream.html" }
     assert_turbo_stream action: :replace, count: 2
   end
 

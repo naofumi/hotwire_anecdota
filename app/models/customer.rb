@@ -6,6 +6,6 @@ class Customer < ApplicationRecord
 
     sanitized_query = sanitize_sql_like query
     Customer.where([ "name LIKE ? OR jp_name LIKE ?",
-                    "%#{sanitized_query}%", "%#{sanitized_query}%" ])
+                     "%#{sanitized_query}%", "%#{sanitized_query}%" ])
   }
 end

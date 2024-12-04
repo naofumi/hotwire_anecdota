@@ -15,7 +15,6 @@ class TodoTest < ActiveSupport::TestCase
     assert_includes todo.errors.full_messages, "Titleを入力してください"
   end
 
-
   test "like! succeeds if not present" do
     user = users(:sazae)
     todo = todos(:liked_by_namihei)

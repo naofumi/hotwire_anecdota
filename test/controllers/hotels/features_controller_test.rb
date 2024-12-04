@@ -8,7 +8,6 @@ module Hotels
       @hotel = hotels(:manareaserina)
     end
 
-
     test "index should return success" do
       get hotel_features_path(@hotel)
 

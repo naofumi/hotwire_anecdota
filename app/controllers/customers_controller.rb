@@ -17,8 +17,10 @@ class CustomersController < ApplicationController
 
     respond_to do |format|
       if @customer.update(customer_params)
-        format.html { redirect_to params[:redirect_to].presence || Customer,
-                                  notice: "Customer was successfully updated." }
+        format.html {
+          redirect_to params[:redirect_to].presence || Customer,
+                      notice: "Customer was successfully updated."
+        }
       else
         format.html { render :edit, status: :unprocessable_content }
       end

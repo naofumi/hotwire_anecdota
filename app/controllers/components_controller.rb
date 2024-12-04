@@ -15,7 +15,6 @@ class ComponentsController < ApplicationController
     render @template
   end
 
-
   private
 
     def available_projects
