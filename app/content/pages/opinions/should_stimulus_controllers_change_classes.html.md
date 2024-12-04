@@ -23,7 +23,7 @@ Stimulus Controllerは原則としてステートをDOMに持たせます。し�
    * Stimulus Valuesステートを使い、アクションの中でvaluesを変更します
        * CSS擬似セレクタを使って`value`の値を読み取り、画面の表示を変更します
    * 直接CSS classを変更します
-       * BEMを使っている場合は良いと思いますが、TailwindでCSSクラスが多い場合は管理が難しいと感じています 
+       * BEMを使っている場合は良いと思いますが、Tailwindを使うとCSSクラスが多くなり、辛くなってきます。**Tailwind CSSを使用している場合はStimulus Valuesステートを使いたくなることが多いです**
 
 ## まとめ --- summary
 

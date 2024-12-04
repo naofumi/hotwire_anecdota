@@ -5,14 +5,11 @@ order: 005
 published: true
 ---
 
-## Next.jsと同程度以上のUI/UXが可能
+## Stimulusは外部ライブラリとの接続が得意 --- stimulus-is-good-at-connecting-with-other-libraries
 
-## 小さいチームでの開発に適している
+Vanilla JavaScriptには多くの便利なライブラリがあります。**Reactでよく使われているライブラリーも、核はvanilla JavaScriptで書かれていて、Reactがそれを軽く包んでいるだけというケースも多いです**。
 
-## フロントエンドがJavaScript専任でも大丈夫
+Reactはエコシステムが凄いとよくいわれています。しかし多くの場合、ライブラリのコアはvanilla JavaScriptですので、Stimulusからも使えます。
 
-## Next.jsとの対応関係
+Stimulusはvanilla JavaScriptの核と接続し、サーバのデータや他のUI部品と繋げるのを得意としています。[Chart.jsの例を解説しています](/examples/chartjs#stimulus-controller)ので、ご覧ください。
 
-* React = ERB + Stimulus : データからHTMLをレンダリング、イベント処理 
-* Next.js = Turbo : サーバとの通信
-* React Native = Hotwire Native : ネイティブアプリ
