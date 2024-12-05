@@ -14,8 +14,77 @@ Layout:
 Layout/EmptyLinesAroundAccessModifier:
   Enabled: false
 
+Layout/LineLength:
+  Enabled: true
+  Exclude:
+    - "**/*_helper.rb" # Allow long Tailwind classes
+    - "**/application_markdown.rb" # Allow long Tailwind classes
+
 Lint:
   Enabled: true
 
 #Metrics:
 #  Enabled: true
+
+Naming:
+  Enabled: true
+
+# It's often challenging to avoid using `set_*`
+Naming/AccessorMethodName:
+  Enabled: false
+
+# Prefer :todo_1 over :todo1
+Naming/VariableNumber:
+  Enabled: true
+  EnforcedStyle: snake_case
+
+Performance:
+  Enabled: true
+
+# Insignificant
+Performance/RedundantBlockCall:
+  Enabled: false
+
+Rails:
+  Enabled: true
+
+Security:
+  Enabled: true
+
+Style:
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: true
+  EnforcedStyle: brackets
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/MultilineBlockChain:
+  Enabled: false
+
+Style/MutableConstant:
+  Enabled: false
+
+Style/GlobalStdStream:
+  Enabled: false
+
+Style/EmptyMethod:
+  Enabled: true
+  EnforcedStyle: expanded
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Enabled: false

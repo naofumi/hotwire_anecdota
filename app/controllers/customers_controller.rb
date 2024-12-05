@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: %i[ show edit update ]
+  before_action :set_customer, only: [ :edit, :update ]
 
   # GET /customers or /customers.json
   def index

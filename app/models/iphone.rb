@@ -5,11 +5,11 @@ class Iphone
   end
 
   def state
-    case
-    when @iphone_session["ram"] then :ram_entered
-    when @iphone_session["color"] then :color_entered
-    when @iphone_session["model"] then :model_entered
-    else :nothing_entered
+    if @iphone_session["ram"] then :ram_entered
+    elsif @iphone_session["color"] then :color_entered
+    elsif @iphone_session["model"] then :model_entered
+    else
+      :nothing_entered
     end
   end
 

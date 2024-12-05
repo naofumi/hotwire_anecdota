@@ -1,5 +1,5 @@
 class HotelsController < HotelBaseController
-  before_action :set_hotel, only: %i[ show edit update destroy ]
+  before_action :set_hotel, only: [ :show, :edit, :update, :destroy ]
 
   # GET /hotels or /hotels.json
   def index

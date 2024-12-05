@@ -1,5 +1,5 @@
 class FileNodesController < ApplicationController
-  before_action :set_file_node, only: %i[ show details edit update destroy ]
+  before_action :set_file_node, only: [ :show, :details, :edit, :update, :destroy ]
   # GET /file_nodes or /file_nodes.json
   def index
     @file_nodes = FileNode.all

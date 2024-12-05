@@ -2,7 +2,8 @@ module Likable
   extend ActiveSupport::Concern
 
   included do
-    has_many :likes, as: :likable
+    has_many :likes, as: :likable, dependent: :destroy
+    delegate :count, to: :likes, prefix: true
   end
 
   def like_by!(user)
@@ -22,9 +23,5 @@ module Likable
     raise ArgumentError unless user
 
     likes.where(user: user).exists?
-  end
-
-  def likes_count
-    likes.count
   end
 end

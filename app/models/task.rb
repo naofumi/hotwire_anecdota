@@ -10,9 +10,9 @@ class Task < ApplicationRecord
   private
 
     def create_activity
-      if saved_change_to_bucket_id?
-        old_bucket = Bucket.find_by(id: bucket_id_before_last_save)
-        activities.create!(event: "bucket_changed", before: old_bucket&.name, after: bucket.name)
-      end
+      return unless saved_change_to_bucket_id?
+
+      old_bucket = Bucket.find_by(id: bucket_id_before_last_save)
+      activities.create!(event: "bucket_changed", before: old_bucket&.name, after: bucket.name)
     end
 end

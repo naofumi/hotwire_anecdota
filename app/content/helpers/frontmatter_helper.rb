@@ -7,9 +7,9 @@ module FrontmatterHelper
     !Rails.env.production? && !show_published_only
   end
 
-  def page_block_unless_published!(page)
-    if Rails.env.production? && !page.data.published
-      raise AbstractController::ActionNotFound
-    end
+  def hide_page_unless_published!(page)
+    return if page_showable?(page)
+
+    raise AbstractController::ActionNotFound
   end
 end

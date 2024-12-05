@@ -1,5 +1,5 @@
 class BucketsController < ApplicationController
-  before_action :set_bucket, only: %i[ show edit update destroy ]
+  before_action :set_bucket, only: [ :show, :edit, :update, :destroy ]
 
   # GET /buckets or /buckets.json
   def index

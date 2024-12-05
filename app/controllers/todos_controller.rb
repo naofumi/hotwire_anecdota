@@ -1,5 +1,5 @@
 class TodosController < ApplicationController
-  before_action :set_todo, only: %i[ edit update destroy ]
+  before_action :set_todo, only: [ :edit, :update, :destroy ]
   before_action :authenticate_user!
   set_available_variants :mpa, :streams, :optimistic
 
@@ -23,10 +23,8 @@ class TodosController < ApplicationController
     respond_to do |format|
       if @todo.save
         flash.now.notice = "Todo was successfully created."
-        format.turbo_stream
-      else
-        format.turbo_stream
       end
+      format.turbo_stream
     end
   end
 

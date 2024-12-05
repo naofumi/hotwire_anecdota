@@ -25,9 +25,11 @@ module Variantable
     end
 
     def available_variants
-      self.class.instance_variable_defined?(:@available_variants) ?
-        self.class.instance_variable_get(:@available_variants) :
+      if self.class.instance_variable_defined?(:@available_variants)
+        self.class.instance_variable_get(:@available_variants)
+      else
         []
+      end
     end
 end
 

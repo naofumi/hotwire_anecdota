@@ -20,6 +20,6 @@ class ReactController < ApplicationController
 
     def set_template
       @template = params[:id].presence_in(view_templates)
-      raise ActionController::RoutingError.new("Not Found") unless @template
+      raise ActionController::RoutingError, "Not Found" unless @template
     end
 end

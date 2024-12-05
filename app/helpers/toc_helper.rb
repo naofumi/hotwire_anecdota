@@ -8,7 +8,7 @@ module TocHelper
     include ActionView::Helpers::AssetUrlHelper
 
     def initialize(html_document)
-      @html_document = html_document
+      @html_document = html_document # rubocop:disable Rails/HelperInstanceVariable
     end
 
     def toc
@@ -31,7 +31,7 @@ module TocHelper
       end
 
       def document
-        html_fragment(@html_document)
+        html_fragment(@html_document) # rubocop:disable Rails/HelperInstanceVariable
       end
 
       def toc_indent_class(node_name)
