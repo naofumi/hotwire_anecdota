@@ -18,26 +18,24 @@ Hotwireを使うと下記のことができます。
 
 ## Hotwireはシンプル --- hotwire-is-simple
 
-* Hotwireでは主にサーバでHTMLを生成します。Next.jsのSSRやReact Server Componentと同じです
+* Hotwireでは主にサーバでHTMLを生成します。Next.jsのReact Server Componentと同じです（SSRは裏でCSRを動かしますので、決してシンプルではありません）
     * このため、**ブラウザにデータを送信するためのJSON APIの作成が不要です** 
 * Hotwireは直接DOMを変更できます
     * Reactはステートを介さないDOM変更は原則禁止です。常にステートを介します。一方でHotwireはステートを使っても良いですし、シンプルな場合は省略しても構いません
-* Hotwireは、複雑なUI/UXを作るときにStimulusの[Valuesによるステート管理](https://stimulus.hotwired.dev/reference/values)を行います
+* Hotwireで複雑なUI/UXを作るときには、Stimulusの[Valuesによるステート管理](https://stimulus.hotwired.dev/reference/values)を使います
 
 ## HotwireのJavaScriptは簡単 --- hotwire-javascript-is-simple
 
-* Reactを書くためには、JavaScriptのES6記述、高階関数、async await非同期処理など、高いレベルの知識が必要です。React自身がかなり難解であることに加えて、その前にJavaScriptも高いレベルで理解する必要があります
-* Hotwireは「入門チュートリアルレベルのJavaScript」だけ理解できていれば十分です。ループや条件分岐、それとDOM属性の変更ができれば十分です。JavaScriptの難しい機能は知らなくてもHotwireは書けます
+* Reactを書くためには、JavaScriptのES6記述、高階関数、async await非同期処理など、[高いレベルの知識が必要です](/opinions/why_is_react_difficult)。React自身がかなり難解であることに加えて、その前にJavaScriptも高いレベルで理解する必要があります
+* [Hotwireは「入門チュートリアルレベルのJavaScript」だけ理解できていれば十分です](/opinions/hotwire_javascript_is_simple)。ループや条件分岐、それとDOM属性の変更ができれば十分です。JavaScriptの難しい機能は知らなくてもHotwireは書けます
 * **HTML/CSSは使いこなせるけれども、高度なJavaScriptはイマイチ自信がない人（特にデザイナー）でもHotwireは使いこなせます**
-
-なお、本サイトはチュートリアルではありませんので、Hotwireの基本は教えませんが、別途検索していただければ見つかると思います
 
 ## Hotwireはセミオーダー、Reactはフルオーダー --- hotwire-semi-order-react-full-order
 
 * Hotwireはサーバで出来上がったパーツ（HTML短編）を工事現場で繋ぎ合わせます
 * Reactは工事現場で具材（JSON API）から組み立てます
 
-Reactの方は現場の状況に応じて大幅な変更をする時は強力ですが、フロントエンドの作業は増えます。HotwireはDBに近い工場で効率的にパーツを作り、Turboで現場に送り、Stimulusで微調整をしながらパッと組み立てます。
+Reactの方は現場の状況に応じて大幅な変更をする場合は強力ですが、フロントエンドの作業は増えます。HotwireはDBに近い工場で効率的にパーツを作り、Turboで現場に送り、Stimulusで微調整をしながらパッと組み立てます。
 
 ![what-is-hotwire-hotwire.webp](content_images/what-is-hotwire-hotwire.webp "max-w-[600px] mx-auto")
 
@@ -50,8 +48,8 @@ Reactの方は現場の状況に応じて大幅な変更をする時は強力で
 
 ## とにかくHotwireはReactとは異なる --- hotwire-and-react-are-different
 
-* HotwireとReactは結局はJavaScriptです。したがって最終的にやれることは同じです
-   * 例えばRubyでできることとC言語でできることは大きく異なります。ここではツールの違いが非常に大きいです。でもHotwireとReactは結局ブラウザのJavaScript/HTML/CSSを介しますので、ツールの違いは軽微です 
+* HotwireとReactは結局はJavaScriptです。したがって**最終的にやれることは同じ**です
+   * 例えばRubyでできることとC言語でできることは大きく異なります。その場合はツールの違いが非常に大きいです。でもHotwireとReactなら結局ブラウザのJavaScript/HTML/CSSを介しますので、ツールの違いは軽微です 
 * 一方でHotwireとReactはアプローチが大きく異なります
 
 ![hotwire-history.webp](content_images/hotwire-history.webp "mx-auto max-w-[500px]")

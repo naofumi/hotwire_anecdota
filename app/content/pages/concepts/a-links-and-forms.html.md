@@ -8,9 +8,9 @@ published: true
 
 ## `<a>`タグや`<form>`タグのメリット --- merits-of-using-a-links-and-forms
 
-Reactでインタラクティブな動作をさせる時、`<button>`タグに`onClick`等のイベントハンドラーをつけることが多いです。同様にformを送信する場合も`<form>`タグに`action`属性をつけずに、代わりに`onSubmit`のイベントハンドラをつけて処理するのが一般的です。つまり**Reactはブラウザネイティブの動作を使いません**。
+Reactでインタラクティブな動作をさせる時、`<a>`タグを使用せずに`<button>`タグに`onClick`等のイベントハンドラーをつけることが多いです。同様にformを送信する場合も`<form>`タグに`action`属性をつけずに、代わりに`onSubmit`のイベントハンドラをつけて処理するのが一般的です。このように**Reactはブラウザネイティブの機能を使わずに、カスタムで動作を作ることが多いです**。
 
-**このようにReactではブラウザ本来の動作をさせずに、カスタムの動作をさせることを好みます**。Hotwireはこの逆です。**Hotwireではなるべくブラウザ本来の機能を使います**。
+Hotwireはこの逆です。**Hotwireではなるべくブラウザ本来の機能を使います**。
 
 ブラウザ本来の機能を使うメリットは以下のものが挙げられます。
 
@@ -23,7 +23,7 @@ Reactでインタラクティブな動作をさせる時、`<button>`タグに`o
     * `<a>`タグや`<form>`タグによってリクエストを送信すると、適切なHTML要素に`aria-busy`属性が付きます。アクセシビリティ的に有効な上に、これをCSS擬似セレクタで読み取れば待ちUIがCSSだけで作れます
     * `<form>`に`data-turbo-confirm`属性をつけると、form送信時に最終確認用のモーダルダイアログを表示できます。これはデフォルトではブラウザネイティブの`window.confirm()`が使用されますが、[カスタマイズ](https://turbo.hotwired.dev/reference/drive#turbo.setconfirmmethod)して任意のダイアログを表示できます
   
-上記のように、`<a>`タグや`<form>`タグを使えば数多くの便利機能がついてきます。`onClick`を使ってカスタムのイベントハンドラを書くのではなく、なるべく標準機能で引っ張り、少しでもライブラリに多くの仕事をさせるのがHotwireを便利に使いこなすコツの一つだと思います。
+上記のように、Hotwireでは`<a>`タグや`<form>`タグを使えば数多くの便利機能がついてきます。`onClick`を使ってカスタムのイベントハンドラを書くのではなく、**なるべくブラウザの標準機能で引っ張り、少しでもライブラリに多くの仕事をさせるのがHotwireを便利に使いこなすコツの一つ**だと思います。
 
 ## 基本的な指針 --- basic-design-guideline
 
@@ -32,12 +32,12 @@ Reactでインタラクティブな動作をさせる時、`<button>`タグに`o
 * `<button>`タグに`onclick`を書いて、そのハンドラからサーバに`fetch`するようなコードは滅多に書きません
    * 一般的なアコーディオンの開閉などはサーバとの通信が発生しませんので、`<button>`タグにStimulusを繋げます 
 
-## JavaScriptから自由にTurboを使いたい場合 --- using-turbo-from-javascript
+## JavaScriptから自在にTurboを使いたい場合 --- using-turbo-from-javascript
 
-Turboを使ってサーバとの非同期通信をスタートさせる場合、`<a>`タグや`<form>`タグが推奨されているのは上述した通りです。でもJavaScriptからやりたい場合もあります。そして`Turbo.visit([url])`でそれが可能なことも紹介しました。しかし実は、ここには制限があります。`Turbo.visit()`はGETメソッドしか送信できないのです。
+Turboを使ってサーバとの非同期通信をスタートさせる場合、`<a>`タグや`<form>`タグが推奨されているのは上述した通りです。でも`<a>`タグや`<form>`タグとは無関係に、JavaScriptからリクエストを送信したい場合もあります。そして`Turbo.visit([url])`でそれが可能なことも紹介しました。しかし実は、ここには制限があります。`Turbo.visit()`はGETメソッドしか送信できないのです。
 
 POST用のメソッドを用意しないなど、TurboではJavaScriptから送信できるリクエストを敢えて制限しています。JavaScriptから非GETのTurboリクエストを送信しにくくしているのです。なるべく`<form>`タグを作って、プログレッシブエンハンスメントできるように書きなさいと言われているかのようです。
 
-どうしてもJavaScriptから自由にTurboを使いたい場合は[request.js](https://github.com/rails/requestjs-rails?tab=readme-ov-file)があります。これはGitHubの`rails`リポジトリにありますので、Railsのチームで管理をしているものです。request.jsはCSRFトークンの送信や返ってきたTurbo StreamをDOMに挿入する処理もしてくれますので、Turboと一緒に使うときは便利です。
+**どうしてもJavaScriptから自由にTurboを使いたい場合は[request.js](https://github.com/rails/requestjs-rails?tab=readme-ov-file)があります**。これはGitHubの`rails`リポジトリにありますので、Railsのチームで管理をしているものです（安心して使えます）。request.jsはCSRFトークンの送信や返ってきたTurbo StreamをDOMに挿入する処理もしてくれますので、Turboと一緒に使うときは便利です。
 
 

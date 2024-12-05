@@ -18,6 +18,7 @@ Reactが普及させた単方向データフローはロジックがわかりや
 **複雑なステートを管理する場合、Stimulusも単方向データフロー的な使い方ができます**。ここで紹介するのはこのようなものです。簡単なステートの場合は、ここまで考える必要はありません。
 
 [コード例](/examples)の中には下記の書き方をしているものがたくさんあります。
+
 * 簡単な例: [引き出しの例](/examples/drawer)
 * 複雑な例: [Apple Store模写の例](/examples/store/store-stimulus-state)
 
@@ -25,15 +26,13 @@ Reactが普及させた単方向データフローはロジックがわかりや
 
 下記は[Apple Store模写の比較的複雑なStimulus Controllerの例](/examples/store/store-stimulus-state)です。各セクションをコメントしていますので、コードの中をご確認ください。
 
-私は**Actionのメソッドの行数を少なくして、RailsのThin Controllerのようにしています**。ステートの更新に集中させることで、責務を明確にします（ただしステートを介さないような簡単な処理の場合は直接targetを更新させます）。
+* 私は**Actionのメソッドの行数を少なくして、RailsのThin Controllerのようにしています**。ステートの更新に集中させることで、責務を明確にします（ただしステートを介さないような簡単な処理の場合は直接targetを更新させます）。
+* **ActionハンドラーとRenderを明確に分けるのは大きなメリットがある**と感じています。
+* また下記では`IPhone`クラスを用意し、**ビジネスロジックは完全に分離収納しています**。下記のような処理の流れになります。
+    * Actionで`this.iphoneValue`ステートを更新する（[Valuesステート](https://stimulus.hotwired.dev/reference/values)）
+    * `#render()`するとき、上記ステートで`IPhone`クラスを初期化
+    * `IPhone`クラスのビジネスロジックに応じて、画面を変更する
 
-**ActionハンドラーとRenderを明確に分けるのは大きなメリットがある**と感じています。
-
-また下記では`IPhone`クラスを用意し、**ビジネスロジックは完全にそこに分離収納しています**。下記のような処理の流れになります。
-
-1. Actionで`this.iphoneValue`ステートを更新する（[Valuesステート](https://stimulus.hotwired.dev/reference/values)）
-2. `#render()`するとき、上記ステートで`IPhone`クラスを初期化
-3. `IPhone`クラスのビジネスロジックに応じて、画面を変更する
 
 ```js:app/javascript/controllers/iphone_static_controller.js
 import {Controller} from "@hotwired/stimulus"

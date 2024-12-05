@@ -8,13 +8,11 @@ published: true
 
 Hotwireの考え方を理解しやすくするために、React, jQuery等と比較して紹介します。
 
-## Hotwireのアプローチ --- approach-of-hotwire
-
 下記のようなUIを作るときのHotwireのアプローチを、Reactと比べながら解説します。
 
 ![What is Hotwire](content_images/what-is-hotwire-objective.webp "max-w-[500px]")
 
-### Hotwireの場合 --- hotwire-case
+## Hotwireの場合 --- hotwire-case
 
 Hotwireの場合は以下のように考えます。
 
@@ -24,7 +22,7 @@ Hotwireの場合は以下のように考えます。
 
 ![what-is-hotwire-hotwire.webp](content_images/what-is-hotwire-hotwire.webp "max-w-[500px]")
 
-### Reactの場合 --- react-case
+## Reactの場合 --- react-case
 
 Reactの場合は以下のように考えます。
 
@@ -37,7 +35,7 @@ Reactの場合は以下のように考えます。
 
 ![what-is-hotwire-react.png](content_images/what-is-hotwire-react.png "max-w-[600px]")
 
-### HotwireとReactの比較 --- hotwire-react-comparison
+## HotwireとReactの比較 --- hotwire-react-comparison
 
 * リクエスト送信
    * Hotwireはすぐにサーバからデータを取りにいきます
@@ -60,11 +58,13 @@ Hotwireは目標に対して直接的に処理をしています。一方でReac
 * 帰ってきた結果は`user-profile`に埋め込まれるようにします
 * 上記の流れはJavaScriptで書きます（HotwireがHTML属性で宣言的に指定するのた対照的です）
 
-jQueryのやり方はHotwireとよく似ていて、直接的です。やはりシンプルでわかりやすいです。ただし**Hotwireの方がHTML属性を宣言的に使用しますので、UI/UXが複雑になっても混乱しにくくなっています**。
+jQueryのやり方はHotwireとよく似ていて、直接的です。やはりシンプルでわかりやすいです。
 
-### (参考)HTMX, Alpine.jsなどとの比較 --- htmx-alpine
+jQueryに対する批判として多かったのは、単純なケースではシンプルである一方で、複雑になるとすぐに混乱してスパゲッティーコード化するというものでした。 一方で**HotwireはHTML属性を宣言的に使用しますので、UI/UXが複雑になっても混乱しにくくなっています**。
 
-Hotwireと似たアプローチで、かつどのバックエンドでも使用できる技術としては[HTMX](https://htmx.org)や[Alpine.js](https://alpinejs.dev/)があります。特にHTMXは注目されていて、[Astro](https://astro.build/blog/astro-340/), Python, [Java Spring](https://spring.io/blog/2024/08/07/spring-tips-htmx), [Hono](https://zenn.dev/yusukebe/articles/e8ff26c8507799)と組み合わせた例がしばしば報告されています。
+## (参考)HTMX, Alpine.jsなどとの比較 --- htmx-alpine
+
+Hotwireと似たアプローチであり、どのバックエンドでも使用できる技術としては[HTMX](https://htmx.org)や[Alpine.js](https://alpinejs.dev/)があります。特にHTMXは注目されていて、[Astro](https://astro.build/blog/astro-340/), Python, [Java Spring](https://spring.io/blog/2024/08/07/spring-tips-htmx), [Hono](https://zenn.dev/yusukebe/articles/e8ff26c8507799)と組み合わせた例がしばしば報告されています。
 
 私も十分にHTMXを試していないのではっきりしたことは言えませんが、Hotwireと比較した場合、大きな違いはHTML属性をどれだけ用意しているかだと感じています。
 
@@ -72,7 +72,7 @@ Hotwireと似たアプローチで、かつどのバックエンドでも使用�
 2. HotwireはStimulusを使って、自分で新しいHTML属性とそれに結びついたJavaScriptを書く
 3. HTMXは出来合いのHTML属性をたくさん用意し、それを組み合わせてUIを作る
 
-Hotwireは37signalsの製品で誕生し、実際の製品の複雑なUIでもわかりやすく作るために生まれた技術です。多くの箇所は出来合いのHTML属性だけで対応しますが、必要に応じてカスタムJavaScriptを書くことも重視しています。現実の複雑なプロダクトのエッジケースに対応するため、比較的すぐにJavaScriptを書きます。
+Hotwireは37signalsの製品で誕生し、実際の製品の複雑なUIでもわかりやすく作るために生まれた技術です。多くの箇所は出来合いのHTML属性だけで対応しますが、必要に応じてカスタムJavaScriptを書くことも重視しています。現実の複雑なプロダクトのエッジケースに対応するため、比較的すぐにJavaScriptを書きます。**要するにHotwireは非常に現実主義的です**。
 
-それに対して、HTMXはHTML属性中心の宣言的アプローチをより深く追求した、より野心的なものだと私は感じています。
+それに対して、**HTMXはHTML属性中心の宣言的アプローチをより深く追求した、より野心的で学術的なものだと私は感じています**。
 

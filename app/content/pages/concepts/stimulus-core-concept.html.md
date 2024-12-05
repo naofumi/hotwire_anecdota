@@ -33,4 +33,4 @@ published: true
 ## Reactを含めた他のライブラリと一緒に使う --- use-with-other-libraries
 
 * Stimulusは他のライブラリと一緒に使えます（RailsにはTrixというリッチテキストエディタが含まれていますが、それはStimulusで書かれているわけではありません）
-* <span class="italic">**補足:** [ReactもStimulusと一緒に使えます](/examples/store/store-react-state)</span>
+* 本サイトでは[Stimulusを他のJavaScriptと組みわせて使用した例](/other_libraries)を紹介しています

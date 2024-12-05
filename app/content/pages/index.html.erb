@@ -31,7 +31,7 @@ published: true
       <% end %>
     </div>
 
-    <div class="md:columns-2 mt-24 max-w-4xl mx-auto gap-6">
+    <div class="sm:columns-2 xl:columns-3 mt-24 max-w-4xl mx-auto gap-6">
       <% current_page.children.sort_by { _1.data.order.to_i }.each do |section_page| %>
         <!-- manually set [&:nth-child](number):mb-0 due to differences between Safari and Chrome/Firefox -->
         <div class="mb-6 p-6 break-inside-avoid rounded-lg bg-white/90 backdrop-blur"
