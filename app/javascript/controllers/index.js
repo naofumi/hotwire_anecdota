@@ -19,6 +19,9 @@ application.register("chapter-list", ChapterListController)
 import ChartjsController from "./chartjs_controller"
 application.register("chartjs", ChartjsController)
 
+import ColorChangerController from "./color_changer_controller"
+application.register("color-changer", ColorChangerController)
+
 import DropdownController from "./dropdown_controller"
 application.register("dropdown", DropdownController)
 
@@ -39,9 +42,6 @@ application.register("hamburger", HamburgerController)
 
 import HighlightableController from "./highlightable_controller"
 application.register("highlightable", HighlightableController)
-
-import ImageSwitcherController from "./image_switcher_controller"
-application.register("image-switcher", ImageSwitcherController)
 
 import IphoneStaticController from "./iphone_static_controller"
 application.register("iphone-static", IphoneStaticController)

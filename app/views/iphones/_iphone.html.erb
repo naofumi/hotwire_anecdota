@@ -58,8 +58,8 @@
 
       <div class="mt-48">
         <h2 class="mb-6 text-2xl">Finish. <span class="text-gray-400">好きなの選んで</span></h2>
-        <%= tag.div data: { controller: "image-switcher", image_switcher_iphone_value: iphone } do %>
-          <div class="text-xl my-4" data-image-switcher-target="colorText"><%= iphone.color_name %></div>
+        <%= tag.div data: { controller: "color-changer", color_changer_iphone_value: iphone } do %>
+          <div class="text-xl my-4" data-color-changer-target="colorText"><%= iphone.color_name %></div>
 
           <%= form_with url: iphone_path, method: :post do %>
             <%= fieldset_tag nil, disabled: !iphone.color_enterable?, class: "disabled:opacity-30" do %>

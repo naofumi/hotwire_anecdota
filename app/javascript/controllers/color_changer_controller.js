@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="image-switcher"
+// Connects to data-controller="color-changer"
 export default class extends Controller {
   static values = {iphone: Object}
   static targets = ["colorText"]
