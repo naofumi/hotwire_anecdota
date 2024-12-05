@@ -12,7 +12,7 @@ siblings: true
 
 [デモはこちら](/react/iphone)に用意しています。
 
-* ReactをHotwireのページに埋め込む必要があります。これはGitHubでも行われていることですので、一般的です。方法は[「Reactと一緒に使う」](/other_libraries/using_with_react)で紹介しています
+* ReactをHotwireのページに埋め込む必要があります。実際のApple Storeで行われている手法です。方法は[「Reactと一緒に使う」](/other_libraries/using_with_react)で紹介しています
 * 各オプションごとの製品価格および製品オプションの初期値をReactにあらかじめ渡す必要があります。これも[「Reactと一緒に使う」](/other_libraries/using_with_react)で紹介しています
 * オプションが選択されるとReactでイベントハンドラが呼び出され、イベントハンドラの中で`useState`で作成されたステートを更新します
 * Reactはステートが変更されると再レンダリングが自動的に行われます。ページ全体が再レンダリングされて、変更が反映されます
@@ -40,7 +40,7 @@ Reactはステートを中心とした情報の流れを強制しています。
 
 * `javascript_include_tag "react_iphone"`でReactで書かれたコードを読み込みます。後述しますが、Reactは`<div id="root"></div>`の箇所に挿入されます
 * 製品オプションごとの価格などをReactに渡す必要があります。これは`<script type="application/json" id="catalog-data">`で行います。`@catalog_data`としてコントローラから渡されたデータを、この中にJSON形式で書き込みます
-   * `image_path()`で`@catalog_data`を処理しているところは、[Railsがアセットのフィンガープリントをするため](https://railsguides.jp/asset_pipeline.html#フィンガープリントと注意点)です
+   * `image_path()`で`@catalog_data`を処理しているところは、[Railsがアセットのフィンガープリント(ダイジェスト)を追加するため](https://railsguides.jp/asset_pipeline.html#フィンガープリントと注意点)です
 
 
 ### Reactコードの接続とデータの読み込み --- react-code
@@ -111,12 +111,12 @@ export function IPhoneShow({catalogData}) {
 * ビジネスロジックを収めた`Iphone`クラスのインスタンスを作成します。これは**Stimulusで使用したモデルをそのまま再利用しています**
 * `handleOptionChange`, `handleColorChange`の関数はオプション選択イベントを処理するイベントハンドラです。`iPhoneState`を更新します
 * `handleResetColorText`はホバー時のカラーテキストを更新するものです
+* コード量が多くなってしまうので、HTMLをレンダリングするJSXの箇所は省略しています。実際に[GitHub上でコードを確認する](https://github.com/naofumi/hotwire_anecdota/tree/master/app/javascript/react/components/IPhoneShow.jsx)と、[Stimulus Controllerに書いていたロジック](/examples/store/store-stimulus-state)(IPhoneオブジェクトへの移譲など)の多くがJSXの中に書き込まれていることがわかります。
 
 ## まとめ --- summary
 
 * [Hotwireでステートをサーバに持たせた例](/examples/store/store-server-state)と構造としてはよく似ています
     * イベントハンドラの中で`iphoneState`ステートに保存し、IPhoneオブジェクトでロジックを処理して、コンポーネントを再レンダリングしています
     * Reactはステートを更新すると自動的に再レンダリングします。そのため、Stimulusで必要だった`#render*`のメソッドが不要になります
-* Stimulus Controller版では`#render*`メソッドを使ってステートをDOMに反映させました。一方でReactの場合は`IphoneShow`コンポーネント(`app/javascript/react/components/IPhoneShow.jsx`)のJSXの中にロジックが埋め込まれています
-    * テンプレートの中にロジックを埋め込むのはRails ERBと同じやり方です。（つまり[ステートをサーバに持たせた例](/examples/store/store-server-state)と同じです）。なお、今回は解説を省略しました
-    * テンプレートの中にロジックを埋め込むことは賛否両論ありますが、HTMLとロジックの関係がわかりやすいと思います
+* Stimulus Controller版では`#render*`メソッドを使ってステートをDOMに反映させました。一方でReactの場合は`IphoneShow`コンポーネント(`app/javascript/react/components/IPhoneShow.jsx`)のJSXの中にロジックが埋め込まれています(コード量が多くなるのでここでは掲載していません。[GitHub上で確認して](https://github.com/naofumi/hotwire_anecdota/tree/master/app/javascript/react/components/IPhoneShow.jsx)ください)
+    * テンプレートの中にロジックを埋め込むのは[ステートをサーバに持たせた例](/examples/store/store-server-state)と同じです。[関心の分離](https://ja.wikipedia.org/wiki/関心の分離)という視点では議論がありますが、一般にHTMLとロジックの関係がわかりやすくなると思います

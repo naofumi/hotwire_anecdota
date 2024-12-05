@@ -39,11 +39,11 @@ JavaScriptをしっかり勉強しなければならないのは、一見する�
 
 **振り返ると、確かにReactに要求されるJavaScriptのレベルは高く、難しいです**。
 
-## Hotwireは入門書レベルのJavaScriptで書ける
+## Hotwireは入門書レベルのJavaScriptで書ける --- you-can-write-javascript-with-entry-level-knowledge
 
 一方でHotwireはJavaScriptの入門書程度のJavaScriptで十分に書けます。これについては[別記事で掘り下げています](/opinions/hotwire_javascript_is_simple)。
 
-## 最後に
+## 最後に --- closing
 
-Hotwireの方がシンプルで、Reactの方が複雑だと言っているのではありません。熟練者にとっては、TypeScriptを含めた高度な機能を使っている方が簡単にプログラムが書けるのかもしれません。しかし入門者やウェブデザイナー等にとっては、Reactはハードルが高いフレームワークと言って良いと思います。
+Hotwireの方がシンプルで、Reactの方が複雑だと言っているのではありません。熟練者にとっては、TypeScriptを含めた高度な機能を使っている方が簡単にプログラムが書けるのかもしれません。しかし**入門者やウェブデザイナー等にとっては、Reactはハードルが高いフレームワークと言って良い**と思います。
 

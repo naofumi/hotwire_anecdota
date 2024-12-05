@@ -13,7 +13,7 @@ published: true
 
 しかし、他にも大きな違いがあります。以下はサーバの視点からの違いに着目します
 
-### Turbo Framesはブラウザで指定、Turbo Streamsはサーバで指定
+### Turbo Framesはブラウザで指定、Turbo Streamsはサーバで指定 --- set-turbo-frames-in-browser-turbo-streams-on-server
 
 * Turbo Frames
   * Turbo Framesのリクエストを飛ばすには、リクエストの中で指定する必要があります。以下の方法があります

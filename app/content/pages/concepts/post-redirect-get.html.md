@@ -31,7 +31,7 @@ published: true
       * フォーム送信後にリダイレクトなしで200系を返すと、レスポンスは無視されます
    * Turbo Streamsならば、ブラウザはステータス番号に関わらず、レスポンスbodyの中身だけで応答を決めます。普通は１往復だけでレスポンスします（[Turbo Streamのrefresh](https://turbo.hotwired.dev/reference/streams#refresh)だけは別です。ブラウザにページのリフレッシュをさせます – Morphingを使ったページリロード）
 
-## 私のオススメ
+## 私のオススメ --- my-recommendation
 
 * 開発の初期ではTurbo DriveやTurbo Framesを使い、高速にCRUD画面を作っていきます。この際はPOST/Redirect/GETのパターンを使うことになります
 * 開発が落ち着いて、UI/UXの改善の取り掛かる余裕が生まれたらTurbo Streamsなどを使って、パフォーマンスの最適化をします

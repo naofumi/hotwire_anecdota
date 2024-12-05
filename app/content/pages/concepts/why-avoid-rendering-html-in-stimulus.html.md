@@ -5,7 +5,7 @@ order: 10
 published: true
 ---
 
-## HTML生成を避けるのは自主ルール
+## HTML生成を避けるのは自主ルール --- avoiding-html-is-a-voluntary-rule
 
 Stimulus Controllerの中でHTMLを生成することはできます。jQuery時代のように、JavaScriptコードで自在にHTMLは作れます。しかし **[JavaScriptによるHTML生成を自主的に避けるのがStimulusの流儀](https://stimulus.hotwired.dev/handbook/origin#the-three-core-concepts-in-stimulus)** です。
 
@@ -23,13 +23,18 @@ Railsの世界ではまずERBを使ってサーバサイドでHTMLをレンダ�
 
 しかしHotwireのそもそもの存在意義はフロントエンドを簡単に書けるようすることです。Stimulusは簡単じゃなければ存在意義がありません。Viewのコードを書く箇所が重複して、メンテナンス負荷が大きくなったら本末転倒です。そのため、**StimulusはCSSクラスの切り替えやHTML属性の変更、あるいはHTML内容のちょっとした書き換えに留めることを一般的です**。
 
-## StimulusでしかHTMLレンダリングしないのなら問題ない
+## StimulusでしかHTMLレンダリングしないのなら問題ない --- its-ok-if-only-rendering-in-stimulus
 
-Hotwireで避けたいのはHTMLレンダリングコードの重複です。したがってサーバサイドでのレンダリングをやめて、クライアントサイドに完全に任せるなら問題ありません。実際、Stimulusの中でReact/JSXを書き、Stimulusのステートなどをpropsとして渡していくこともできます。
+Hotwireで避けたいのはHTMLレンダリングコードの重複です。したがってサーバサイドでのレンダリングをやめて、クライアントサイドに完全に任せるなら問題ありません。例えば本サイトでも以下のケースを紹介しています。
 
-また一般的にはChart.jsなどを使って、StimulusでChart.js等にデータを渡すことは普通にやります。
+* [Stimulus Controllerの中にReact/JSXを埋め込む](/other_libraries/using_with_react)ケース
+   * この場合はReactがHTMLを生成しますが、これReactだけが担当しているコンポーネントで、ERBで同じHTMLを書いていません 
+* [Stimulus Controllerの中にChart.jsなどの外部ライブラリを埋め込む](/other_libraries/chartjs-stimulus)ケース
+    * この場合はChart.jsがHTML(canvas)を生成しますが、これChart.jsだけが担当しています
 
-**HTMLをレンダリングする箇所がブラウザかサーバのどちらか一方であれば、Stimulusで行ってもERBで行っても問題はありません**。
+上記の例以外に、Stimulusだけで多くのHTMLを書く場合もあるでしょう。特に複雑な楽観的UIを実現したい場合は有用かもしれません。
+
+**HTMLをレンダリングする箇所がブラウザだけならば、Stimulusで処理しても問題はありません**。メンテナンス上で注意を要するのは、ブラウザとサーバ双方に同じHTMLを生成するコードがある場合です
 
 ## ブラウザとサーバで同じ言語を使えば良いのか？ --- should-the-browser-and-server-use-the-same-language
 

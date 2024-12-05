@@ -13,8 +13,8 @@ siblings: true
 [デモはこちら](/components/iphone)に用意しています。
 
 * 各オプションごとの製品価格および製品オプションの初期値をStimulus Controllerにあらかじめ渡す必要があります。Stimulusの[Values](https://stimulus.hotwired.dev/reference/values)を使うと、HTMLの`data-*`属性でサーバから値を渡すことができます
-* オプションが選択されるとStimulus Controllerのactionが呼び出され、actionの中でStimulusのValueを更新します
-* Valueが更新されると自動的にコールバックが呼ばれますので、その中で`#render`を実行します
+* オプションが選択されるとStimulus Controllerのactionが呼び出され、actionの中でStimulusのValueステートを更新します
+* Valueが更新されると自動的にコールバックが呼び出されますので、その中で`#render`を実行します
 * `#render`はtargetとして指定されているHTML要素を更新します
 
 **Action ==> Values ==> Targets**と情報が流れます。Reactと似た感じで、Values(ステート)を中心にActionを受け取り、Targetを更新するフローになります。[Stimulus Controllerの構造](/concepts/stimulus-typical-structure)で紹介しているものです。
@@ -35,7 +35,7 @@ siblings: true
 </div>
 ```
 
-* `iphone-static`Stimulus Controllerをとの接続です。`@catalog_data`はコントローラから渡された製品オプションと価格のデータで、`Catalog`クラスの`.data`メソッドから取得してます。これを`iphoneStaticCatalogDataValue`としてStimulus Controllerに渡しています（なおRailsはこの時に自動的にJSONに変換してくれます）
+* `iphone-static`Stimulus Controllerをとの接続です。`@catalog_data`はコントローラから渡された製品オプションと価格のデータで、`Catalog`クラスの`.data`メソッドから取得してます。これを`iphoneStaticCatalogDataValue`としてStimulus Controllerに渡しています（なおRailsは自動的にJSONに変換してくれます）
 
 ### `iphone-static` Stimulus Controller --- stimulus-controller
 
@@ -134,7 +134,7 @@ export default class extends Controller {
 * `update*()`のメソッドはすべてactionです。`this.iphoneValue`ステートを適宜更新しています
 * `setColorText()`, `resetColorText()`は色のアイコンの上をホバーした時の処理です。一時的に色の名前を表示するだけですので、ステートに保存する必要がありません。ダイレクトにHTML要素の`textContext`属性を書き換えています
 * `iphoneValueChanged()`は`iphoneValue`属性が変更された時に自動的に呼ばれるコールバックです。この中で`#render()`メソッドを呼び出します
-* `#render()`メソッドはステートに従って、各`*target`の表示を変更します。その際、価格計算等のロジックは複雑になりますので、`IPhone`クラスのインスタンスを作り、それに委任しています
+* `#render()`メソッドはステートに従って、各`*target`の表示を変更します。その際、価格計算等のロジックは複雑になりますので、`IPhone`クラスのインスタンスを作り、計算処理を移譲しています
 
 ### IPhoneモデル --- iphone-model
 
@@ -202,15 +202,15 @@ export default class IPhone {
 ```
 
 * `IPhone`クラスはビジネスロジックを収めています
-    * 初期状態のモデル・カラー・RAM容量
-    * どこまでオプションを入力したかをステートマシン的に管理
-    * model, color, ram等のオプションをセットするメソッド
-    * 色の名前や画像URLを算出する処理
-    * 価格情報を算出する処理
+    * 初期状態のモデル・カラー・RAM容量(`this.data`)
+    * model, color, ram等のオプション(`this.model`, `this.color`, `this.ram`)
+    * どこまでオプションを入力したかをステートマシン的に管理(`state()`. `can*()`) 
+    * 色の名前や画像URLを算出する処理(`imagePath()`, `fullColorName()`)
+    * 価格情報を算出する処理(`price()`)
 
 ## まとめ --- summary
 
 * [ステートをサーバに持たせた例](/examples/store/store-server-state)と構造としてはよく似ています
-    * ActionのイベントをStimulus Controllerで受け取り、`this.iphoneValue`ステートに保存し、`IPhone`オブジェクトでロジックを処理して、targetsを更新しています。この処理の流れは[Stimulus Controllerの構造](/concepts/stimulus-typical-structure)で紹介しているもので、制御の流れがわかりやすくなります
-       * StimulusのActionがRails ControllerのAction、`IPhone`オブジェクトがRailsのモデル、targetsの更新がERB viewの作成と考えると、この処理の流れとRails MVCがとても似ていることに気づきます
-* Stimulusはすでに用意されたHTMLを後から修正する形を主にとります。そのため[Stimulus Controller](#stimulus-controller)の中の`#render*`メソッドがどのようにHTMLに反映されるかが少しわかりにくくなっています
+    * ActionのイベントをStimulus Controllerで受け取り、`this.iphoneValue`ステートに保存し、`IPhone`オブジェクトでロジックを処理して、最後にtargetsを更新しています。この処理の流れは[Stimulus Controllerの構造](/concepts/stimulus-typical-structure)で紹介しているもので、制御の流れがわかりやすくなります
+       * StimulusのActionがRails ControllerのAction、`IPhone`オブジェクトがRailsのモデル、targetsの更新がERB viewの作成と考えると、**この処理の流れとRails MVCがとても似ていることに気づきます**
+* [Stimulusはすでに用意されたHTMLを後から修正する形を取ることが一般的です](/concepts/why-avoid-rendering-html-in-stimulus)。ファイルが分かれますので、`values`ステートがどのようにHTMLに反映されるかのロジックが、少しわかりにくくなっています
