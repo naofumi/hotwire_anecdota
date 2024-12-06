@@ -7,7 +7,7 @@ published: true
 
 ## Hotwireは入門書レベルのJavaScriptで書ける --- you-can-write-hotwire-with-tutorial-level-javascript
 
-[Reactとの比較](opinions/why_is_react_difficult)になりますが、Hotwireで使うJavaScriptは簡単です。**Hotwireは入門書程度のJavaScriptで十分に書けます**。
+[Reactとの比較](/opinions/why_is_react_difficult)になりますが、Hotwireで使うJavaScriptは簡単です。**Hotwireは入門書程度のJavaScriptで十分に書けます**。
 
 * Hotwireでは高階関数はほとんど使いません。`Array.forEach()`とか`Array.filter()`などの初歩的なものを使ってDOM操作はしますが、高階関数を意識することはまずありません。
 * Hotwireではasync awaitやPromise、コールバック等は滅多に書きません
