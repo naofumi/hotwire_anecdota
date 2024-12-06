@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const dispatchImport =  dispatcher(key)
   if (!dispatchImport) {
-    alert(`No dispatcher found for "${key}"`)
+    alert(`No dispatcher found for "${key}". Add a dispatcher to app/javascript/application_react.jsx`)
   }
   const MyComponent = lazy(dispatchImport)
   root.render(<Suspense fallback={<div>Loading...</div>}>
@@ -46,6 +46,7 @@ function dispatcher(key) {
   const table = {
     "toggle": () => import("./react/pages/TogglePage"),
     "customers": () => import("./react/pages/CustomersPage"),
+    "images": () => import("./react/pages/ImagesPage"),
   }
   return table[key]
 }
