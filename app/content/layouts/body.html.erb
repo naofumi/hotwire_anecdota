@@ -21,7 +21,8 @@
 <body class="bg-orange-50 bg-fixed bg-cover bg-top <%= @background ? "!bg-[#FFE5CA] bg-[url('pexels-pixabay-51343.webp')]" : ""%>">
 <% hide_page_unless_published!(current_page) %>
 <%= render 'nav',
-           hide_top_button: current_page.data.hide_top_button,
+           hide_back_button: current_page.data.hide_back_button,
+           back_link: @back_link,
            hide_title: current_page.data.hide_title %>
 <%= yield %>
 <%= render 'footer' %>

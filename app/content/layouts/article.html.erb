@@ -1,4 +1,5 @@
 <% provide :head, turbo_exempts_page_from_preview %>
+<% @back_link = { title: current_page.parent.data.title, url: current_page.parent.url } %>
 <%= render_layout "body" do %>
   <div class="group/chapter-list lg:max-w-6xl lg:mx-auto"
        data-controller="chapter-list"

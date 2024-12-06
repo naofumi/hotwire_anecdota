@@ -1,19 +1,30 @@
-<% local_assigns.with_defaults(hide_top_button: false,
+<% local_assigns.with_defaults(hide_back_button: false,
                                hide_title: false,
+                               back_link: nil,
                                show_data_reset: false) =>
-           { hide_top_button:, hide_title:, show_data_reset: } %>
+     { hide_back_button:, hide_title:, back_link:, show_data_reset: } %>
 
 <nav class="w-full flex py-1 px-4 items-start items-center">
-  <% if hide_top_button %>
+  <% if hide_back_button %>
     <span class="w-52 flex-none basis-24"></span>
   <% else %>
-    <a href="/" class="flex-none basis-24 text-xl font-extralight p-1 text-orange-600 flex items-center hover:text-orange-400">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-           stroke="currentColor" class="size-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
-      </svg>
-      <span>Top</span>
-    </a>
+    <% if back_link %>
+      <a href="<%= back_link[:url] %>" class="overflow-hidden flex-none basis-36 text-xl font-extralight p-1 text-orange-600 flex items-center hover:text-orange-400">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+             stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
+        </svg>
+        <span class="text-ellipsis overflow-hidden text-nowrap"><%= back_link[:title] %></span>
+      </a>
+    <% else %>
+      <a href="/" class="flex-none basis-36 text-xl font-extralight p-1 text-orange-600 flex items-center hover:text-orange-400">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+             stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
+        </svg>
+        <span>Top</span>
+      </a>
+    <% end %>
   <% end %>
 
   <% if hide_title %>
@@ -21,12 +32,13 @@
   <% else %>
     <div class="text-center grow flex flex-col ">
       <a href="/" class="group text-xs p-1 font-light text-gray-400 hover:text-orange-300">
-        Anecdotes on <span class="hotwire-text tracking-tight inline-block text-xl font-bold text-orange-600 group-hover:text-orange-300">Hotwire</span>
+        Anecdotes on
+        <span class="hotwire-text tracking-tight inline-block text-xl font-bold text-orange-600 group-hover:text-orange-300">Hotwire</span>
       </a>
     </div>
   <% end %>
 
-  <div class="basis-24 pr-2">
+  <div class="basis-36 pr-2">
     <% if show_data_reset %>
       <%= button_to "Reset Data", fixtures_path, method: :post,
                     class: "border rounded bg-orange-600 px-1 text-white text-sm" %>
