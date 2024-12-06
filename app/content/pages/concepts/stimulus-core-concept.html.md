@@ -5,7 +5,7 @@ order: 25
 published: true
 ---
 
-ここに記載している内容は[Stimulus 1.0を公開した時にDHHが解説](https://signalvnoise.com/svn3/stimulus-1-0-a-modest-javascript-framework-for-the-html-you-already-have/)を参照し、私の経験で少し補足したものです。
+ここに記載している内容は2018年に書かれた[The Origin of Stimulus (Stimulusの始まり)](https://stimulus.hotwired.dev/handbook/origin)を参照し、私の経験で少し補足したものです。
 
 ## Stimulusの３つのコア・コンセプト --- 3-core-concepts
 
@@ -33,4 +33,4 @@ published: true
 ## Reactを含めた他のライブラリと一緒に使う --- use-with-other-libraries
 
 * Stimulusは他のライブラリと一緒に使えます（RailsにはTrixというリッチテキストエディタが含まれていますが、それはStimulusで書かれているわけではありません）
-* 本サイトでは[Stimulusを他のJavaScriptと組みわせて使用した例](/other_libraries)を紹介しています
+* なお本サイトでは[Stimulusを他のJavaScriptと組みわせて使用した例](/other_libraries)を紹介しています
