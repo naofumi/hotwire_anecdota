@@ -16,16 +16,16 @@ published: true
 ![interactive-flow-hotwire.webp](content_images/interactive-flow-hotwire.webp "mx-auto max-w-[500px]")
 
 1. 今回はサーバから非同期でデータを受け取る必要がありません
-   1. Stimulusだけで実装します
-   2. HTMLのcheckboxやradioを使う方法もありますが、今回は紹介しません
-   3. HTMLのdetails, summaryを使う方法もありますが、今回は紹介しません
+   1. Stimulusだけで実装します。つまり上図の<span class="text-green-600 font-bold">緑</span>のところだけ考えれば良いです。
+   2. HTMLのcheckboxやradioを使う方法もありますが、今回は紹介しません。もし使うとしたら上図の<span class="text-black font-bold">黒</span>のところになります
+   3. HTMLのdetails, summaryを使う方法もありますが、今回は紹介しません。もし使うとしたら上図の<span class="text-black font-bold">黒</span>のところになります
 2. Stimulus Controllerの制御範囲を考えます。つまり画面のどこをカバーするかです
    1. 今回のアコーディオンは、各行が独立して動いています。一方で一つの行を開いたら他の行が閉じるというアコーディオンも考えられますが、今回はそれではないです
-   2. 各行が独立していますので、Stimulus Controllerの制御範囲は各行単位で良さそうです
+   2. 各行が独立していますので、Stimulus Controllerの制御範囲は各行単位で良さそうです（もしお互いに関連していれば、すべての行を一つのControllerの下に束ねることを考えます）
 3. Stimulus Controllerのステートを検討します
    1. アクセシビリティを調べると、アコーディオンでは[`aria-expanded`を使うのが良さそうです](https://www.accessibility-developer-guide.com/examples/widgets/accordion/)
    2. 基本的には`aria-expanded`をCSS擬似セレクタで読み取るアプローチを採用します
-   3. ただしアコーディオンを拡大する時のCSSトランジションは、拡大時の高さが指定されないとうまくいきません。このため一部ではCSSではなくStimulus controllerでJavaScriptを使って直接HTML要素の`style`を変更します
+   3. ただしアコーディオンを拡大する時のCSSトランジションは、拡大時の高さが指定されないとうまくいきません。このため一部ではCSSではなくStimulus controller内でJavaScriptを使って直接HTML要素の`style`を変更します
 
 ## コード --- code
 

@@ -44,7 +44,7 @@ Hotwireでデザイナーからバックエンド・インフラが一丸にな�
 
 例えば**CRUD画面をRuby on Railsで高速に開発し、高度なインタラクティビティが要求される箇所だけは慣れたReactを使うこともできます**。良いとこどりができます。
 
-私たちの目的は良いUI/UXを作ることであって、Hotwire vs. Reactの技術選定をすることではありません。良いとこどりできる場合は積極的にやりましょう。
+私たちの目的は良いUI/UXを作ることであって、Hotwire vs. Reactのどちらか一方を選定をすることではありません。良いとこどりできる場合は積極的にやりましょう。
 
 ![apple-store.webp](content_images/apple-store.webp "max-w-[500px] mx-auto")
 
