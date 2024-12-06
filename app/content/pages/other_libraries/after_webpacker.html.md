@@ -40,9 +40,9 @@ $('#logo').attr({
 
 CSSについてはSASS等を使わずに生のCSSを使う方法がデフォルトとして用意されています。最新のCSSはネスト化された定義やCSS変数など、従来はSASSがなければ実現できなかった機能が最初から用意されています。以前に比べて、大きいプロジェクトであっても生のCSSが現実的に使えるようになっています。
 
-Tailwind CSSやSASSを使うのであれば、CSSをビルドするツールが必要になります。Tailwind CSSについては別個の[tailwindcss-rails gem](https://github.com/rails/tailwindcss-rails)が用意されていますし、SASSを使いたいのであれば[dartsass-rails gem](https://github.com/rails/dartsass-rails/)が用意されています。またビルド時にどっちみちNode.jsを使うのであれば[cssbundling-rails gem](https://github.com/rails/cssbundling-rails)が用意されています。
+Tailwind CSSやSASSを使うのであれば、CSSをビルドするツールが必要になります。Tailwind CSSについては別個の[tailwindcss-rails gem](https://github.com/rails/tailwindcss-rails)が用意されていますし、SASSを使いたいのであれば[dartsass-rails gem](https://github.com/rails/dartsass-rails/)が用意されています。またJavaScriptビルド時にどっちみちNode.jsを使っていたのであれば、それを使う[cssbundling-rails gem](https://github.com/rails/cssbundling-rails)が用意されています。
 
-tailwindcss-rails gemおよびdartsass-rails gemはNode無しで使えるのに対して、cssbundling-rails gemはNodeを必要とするぐらいの違いです。
+tailwindcss-rails gemおよびdartsass-rails gemはNode無しで使えるのに対して、cssbundling-rails gemはNodeを必要とするぐらいの違いです。（ビルド用のDockerコンテナにnodeをインストールするところだけが面倒ですが、そこもさまざまにオプションを変えながら`rails new`で生成されるDockerfileを参考をみて、それをコピペすれば対応できます）
 
 **本サイトでは、Reactを使う関係でどうしてもNodeを使用しますので、ついでにTailwind CSSもcssbundling-rails gemでビルドさせています**。Reactを使わずに、またJavaScriptはimport mapsにするのであれば、tailwindcss-rails gemを使用したかもしれません。
 
