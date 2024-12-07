@@ -41,6 +41,9 @@ gem "acts_as_list"
 
 gem "thruster"
 
+# Mainly for OGP, twitter cards, etc.
+gem "meta-tags"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: [ :mri, :windows ], require: "debug/prelude"

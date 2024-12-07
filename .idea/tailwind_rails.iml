@@ -72,6 +72,7 @@
     <orderEntry type="library" scope="PROVIDED" name="marcel (v1.0.4, rbenv: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="markdown-rails (v2.1.0, rbenv: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="matrix (v0.4.2, rbenv: 3.3.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="meta-tags (v2.22.1, rbenv: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mime-types (v3.6.0, rbenv: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mime-types-data (v3.2024.1105, rbenv: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mini_mime (v1.1.5, rbenv: 3.3.4) [gem]" level="application" />
@@ -160,6 +161,7 @@
         <option value="mailbox" />
         <option value="mailer" />
         <option value="markdown_rails:install" />
+        <option value="meta_tags:install" />
         <option value="migration" />
         <option value="model" />
         <option value="resource" />
@@ -193,6 +195,7 @@
         <option value="mailbox" />
         <option value="mailer" />
         <option value="markdown_rails:install" />
+        <option value="meta_tags:install" />
         <option value="migration" />
         <option value="model" />
         <option value="resource" />

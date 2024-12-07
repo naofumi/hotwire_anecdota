@@ -3,6 +3,7 @@
 <head>
   <title><%= current_page.data.title %></title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= display_meta_tags(default_meta_tags(url: request.original_url, title: current_page.data.title)) %>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
