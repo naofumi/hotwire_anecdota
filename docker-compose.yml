@@ -1,0 +1,21 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY:-dummy_master_key}
+    volumes:
+      - ./storage:/rails/storage
+      - ./log:/rails/log
+      - ./tmp:/rails/tmp
+    command: ["./bin/thrust", "./bin/rails", "server"]
+
+  node:
+    image: node:22.2.0
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: sh -c "yarn install && yarn build && yarn build:css"
