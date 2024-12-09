@@ -50,3 +50,4 @@ Hotwireの方がシンプルで、Reactの方が複雑だと言っているの�
 
 そして**入門者やウェブデザイナー等にとっては、Reactは間違いなくハードルが高いフレームワークと言って良い**と思います。
 
+![ReactのJavaScriptは難しい - Hotwire/StimulusのJavaScriptは簡単](https://www.youtube.com/watch?v=GwRsPw10l-Q)

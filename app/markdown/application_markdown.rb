@@ -28,8 +28,8 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   # about at https://github.com/vmg/redcarpet#and-its-like-really-simple-to-use
   # Make sure you know what you're doing if you're using this to render user inputs.
   def enable
-    [ :fenced_code_blocks, :disable_indented_code_blocks, :underline, :footnotes, :tables, :strikethrough,
-      :no_intra_emphasis ]
+    [:fenced_code_blocks, :disable_indented_code_blocks, :underline, :footnotes, :tables, :strikethrough,
+     :no_intra_emphasis]
   end
 
   # https://github.com/sitepress/markdown-rails?tab=readme-ov-file#customizing-renderer
@@ -40,16 +40,16 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
     lexer = Rouge::Lexer.find(language_part)
     content_tag(:div, class: "my-2") do
       safe_join [
-        tag.div(class: "px-2 border rounded-t text-sm border-gray-700 bg-gray-700 text-gray-100 w-fit") {
-          safe_join [
-            tag.span(filename_part || language_part),
-            filename_part && link_to(github_logo, github_link(filename_part), target: "_blank", rel: "noopener")
-          ]
-        },
-        tag.pre(class: "#{language_part} bg-[#272822] px-1 py-2 text-gray-100 border rounded rounded-tl-none border-black text-sm overflow-x-auto") {
-          raw FORMATTER.format(lexer.lex(code)) # rubocop:disable Rails/OutputSafety
-        }
-      ]
+                  tag.div(class: "px-2 border rounded-t text-sm border-gray-700 bg-gray-700 text-gray-100 w-fit") {
+                    safe_join [
+                                tag.span(filename_part || language_part),
+                                filename_part && link_to(github_logo, github_link(filename_part), target: "_blank", rel: "noopener")
+                              ]
+                  },
+                  tag.pre(class: "#{language_part} bg-[#272822] px-1 py-2 text-gray-100 border rounded rounded-tl-none border-black text-sm overflow-x-auto") {
+                    raw FORMATTER.format(lexer.lex(code)) # rubocop:disable Rails/OutputSafety
+                  }
+                ]
     end
   end
 
@@ -70,15 +70,19 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
     css_classes = title
     extension = link.match(/\.(\w{3,4})$/)&.captures&.first
 
-    case extension
-    when "webp", "jpg", "jpeg", "gif", "png"
-      link_to image_path(link), target: "image", class: "#{css_classes} block" do
-        image_tag(link, alt: alt, title: alt)
+    if URI(link).host == "www.youtube.com"
+      youtube_tag link, alt
+    else
+      case extension
+      when "webp", "jpg", "jpeg", "gif", "png"
+        link_to image_path(link), target: "image", class: "#{css_classes} block" do
+          image_tag(link, alt: alt, title: alt)
+        end
+      when "mov"
+        tag.video src: video_path(link), width: 733, height: 606, muted: true,
+                  autoplay: true, playsinline: true, controls: true,
+                  loop: true, class: css_classes, data: { turbo_permanent: true }
       end
-    when "mov"
-      tag.video src: video_path(link), width: 733, height: 606, muted: true,
-                autoplay: true, playsinline: true, controls: true,
-                loop: true, class: css_classes, data: { turbo_permanent: true }
     end
   end
 
@@ -114,17 +118,21 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
       "https://github.com/naofumi/hotwire_anecdota/tree/master/#{filename}"
     end
 
-  # This is provided as an example; there's many more YouTube URLs that this wouldn't catch.
-  # def youtube_tag(url, alt)
-  #   embed_url = "https://www.youtube-nocookie.com/embed/#{CGI.parse(url.query).fetch("v").first}"
-  #   content_tag :iframe,
-  #               src: embed_url,
-  #               width: 560,
-  #               height: 325,
-  #               allow: "encrypted-media; picture-in-picture",
-  #               allowfullscreen: true \
-  #     do
-  #       alt
-  #     end
-  # end
+    # This is provided as an example; there's many more YouTube URLs that this wouldn't catch.
+    def youtube_tag(link, alt)
+      url = URI(link)
+      embed_url = "https://www.youtube-nocookie.com/embed/#{CGI.parse(url.query).fetch("v").first}"
+      content_tag(:iframe,
+                  src: embed_url,
+                  title: "YouTube video player",
+                  # width: 560,
+                  # height: 315,
+                  allow: "accelorometer; clipboard-write; gyroscope: encrypted-media; picture-in-picture; web-share",
+                  referrerpolicy: "strict-origin-when-cross-origin",
+                  allowfullscreen: true,
+                  class: "mx-auto w-full max-w-[560px] aspect-video my-8",
+                  ) do
+          alt
+        end
+    end
 end
