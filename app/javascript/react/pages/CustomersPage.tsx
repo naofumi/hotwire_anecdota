@@ -1,7 +1,16 @@
 import React, {useEffect, useState} from "react"
 import Search from "../components/Search"
 
-function fetchJsonWithAbort(url, {success, error = (err) => console.log(err)}) {
+type Customer = {
+  id: number,
+  name: string,
+  jp_name: string,
+}
+
+function fetchJsonWithAbort(
+  url: string,
+  {success, error = (err: any) => console.log(err)}: {success: (json: any) => void, error?: (err: any) => void}
+) {
   const abortController = new AbortController()
 
   fetch(url, {
@@ -15,14 +24,14 @@ function fetchJsonWithAbort(url, {success, error = (err) => console.log(err)}) {
   return abortController
 }
 
-function useServerData(url, initialData) {
-  const [serverData, setServerData] = useState(initialData)
-  const [loading, setLoading] = useState(false)
+function useServerData<T>(url: string, initialData: T) {
+  const [serverData, setServerData] = useState<T>(initialData)
+  const [loading, setLoading] = useState<boolean>(false)
 
-  function getServerDataWithAbort(url) {
+  function getServerDataWithAbort(url: string) {
     setLoading(true)
     return fetchJsonWithAbort(url, {
-        success: (json) => {
+        success: (json: T) => {
           setServerData(json)
           setLoading(false)
         }
@@ -46,9 +55,9 @@ function useServerData(url, initialData) {
 
 export default function CustomersPage() {
   const [query, setQuery] = useState("")
-  const {serverData: customers, loading, reloadData} = useServerData(`/customers?query=${query}`, [])
+  const {serverData: customers, loading, reloadData} = useServerData<Customer[]>(`/customers?query=${query}`, [])
 
-  function navigateToEdit(customer) {
+  function navigateToEdit(customer: Customer) {
     document.location.href = `/customers/${customer.id}/edit?redirect_to=/react/customers`
   }
 
