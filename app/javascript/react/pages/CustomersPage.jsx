@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react"
 import Search from "../components/Search"
 
-function fetchJsonWithAbort(url, callback) {
+function fetchJsonWithAbort(url, {success, error = (err) => console.log(err)}) {
   const abortController = new AbortController()
 
   fetch(url, {
@@ -9,8 +9,8 @@ function fetchJsonWithAbort(url, callback) {
     signal: abortController.signal
   })
     .then(res => res.json())
-    .then(data => callback(data))
-    .catch(err => console.log(err))
+    .then(json => success(json))
+    .catch(err => error(err))
 
   return abortController
 }
@@ -19,33 +19,36 @@ function useServerData(url, initialData) {
   const [serverData, setServerData] = useState(initialData)
   const [loading, setLoading] = useState(false)
 
-  function reloadData() {
+  function getServerDataWithAbort(url) {
     setLoading(true)
-    fetchJsonWithAbort(url, (json) => {
-      setServerData(json)
-      setLoading(false)
-    })
+    return fetchJsonWithAbort(url, {
+        success: (json) => {
+          setServerData(json)
+          setLoading(false)
+        }
+      }
+    )
+  }
+
+  function reloadData() {
+    getServerDataWithAbort(url)
   }
 
   useEffect(() => {
-    setLoading(true)
-    const abortController = fetchJsonWithAbort(url, (json) => {
-      setServerData(json)
-      setLoading(false)
-    })
+    const abortController = getServerDataWithAbort(url)
     return () => {
       abortController.abort()
     }
   }, [url])
 
-  return [serverData, loading, reloadData]
+  return {serverData, loading, reloadData}
 }
 
 export default function CustomersPage() {
   const [query, setQuery] = useState("")
-  const [customers, loading, reloadData] = useServerData(`/customers?query=${query}`, [])
+  const {serverData: customers, loading, reloadData} = useServerData(`/customers?query=${query}`, [])
 
-  function navigateTo(customer) {
+  function navigateToEdit(customer) {
     document.location.href = `/customers/${customer.id}/edit?redirect_to=/react/customers`
   }
 
@@ -78,7 +81,7 @@ export default function CustomersPage() {
             {customer.jp_name}
           </td>
           <td className="p-2">
-            <button onClick={() => navigateTo(customer)}>
+            <button onClick={() => navigateToEdit(customer)}>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                    stroke="currentColor" className="size-6">
                 <path strokeLinecap="round" strokeLinejoin="round"
