@@ -64,3 +64,5 @@ document.addEventListener("turbo:load", () => {
 
 * HotwireをReactと一緒に使うことは簡単にできます
 * `<script type="application/json" ...>...</script>`にデータを埋め込めばERBからReactにデータを渡せます。ダイナミックなコンテンツであっても、無駄なリクエストを送信せずに、Next.jsのSSRと同等の早さでページを表示できます
+
+![Rails 8でReactを動かしてアセットパイプラインを勉強する](https://www.youtube.com/watch?v=J2jLG7FtUu4)
