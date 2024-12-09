@@ -1,5 +1,4 @@
 import {Controller} from "@hotwired/stimulus"
-import Chart from "chart.js/auto"
 
 // Connects to data-controller="chartjs"
 export default class extends Controller {
@@ -44,13 +43,17 @@ export default class extends Controller {
       this.chart.data = this.#data()
       this.chart.update()
     } else {
-      this.chart = new Chart(
-        this.chartTarget,
-        {
-          type: 'bar',
-          data: this.#data()
-        }
-      );
+      // dynamic import of Chart
+      import("chart.js/auto")
+        .then(module => {
+          this.chart = new module.default(
+            this.chartTarget,
+            {
+              type: 'bar',
+              data: this.#data()
+            }
+          );
+        })
     }
   }
 
