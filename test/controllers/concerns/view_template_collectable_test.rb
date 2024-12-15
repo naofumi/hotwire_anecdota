@@ -6,7 +6,7 @@ class ViewTemplateCollectableTest < ActionDispatch::IntegrationTest
   class MockController < ApplicationController
     include ViewTemplateCollectable
 
-    collect_view_templates "components"
+    collect_view_templates from_directory: "components"
   end
 
   test "view_templates includes top view 'accordion'" do

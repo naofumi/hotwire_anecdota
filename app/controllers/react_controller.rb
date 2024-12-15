@@ -1,14 +1,12 @@
 class ReactController < ApplicationController
   include ViewTemplateCollectable
-  collect_view_templates "react"
+  collect_view_templates from_directory: "react"
 
-  # AVAILABLE_TEMPLATES = %w[ iphone toggle second]
   before_action :set_template, only: [ :show ]
-  # before_action :set_data
   layout "react_layout"
 
   def show
-    render @template
+    render template_full_path(@template)
   end
 
   def iphone

@@ -1,6 +1,6 @@
 class ComponentsController < ApplicationController
   include ViewTemplateCollectable
-  collect_view_templates "components"
+  collect_view_templates from_directory: "components"
 
   before_action :set_template, only: [ :show ]
   before_action :set_data, only: [ :show ]
@@ -12,7 +12,7 @@ class ComponentsController < ApplicationController
   end
 
   def show
-    render @template
+    render template_full_path(@template)
   end
 
   private

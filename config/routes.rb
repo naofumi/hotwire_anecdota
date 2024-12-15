@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     end
   end
   resource :iphone
-  resources :react, only: [ :show ] do
+  resources :react, only: [ :show ], constraints: { id: %r{[\w/]+} } do
     collection do
       get :iphone
     end
