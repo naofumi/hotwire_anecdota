@@ -30,7 +30,7 @@ function ComboboxExample() {
         displayValue={(person) => person?.name}
         onChange={(event) => setQuery(event.target.value)}
       />
-      <ComboboxOptions anchor="bottom" className="border empty:invisible">
+      <ComboboxOptions anchor="bottom" className="w-52 border empty:invisible">
         {filteredPeople.map((person) => (
           <ComboboxOption as={Fragment} key={person.id} value={person} className="data-[focus]:bg-blue-100">
             {({ focus, selected }) => (
