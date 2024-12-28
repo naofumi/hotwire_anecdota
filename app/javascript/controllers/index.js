@@ -22,6 +22,9 @@ application.register("chartjs", ChartjsController)
 import ColorChangerController from "./color_changer_controller"
 application.register("color-changer", ColorChangerController)
 
+import ComboboxController from "./combobox_controller"
+application.register("combobox", ComboboxController)
+
 import DropdownController from "./dropdown_controller"
 application.register("dropdown", DropdownController)
 

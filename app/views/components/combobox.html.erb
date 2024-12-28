@@ -1,0 +1,36 @@
+<% set_breadcrumbs [["Combobox", component_path(:combobox)]] %>
+
+<%= render 'template',
+           title: "Combobox",
+           description: "" do %>
+  <div class="w-52 mx-auto">
+    <div data-controller="combobox" class="group"
+         data-combobox-options-value="<%= [
+                                           { id: 1, title: 'Durward Reynolds' },
+                                           { id: 2, title: 'Kenton Towne' },
+                                           { id: 3, title: 'Therese Wunsch' },
+                                           { id: 4, title: 'Benedict Kessler' },
+                                           { id: 5, title: 'Katelyn Rohan' },
+                                         ].to_json %>">
+      <input data-combobox-target="input"
+             name="any_name"
+             type="search"
+             data-action="input->combobox#setQuery
+                          focus->combobox#showListBox
+                          blur->combobox#hideListBox
+                          keydown.enter->combobox#selectCurrent
+                          keydown.up->combobox#moveUp
+                          keydown.down->combobox#moveDown">
+      <div data-combobox-target="options"
+           class="group-data-[combobox-opened-value=true]:visible invisible empty:invisible border"
+           data-action="keydown.esc@window->combobox#hideListBox"
+      ></div>
+      <template class="combobox-row">
+        <div class="cursor-pointer data-[selected=true]:font-bold data-[focus=true]:bg-gray-100"
+             data-combobox-target="option"
+             data-action="pointerdown->combobox#selectOption:prevent mouseenter->combobox#focus">
+        </div>
+      </template>
+    </div>
+  </div>
+<% end %>

@@ -24,7 +24,7 @@ function ComboboxExample() {
     })
 
   return (
-    <Combobox value={selectedPerson} onChange={setSelectedPerson} onClose={() => setQuery('')}>
+    <Combobox immediate value={selectedPerson} onChange={setSelectedPerson} onClose={() => setQuery('')}>
       <ComboboxInput
         aria-label="Assignee"
         displayValue={(person) => person?.name}
