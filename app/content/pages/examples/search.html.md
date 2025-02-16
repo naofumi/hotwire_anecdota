@@ -8,7 +8,7 @@ published: true
 
 ここで作成するのはリアルタイム検索です。下記のようなUIです。
 
-[デモはこちら](/customers)に用意しています。
+[デモはこちら](/customers "demo")に用意しています。
 
 ![realtime-search.mov](content_images/realtime-search.mov "mx-auto max-w-[600px]")
 

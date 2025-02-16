@@ -5,6 +5,7 @@ module.exports = {
     './app/javascript/controllers/**/*.js',
     './app/javascript/react/**/*.{js,jsx}',
     './app/content/helpers/**/*.rb',
+    './app/markdown/**/*.rb',
     './app/content/layouts/**/*.erb',
     './app/content/pages/index.html.erb',
     './app/content/pages/**/*.{md,erb}',

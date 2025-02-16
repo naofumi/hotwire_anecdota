@@ -9,7 +9,7 @@ published: true
 
 ![toggle.mov](content_images/toggle.mov)
 
-２つの方法で作ります。デモはこちらです: [Stimulusバージョン](/components/toggle_stimulus)と[Checkboxバージョン](/components/toggle_checkbox)です。
+２つの方法で作ります。デモはこちらです: [Stimulusバージョン](/components/toggle_stimulus "demo")と[Checkboxバージョン](/components/toggle_checkbox "demo")です。
 
 ## 考えるポイント --- points-to-consider
 

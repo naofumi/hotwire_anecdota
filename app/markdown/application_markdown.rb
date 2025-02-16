@@ -104,6 +104,16 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
     end
   end
 
+  def link(link, title, content)
+    if title =~ /\Ademo/
+      link_to content, link, class: "after:content-['demo'] after:text-xs after:text-[10px] after:align-top after:text-green-500 after:rotate-[45deg] after:bg-orange-600 after:text-white after:inline-block after:rounded after:px-1"
+    elsif link =~ /components\//
+      link_to content, link, class: "after:content-['demo'] after:text-xs after:text-[10px] after:align-top after:text-green-500 after:rotate-[45deg] after:bg-orange-600 after:text-white after:inline-block after:rounded after:px-1"
+    else
+      link_to content, link, title: title
+    end
+  end
+
   private
 
     def github_logo
@@ -131,8 +141,8 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
                   referrerpolicy: "strict-origin-when-cross-origin",
                   allowfullscreen: true,
                   class: "mx-auto w-full max-w-[560px] aspect-video my-8",
-                  ) do
-          alt
-        end
+      ) do
+        alt
+      end
     end
 end
