@@ -119,7 +119,7 @@
         }
 
         strong {
-            @apply mx-0.5 px-0.5 rounded bg-orange-600/20 font-semibold
+            @apply mx-0.5 px-0.5 rounded bg-pink-600/10 font-semibold
         }
 
         blockquote {
