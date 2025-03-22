@@ -1,0 +1,50 @@
+---
+title: Hotwire Anecdota
+layout: body
+hide_back_button: true
+hide_title: true
+published: true
+---
+<% @background = true %>
+
+<% provide :head, preload_link_tag(image_path("pexels-pixabay-51343.webp")) %>
+
+<div class="top py-24 sm:py-32" data-controller="top-page">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-lg">
+      <div>
+        <p class="-mb-2 text-base font-semibold leading-7 text-orange-600">
+          Hotwire Anecdotes
+        </p>
+        <h1 class="text-3xl font-thin text-gray-600 sm:text-4xl">
+          Anecdotes on
+          <div class="inline-block hotwire-text font-bold text-6xl text-orange-600 tracking-tight">Hotwire</div>
+        </h1>
+      </div>
+      <div>
+        <p class="mt-6 text-normal font-light leading-8 text-gray-500">
+          My experiences, feelings and thoughts on <a href="https://hotwired.dev" class="text-orange-600 text-2xl underline hover:opacity-70 active:text-orange-800">Hotwire</a>
+        </p>
+      </div>
+      <% if !Rails.env.production? %>
+        <%= link_to "Component List", components_path %>
+      <% end %>
+    </div>
+
+    <div class="sm:columns-2 lg:columns-3 mt-24 max-w-4xl lg:max-w-5xl mx-auto gap-6">
+      <% current_page.children.sort_by { _1.data.order.to_i }.each do |section_page| %>
+        <!-- manually set [&:nth-child](number):mb-0 due to differences between Safari and Chrome/Firefox -->
+        <div class="mb-6 p-6 break-inside-avoid rounded-lg bg-white/90 backdrop-blur"
+             data-top-page-target="section">
+          <h3 class="text-2xl mb-4 font-extralight text-gray-600">
+            <%= link_to section_page.data.title, section_page.request_path, class: "inline-block hover:text-orange-600" %>
+            <% if Rails.env.development? %>
+              <span class="text-xs"><%= section_page.data.order %></span>
+            <% end %>
+          </h3>
+          <%= render 'page_children', page: section_page, show_published_only: true %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
