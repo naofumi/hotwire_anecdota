@@ -93,7 +93,7 @@ published: true
    * まとめると、Turbo DriveでもTurbo StreamsでもRailsの[`#notice`](https://api.rubyonrails.org/v7.2.2/classes/ActionDispatch/Flash/FlashHash.html#method-i-notice)を使いますが、Turbo Driveでは`flash.notice`を使って設定します。一方、Turbo Streamsでは`flash.now.notice`を使用します。これでPOST/redirect/GETのパターンとPOSTからすぐにHTMLを返すパターンの双方に対応します
    * なおTurbo Framesの場合は画面の一箇所しか画面更新ができません。したがってTurbo Framesでトーストを表示するのはかなり難しくなります。Turbo DriveもしくはTurbo Streamsを使った方が良いでしょう
 
-### GlobalNotificationControler Stimulus Controller --- stimulus-controller
+### GlobalNotificationController --- stimulus-controller
 
 ```js:app/javascript/controllers/global_notification_controller.js
 import {Controller} from "@hotwired/stimulus"
