@@ -14,7 +14,7 @@
     <% full_document = capture { yield } %>
 
     <div class="hidden pl-6 max-h-full lg:pl-8 lg:w-72 lg:fixed lg:block">
-      <div class="p-4 border-md rounded bg-white/80">
+      <div class="p-4 border-md rounded bg-white border-orange-100 border">
         <!-- desktop chapter list -->
         <%= link_to current_page.data.title, "#", class: "font-semibold hover:text-orange-600 active:opacity-50" %>
         <%= safe_join extract_toc(full_document) %>
@@ -25,14 +25,14 @@
         <p class="text-base leading-7 text-orange-600">
           <%= current_page.parent.data.title %>
         </p>
-        <h1 class="bg-orange-50 pt-1 text-3xl font-light text-gray-900 sm:text-4xl">
+        <h1 class="bg-orange-50/30 pt-1 text-3xl font-light text-gray-900 sm:text-4xl">
           <%= current_page.data.title %>
         </h1>
         <p class="mt-6 text-xl leading-8">
           <%= current_page.data.subtitle %>
         </p>
 
-        <div class="fixed top-4 right-4 max-w-96 border rounded-md p-2 bg-white/90 lg:hidden">
+        <div class="fixed top-2 right-4 max-w-96 border border-orange-100 rounded-md p-2 bg-white/90 lg:hidden">
           <!-- mobile chapter list -->
           <div class="flex justify-end">
             <button class="block text-orange-600"

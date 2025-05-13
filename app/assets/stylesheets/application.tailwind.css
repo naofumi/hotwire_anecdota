@@ -89,14 +89,14 @@
     /* Markdown */
     .md {
         h2 {
-            @apply mt-4 mb-4 pt-4 pb-0 text-2xl border-b border-dotted border-gray-400 font-light text-gray-900  bg-orange-50 top-10 sm:top-10
+            @apply mt-4 mb-4 pt-4 pb-0 text-2xl border-b border-dotted border-gray-400 font-light text-gray-900  bg-orange-50/30 top-10 sm:top-10
         }
         h2 > a {
             @apply text-inherit decoration-0 hover:text-orange-600
         }
 
         h3 {
-            @apply font-bold mt-4 py-2 text-lg bg-orange-50 top-[89px] sm:top-[89px]
+            @apply font-bold mt-4 py-2 text-lg bg-orange-50/30 top-[89px] sm:top-[89px]
         }
         h3 > a {
             @apply text-inherit decoration-0 hover:text-orange-600;
@@ -116,6 +116,21 @@
 
         a {
             @apply text-orange-600 hover:text-orange-400 underline
+        }
+
+        .link--demo:after {
+            @apply text-orange-600 hover:text-orange-400 underline inline-block h-4 w-4 mx-1;
+            content: url("forward.svg");
+        }
+
+        .link--external:after {
+            @apply text-orange-600 hover:text-orange-400 underline inline-block h-4 w-4 mx-1;
+            content: url("arrow-top-right-on-square.svg");
+        }
+
+        .link--github:after {
+            @apply text-orange-600 hover:text-orange-400 underline inline-block h-4 w-4 mx-1 align-baseline;
+            content: url("github.svg");
         }
 
         strong {

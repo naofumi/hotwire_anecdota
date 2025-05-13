@@ -19,7 +19,7 @@
   <meta name="view-transition" content="same-origin" />
 </head>
 
-<body class="bg-orange-50 bg-fixed bg-cover bg-top <%= @background ? "!bg-[#FFE5CA] bg-[url('pexels-pixabay-51343.webp')]" : ""%>">
+<body class="bg-orange-50/30  bg-fixed bg-cover bg-top <%= @background ? "!bg-[#FFE5CA] bg-[url('pexels-pixabay-51343.webp')]" : ""%>">
 <% hide_page_unless_published!(current_page) %>
 <%= render 'nav',
            hide_back_button: current_page.data.hide_back_button,

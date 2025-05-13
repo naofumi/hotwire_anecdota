@@ -106,9 +106,13 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
 
   def link(link, title, content)
     if title =~ /\Ademo/
-      link_to content, link, class: "after:content-['demo'] after:text-xs after:text-[10px] after:align-top after:text-green-500 after:rotate-[45deg] after:bg-orange-600 after:text-white after:inline-block after:rounded after:px-1"
+      link_to content, link, class: "link--demo"
     elsif link =~ /components\//
-      link_to content, link, class: "after:content-['demo'] after:text-xs after:text-[10px] after:align-top after:text-green-500 after:rotate-[45deg] after:bg-orange-600 after:text-white after:inline-block after:rounded after:px-1"
+      link_to content, link, class: "link--demo"
+    elsif link =~ /https?:\/\/github\.com/
+      link_to content, link, class: "link--github"
+    elsif link =~ /https?:/
+      link_to content, link, class: "link--external"
     else
       link_to content, link, title: title
     end
