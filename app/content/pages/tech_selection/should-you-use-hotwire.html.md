@@ -3,7 +3,7 @@ title: あなたはHotwireを採用するべきか？
 section: Introduction
 layout: article
 order: 50
-published: true
+published: false
 ---
 
 ## ReactとHotwireのどっちを採用するべきか？ --- which-should-i-choose

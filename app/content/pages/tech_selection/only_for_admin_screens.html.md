@@ -1,8 +1,8 @@
 ---
 title: Hotwireは管理画面限定？
 layout: article
-order: 60
-published: true
+order: 50
+published: false
 ---
 
 Hotwireは決して管理画面限定ではありません。**管理画面が非常に得意だというだけで、UI/UXにこだわったエンドユーザ向け画面も、Hotwireで十分にこなせます**

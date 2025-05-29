@@ -87,19 +87,19 @@
     }
 
     /* Markdown */
-    .md {
+    .markdown {
         h2 {
             @apply mt-4 mb-4 pt-4 pb-0 text-2xl border-b border-dotted border-gray-400 font-light text-gray-900  bg-orange-50/30 top-10 sm:top-10
         }
         h2 > a {
-            @apply text-inherit decoration-0 hover:text-orange-600
+            @apply text-inherit decoration-transparent hover:text-orange-600
         }
 
         h3 {
             @apply font-bold mt-4 py-2 text-lg bg-orange-50/30 top-[89px] sm:top-[89px]
         }
         h3 > a {
-            @apply text-inherit decoration-0 hover:text-orange-600;
+            @apply text-inherit decoration-transparent hover:text-orange-600;
         }
 
         h4 {
@@ -134,7 +134,7 @@
         }
 
         strong {
-            @apply mx-0.5 px-0.5 rounded bg-pink-600/10 font-semibold
+            @apply mx-0.5 px-0.5 rounded font-bold
         }
 
         blockquote {
