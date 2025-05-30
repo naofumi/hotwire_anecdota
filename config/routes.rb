@@ -40,6 +40,12 @@ Rails.application.routes.draw do
       get :iphone
     end
   end
+  resources :statics, only: [] do
+    collection do
+      get :benchmark
+    end
+  end
+
   resources :tasks do
     scope module: :tasks do
       resource :completion
