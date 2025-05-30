@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   resources :statics, only: [] do
     collection do
       get :benchmark
+      get :web_components
     end
   end
 

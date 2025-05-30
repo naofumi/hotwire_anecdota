@@ -4,6 +4,7 @@ module.exports = {
     './app/helpers/**/*.rb',
     './app/javascript/controllers/**/*.js',
     './app/javascript/react/**/*.{js,jsx}',
+    './app/javascript/*.{js,jsx}',
     './app/content/helpers/**/*.rb',
     './app/markdown/**/*.rb',
     './app/content/layouts/**/*.erb',
