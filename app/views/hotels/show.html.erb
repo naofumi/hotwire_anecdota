@@ -44,7 +44,8 @@
               aria: { selected: true },
       class: "px-4 inline-block py-4 h-16 text-lg aria-selected:border-b-4 aria-selected:border-blue-500" %>
   <%= link_to "宿の紹介", hotel_features_path(@hotel),
-              data: { action: "click->slide-drawer#show",
+              data: { controller: "slide-drawer-trigger",
+                      action: "click->slide-drawer-trigger#show",
                       slide_drawer_target: "tab",
                       aria: { selected: false },
                       turbo_frame: :slide_drawer },
