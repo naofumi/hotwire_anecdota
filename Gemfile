@@ -66,7 +66,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "sitepress-rails", "~> 4.0"
+gem "sitepress-rails", "~> 4.1.1"
 
 gem "markdown-rails", "~> 2.1"
 
