@@ -5,9 +5,9 @@ gem "rails", "~> 8.1.1"
 # Asset pipeline for Rails [https://github.com/rails/propshaft/blob/main/UPGRADING.md]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", ">= 2.3"
+gem "sqlite3", ">= 2.8"
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
+gem "puma", ">= 7.1.0"
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails"
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
@@ -19,7 +19,7 @@ gem "cssbundling-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
-gem "redis", ">= 4.0.1"
+gem "redis", ">= 5.4.1"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -68,8 +68,8 @@ end
 
 gem "sitepress-rails", "~> 4.1.1"
 
-gem "markdown-rails", "~> 2.1"
+gem "markdown-rails", "~> 2.2"
 
-gem "rouge", "~> 4.4"
+gem "rouge", "~> 4.6"
 
 gem "rack-cors"
