@@ -3,9 +3,9 @@
   "private": true,
   "devDependencies": {
     "@types/jquery": "^4.0.0",
-    "@tailwindcss/cli": "^4.0.0",
+    "@tailwindcss/cli": "^4.2.1",
     "esbuild": "^0.27.3",
-    "tailwindcss": "^4.0.0"
+    "tailwindcss": "^4.2.1"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --splitting --chunk-names=[name]-[hash].digested --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets --loader:.jpg=file --loader:.webp=file --loader:.png=file --asset-names=[name]-[hash].digested",
@@ -16,7 +16,7 @@
     "@heroicons/react": "^2.2.0",
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.23",
-    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/forms": "^0.5.11",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
     "autoprefixer": "^10.4.20",

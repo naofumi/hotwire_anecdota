@@ -433,7 +433,7 @@
   dependencies:
     tslib "^2.8.0"
 
-"@tailwindcss/cli@^4.0.0":
+"@tailwindcss/cli@^4.2.1":
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/@tailwindcss/cli/-/cli-4.2.1.tgz#a61addb3c4935e3a3f6169cd3e5fb941a6404632"
   integrity sha512-b7MGn51IA80oSG+7fuAgzfQ+7pZBgjzbqwmiv6NO7/+a1sev32cGqnwhscT7h0EcAvMa9r7gjRylqOH8Xhc4DA==
@@ -446,7 +446,7 @@
     picocolors "^1.1.1"
     tailwindcss "4.2.1"
 
-"@tailwindcss/forms@^0.5.7":
+"@tailwindcss/forms@^0.5.11":
   version "0.5.11"
   resolved "https://registry.yarnpkg.com/@tailwindcss/forms/-/forms-0.5.11.tgz#e77039e96fa7b87c3d001a991f77f9418e666700"
   integrity sha512-h9wegbZDPurxG22xZSoWtdzc41/OlNEUQERNqI/0fOwa2aVlWGu7C35E/x6LDyD3lgtztFSSjKZyuVM0hxhbgA==
@@ -908,7 +908,7 @@ tabbable@^6.0.0:
   resolved "https://registry.yarnpkg.com/tabbable/-/tabbable-6.4.0.tgz#36eb7a06d80b3924a22095daf45740dea3bf5581"
   integrity sha512-05PUHKSNE8ou2dwIxTngl4EzcnsCDZGJ/iCLtDflR/SHB/ny14rXc+qU5P4mG9JkusiV7EivzY9Mhm55AzAvCg==
 
-tailwindcss@4.2.1, tailwindcss@^4.0.0:
+tailwindcss@4.2.1, tailwindcss@^4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-4.2.1.tgz#018c4720b58baf98a6bf56b0a12aa797c6cfef1d"
   integrity sha512-/tBrSQ36vCleJkAOsy9kbNTgaxvGbyOamC30PRePTQe/o1MFwEKHQk4Cn7BNGaPtjp+PuUrByJehM1hgxfq4sw==
