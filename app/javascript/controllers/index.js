@@ -94,8 +94,5 @@ application.register("todo", TodoController)
 import TodoLikesController from "./todo_likes_controller"
 application.register("todo-likes", TodoLikesController)
 
-import TopPageController from "./top_page_controller"
-application.register("top-page", TopPageController)
-
 import VariantsSelectorController from "./variants_selector_controller"
 application.register("variants-selector", VariantsSelectorController)

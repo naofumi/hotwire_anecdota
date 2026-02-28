@@ -1,11 +1,10 @@
 <% local_assigns.with_defaults(hide_back_button: false,
                                hide_title: false,
                                back_link: nil,
-                               show_data_reset: false,
-                               background: false) =>
-     { hide_back_button:, hide_title:, back_link:, show_data_reset:, background: } %>
+                               show_data_reset: false) =>
+     { hide_back_button:, hide_title:, back_link:, show_data_reset: } %>
 
-<nav class="w-full flex py-1 px-4 h-16 items-center <%= background ? '' : 'border-b border-gray-200' %>">
+<nav class="w-full flex py-1 px-4 h-16 items-center">
   <% if hide_back_button %>
     <span class="w-52 flex-none basis-24"></span>
   <% else %>
