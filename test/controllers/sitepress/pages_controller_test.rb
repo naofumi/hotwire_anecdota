@@ -9,8 +9,7 @@ class SitepressPagesControllerTest < ActionDispatch::IntegrationTest
     get "/directory"
     assert_response :success
 
-    assert_select "h1", text: /Anecdotes on/
-    assert_select "h1", text: /Hotwire/
+    assert_select "h1", text: /コンテンツ一覧/
   end
 
   test "get /tech_selection/what_is_hotwired should return success" do
