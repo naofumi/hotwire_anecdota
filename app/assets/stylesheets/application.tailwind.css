@@ -1,5 +1,6 @@
 @import "tailwindcss";
-@config "../../../tailwind.config.js";
+
+@plugin "@tailwindcss/forms";
 
 @import "./components/buttons.css";
 @import "./components/forms.css";
