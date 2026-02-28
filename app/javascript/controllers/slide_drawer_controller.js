@@ -1,40 +1,54 @@
 import { Controller } from "@hotwired/stimulus"
+import { slideDrawerStore } from "../stores/slide_drawer_store"
 
 // Connects to data-controller="slide-drawer"
 export default class extends Controller {
   static values = {
     shown: {type: Boolean, default: false},
     selectedTab: {type: Number, default: 0},
-  };
-  static targets = ["drawer", "tab"]
+  }
+  static targets = ["drawer"]
 
   connect() {
+    this.storeKey = "hotel-slide-drawer"
+    this.#setState()
+    this.#render()
+
+    this.unsubscribe = slideDrawerStore.subscribe(
+      (s) => ({ drawerState: s.drawers[this.storeKey] }),
+      (state) => {
+        this.#render()
+      }
+    )
+  }
+
+  disconnect() {
+    this.unsubscribe && this.unsubscribe()
   }
 
   show(event) {
-    this.shownValue = true
-    this.selectedTabValue = this.tabTargets.indexOf(event.currentTarget)
+    slideDrawerStore.getState().open(this.storeKey)
   }
 
   hide() {
-    this.shownValue = false
-    this.selectedTabValue = 0
+    slideDrawerStore.getState().close(this.storeKey)
   }
 
-  shownValueChanged() {
-    this.#render()
+  #setState() {
+    if (this.shownValue === true) {
+      slideDrawerStore.getState().open(this.storeKey)
+    } else {
+      slideDrawerStore.getState().close(this.storeKey)
+    }
   }
 
   #render() {
-    if (this.shownValue) {
+    if (slideDrawerStore.getState().opened(this.storeKey)) {
       document.body.style.overflow = "hidden"
       this.drawerTarget.ariaHidden = false
     } else {
       document.body.style.overflow = "auto"
       this.drawerTarget.ariaHidden = true
     }
-    this.tabTargets.forEach((target, i) => {
-      target.ariaSelected = (i === this.selectedTabValue)
-    })
   }
 }

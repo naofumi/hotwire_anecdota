@@ -10,7 +10,7 @@ siblings: true
 
 ここではReactを使います。ステートをReactに持たせます。
 
-[デモはこちら](/react/iphone)に用意しています。
+[デモはこちら](/react/iphone "demo-iphone-react")に用意しています。
 
 * ReactをHotwireのページに埋め込む必要があります。実際のApple Storeで行われている手法です。方法は[「Reactと一緒に使う」](/other_libraries/using_with_react)で紹介しています
 * 各オプションごとの製品価格および製品オプションの初期値をReactにあらかじめ渡す必要があります。これも[「Reactと一緒に使う」](/other_libraries/using_with_react)で紹介しています

@@ -1,0 +1,45 @@
+<% set_breadcrumbs [["Benchmark", benchmark_statics_path]] %>
+
+<h1 class="text-5xl">Benchmarks</h1>
+
+<% @elements = (1..2000).to_a %>
+
+<div class="text-xs">
+<% inline_result = Benchmark.measure do %>
+  <% @elements.each do |element| %>
+    Foo <%= element %>
+  <% end %>
+<% end %>
+
+<hr>
+
+<%= each_partial_result = Benchmark.measure do %>
+  <% @elements.each do |element| %>
+    <%= render partial: "element", locals: { element: } %>
+  <% end %>
+<% end %>
+
+<hr>
+
+<%= collection_partial_result = Benchmark.measure do %>
+  <%= render partial: "element", collection: @elements, as: :element %>
+<% end %>
+</div>
+
+<h2 class="text-3xl">Results</h2>
+<table>
+  <tbody>
+  <tr>
+    <th>inline_result</th>
+    <td><%= inline_result %></td>
+  </tr>
+  <tr>
+    <th>each_partial_result</th>
+    <td><%= each_partial_result %></td>
+  </tr>
+  <tr>
+    <th>collection_partial_result</th>
+    <td><%= collection_partial_result %></td>
+  </tr>
+  </tbody>
+</table>

@@ -1,0 +1,53 @@
+/* app/assets/stylesheets/components/select-menu.css */
+
+@layer components {
+    *[data-controller="select-menu"] {
+        > ul {
+            @apply transition duration-200;
+
+            li {
+                @apply hover:bg-orange-600 hover:text-white;
+
+                &:hover span:nth-child(2) {
+                    @apply text-white;
+                }
+
+                &[aria-selected='true'] {
+                    span:nth-child(1) {
+                        @apply font-semibold;
+                    }
+
+                    span:nth-child(2) {
+                        @apply visible;
+                    }
+                }
+            }
+        }
+
+        button[aria-expanded='false'] + ul {
+            @apply opacity-0;
+        }
+
+        button[aria-expanded='true'] + ul {
+            @apply opacity-100;
+        }
+    }
+
+    .highlight-on-appear {
+        transition: background-color ease-out 1s;
+
+        @starting-style {
+            background-color: yellow;
+        }
+    }
+
+    .global-notification {
+        @starting-style {
+            opacity: 0 !important;
+            transform: translateY(8px);
+            @media (min-width: 640px) {
+                transform: translateY(0px) translateX(8px);
+            }
+        }
+    }
+}

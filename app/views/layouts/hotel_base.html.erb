@@ -18,11 +18,7 @@
 </head>
 
 <body>
-<div data-controller="slide-drawer"
-     data-slide-drawer-shown-value="false"
-     class="group/slide-drawer"
->
-  <div class="w-full min-w-[768px]">
+<div class="w-full min-w-[768px]">
     <nav class="flex h-16">
       <div class="h-14 w-14">
         <%= image_tag "hotel_images/hotel-logo.webp",
@@ -43,7 +39,7 @@
     <%= yield %>
   </div>
 
-  <div id="slide-drawer">
+<div data-controller="slide-drawer" data-slide-drawer-shown-value="false">
     <div class="peer transition-all duration-500 ease-out fixed h-full w-[768px] z-20 bg-white top-0 right-0 overflow-auto
                 aria-hidden:translate-x-[768px]"
          aria-hidden="true"
@@ -64,6 +60,5 @@
          data-action="click->slide-drawer#hide:prevent">
     </div>
   </div>
-</div>
 </body>
 </html>
