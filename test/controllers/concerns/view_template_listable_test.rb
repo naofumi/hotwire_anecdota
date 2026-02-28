@@ -2,11 +2,14 @@
 
 require "test_helper"
 
-class ViewTemplateCollectableTest < ActionDispatch::IntegrationTest
+class ViewTemplateListableTest < ActionDispatch::IntegrationTest
   class MockController < ApplicationController
-    include ViewTemplateCollectable
+    # stub controller_path before including
+    def self.controller_path
+      "components"
+    end
 
-    collect_view_templates from_directory: "components"
+    include ViewTemplatesListable
   end
 
   test "view_templates includes top view 'accordion'" do

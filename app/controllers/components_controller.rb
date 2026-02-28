@@ -1,6 +1,5 @@
 class ComponentsController < ApplicationController
   include ViewTemplatesListable
-  collect_view_templates from_directory: "components"
 
   before_action :set_template, only: [ :show ]
   before_action :set_data, only: [ :show ]
@@ -8,7 +7,7 @@ class ComponentsController < ApplicationController
   def index
     @available_templates = view_templates
     @available_projects = available_projects
-    @available_react_templates = ReactController::AVAILABLE_TEMPLATES
+    @available_react_templates = ViewTemplatesList.new(controller_path: 'react').view_templates
   end
 
   def show

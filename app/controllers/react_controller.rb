@@ -1,6 +1,5 @@
 class ReactController < ApplicationController
   include ViewTemplatesListable
-  collect_view_templates from_directory: "react"
 
   before_action :set_template, only: [ :show ]
   layout "react_layout"

@@ -54,7 +54,6 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   end
 
   def codespan(code)
-    puts tag.code(code), tag.code(code).html_safe?
     tag.code(code).html_safe
   end
 

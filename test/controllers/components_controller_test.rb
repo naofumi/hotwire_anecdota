@@ -7,7 +7,7 @@ class ComponentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "get show comoponents/toggle_stimulus returns success" do
+  test "get show components/toggle_stimulus returns success" do
     get component_path(:toggle_stimulus)
 
     assert_response :success
