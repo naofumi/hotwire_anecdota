@@ -2,6 +2,6 @@
 
 @layer components {
     .field_with_errors > input {
-        @apply !bg-red-500 !bg-opacity-10 !border-red-500 !border-2;
+        @apply !bg-red-500/10 !border-red-500 !border-2;
     }
 }

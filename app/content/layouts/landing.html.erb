@@ -21,12 +21,12 @@
 
 <body class="bg-fixed bg-cover bg-top <%= @background ? "!bg-[#FFF5EB] bg-[url('pexels-pixabay-51343.webp')]" : "" %>">
 <% not_found_unless_published!(current_page) %>
-<%= render 'nav',
+<%#= render 'nav',
            hide_back_button: current_page.data.hide_back_button,
            back_link: @back_link,
            hide_title: current_page.data.hide_title,
            background: @background %>
 <%= yield %>
-<%= render 'footer' %>
+<%#= render 'footer' %>
 </body>
 </html>

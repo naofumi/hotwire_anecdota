@@ -5,7 +5,7 @@
     0% {
     }
     50% {
-        @apply brightness-200;
+        filter: brightness(2);
     }
     100% {
     }

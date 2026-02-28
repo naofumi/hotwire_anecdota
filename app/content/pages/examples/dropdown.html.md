@@ -63,7 +63,7 @@ published: true
       -->
       <div id="user-menu"
            class="absolute left-0 z-10 w-48 origin-top-right rounded-md bg-white
-           py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition-all
+           py-1 shadow-lg ring-1 ring-black/5 focus:outline-none transition-all
            transform opacity-0 collapse scale-95 ease-in duration-75
            peer-aria-[expanded=true]:opacity-100 peer-aria-[expanded=true]:scale-100
            peer-aria-[expanded=true]:visible peer-aria-[expanded=true]:ease-out

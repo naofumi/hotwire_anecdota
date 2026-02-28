@@ -6,7 +6,7 @@ class SitepressPagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get top page" do
-    get root_url
+    get "/directory"
     assert_response :success
 
     assert_select "h1", text: /Anecdotes on/
