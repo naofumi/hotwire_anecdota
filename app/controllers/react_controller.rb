@@ -1,5 +1,5 @@
 class ReactController < ApplicationController
-  include ViewTemplateCollectable
+  include ViewTemplatesListable
   collect_view_templates from_directory: "react"
 
   before_action :set_template, only: [ :show ]

@@ -1,5 +1,5 @@
 class ComponentsController < ApplicationController
-  include ViewTemplateCollectable
+  include ViewTemplatesListable
   collect_view_templates from_directory: "components"
 
   before_action :set_template, only: [ :show ]
