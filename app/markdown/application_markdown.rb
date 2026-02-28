@@ -112,7 +112,7 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
     safety_assumed_content = content.html_safe # rubocop:disable Rails/OutputSafety
 
     # rubocop:disable Lint/DuplicateBranch
-    if title.start_with?("demo")
+    if title&.start_with?("demo")
       link_to safety_assumed_content, link, class: "link--demo", target: "_blank", rel: "noopener"
     elsif link.include?("components/")
       link_to safety_assumed_content, link, class: "link--demo", target: "_blank", rel: "noopener"
