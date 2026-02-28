@@ -1,0 +1,117 @@
+/* app/assets/stylesheets/components/markdown.css */
+
+@layer components {
+    /* Markdown */
+    .markdown {
+        h2 {
+            @apply mt-4 mb-4 pt-4 pb-0 text-2xl border-b border-dotted border-gray-400 font-light text-gray-900 top-10 sm:top-10;
+        }
+
+        h2 > a {
+            @apply text-inherit decoration-transparent hover:text-orange-600;
+        }
+
+        h3 {
+            @apply font-bold mt-4 py-2 text-lg top-[89px] sm:top-[89px];
+        }
+
+        h3 > a {
+            @apply text-inherit decoration-transparent hover:text-orange-600;
+        }
+
+        h4 {
+            @apply mt-2 py-2 text-base font-bold text-gray-900;
+        }
+
+        p {
+            @apply text-gray-700 my-3 text-base/7;
+        }
+
+        code {
+            @apply mx-0.5 px-0.5 rounded border bg-gray-200/70 font-mono border-gray-200;
+        }
+
+        a {
+            @apply text-orange-600 hover:text-orange-400 underline;
+        }
+
+        .link--demo:after {
+            @apply text-orange-600 hover:text-orange-400 underline inline-block h-4 w-4 mx-1;
+            content: url("forward.svg");
+        }
+
+        .link--external:after {
+            @apply text-orange-600 hover:text-orange-400 underline inline-block h-4 w-4 mx-1;
+            content: url("arrow-top-right-on-square.svg");
+        }
+
+        .link--github:after {
+            @apply text-orange-600 hover:text-orange-400 underline inline-block h-4 w-4 mx-1 align-baseline;
+            content: url("github.svg");
+        }
+
+        strong {
+            @apply mx-0.5 px-0.5 rounded font-bold;
+        }
+
+        blockquote {
+            @apply pl-4 border-l-4 border-gray-200;
+        }
+
+        img {
+            @apply py-4 mx-auto;
+        }
+
+        .footnotes {
+            p {
+                @apply !text-sm !text-gray-700;
+            }
+        }
+
+        ul {
+            @apply ml-0 my-3 space-y-2 text-base/7;
+        }
+
+        ul li {
+            background: url('/check-circle.svg') no-repeat left top 6px;
+            padding: 0 16px 0 32px;
+            list-style: none;
+            margin: 0;
+            vertical-align: middle;
+
+            ul {
+                @apply my-1;
+            }
+
+            ul li {
+                margin-top: 8px;
+                background: url('/check-circle-gray.svg') no-repeat left top 6px;
+            }
+        }
+
+        ol {
+            @apply ml-6 my-2 space-y-2 text-base/7;
+        }
+
+        ol li {
+            /*background: url('check-circle.svg') no-repeat left top 12px;*/
+            padding: 0 16px 0 4px;
+            list-style: decimal outside none;
+            margin: 0;
+            vertical-align: middle;
+
+            ol {
+                @apply my-1;
+            }
+
+            ol li {
+                margin-top: 0 !important;
+                list-style: lower-alpha;
+
+                ol li {
+                    list-style: lower-roman;
+                }
+            }
+        }
+    }
+}

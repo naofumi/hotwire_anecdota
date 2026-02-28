@@ -1,0 +1,18 @@
+/* app/assets/stylesheets/components/top-page.css */
+
+/* Top Page */
+@keyframes topPageTitle {
+    0% {
+    }
+    50% {
+        @apply brightness-200;
+    }
+    100% {
+    }
+}
+
+@layer components {
+    .hotwire-text {
+        animation: topPageTitle 1s ease-in-out 1s;
+    }
+}

@@ -1,0 +1,14 @@
+default: &default
+  common:
+    - from: /tech_selection/what_is_hoge
+      to: /tech_selection/what_is_hotwire
+      status: 302
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

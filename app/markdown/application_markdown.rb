@@ -53,6 +53,11 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
     end
   end
 
+  def codespan(code)
+    puts tag.code(code), tag.code(code).html_safe?
+    tag.code(code).html_safe
+  end
+
   # Example of how you might override the images to show embeds, like a YouTube video.
   # def image(link, title, alt)
   #   url = URI(link)
@@ -106,15 +111,15 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
 
   def link(link, title, content)
     if title =~ /\Ademo/
-      link_to content, link, class: "link--demo"
+      link_to content.html_safe, link, class: "link--demo", target: "_blank"
     elsif link =~ /components\//
-      link_to content, link, class: "link--demo"
+      link_to content.html_safe, link, class: "link--demo", target: "_blank"
     elsif link =~ /https?:\/\/github\.com/
-      link_to content, link, class: "link--github"
+      link_to content.html_safe, link, class: "link--github", target: "_blank"
     elsif link =~ /https?:/
-      link_to content, link, class: "link--external"
+      link_to content.html_safe, link, class: "link--external", target: "_blank"
     else
-      link_to content, link, title: title
+      link_to content.html_safe, link, title: title
     end
   end
 

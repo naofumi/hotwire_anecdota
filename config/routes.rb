@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "components#index"
+
+  Rails.application.config_for(:redirects)[:common].each do |config|
+    from, to, status = config[:from], config[:to], config[:status] || 301
+    get from, to: redirect(to), status:
+  end
+
   sitepress_pages
   sitepress_root
   resources :users, only: [ :index ] do

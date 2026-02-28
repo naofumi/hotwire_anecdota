@@ -33,14 +33,14 @@ published: true
         </p>
       </div>
       <% if !Rails.env.production? %>
-        <%= link_to "コンポーネント一覧", components_path %>
+        <%= link_to "コンポーネント一覧 (開発時)", components_path %>
       <% end %>
     </div>
 
     <div class="sm:columns-2 lg:columns-3 mt-24 max-w-4xl lg:max-w-5xl mx-auto gap-6">
       <% current_page.children.reject { translation_folder_path? _1.request_path }.sort_by { _1.data.order.to_i }.each do |section_page| %>
         <!-- manually set [&:nth-child](number):mb-0 due to differences between Safari and Chrome/Firefox -->
-        <div class="mb-6 p-6 break-inside-avoid rounded-lg bg-white/90 backdrop-blur"
+        <div class="mb-6 p-6 break-inside-avoid rounded-lg bg-white"
              data-top-page-target="section">
           <h3 class="text-2xl mb-4 font-extralight text-gray-600">
             <%= link_to section_page.data.title, section_page.request_path, class: "inline-block hover:text-orange-600" %>
