@@ -30,8 +30,8 @@ class FileNodesController < ApplicationController
         format.html { redirect_to file_node_url(@file_node), notice: "File node was successfully created." }
         format.json { render :show, status: :created, location: @file_node }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @file_node.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @file_node.errors, status: :unprocessable_content }
       end
     end
   end
@@ -43,8 +43,8 @@ class FileNodesController < ApplicationController
         format.html { redirect_to file_node_url(@file_node), notice: "File node was successfully updated." }
         format.json { render :show, status: :ok, location: @file_node }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @file_node.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @file_node.errors, status: :unprocessable_content }
       end
     end
   end
@@ -67,6 +67,6 @@ class FileNodesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def file_node_params
-      params.require(:file_node).permit(:name, :directory)
+      params.expect(file_node: [ :name, :directory ])
     end
 end

@@ -28,8 +28,8 @@ class BucketsController < ApplicationController
         format.html { redirect_to bucket_url(@bucket), notice: "Bucket was successfully created." }
         format.json { render :show, status: :created, location: @bucket }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @bucket.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @bucket.errors, status: :unprocessable_content }
       end
     end
   end
@@ -41,8 +41,8 @@ class BucketsController < ApplicationController
         format.html { redirect_to bucket_url(@bucket), notice: "Bucket was successfully updated." }
         format.json { render :show, status: :ok, location: @bucket }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @bucket.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @bucket.errors, status: :unprocessable_content }
       end
     end
   end
@@ -65,6 +65,6 @@ class BucketsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def bucket_params
-      params.require(:bucket).permit(:name, :position)
+      params.expect(bucket: [ :name, :position ])
     end
 end

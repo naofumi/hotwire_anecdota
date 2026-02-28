@@ -22,6 +22,6 @@ module Likable
   def liked_by?(user)
     raise ArgumentError unless user
 
-    likes.where(user: user).exists?
+    likes.exists?(user: user)
   end
 end

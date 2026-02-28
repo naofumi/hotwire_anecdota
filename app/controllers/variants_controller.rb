@@ -8,6 +8,6 @@ class VariantsController < ApplicationController
   private
 
     def variant_params
-      params.require(:variant).permit(:name)
+      params.expect(variant: [ :name ])
     end
 end

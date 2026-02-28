@@ -6,9 +6,9 @@ class IphonesController < ApplicationController
   end
 
   def create
-    @iphone.model = params[:model] if params[:model]
-    @iphone.color = params[:color] if params[:color]
-    @iphone.ram = params[:ram] if params[:ram]
+    @iphone.model = params[:model].presence
+    @iphone.color = params[:color].presence
+    @iphone.ram = params[:ram].presence
 
     respond_to do |format|
       format.turbo_stream

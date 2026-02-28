@@ -1,5 +1,6 @@
 module Variantable
   extend ActiveSupport::Concern
+
   included do
     helper_method :available_variants
   end

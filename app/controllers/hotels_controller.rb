@@ -29,8 +29,8 @@ class HotelsController < HotelBaseController
         format.html { redirect_to hotel_url(@hotel), notice: "Hotel was successfully created." }
         format.json { render :show, status: :created, location: @hotel }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @hotel.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @hotel.errors, status: :unprocessable_content }
       end
     end
   end
@@ -42,8 +42,8 @@ class HotelsController < HotelBaseController
         format.html { redirect_to hotel_url(@hotel), notice: "Hotel was successfully updated." }
         format.json { render :show, status: :ok, location: @hotel }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @hotel.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @hotel.errors, status: :unprocessable_content }
       end
     end
   end
@@ -66,6 +66,6 @@ class HotelsController < HotelBaseController
 
     # Only allow a list of trusted parameters through.
     def hotel_params
-      params.require(:hotel).permit(:name, :prefecture, :city, :tagline, :description)
+      params.expect(hotel: [ :name, :prefecture, :city, :tagline, :description ])
     end
 end

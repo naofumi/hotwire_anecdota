@@ -1,13 +1,46 @@
 # Omakase Ruby styling for Rails
 inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
+inherit_mode:
+  merge:
+    - Exclude
+
+AllCops:
+  SuggestExtensions: true
+  DisabledByDefault: false
+  NewCops: enable
+  Exclude:
+    - "db/migrate/**/*"
+
 # Overwrite or add rules to create your own house style
 #
 # # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
 # Layout/SpaceInsideArrayLiteralBrackets:
 #   Enabled: false
 
+# Reenable cops disabled in Omakase
+Bundler:
+  Enabled: false
+Gemspec:
+  Enabled: false
 Layout:
+  Enabled: true
+Lint:
+  Enabled: true
+# I would like to re-enable this later
+Metrics:
+  Enabled: false
+Naming:
+  Enabled: true
+Performance:
+  Enabled: true
+  Exclude:
+    - "test/**/*"
+Rails:
+  Enabled: true
+Security:
+  Enabled: true
+Style:
   Enabled: true
 
 # Rails style does not have an empty line after private.
@@ -20,13 +53,13 @@ Layout/LineLength:
     - "**/*_helper.rb" # Allow long Tailwind classes
     - "**/application_markdown.rb" # Allow long Tailwind classes
 
-Lint:
+# Omakase disables this due to exceptions for private only Concerns, but I enable it.
+Layout/IndentationConsistency:
   Enabled: true
+  EnforcedStyle: indented_internal_methods
 
-#Metrics:
-#  Enabled: true
-
-Naming:
+# Omakase disables this due to exceptions for private only Concerns, but I enable it.
+Layout/IndentationWidth:
   Enabled: true
 
 # It's often challenging to avoid using `set_*`
@@ -38,21 +71,12 @@ Naming/VariableNumber:
   Enabled: true
   EnforcedStyle: snake_case
 
-Performance:
-  Enabled: true
-
 # Insignificant
 Performance/RedundantBlockCall:
   Enabled: false
 
-Rails:
-  Enabled: true
-
-Security:
-  Enabled: true
-
-Style:
-  Enabled: true
+Rails/I18nLocaleTexts:
+  Enabled: false
 
 Style/FrozenStringLiteralComment:
   Enabled: false

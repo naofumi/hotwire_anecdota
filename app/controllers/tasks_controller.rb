@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   include ActionView::RecordIdentifier
+
   before_action :set_task, only: [ :show, :edit, :update, :destroy ]
 
   # GET /tasks or /tasks.json
@@ -30,8 +31,8 @@ class TasksController < ApplicationController
         format.html { redirect_to task_url(@task), notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @task }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @task.errors, status: :unprocessable_content }
       end
     end
   end
@@ -47,8 +48,8 @@ class TasksController < ApplicationController
         }
         format.json { render :show, status: :ok, location: @task }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @task.errors, status: :unprocessable_content }
       end
     end
   end
@@ -71,6 +72,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:name, :user_id, :description, :position, :deadline, :bucket_id)
+      params.expect(task: [ :name, :user_id, :description, :position, :deadline, :bucket_id ])
     end
 end

@@ -3,8 +3,7 @@ Rails.application.routes.draw do
   # root "components#index"
 
   Rails.application.config_for(:redirects)[:common].each do |config|
-    from, to, status = config[:from], config[:to], config[:status] || 301
-    get from, to: redirect(to), status:
+    get config[:from], to: redirect(config[:to]), status: config[:status] || 301
   end
 
   sitepress_pages

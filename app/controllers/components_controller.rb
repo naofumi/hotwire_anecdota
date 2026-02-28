@@ -7,7 +7,7 @@ class ComponentsController < ApplicationController
   def index
     @available_templates = view_templates
     @available_projects = available_projects
-    @available_react_templates = ViewTemplatesList.new(controller_path: 'react').view_templates
+    @available_react_templates = ViewTemplatesList.new(controller_path: "react").view_templates
   end
 
   def show
