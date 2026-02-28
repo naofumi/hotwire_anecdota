@@ -570,12 +570,10 @@
   dependencies:
     tslib "^2.4.0"
 
-"@types/jquery@^3.5.32":
-  version "3.5.34"
-  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.5.34.tgz#c1993eaac0db03cf9db974976dd8f07bbf7c5708"
-  integrity sha512-3m3939S3erqmTLJANS/uy0B6V7BorKx7RorcGZVjZ62dF5PAGbKEDZK1CuLtKombJkFA2T1jl8LAIIs7IV6gBQ==
-  dependencies:
-    "@types/sizzle" "*"
+"@types/jquery@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-4.0.0.tgz#b7717b6e5103b50b115b707950357f302cc92fba"
+  integrity sha512-Z+to+A2VkaHq1DfI2oSwsoCdhCHMpTSgjWzNcbNlRGYzksDBpPUgEcAL+RQjOBJRaLoEAOHXxqDGBVP+BblBwg==
 
 "@types/prop-types@*":
   version "15.7.15"
@@ -594,11 +592,6 @@
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.2.2"
-
-"@types/sizzle@*":
-  version "2.3.10"
-  resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.10.tgz#277a542aff6776d8a9b15f2ac682a663e3e94bbd"
-  integrity sha512-TC0dmN0K8YcWEAEfiPi5gJP14eJe30TTGjkvek3iM/1NdHHsdCA/Td6GvNndMOo/iSnIsZ4HuuhrYPDAmbxzww==
 
 autoprefixer@^10.4.20:
   version "10.4.27"
