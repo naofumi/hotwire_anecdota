@@ -4,7 +4,7 @@
   "devDependencies": {
     "@types/jquery": "^3.5.32",
     "@tailwindcss/cli": "^4.0.0",
-    "esbuild": "^0.23.0",
+    "esbuild": "^0.27.3",
     "tailwindcss": "^4.0.0"
   },
   "scripts": {
