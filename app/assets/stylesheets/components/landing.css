@@ -1,5 +1,9 @@
 @layer components {
-    .landing__background {
+    .landing {
         background-image: url('pexels-jakubzerdzicki-23203452.webp');
+        background-size: cover;
+        background-repeat-y: repeat;
+        width: 100%;
+        height: 100vh;
     }
 }
