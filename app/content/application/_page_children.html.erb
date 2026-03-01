@@ -1,14 +1,14 @@
 <% show_published_only = local_assigns.fetch(:show_published_only, false) %>
 
-<ol class="ml-5 my-2 text-base/7">
+<ol class="text-base">
   <% page.children
          .sort_by { _1.data.order.to_i }
          .filter { page_showable?(_1, show_published_only:) }
          .each do |child_page| %>
-    <li class="m-0 my-1 ml-8 !mt-0 list-decimal list-outside list-image-none italic font-thin text-3xl text-gray-400 hover:text-orange-400">
+    <li class="group m-0 my-1 ml-16 !mt-0 list-decimal list-outside list-image-none italic font-thin text-3xl text-gray-400 hover:text-orange-400 hover:underline decoration-1 underline-offset-4 active:translate-y-0.5">
       <%= link_to child_page.data.title,
                   child_page.url,
-                  class: "#{child_page.data.published ? '' : "opacity-40"} text-base font-light not-italic #{current_page?(child_page.url) ? "text-gray-600" : "text-orange-500"} hover:text-orange-300" %>
+                  class: "#{child_page.data.published ? '' : "opacity-40"} text-base font-light not-italic text-gray-500 group-hover:text-orange-500" %>
       <% if Rails.env.development? %>
         <span class="text-xs"><%= child_page.data.order %></span>
       <% end %>
