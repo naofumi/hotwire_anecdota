@@ -1,7 +1,7 @@
 <div class="mx-auto min-w-[1028px] lg:max-w-5xl">
   <% set_breadcrumbs [["myPhone Static", component_path(:iphone)]] %>
   <%
-    @catalog_data[:images].transform_values! { image_path(_1) }
+    @catalog_data[:images].transform_values! { image_path(it) }
   %>
   <%= tag.div data: { controller: "iphone-static", iphone_static_catalog_data_value: @catalog_data } do %>
     <div class="text-xl z-10 font-bold sticky top-0 right-0 h-8 w-full">

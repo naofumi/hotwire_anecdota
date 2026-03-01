@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Variantable
 
-  before_action :set_current_variant, unless: -> { _1.is_a? Sitepress::SiteController }
+  before_action :set_current_variant, unless: -> { it.is_a? Sitepress::SiteController }
 
   helper_method :current_user
 

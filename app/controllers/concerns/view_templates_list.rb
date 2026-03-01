@@ -3,9 +3,9 @@ class ViewTemplatesList
     base = Rails.root.join("app/views/#{controller_path}")
     @controller_path = controller_path
     @templates = Dir.glob("**/*.html.erb", base:)
-                    .reject { filepath_is_index? _1 }
-                    .reject { filepath_is_partial? _1 }
-                    .map { _1.chomp(".html.erb") }
+                    .reject { filepath_is_index? it }
+                    .reject { filepath_is_partial? it }
+                    .map { it.chomp(".html.erb") }
   end
 
   def view_templates

@@ -2,5 +2,5 @@
   ancestors = current_page.parents[0..-2].reverse.compact
 
   render "breadcrumbs",
-         breadcrumbs: (ancestors + [current_page]).map { [_1.data.title, _1.request_path] }
+         breadcrumbs: (ancestors + [current_page]).map { [it.data.title, it.request_path] }
 %>
