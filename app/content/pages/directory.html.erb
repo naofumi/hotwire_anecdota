@@ -6,28 +6,31 @@ hide_title: false
 published: true
 ---
 <div class="pt-12">
-  <div class="mx-auto max-w-3xl mx-auto">
-    <div class="mx-auto">
-      <h1 class="text-gray-600 text-5xl font-thin tracking-tighter">コンテンツ一覧</h1>
+  <div class="mx-auto max-w-3xl">
+    <div>
+      <h1 class="text-5xl font-thin tracking-tighter">コンテンツ一覧</h1>
     </div>
 
     <div class="mt-12 grid grid-cols-3 gap-6 auto-rows-fr">
-      <a class="block border-orange-600 border rounded-lg hover:opacity-80 cursor-pointer active:translate-y-0.5">
+      <a href="/introduction" class="block border-orange-600 border rounded-lg hover:opacity-80 cursor-pointer active:translate-y-0.5">
         <%= image_tag "content_images/pexels-jakubzerdzicki-20943579.webp", alt: "Hotwire概要画像", class: "w-full aspect-square object-cover mb-4 rounded-t-[7px]" %>
         <div class="p-2">
-        <h2 class="text-2xl font-thin">Hotwireの概要</h2>
+          <h2 class="text-2xl font-thin">Hotwireの概要</h2>
+          <p class="text-lg text-gray-600 font-light mt-4">Hotwireで何ができるかやそのメリット、およびHotwireがなぜ簡単かを解説します。</p>
         </div>
       </a>
-      <a class="block border-orange-600 border rounded-lg hover:opacity-80 cursor-pointer active:translate-y-0.5">
+      <a href="/examples" class="block border-orange-600 border rounded-lg hover:opacity-80 cursor-pointer active:translate-y-0.5">
         <%= image_tag "content_images/pexels-jakubzerdzicki-16859997.webp", alt: "Hotwireの使用例", class: "w-full aspect-square object-cover mb-4 rounded-t-[7px]" %>
         <div class="p-2">
           <h2 class="text-2xl font-thin">Hotwireの使用例</h2>
+          <p class="text-lg text-gray-600 font-light mt-4">Hotwireの使用例や使用場面を紹介します。</p>
         </div>
       </a>
-      <a class="block border-orange-600 border rounded-lg hover:opacity-80 cursor-pointer active:translate-y-0.5">
+      <a href="/concepts" class="block border-orange-600 border rounded-lg hover:opacity-80 cursor-pointer active:translate-y-0.5">
         <%= image_tag "content_images/pexels-jakubzerdzicki-20880743.webp", alt: "Hotwireの考え方", class: "w-full aspect-square object-cover mb-4 rounded-t-[7px]" %>
         <div class="p-2">
           <h2 class="text-2xl font-thin">Hotwireの考え方</h2>
+          <p class="text-lg text-gray-600 font-light mt-4">Hotwireの考え方や関連話題を紹介します。</p>
         </div>
       </a>
     </div>

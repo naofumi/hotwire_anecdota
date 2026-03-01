@@ -1,6 +1,7 @@
 <% @background = true %>
 
 <% provide :head, preload_link_tag(image_path("pexels-pixabay-51343.webp")) %>
+<% @back_link = { title: "コンテンツ一覧", url: "/directory" } %>
 
 <%= render_layout "body" do %>
   <div class="lg:max-w-6xl lg:mx-auto">
