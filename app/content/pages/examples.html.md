@@ -4,4 +4,5 @@ subtitle: Hotwireによる実装例Hotwireによる実装例Hotwireによる実�
 layout: section
 order: 015
 published: true
+key_image: examples
 ---

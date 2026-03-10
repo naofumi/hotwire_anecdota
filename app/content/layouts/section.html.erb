@@ -1,6 +1,5 @@
 <% @background = true %>
 
-<% provide :head, preload_link_tag(image_path("pexels-pixabay-51343.webp")) %>
 <% @back_link = { title: "コンテンツ一覧", url: "/directory" } %>
 
 <%= render_layout "body" do %>
@@ -8,11 +7,11 @@
     <%= render "content_breadcrumbs", current_page: %>
   </div>
   <div class="max-w-3xl mx-auto flex gap-8 justify-between items-stretch mt-4">
-    <div class="flex-1 bg-orange-400 flex flex-col justify-center items-center">
-      <h1 class="text-4xl font-base text-white">
+    <div class="section__key-image section__key-image--<%= current_page.data.key_image %>">
+      <h1 class="section__title">
         <%= current_page.data.title %>
       </h1>
-      <p class="mt-8 text-xl text-white mx-12">
+      <p class="section__subtitle">
         <%= current_page.data.subtitle %>
       </p>
     </div>

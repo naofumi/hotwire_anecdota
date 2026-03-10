@@ -1,4 +1,28 @@
 @layer components {
+    .section__key-image {
+        /*@apply flex-1 bg-orange-400 flex flex-col justify-center items-center;*/
+        @apply rounded-2xl flex-1 bg-cover flex flex-col justify-center items-center;
+    }
+
+    .section__key-image--introduction {
+        background-image: url('content_images/pexels-jakubzerdzicki-20943579.webp');
+    }
+
+    .section__key-image--examples {
+        background-image: url('content_images/pexels-jakubzerdzicki-16859997.webp');
+    }
+
+    .section__key-image--concepts {
+        background-image: url('content_images/pexels-jakubzerdzicki-20880743.webp');
+    }
+
+    .section__title {
+        @apply text-4xl font-normal text-white text-shadow-md/30 text-shadow-gray-600;
+    }
+
+    .section__subtitle {
+        @apply mt-8 text-xl text-white text-shadow-md/30 text-shadow-gray-600 mx-12;
+    }
     /*.section__header {*/
     /*    background-image: url('pexels-jakubzerdzicki-23203452.webp');*/
     /*    background-size: cover;*/
