@@ -10,3 +10,7 @@ The goal of this project is to study and document how to effectively use Hotwire
 
 https://www.w3.org/WAI/ARIA/apg/patterns/
 https://www.accessibility-developer-guide.com/examples/widgets/
+
+## Photo credits
+
+https://www.pexels.com/ja-jp/@jakubzerdzicki/

@@ -3,17 +3,28 @@ title: ドロップダウン
 layout: article
 order: 30
 published: true
+descriptors:
+  component_names:
+    - DropDown
+    - Menu
+  server_request: false
+  state_management:
+    - aria-expanded (Stimulus版)
+  technologies:
+    - Stimulus
+    - Native HTML (Popover API)
+  demo_urls:
+    - ["Stimulus版", "/components/dropdown_menu"]
+    - ["Native版", "/components/dropdown_menu_native"]
+  related_pages:
+    - /concepts/stimulus-tips.html.md
 ---
 
 ここで作るのは次のようなUIです。
 
 ![dropdown.mov](content_images/dropdown.mov "mx-auto max-w-[500px]")
 
-[デモはこちら](/components/dropdown_menu)に用意しています。
-
 ## 考えるポイント --- points-to-consider
-
-![interactive-flow-hotwire.webp](content_images/interactive-flow-hotwire.webp "mx-auto max-w-[500px]")
 
 1. サーバから非同期でデータをもらう必要はありません
    1. したがってStimulusだけで実装できます

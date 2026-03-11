@@ -2,7 +2,7 @@
 <% @back_link = { title: current_page.parent.data.title, url: current_page.parent.url } %>
 <%= render_layout "body" do %>
   <div class="max-w-3xl mx-auto bg-white">
-    <div class="pt-8">
+    <div class="mt-12">
       <%= render "content_breadcrumbs",
                  current_page: %>
     </div>
@@ -10,35 +10,18 @@
     <% full_document = capture { yield } %>
 
     <div class="text-base text-gray-700 mt-12">
-      <div class="sticky top-0">
-        <div class="group/chapter-list absolute top-4 right-0 max-w-96 border border-orange-500 rounded-md p-2 bg-white shadow data-[chapter-list-shown-value=true]:shadow-lg"
-             data-controller="chapter-list"
-             data-chapter-list-shown-value="false"
-        >
-          <div class="flex justify-end">
-            <button class="block text-orange-600 cursor-pointer px-3"
-                    data-action="click->chapter-list#toggle">
-              目次
-            </button>
-          </div>
-          <div class="group-data-[chapter-list-shown-value=false]/chapter-list:hidden">
-            <%= safe_join extract_toc(full_document) %>
-          </div>
-        </div>
-      </div>
+      <%= render "article_toc", full_document: %>
       <div>
-        <p class="text-base leading-7 text-orange-600">
-          <%= current_page.parent.data.title %>
-        </p>
-        <h1 class="pt-1 text-3xl font-light text-gray-900 sm:text-4xl">
+        <h1 class="mt-2 text-3xl font-light text-gray-900 sm:text-4xl">
           <%= current_page.data.title %>
         </h1>
         <p class="mt-6 text-xl leading-8">
           <%= current_page.data.subtitle %>
         </p>
       </div>
-      <div class="mt-10 max-w-3xl mx-auto">
-        <% if current_page.data.siblings %>
+      <%= render 'article_descriptors', current_page: %>
+      <div class="mt-12 max-w-3xl mx-auto">
+        <% if current_page.data.show_siblings %>
           <div class="border rounded-lg p-2 mb-8 bg-white/80">
             <h3 class="text-xl ml-4 font-light" id="sibling-pages">
               <%= link_to current_page.parent.data.title,
@@ -60,7 +43,7 @@
           <%= full_document %>
         </div>
 
-        <% if current_page.data.siblings %>
+        <% if current_page.data.show_siblings %>
           <div class="border rounded-lg p-2 mt-12 bg-white/80">
             <h3 class="text-xl ml-4 font-light" id="sibling-pages">
               <%= link_to current_page.parent.data.title,

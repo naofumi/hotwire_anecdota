@@ -2,14 +2,34 @@ import {Controller} from "@hotwired/stimulus"
 
 // Connects to data-controller="accordion"
 export default class extends Controller {
-  static targets = ["revealable"]
+  static targets = ["revealable", "trigger"]
 
   connect() {
+    this.#syncContentA11y()
   }
 
-  toggle(event) {
-    event.currentTarget.ariaExpanded = event.currentTarget.ariaExpanded == "true" ? "false" : "true"
+  toggle() {
+    this.triggerTarget.ariaExpanded = this.#isExpanded()
+                                      ? "false"
+                                      : "true"
     this.#toggleRevealableTargets()
+    this.#syncContentA11y()
+  }
+
+  #isExpanded() {
+    return this.triggerTarget.ariaExpanded == "true"
+  }
+
+  #syncContentA11y() {
+    this.revealableTargets.forEach(target => {
+      if (this.#isExpanded()) {
+        target.ariaHidden = "false"
+        target.inert = false
+      } else {
+        target.ariaHidden = "true"
+        target.inert = true
+      }
+    })
   }
 
   #toggleRevealableTargets() {

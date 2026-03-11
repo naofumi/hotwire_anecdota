@@ -1,0 +1,18 @@
+<% if current_page.data.descriptors %>
+  <% d = current_page.data.descriptors %>
+  <% raise "Descriptor element mismatch" unless d.keys == ["component_names", "server_request", "state_management", "technologies", "demo_urls", "related_pages"] %>
+  <div class="grid grid-cols-[auto_1fr] auto-rows-auto w-fit">
+    <div class="h-8 font-bold text-right pr-2 border-r-2 border-gray-600">UI 要素名</div>
+    <div class="pl-2"><%= d.component_names.to_a.join(', ') %></div>
+    <div class="h-8 font-bold text-right pr-2 border-r-2 border-gray-600">サーバ接続</div>
+    <div class="pl-2"><%= d.server_request ? "要" : "不要" %></div>
+    <div class="h-8 font-bold text-right pr-2 border-r-2 border-gray-600">ステート管理</div>
+    <div class="pl-2"><%= d.state_management.to_a.join(', ') %></div>
+    <div class="h-8 font-bold text-right pr-2 border-r-2 border-gray-600">使用技術</div>
+    <div class="pl-2"><%= d.technologies.to_a.join(', ') %></div>
+    <div class="h-8 font-bold text-right pr-2 border-r-2 border-gray-600">デモ</div>
+    <div class="pl-2 markdown"><%= safe_join d.demo_urls.map { link_to it[0], it[1], class: "link--demo" }, ", " %></div>
+    <div class="h-8 font-bold text-right pr-2 border-r-2 border-gray-600">関連ページ</div>
+    <div class="pl-2 markdown"><%= safe_join d.related_pages.map { |path| link_to site.get(path).data.title, path, class: "link" }, ", " %></div>
+  </div>
+<% end %>

@@ -1,0 +1,38 @@
+<% set_breadcrumbs [["DropDown", component_path(:dropdown)]] %>
+
+<%= render 'template',
+           title: "DropDown Native",
+           description: "" do %>
+
+  <div class="mx-auto w-48">
+    <!-- Profile dropdown -->
+    <div class="relative ml-3 w-8"
+         data-controller="dropdown-native"
+         data-action="mouseleave->dropdown-native#hide">
+      <button type="button" class="[anchor-name:--user-menu] peer relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              id="user-menu-button"
+              data-action="mouseenter->dropdown-native#show"
+              data-dropdown-native-target="button"
+              popovertarget="user-menu">
+        <span class="absolute -inset-1.5"></span>
+        <span class="sr-only">Open user menu</span>
+        <%= image_tag("content_images/avatar.webp", class: "h-8 w-8 rounded-full") %>
+      </button>
+
+      <div id="user-menu"
+           class="dropdown-native"
+           popover
+           role="menu"
+           aria-orientation="vertical"
+           aria-labelledby="user-menu-button"
+           tabindex="-1">
+        <!-- Active: "bg-gray-100", Not Active: "" -->
+        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300" role="menuitem" tabindex="-1" id="user-menu-item-0">Your
+          Profile</a>
+        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign
+          out</a>
+      </div>
+    </div>
+  </div>
+<% end %>

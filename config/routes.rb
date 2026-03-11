@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   sitepress_pages
   sitepress_root
+
   resources :users, only: [ :index ] do
     resource :user_profile, module: :users, only: [ :show ]
   end

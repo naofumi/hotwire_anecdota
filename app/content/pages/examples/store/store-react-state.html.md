@@ -3,7 +3,7 @@ title: ステートをReactに持たせる
 layout: article
 order: 30
 published: true
-siblings: true
+show_siblings: true
 ---
 
 ## 概略 --- introduction

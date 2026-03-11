@@ -3,7 +3,7 @@ title: フォーム送信成功と後処理
 layout: article
 order: 0010
 published: true
-siblings: true
+show_siblings: true
 ---
 
 Hotwireで作成したモーダル中のフォームからリクエストを送信し、成功するところまでを解説します。下記のビデオのものになります。

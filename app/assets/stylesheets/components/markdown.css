@@ -4,7 +4,7 @@
     /* Markdown */
     .markdown {
         h2 {
-            @apply mt-4 mb-4 pt-4 pb-0 text-2xl border-b border-dotted border-gray-400 font-light text-gray-900 top-10 sm:top-10;
+            @apply mt-12 p-0 text-2xl border-b border-dotted border-gray-400 font-light text-gray-900 top-10 sm:top-10;
         }
 
         h2 > a {
@@ -24,7 +24,7 @@
         }
 
         p {
-            @apply text-gray-700 my-3 text-base/7;
+            @apply text-gray-700 mt-4 text-base/7;
         }
 
         code {
@@ -32,12 +32,15 @@
         }
 
         a {
-            @apply text-orange-600 hover:text-orange-400 underline;
+            @apply text-orange-600 hover:opacity-60 active:translate-y-0.5 underline;
         }
 
-        .link--demo:after {
-            @apply text-orange-600 hover:text-orange-400 underline inline-block h-4 w-4 mx-1;
-            content: url("forward.svg");
+        .link--demo {
+            @apply inline-flex items-center leading-none;
+            &:after {
+                @apply text-orange-600 hover:text-orange-400 underline h-4 w-4 mx-1;
+                content: url("forward.svg");
+            }
         }
 
         .link--external:after {
@@ -69,7 +72,7 @@
         }
 
         ul {
-            @apply ml-0 my-3 space-y-2 text-base/7;
+            @apply ml-0 mt-4 space-y-2 text-base/7;
         }
 
         ul li {
@@ -77,10 +80,11 @@
             padding: 0 16px 0 32px;
             list-style: none;
             margin: 0;
+            margin-top: 8px;
             vertical-align: middle;
 
             ul {
-                @apply my-1;
+                @apply mt-2;
             }
 
             ul li {
@@ -90,7 +94,7 @@
         }
 
         ol {
-            @apply ml-6 my-2 space-y-2 text-base/7;
+            @apply ml-6 mt-4 space-y-2 text-base/7;
         }
 
         ol li {
@@ -98,14 +102,14 @@
             padding: 0 16px 0 4px;
             list-style: decimal outside none;
             margin: 0;
+            margin-top: 8px;
             vertical-align: middle;
 
             ol {
-                @apply my-1;
+                @apply mt-2;
             }
 
             ol li {
-                margin-top: 0 !important;
                 list-style: lower-alpha;
 
                 ol li {

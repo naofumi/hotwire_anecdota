@@ -5,13 +5,15 @@
          .sort_by { it.data.order.to_i }
          .filter { page_showable?(it, show_published_only:) }
          .each do |child_page| %>
-    <li class="group m-0 my-1 ml-16 !mt-0 list-decimal list-outside list-image-none italic font-thin text-3xl text-gray-400 hover:text-orange-400 hover:underline decoration-1 underline-offset-4 active:translate-y-0.5">
-      <%= link_to child_page.data.title,
-                  child_page.url,
-                  class: "#{child_page.data.published ? '' : "opacity-40"} text-base font-light not-italic text-gray-500 group-hover:text-orange-500" %>
-      <% if Rails.env.development? %>
-        <span class="text-xs"><%= child_page.data.order %></span>
-      <% end %>
+    <li class="group my-1 ml-16 list-decimal list-outside list-image-none italic font-thin text-3xl text-gray-400 hover:text-orange-400 hover:underline decoration-1 underline-offset-4 active:translate-y-0.5">
+      <div class="flex flex-row gap-1 items-baseline">
+        <%= link_to child_page.data.title,
+                    child_page.url,
+                    class: "#{child_page.data.published ? '' : "opacity-40"} pt-2 block text-base font-light not-italic text-gray-500 group-hover:text-orange-500 flex-1" %>
+        <% if Rails.env.development? %>
+          <span class="text-xs flex-initial"><%= child_page.data.order %></span>
+        <% end %>
+      </div>
     </li>
   <% end %>
 </ol>

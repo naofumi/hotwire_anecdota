@@ -28,6 +28,9 @@ application.register("combobox", ComboboxController)
 import DropdownController from "./dropdown_controller"
 application.register("dropdown", DropdownController)
 
+import DropdownNativeController from "./dropdown_native_controller"
+application.register("dropdown-native", DropdownNativeController)
+
 import FileDetailController from "./file_detail_controller"
 application.register("file-detail", FileDetailController)
 

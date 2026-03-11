@@ -8,3 +8,10 @@
 @import "./components/markdown.css";
 @import "./components/landing.css";
 @import "./components/section.css";
+@import "./components/dropdown.css";
+
+@layer base {
+    html {
+        -webkit-font-smoothing: antialiased
+    }
+}

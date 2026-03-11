@@ -3,6 +3,23 @@ title: アコーディオン
 layout: article
 order: 20
 published: true
+descriptors:
+  component_names:
+    - Accordion
+    - Expandable
+    - Collapsible
+    - Disclosure
+  server_request: false
+  state_management:
+    - aria-expanded (Stimulus版)
+  technologies:
+    - Stimulus
+    - Native HTML
+  demo_urls:
+    - ["Stimulus版", "/components/accordion"]
+    - ["Native版", "/components/accordion_native"]
+  related_pages:
+    - /concepts/stimulus-tips.html.md
 ---
 
 ここで作るのは下記のようなUIです。
@@ -13,21 +30,83 @@ published: true
 
 ## 考えるポイント --- thinking-points
 
-![interactive-flow-hotwire.webp](content_images/interactive-flow-hotwire.webp "mx-auto max-w-[500px]")
+* サーバとの非同期通信
+    * 不要 
+* アコーディオンの開閉ステート
+    * 開閉ボタンの`aria-expanded`属性をステートとします
+* その他の属性変更
+    * a11yのために、`aria-hidden`や`inert`の属性を追加します
+    * トランジションを実現するために、アコーディオンの詳細文の箇所の高さをStimulusから制御します。これはCSSの`interpolate-size`のサポートが広がれば不要になる見込みです。
+* 追記
+    * `<details>`, `<summary>`を使った例も参考として紹介しますが、滑らかなトランジションに必要な`interpolate-size`CSSSがまだすべての主要ブラウザに広がっていないため、あくまでも参考扱いです
+    * 他に`<input type="checkbox">`や`<input type="radio">`を使用する方法もありますが、ネイティブな`<details>`, `<summary>`での完全な実装が近い将来期待できますので、解説しません
 
-1. 今回はサーバから非同期でデータを受け取る必要がありません
-   1. Stimulusだけで実装します。つまり上図の<span class="text-green-600 font-bold">緑</span>のところだけ考えれば良いです。
-   2. HTMLのcheckboxやradioを使う方法もありますが、今回は紹介しません。もし使うとしたら上図の<span class="text-black font-bold">黒</span>のところになります
-   3. HTMLのdetails, summaryを使う方法もありますが、今回は紹介しません。もし使うとしたら上図の<span class="text-black font-bold">黒</span>のところになります
-2. Stimulus Controllerの制御範囲を考えます。つまり画面のどこをカバーするかです
-   1. 今回のアコーディオンは、各行が独立して動いています。一方で一つの行を開いたら他の行が閉じるというアコーディオンも考えられますが、今回はそれではないです
-   2. 各行が独立していますので、Stimulus Controllerの制御範囲は各行単位で良さそうです（もしお互いに関連していれば、すべての行を一つのControllerの下に束ねることを考えます）
-3. Stimulus Controllerのステートを検討します
-   1. アクセシビリティを調べると、アコーディオンでは[`aria-expanded`を使うのが良さそうです](https://www.accessibility-developer-guide.com/examples/widgets/accordion/)
-   2. 基本的には`aria-expanded`をCSS擬似セレクタで読み取るアプローチを採用します
-   3. ただしアコーディオンを拡大する時のCSSトランジションは、拡大時の高さが指定されないとうまくいきません。このため一部ではCSSではなくStimulus controller内でJavaScriptを使って直接HTML要素の`style`を変更します
+## Stimulus版のコード --- code-stimulus
 
-## コード --- code
+### Accordion Controller --- accordion-controller
+
+```js:app/javascript/controllers/accordion_controller.js
+import {Controller} from "@hotwired/stimulus"
+
+// Connects to data-controller="accordion"
+export default class extends Controller {
+  static targets = ["revealable", "trigger"]
+
+  connect() {
+    this.#syncContentA11y()
+  }
+
+  toggle() {
+    this.triggerTarget.ariaExpanded = this.#isExpanded() ? "false" : "true"
+    this.#toggleRevealableTargets()
+    this.#syncContentA11y()
+  }
+
+  #isExpanded() {
+    return this.triggerTarget.ariaExpanded == "true"
+  }
+
+  #syncContentA11y() {
+    this.revealableTargets.forEach(target => {
+      if (this.#isExpanded()) {
+        target.ariaHidden = "false"
+        target.inert = false
+      } else {
+        target.ariaHidden = "true"
+        target.inert = true
+      }
+    })
+  }
+
+  #toggleRevealableTargets() {
+    this.revealableTargets.forEach(target => {
+      /*
+      * CSS transitions cannot transition if the destination height
+      * is not explicitly specified (like height: auto).
+      * Hence, we get the scrollHeight with JavaScript and
+      * explicitly set that value as the destination height.
+      * */
+      if (parseInt(target.style.height)) {
+        target.style.height = 0
+      } else {
+        const scrollHeight = target.scrollHeight
+        target.style.height = scrollHeight + "px"
+      }
+    })
+  }
+}
+```
+
+* Stimulus Controllerの作り方は[ここ](/tips/how-you-should-create-stimulus-controllers)をご確認ください
+* Stimulus Controllerで一番最初に見るべきポイントはイベントに応じて変化するステートです。
+  * このControllerのイベントハンドラは`toggle()`だけなので、そこでステートがどのように変化するかを確認します。
+  * そうすると`this.triggerTarget.ariaExpanded`がステートだというのがわかります。`toggle()`を実行することでこの値の`"true"`, `"false"`と変化します。
+* `this.triggerTarget.ariaExpanded`ステートは、のちに詳しく説明しますが、CSSセレクタで検知できます。つまりCSSこのステートを監視して、自動的にUIを更新してくれます
+* `#syncContentA11y()`はCSSだけでは対応できない箇所を更新しています
+   * 今回はコンテンツ部分(Accordion開閉で表示・非表示となる箇所)のa11y対応です
+   * このようにCSSだけで対応できるところはCSSで対処し、DOMの直接操作が必要なところはStimulus Controllerの中で対処することがよくあります
+* `this.#toggleRevealableTargets()`はCSS transitionのための工夫、`this.#syncContentA11y()`はコンテンツに対してa11yのための`aria`属性を変更したり、`inert`属性を追加したりしています。
+
 
 ### アコーディオンのview --- accordion-view
 
@@ -52,7 +131,7 @@ published: true
 ```
 
 * アコーディオンを表示するERBです
-* アコーディオンの各行は`accordion_row` partialを切っています
+* アコーディオンの各行は`accordion_row` partialを使ってコンポーネント化しています。
     * なおこのpartialは`do end`ブロックと`yield`を使って、コードをスッキリさせています。この使い方は[Rails Guide](https://railsguides.jp/layouts_and_rendering.html#シンプルなビューでパーシャルを使う)でも紹介されています
 
 ### `accordion_row` partial --- accordion-row-partial
@@ -60,16 +139,17 @@ published: true
 ```erb:app/views/components/_accordion_row.html.erb
 <div class="py-4 border-b border-gray-300"
      data-controller="accordion">
-  <h3 class="flex justify-between text-xl cursor-pointer">
+  <button class="group w-full flex justify-between text-xl cursor-pointer"
+          data-action="click->accordion#toggle"
+          data-accordion-target="trigger"
+          aria-expanded="false">
     <span><%= title %></span>
-    <button aria-expanded="false"
-            class="aria-[expanded=true]:rotate-180 pt-2 transition-all duration-300"
-            data-action="click->accordion#toggle">
+    <div class="group-aria-[expanded=true]:rotate-180 pt-2 transition-all duration-300">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
       </svg>
-    </button>
-  </h3>
+    </div>
+  </button>
   <div data-accordion-target="revealable" class="h-0 overflow-hidden transition-all duration-300 text-sm">
     <div class="mt-4"><%= yield %></div>
   </div>
@@ -77,64 +157,43 @@ published: true
 ```
 
 * アコーディオンの各行をコードしているpartialです
-* `data-controller="accordion"`となっているところで、`AccordionController` Stimulus controllerに接続します
-* `<button>`のところは`class="aria-[expanded=true]:rotate-180"`がありますので、`aria-expanded`属性の値によって表示が変えるCSS擬似セレクタです
-* `data-action="click->accordion#toggle"`のところはアコーディオン開閉ボタンです
-    * `data-action="click->accordion#toggle"`は、「クリックしたら`accordion` controllerの`toggle()`メソッドを実行すること」という意味です。イベントハンドラになります
+* `data-controller="accordion"`となっている`<div>`で、上述の`AccordionController` Stimulus controllerに接続します
+* `<button>`に`data-action="click->accordion#toggle"`があります。つまりこのボタンがクリックされると`AccordionController`の`toggle()`メソッドが呼び出されます
+   * 上述したように`toggle()`メソッドはこの`<button>`のステートを変更し、`aria-expanded="false"`を`"true"`に書き換えます
+   * SVGアイコン(下向き矢印)を囲む`<div>`には`class="group-aria-[expanded=true]:rotate-180`がついています。これは親の`<button>`要素の`aria-expanded`属性に反応して、`"true"`ならば180度回転するものです。つまり`AccordionController`のステートの変化に反応している表示を変えています。
 * `data-accordion-target="revealable"`となっているところが、アコーディオンの開閉で見え隠れする箇所です
-   * `data-accordion-target="revealable"`なので、Stimulus controllerから制御される箇所です
-   * アニメーションを使いますので、単純に`hidden`で隠す訳にはいきません。`h-0 overflow-hidden`で隠して、徐々に大きくなるアニメーションができるような隠し方をしています
-   * CSSだけでトランジションができないためにStimulusから制御する必要があります。そのために`target`になっています
+   * `data-accordion-target="revealable"`により、`AccordionController`からは`this.revealableTargets`として簡単にアクセスできます。
+   * トランジションを使いますので、単純に`hidden`で隠す訳にはいきません。`h-0 overflow-hidden`で隠して、徐々に高さを変える隠し方をしています。`AccordionController`の`#toggleRevealableTargets()`の処理です
+   * 現場ではCSSの限界のためこのような記述をしています。将来的にはCSSが進歩して、ここのコードは不要になるでしょう
 
-### Accordion Controller --- accordion-controller
+## native版のコード --- code-native
 
-```js:app/javascript/controllers/accordion_controller.js
-import {Controller} from "@hotwired/stimulus"
-
-// Connects to data-controller="accordion"
-export default class extends Controller {
-  static targets = ["revealable"]
-
-  connect() {
-  }
-
-  toggle(event) {
-    event.currentTarget.ariaExpanded = event.currentTarget.ariaExpanded == "true" ? "false" : "true"
-    this.#toggleRevealableTargets()
-  }
-
-  #toggleRevealableTargets() {
-    this.revealableTargets.forEach(target => {
-      /*
-      * CSS transitions cannot transition if the destination height
-      * is not explicitly specified (like height: auto).
-      * Hence, we get the scrollHeight with JavaScript and
-      * explicitly set that value as the destination height.
-      * */
-      if (parseInt(target.style.height)) {
-        target.style.height = 0
-      } else {
-        const scrollHeight = target.scrollHeight
-        target.style.height = scrollHeight + "px"
-      }
-    })
-  }
-}
+```erb:app/views/components/accordion_row_native.html.erb
+<div class="py-4 border-b border-gray-300">
+  <details class="group">
+    <summary class="flex cursor-pointer list-none items-start justify-between text-xl marker:content-none">
+      <span><%= title %></span>
+      <span class="pt-2 transition-transform duration-300 group-open:rotate-180" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+        </svg>
+      </span>
+    </summary>
+    <div class="text-sm">
+      <div>
+        <div class="mt-4"><%= yield %></div>
+      </div>
+    </div>
+  </details>
+</div>
 ```
 
-* Stimulus Controllerの作り方は[ここ](/tips/how-you-should-create-stimulus-controllers)をご確認ください
-* 空の`connect() {}`メソッド定義があります。これは`bin/rails g stimulus [controller名]`をやると自動的に作ってくれるもので私はそのまま残すことが多いです
-    * Stimulus controllerを繋げるときは、一歩一歩進めることが大切です。このメソッドの中に`alert('hello')`ってやるとcontrollerがちゃんとHTMLと繋がったことがわかりますので、Stimulusを使う第一歩で私は必ずこの確認をしています
-    * StimulusとHTMLの接続は非常に動的で、もちろんIDEが静的解析をしてエラーは吐いてくれることはありません（HTML自身が非常に動的なため）。このため、一歩一歩、動作確認しながらcontrollerやaction, targetを繋げていく姿勢が大切です。これさえやれば、動的でも困ることはありません。
-* `static targets = `を使って、先ほどHTMLで指定した`data-accordion-target="switch"`, `data-accordion-target="revealable"`と接続します
-* 今回はActionは`toggle()`だけです。`data-action="click->accordion#toggle"`によって呼ばれます
-   * `toggle()`が呼び出されると
-      * アコーディオンの`<button>`の`aria-expanded`属性が変化します。`aria-expanded`属性はCSS擬似セレクタで監視されていますので、ボタンの表示が変化します 
-      * `#toggleRevealableTargets()`メソッドが呼ばれ、`revealable`の表示・非表示が変わります（アニメーションの都合上,`height`で制御しています） 
+* ステートは全てnativeの`<details>`タグが管理するため、JavaScriptが不要になっています
+* `<summary>`はnativeに表示非表示が切り替わりますのでJavaScriptはやはり不要です。滑らかなトランジションを実現するCSSがまだ主要ブラウザで十分にサポートされていないため、今回はトランジションさせていません。近い将来にトランジションもnativeで可能になるはずです
+* SVGアイコン(下向き矢印)は`<details>`, `<summary>`はnativeにサポートしていませんが、開閉状態は`<summary>`の`open`属性に反映されますので、`class="group-open:rotate-180"`で検知して、CSSを使って表示を変更しています
 
 ## まとめ --- summary
 
 * アコーディオンをStimulusで実装する方法を紹介しました
-* ステートは基本的には`aria-expanded`に持たせていますが、アニメーションの都合上でうまくいかないところはStimulus ControllerからJavaScriptで操作しています
-
-なお今回のアクセシビリティは簡易的にやっただけですので、抜けている箇所があります。この点はご了承ください。
+* ステートは基本的には`aria-expanded`に持たせていますが、トランジションの都合でうまくいかないところはStimulus ControllerからJavaScriptで操作しています。またJavaScriptでDOMを書き換えないといけない箇所(今回はa11y関連)はStimulus Controllerで対処しています
+* 近い将来はStimulus Controllerさえ不要になり、全てJavaScriptなしでアコーディオンが作れるようになる見込みです

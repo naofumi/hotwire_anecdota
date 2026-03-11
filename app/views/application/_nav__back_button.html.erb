@@ -4,7 +4,7 @@
   <span class=""></span>
 <% else %>
   <% if back_link %>
-    <a href="<%= back_link[:url] %>" class="overflow-hidden text-base font-thin text-orange-600 flex items-center hover:text-orange-400">
+    <a href="<%= back_link[:url] %>" class="overflow-hidden text-base font-light text-orange-600 flex items-center hover:text-orange-400">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width={1.5}
            stroke="currentColor" class="size-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
@@ -12,7 +12,7 @@
       <span class="text-ellipsis overflow-hidden text-nowrap"><%= back_link[:title] %></span>
     </a>
   <% else %>
-    <a href="/" class="text-base font-thin text-orange-600 flex items-center hover:text-orange-400">
+    <a href="/" class="text-base font-light text-orange-600 flex items-center hover:text-orange-400">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width={1.5}
            stroke="currentColor" class="size-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>

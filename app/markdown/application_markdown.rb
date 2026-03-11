@@ -38,7 +38,7 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   def block_code(code, language)
     language_part, filename_part = language.split(":", 2).map(&:strip)
     lexer = Rouge::Lexer.find(language_part)
-    content_tag(:div, class: "my-2") do
+    content_tag(:div, class: "mt-4") do
       safe_join [
         tag.div(class: "px-2 border rounded-t text-sm border-gray-700 bg-gray-700 text-gray-100 w-fit") {
           safe_join [

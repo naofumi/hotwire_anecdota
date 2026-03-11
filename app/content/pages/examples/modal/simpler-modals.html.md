@@ -3,7 +3,7 @@ title: より簡単なモーダルの作り方
 layout: article
 order: 30
 published: true
-siblings: true
+show_siblings: true
 ---
 
 [柔軟性が高いモーダル](/examples/modal#modal-considerations)では、Hotwireで柔軟性をMaxにした時のものを紹介しました。

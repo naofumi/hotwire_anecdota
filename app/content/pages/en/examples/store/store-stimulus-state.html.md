@@ -3,7 +3,7 @@ title: ステートをStimulusに持たせる
 layout: article
 order: 20
 published: true
-siblings: true
+show_siblings: true
 ---
 
 ## 概略 --- introduction

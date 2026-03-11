@@ -3,7 +3,7 @@ title: モーダルの表示・非表示
 layout: article
 order: 006
 published: true
-siblings: true
+show_siblings: true
 ---
 
 十分な機能を持ったモーダルをHotwireで自作する方法を紹介します。下記のビデオのものになります。

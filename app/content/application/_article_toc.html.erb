@@ -1,0 +1,19 @@
+<%# locals: (full_document:) %>
+<div class="sticky top-4 relative z-10">
+  <div class="group/chapter-list absolute top-0 right-0 max-w-96"
+       data-controller="chapter-list"
+       data-chapter-list-shown-value="false"
+  >
+    <div class="max-w-96 border border-orange-500 rounded-md p-2 bg-white shadow data-[chapter-list-shown-value=true]:shadow-xl">
+      <div class="flex justify-end">
+        <button class="block text-orange-600 cursor-pointer px-3 hover:opacity-60"
+                data-action="click->chapter-list#toggle">
+          目次
+        </button>
+      </div>
+      <div class="p-2 group-data-[chapter-list-shown-value=false]/chapter-list:hidden">
+        <%= safe_join extract_toc(full_document) %>
+      </div>
+    </div>
+  </div>
+</div>
