@@ -10,6 +10,7 @@ descriptors:
   server_request: false
   state_management:
     - aria-expanded (Stimulus版)
+    - 不要 (Native版)
   technologies:
     - Stimulus
     - Native HTML (Popover API)
@@ -35,9 +36,9 @@ descriptors:
    3. したがって顔のアイコンとメニュー自身の双方を囲むStimulus Controllerを用意します
 3. ステートを変更するActionはマウスのホバー状態のだけで単純です。またまたメニューの表示・非表示の際に`aria-expanded`を変更するべきです。このようなシンプルなケースでは、[Stimulusの`Values`ステート](https://stimulus.hotwired.dev/reference/values)を使わずに、`aria-expanded`だけで十分に管理できそうです。
 
-## コード --- code
+## コード (Stimulus版) --- code-stimulus
 
-### View --- view
+### View --- view-stimulus
 
 ```erb:app/views/components/dropdown_menu.html.erb
 <% set_breadcrumbs [["DropDown", component_path(:dropdown)]] %>
@@ -96,11 +97,10 @@ descriptors:
 ```
 
 * `data-controller="dropdown"`でStimulus Controllerと繋げています。ボタン（顔の写真があるところ）とメニューを囲むようにStimulus Controllerを繋げます
+* メニューの表示・非表示のステートを保持する必要があります。ここでは`aria-expanded="false"`をステートとします。これが`"true"`かどうかをCSS擬似セレクタ(`peer-aria-[expanded=true]:`)で読み取って、CSSでメニューを表示・非表示にします
 * Actionは`data-action="mouseenter->dropdown#show"`と`data-action="mouseleave->dropdown#hide"`のところです。`mouseenter`と`mouseleave`イベントに反応してStimulus controllerの`show()`と`hide()`を呼び出しています
-* 今回は`aria-expanded="false"`のところをステートとします。これが`"false"`になったり`"true"`になっているのをCSS擬似セレクタが読み取って、メニューを表示・非表示にします
-* `peer-aria-[expanded=true]:`となっているところでTailwind CSSが`aria-expanded=`のステートを監視します。これに応じてメニューの表示・非表示を切り替えます
 
-### Stimulus controller --- stimulus
+### Stimulus controller --- stimulus-controller
 
 ```js:app/javascript/controllers/dropdown_controller.js
 import { Controller } from "@hotwired/stimulus"
@@ -122,13 +122,96 @@ export default class DropdownController extends Controller {
 }
 ```
 
-* DropDownのStimulus Controllerです
 * `static targets = ["switch"]`はtargetを指定しています。`switch`はボタン（顔のアイコンがあるもの）に指定してあります
-* `show()`, `hide()`のイベントでtargetの`ariaExpanded`の値を切り替えています
+* `show()`, `hide()`のイベントでtargetの`ariaExpanded`の値を切り替えています。先ほど説明したように、CSSは擬似要素を介してここの`aria-expanded`を監視し、`aria-expanded="true"`となるとメニューを表示するようにしています
 
-## まとめ --- summary
+### まとめ (Stimulus版) --- summary-stimulus
 
-* ドロップダウンメニューをStimulusで作るにあたって以下のことを検討しました
-  * Stimulus controllerの制御範囲（どこをカバーするべきか）
-  * ステートをどのように持つかどうか（今回は`aria-expanded`属性で十分と判断しました）
-  * `aria-expanded`属性を監視するCSS擬似セレクタを使って、実際の表示変更をする方法
+ドロップダウンメニューをStimulusで作るにあたって以下のことを検討しました
+
+* ステートは`aria-expanded`属性に保持する
+* `aria-expanded="true"`を監視するCSS擬似セレクタを使い、CSSでメニューを表示する
+
+## コード (Native版) --- native
+
+### View --- view-native
+
+```erb:app/views/components/dropdown_menu_native.html.erb
+<% set_breadcrumbs [["DropDown", component_path(:dropdown)]] %>
+
+<%= render 'template',
+           title: "DropDown Native",
+           description: "" do %>
+
+  <div class="mx-auto w-48">
+    <!-- Profile dropdown -->
+    <div class="relative ml-3 w-8"
+         data-controller="dropdown-native"
+         data-action="mouseleave->dropdown-native#hide">
+      <button type="button" class="[anchor-name:--user-menu] peer relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              id="user-menu-button"
+              data-action="mouseenter->dropdown-native#show"
+              data-dropdown-native-target="button"
+              popovertarget="user-menu">
+        <span class="absolute -inset-1.5"></span>
+        <span class="sr-only">Open user menu</span>
+        <%= image_tag("content_images/avatar.webp", class: "h-8 w-8 rounded-full") %>
+      </button>
+
+      <div id="user-menu"
+           class="dropdown-native"
+           popover
+           role="menu"
+           aria-orientation="vertical"
+           aria-labelledby="user-menu-button"
+           tabindex="-1">
+        <!-- Active: "bg-gray-100", Not Active: "" -->
+        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300" role="menuitem" tabindex="-1" id="user-menu-item-0">Your
+          Profile</a>
+        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-300" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign
+          out</a>
+      </div>
+    </div>
+  </div>
+<% end %>
+```
+
+* `data-controller="dropdown_native"`でStimulus Controllerと繋げています。NativeのpopoverはJavaScriptなしの場合は`click`には反応しますが、`mouseenter`, `mouseleave`には反応しないため、そこはStimulus Controllerで補っています
+* Actionは`data-action="mouseenter->dropdown-native#show"`と`mouseleave->dropdown-native#hide`のところです。`mouseenter`と`mouseleave`イベントに反応してStimulus controllerの`show()`と`hide()`を呼び出しています
+* Nativeのpopoverは`popovertarget="user-menu"`と`popover`属性で制御します
+* またCSSのanchor positioningを使ってドロップダウンの表示位置を制御しています。Tailwindでは`[anchor-name:--user-menu]`および`[position-anchor:--user-menu]`を使います
+* Nativeのpopoverでトランジションを使う場合はCSSの`@starting-style`を使用しますが、これはTailwindだと生成できないので`app/assets/stylesheets/components/dropdown.css`に記述しています。
+   * Stimulus版ではTailwindの`collapse/visible`, `opacity-0/opacity-100`で表示・非表示を切り替えていますが、Nativeのpopoverは`display:block/none`で表示・非表示を切り替えますので、`@starting-style`が必要になります。 
+
+### Stimulus controller --- stimulus-native
+
+```js:app/javascript/controllers/dropdown_native_controller.js
+import { Controller } from "@hotwired/stimulus"
+
+
+// Connects to data-controller="dropdown"
+export default class DropdownNativeController extends Controller {
+  static targets = ["button"]
+
+  connect() {
+  }
+
+  show(event) {
+    this.#popoverElement().showPopover()
+  }
+
+  hide(event) {
+    this.#popoverElement().hidePopover()
+  }
+
+  #popoverElement() {
+    const popoverId = this.buttonTarget.getAttribute("popovertarget")
+    return document.getElementById(popoverId)
+  }
+}
+```
+
+* NativeのpopoverはボタンをクリックするならJavaScriptなしで作成できますが、`mouseenter`, `mouseleave`のイベントに反応させるためにはStimulusを使用しています
+* Nativeのpopoverでは`popovertarget`で指定したIDのHTML要素に対して`showPopover()`, `hidePopover()`, `togglePopover()`のメソッドが用意されています。Stimulus controllerの`show()`, `hide()`イベントハンドラはこれらのメソッドを呼び出しています。
+* Stimulus版はメニューの表示・非表示を管理するためにステートを`aria-expanded`属性として持ちましたが、Native版ではステート管理が不要になっています。
