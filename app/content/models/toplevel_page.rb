@@ -1,6 +1,10 @@
 class ToplevelPage < Sitepress::Model
-  collection glob: "index.html*"
+  # collection glob: "index.html*"
   data :sections
+
+  def self.all
+    glob("**/*.html*")
+  end
 
   def section_title_for(section_label)
     sections.unmanage.find { |_title, label| label == section_label }.first

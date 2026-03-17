@@ -27,7 +27,7 @@ class Catalog
         "1TB": { lump: 400, monthly: 26.77 }
       }
     }
-  }
+  }.freeze
 
   class << self
     def data

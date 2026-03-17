@@ -1,8 +1,8 @@
 class Iphone::Catalog
   Price = Data.define(:lump, :monthly)
-  DEFAULT_MODEL = "6-1inch"
-  DEFAULT_COLOR = "naturaltitanium"
-  DEFAULT_RAM = "256GB"
+  DEFAULT_MODEL = "6-1inch".freeze
+  DEFAULT_COLOR = "naturaltitanium".freeze
+  DEFAULT_RAM = "256GB".freeze
 
   def pricing(model, ram)
     pricing_for(model, ram)

@@ -94,9 +94,6 @@ Style/Documentation:
 Style/MultilineBlockChain:
   Enabled: false
 
-Style/MutableConstant:
-  Enabled: false
-
 Style/GlobalStdStream:
   Enabled: false
 
@@ -104,11 +101,17 @@ Style/EmptyMethod:
   Enabled: true
   EnforcedStyle: expanded
 
+# Let me decide
 Style/IfUnlessModifier:
   Enabled: false
 
+# I don't like overuse of guard clauses
 Style/GuardClause:
   Enabled: false
 
 Style/BlockDelimiters:
+  Enabled: false
+
+# I like doing this
+Style/OneClassPerFile:
   Enabled: false

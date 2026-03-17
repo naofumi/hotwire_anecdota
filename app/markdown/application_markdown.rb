@@ -2,7 +2,7 @@
 # delete a bunch of stuff below if you don't need it.
 
 class ApplicationMarkdown < MarkdownRails::Renderer::Rails
-  THEME = "monokai.sublime"
+  THEME = "monokai.sublime".freeze
   include ActionView::Helpers::OutputSafetyHelper
   include ActionView::Helpers::UrlHelper
   # Reformats your boring punctation like " and " into “ and ” so you can look
