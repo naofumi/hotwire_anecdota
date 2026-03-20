@@ -7,7 +7,8 @@
     <%= render "content_breadcrumbs", current_page: %>
   </div>
   <div class="max-w-3xl mx-auto flex gap-8 justify-between items-stretch mt-4">
-    <div class="section__key-image section__key-image--<%= current_page.data.key_image %>">
+    <div style="view-transition-name: <%= view_transition_name(current_page.data.key_image) %>"
+      class="section__key-image section__key-image--<%= current_page.data.key_image %>">
       <h1 class="section__title">
         <%= current_page.data.title %>
       </h1>
