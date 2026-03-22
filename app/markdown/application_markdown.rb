@@ -29,7 +29,7 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
   # Make sure you know what you're doing if you're using this to render user inputs.
   def enable
     [ :fenced_code_blocks, :disable_indented_code_blocks, :underline, :footnotes, :tables, :strikethrough,
-      :no_intra_emphasis ]
+      :no_intra_emphasis, :footnotes ]
   end
 
   # https://github.com/sitepress/markdown-rails?tab=readme-ov-file#customizing-renderer
@@ -143,7 +143,8 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
     # This is provided as an example; there's many more YouTube URLs that this wouldn't catch.
     def youtube_tag(link, alt)
       url = URI(link)
-      embed_url = "https://www.youtube-nocookie.com/embed/#{CGI.parse(url.query).fetch('v').first}"
+      console
+      embed_url = "https://www.youtube-nocookie.com/embed/#{Rack::Utils.parse_query(url.query.to_s).fetch('v')}"
       content_tag(:iframe,
                   src: embed_url,
                   title: "YouTube video player",

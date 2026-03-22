@@ -3,15 +3,30 @@ title: 引き出し
 layout: article
 order: 80
 published: true
+descriptors:
+  component_names:
+    - Drawer
+  server_request: true
+  state_management:
+    - Stimulus values
+  technologies:
+    - Stimulus
+    - Turbo
+  demo_urls:
+    - ["デモ", "/hotels"]
+  related_pages:
+    - /concepts/stimulus-tips.html.md
+
 ---
 
-引き出し(drawer)はよく使われるUIです。ページ遷移をせずに詳細を表示するのに使います。モーダルと似ていますが、モーダルは一般に情報を少しだけ見せ、パッと閉じるものが多いのに対して、引き出しは情報が多く、データ更新も可能で複雑な処理をさせているものをよく見かけます。
+引き出し(drawer)はよく使われるUIです。ページ遷移をせずに詳細を表示するのに使います。モーダルと似ていますが、モーダルは一般にシンプルであるのたいして、引き出しは情報が多くて複雑な処理をさせる場合に使用します。
 
-![drawer.mov](content_images/drawer.mov "mx-auto max-w-[500px]")
-
-[デモはこちらにあります](/hotels)。
+![drawer.mov](content_images/drawer.mov "mx-auto")
 
 ##考えるポイント --- points-to-consider
+
+* サーバから非同期でデータを受け取るためにTurboを使用。
+* 引き出し開閉UIはStimulusで実装
 
 1. サーバから非同期でデータを受け取ります
    1. Turboを使用します

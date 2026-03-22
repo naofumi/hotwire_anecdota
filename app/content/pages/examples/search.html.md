@@ -4,33 +4,43 @@ section: Tips
 layout: article
 order: 50
 published: true
+descriptors:
+  component_names:
+    - Live Search
+    - Realtime Search
+  server_request: true
+  state_management: []
+  technologies:
+    - Turbo
+    - Stimulus
+  demo_urls:
+    - ["デモ", "/customers"]
+  related_pages:
+    - /concepts/stimulus-tips.html.md
+
 ---
 
-ここで作成するのはリアルタイム検索です。下記のようなUIです。
-
-[デモはこちら](/customers "demo")に用意しています。
+ここで作成するのはリアルタイム検索です。下記のビデオをご覧ください。
 
 ![realtime-search.mov](content_images/realtime-search.mov "mx-auto max-w-[600px]")
 
 ## 考えるポイント --- points-to-consider
 
-![interactive-flow-hotwire.webp](content_images/interactive-flow-hotwire.webp "mx-auto max-w-[500px]")
+* サーバとの非同期通信
+   * 必要。
+   * サーバ通信は`<input type="search">`タグの`input`イベントに応答して行います。少し特殊なのでStimulus controllerを用意します。
+* TurboFrames/TurboStreams
+   * 画面の１箇所のみを更新するため、TurboFramesで十分です。[^framesvsstreams]
+* ステート管理
+   * 不要。[^state]
+* サーバへのリクエストの送り方
+   * `<form>`タグに`requestSubmit()`を送る[^request]
+  
+[^request]: サーバにリクエストを送る際、JavaScriptからTurboFramesやTurboStreamsを使うことも可能です。またもちろん`fetch()`を使うこともできます。しかしHotwireはネイティブな感覚を重視しますので、`<form>`を普通にsubmitするように記述します。 
 
-1. データはサーバから非同期で受け取る必要があります
-   1. Hotwireではサーバとの非同期通信は必ずTurboを使います。Turbo Drive, Turbo Frames, Turbo Streamsのどれを使うかだけ、選択する必要があります
-   3. **Turbo Drive, Turbo Frames, Turbo Streamsの選択基準は、画面のどこを更新し、どこはステートを更新せずに維持したいかになります**
-      1. 今回は検索結果の箇所を更新しつつ、検索窓のステートを維持する必要があります。検索窓のステートを維持しないと、入力中にフォーカスがずれたり、日本語入力がうまくいかなかったりするためです
-      2. ステートを維持したい箇所があること、かつ更新する箇所が１つにまとめられることからTurbo Framesを選択します
-         1. 更新する箇所が複数の場合はTurbo Streamsを検討します
-         2. Turbo Drive + Morphingという選択肢もありますが、今回は省略します
-2. Turboだけでイベントハンドリングできるか、それともStimulusで前後の機能追加する必要があるかを考えます
-   1. 今回は`<a>`タグや`<form>`タグのネイティブな動作だけでは不十分です。検索窓（`<input>`タグ）の`input`イベントを捉えないとリアルタイム検索に検索してくれません
-   2. したがってStimulusで`<input>`タグの`input`イベントを捉える処理を書く必要があります
-3. Stimulusを使うと決めたら、次はステートを持つか否かを考えます。今回のStimulus controllerは`<input>`タグの`input`イベントを受け取り、そのまま`<form>`タグのsubmitをするだけですので、ステートを持つ必要はありません
-4. Stimulus controllerの制御範囲を考えます。今回のStimulus controllerは、Turboがデータ送信する際のことは一切制御しません。あくまでも`<form>`タグのsubmitまでが責務です。したがって制御範囲は`<form>`タグだけで十分であり、検索結果を制御する必要はありません
-5. 最後に、Turboを使う場合はネットワークの遅延を意識する必要があります
-   1. アプリの性質上、ネットワーク遅延は大きそうかどうか（海外の人も使うか、モバイルで使うか、あるいはイベント会場で使うかなど）
-   2. 遅延が発生しそうならば、pending UI（待ちUI）を用意します
+[^framesvsstreams]: TurboFramesとTurboStreamsのいずれを使用するかの判断基準は別途解説します。
+[^state]: Reactの場合は最低限でもサーバから送信されたJSON APIのデータをステートに保管しなければなりません。  
+      これはReactが任意のタイミングでコンポーネントを再レンダリングするためで、Hotwireでは不要になります。
 
 ## コード --- code
 
@@ -44,14 +54,30 @@ published: true
     <h1 class="text-4xl text-center">Customers</h1>
   </div>
 
-  <%= render "search" %>
+  <div class="max-w-72 mx-auto mb-10">
+    <%= form_with url: customers_path,
+                  method: :get,
+                  class: "group",
+                  data: {controller: "autosubmit",
+                         autosubmit_wait_value: 300,
+                         turbo_frame: "customers"} do  %>
+      <div class="mt-2">
+        <%= search_field_tag :query, params[:query],
+                             class: "group-aria-busy:bg-[url('/Rolling@1x-1.4s-200px-200px.svg')] bg-contain bg-no-repeat bg-[left_0_top_0] block w-full rounded-full border-0 pr-4 pl-10 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm/6",
+                             placeholder: "検索",
+                             data: { action: "input->autosubmit#submitWithDebounce" }
+        %>
+      </div>
+    <% end %>
+  </div>
 
-  <%= turbo_frame_tag "customers" do %>
+  <%= turbo_frame_tag "customers", target: "_top" do %>
     <table class="table table-striped w-full">
       <thead>
       <tr class="border-b-2 border-gray-900">
         <th class="p-2 text-left">Name</th>
         <th class="p-2 text-left">JP Name</th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
@@ -63,6 +89,13 @@ published: true
           <td class="p-2">
             <%= customer.jp_name %>
           </td>
+          <td class="p-2">
+            <%= link_to edit_customer_path(customer) do %>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"/>
+              </svg>
+            <% end %>
+          </td>
         </tr>
       <% end %>
       </tbody>
@@ -71,40 +104,15 @@ published: true
 </div>
 ```
 
-* 検索窓は`search` partialで分けています
-* `<turbo-frame id="customers>`を設置しています
-    * 更新されるたび、変更されるのはこのTurbo Frameの範囲だけです
-    * 画面の他の箇所はそのままです。検索窓のカーソル位置、入力されている文字等、そのままです
-
-### 検索窓 --- search-input
-
-```erb:app/views/customers/_search.html.erb
-<div class="max-w-72 mx-auto mb-10">
-  <%= form_with url: customers_path,
-                method: :get,
-                class: "group",
-                data: {controller: "autosubmit",
-                       autosubmit_wait_value: 300,
-                       turbo_frame: "customers"} do  %>
-  <div class="mt-2">
-    <%= search_field_tag :query, params[:query],
-                         class: "group-aria-busy:bg-[url('/Rolling@1x-1.4s-200px-200px.svg')] bg-contain bg-no-repeat bg-[left_0_top_0] block w-full rounded-full border-0 pr-4 pl-10 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm/6",
-                         placeholder: "検索",
-                         data: { action: "input->autosubmit#submitWithDebounce" }
-    %>
-  </div>
-    <% end %>
-</div>
-```
-
-* 検索窓のpartialです
-* `data-controller="autosubmit"`属性のところで`autosubmit` Stimulus Controllerと接続しています
-    * その際`data-autosubmit-wait-value="300"`属性ではリアルタイム検索をするときのdebounceの待ち時間を設定しています 
-* また`data-turbo-frame="customers"`属性により、サーバからのレスポンスは`<turbo-frame id="customers">` Turbo Frameのところに入れように指示しています
-* `search_field_tag`は検索窓の`<input type="search">`を作りますが、そこには`data-action="input->autosubmit#submitWithDebounce"`属性がついています
-   * この`input`タグの`input`イベントを受け取ると、`autosubmit` Stimulus Controllerの`submitWithDebounce()`が呼ばれる仕組みになっています
-* Turboはリクエスト送信中に、該当する`<form>`属性および`<turbo-frame>`に`aria-busy`属性を自動的につけます
-    * `group-aria-busy:bg-[url('/Rolling@1x-1.4s-200px-200px.svg')]`のところで`aria-busy`をCSS擬似セレクタによって検出し、pending UI（待ちUI）を表示しています
+* 検索窓は`form_with`の中の`search_field_tag`で実装しています。HTMLで言うと`<form>`タグを`<input type="search">`を使います。
+    * `data-controller="autosubmit"`属性で`AutosubmitController`(Stimulus)に接続します。
+    * `data-autosubmit-wait-value="300"`属性ではリアルタイム検索をするときのdebounceの待ち時間を設定しています。
+    * `data-turbo-frame="customers"`属性により、サーバから送られてきたHTMLは`<turbo-frame id="customers">`で指定されたTurbo Frameのところに入れように指示しています。
+* `search_field_tag`(`<input type="search">`)には`data-action="input->autosubmit#submitWithDebounce"`属性がついています。
+    * `input`イベントに対して、`AutosubmitController`(Stimulus)の`submitWithDebounce()`メソッドが呼ばれます。
+* `search_field_tag`(`<input type="search">`)には`class="group-aria-busy:bg-[url('/Rolling@1x-1.4s-200px-200px.svg')]"`がついています。
+   * これはpending UI(待ちUI)を表示するのに使用します。TurboFrameは自動的に通信中の`<frame>`に`aria-busy`属性をつけますので、CSS擬似セレクタで検出しています。
+* `turbo_frame_tag "customers"`(`<turbo-frame id="customers>`)は、サーバから送られて来たHTMLが挿入される箇所です。
 
 ### Autosubmit Stimulus Controller --- autosubmit-controller
 
@@ -125,39 +133,17 @@ export default class extends Controller {
   }
 
   submitWithDebounce() {
-    console.log("submitWithDebounce")
     clearTimeout(this.timeoutId)
     this.timeoutId = setTimeout(() => this.submit(), this.waitValue)
   }
 }
 ```
 
-* 自動的にformを送信するためのStimulus controllerです
-* リアルタイム検索を行いますので、サーバに負荷をかけすぎないように[debounce処理](https://developer.mozilla.org/ja/docs/Glossary/Debounce)をしています
-* `static values =`ではdebounce処理の待ち時間(wait)を設定しています。デフォルトは300msですが、HTML属性の`data-autosubmit-wait-value="..."`を設定すれば自由に変えられます
-* `submit()`がメインの処理です。やっていることはformに対して`requestSubmit()`を呼んでいるだけです
-* `submitWithDebounce()`は`submit()`にdebounce処理を追加したものです
-
-## まとめ --- summary
-
-![interactive-flow-hotwire.webp](content_images/interactive-flow-hotwire.webp "max-w-[600px] mx-auto")
-
-* 今回はStimulus経由でTurboを実行している形をとっています。一番下の<span class="text-green-600">緑</span>のルートです
-   * Turboは`<a>`タグのクリックや`<form>`内の`<button>`押下には反応します。しかし今回は`input`イベントに応答しますのでStimulusを使わなければなりません
-* Turbo Drive, Turbo Frames, Turbo Streamsの選択については、下記を考慮してTurbo Framesを選択しています
-    * 画面の一部についてはステートを維持しなければならないこと（`<input>`タグのフォーカス）
-    * 更新する箇所が一つにまとめられること
-    * ステートを維持する必要がない場合はTurbo Driveで十分なことが多くなります。また複数箇所を独立に更新する必要がある場合はTurbo Streamsを使います。ただしMorphingも使えますので、各選択肢が使えるシチュエーションはかなり重複してきます
-* 今回のStimulus Controllerが非常にシンプルだったこともあり、再利用性が高いことが最初からわかります。Controllerの命名を`realtime-search`のようにせず、最初から`autosubmit`にしていますが、これは再利用性が予見できたためです。検索以外の用途でも使えるような名前にしています
-    * ただし最初から再利用できそうだと確信できるのは比較的稀だと私は感じています。[通常はあまり再利用性を考えず](/opinions/reusability)、後で気づいたら検討するぐらいで良いと思います
+* `submit()`は、`AutosubmitController`(Stimulus)が接続されたHTML要素の`form`に対して、`requestSubmit()`を呼ぶだけです。
+* リアルタイム検索を行いますので、サーバに負荷をかけすぎないように[debounce処理](https://developer.mozilla.org/ja/docs/Glossary/Debounce)をしています。
+* `submitWithDebounce()`は`submit()`にdebounce処理を追加したものです。
 
 ## メモ --- memo
 
-Next.jsはversion 15になって、非同期通信で[クライアントサイドナビゲーションをする`<Form>`コンポーネント](https://nextjs.org/blog/next-15#form-component)を用意しました。一方でHotwireは当初から`<form>`でGETリクエストをするようにできており、前身の[UJS (Unobtrusive JavaScript)の頃](https://railsguides.jp/v6.1/working_with_javascript_in_rails.html#組み込みヘルパー)からこの機能を用意しています。
-
-Hotwireは`<input>`タグに`data-turbo-submits-with`などでpending UI（待ちUI）をつけられたり、`disabled`属性が自動的についたり、さらに`<form>`要素に自動的に`aria-busy`がついたりするなど、自動でやってくれる範囲が広いです。React/Next.jsであれば新しい`<Form>`要素を使う上に、`useFormStatus()`等を使う必要があります。
-
-さすがに[Basecampプロジェクト管理システム](https://basecamp.com)や[Hey電子メールシステム](https://www.hey.com)で育っただけあって、Next.jsと比較した場合、CRUD周りの機能にはHotwireに一日の長があると言えそうです。
-
-
+* Hotwireは`<input>`タグに`data-turbo-submits-with`などでpending UI（待ちUI）を簡単に追加できたり、`disabled`属性が自動的についたり、さらに`<form>`要素に自動的に`aria-busy`がついたりするなど、自動でやってくれる範囲が広いです。
 

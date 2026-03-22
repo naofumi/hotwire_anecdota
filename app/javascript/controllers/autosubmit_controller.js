@@ -14,7 +14,6 @@ export default class extends Controller {
   }
 
   submitWithDebounce() {
-    console.log("submitWithDebounce")
     clearTimeout(this.timeoutId)
     this.timeoutId = setTimeout(() => this.submit(), this.waitValue)
   }

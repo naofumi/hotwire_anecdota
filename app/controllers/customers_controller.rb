@@ -3,7 +3,7 @@ class CustomersController < ApplicationController
 
   # GET /customers or /customers.json
   def index
-    sleep 1 unless Rails.env.test?
+    sleep 0.5 unless Rails.env.test?
     @customers = Customer.search(params[:query])
   end
 

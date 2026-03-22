@@ -2,7 +2,7 @@
 title: モーダルダイアログは使うべきか？
 layout: article
 order: 40
-published: true
+published: false
 ---
 
 20年前からそうですが、JavaScriptを使うと、ブラウザが元々用意していたネイティブのUIウィジェットを超えて、様々なUIが自由に作れます。

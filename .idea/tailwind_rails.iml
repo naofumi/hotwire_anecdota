@@ -81,6 +81,7 @@
     <orderEntry type="library" scope="PROVIDED" name="mime-types-data (v3.2026.0303, rbenv: 4.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mini_mime (v1.1.5, rbenv: 4.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="minitest (v6.0.2, rbenv: 4.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="TEST" name="minitest-mock (v5.27.0, rbenv: 4.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="msgpack (v1.8.0, rbenv: 4.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-imap (v0.6.3, rbenv: 4.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-pop (v0.1.2, rbenv: 4.0.1) [gem]" level="application" />

@@ -6,7 +6,8 @@
 </div>
 <% if @catalog_data %>
   <script type="application/json" id="catalog-data">
-    <% @catalog_data[:images].transform_values! { image_path(it) } %>
-    <%= @catalog_data.to_json.html_safe %>
+    <%= @catalog_data.tap { it[:images].transform_values! { image_path(it) } }
+                     .to_json
+                     .html_safe %>
   </script>
 <% end %>
