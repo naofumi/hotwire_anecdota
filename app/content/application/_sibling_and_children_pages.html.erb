@@ -1,0 +1,14 @@
+<% if current_page.data.show_siblings %>
+  <div class="mb-8">
+    <h3 class="text-xl ml-4 font-light" id="sibling-pages">
+      <%= link_to current_page.parent.data.title,
+                  current_page.parent.url,
+                  class: "hover:text-orange-600 active:opacity-50"
+      %>
+    </h3>
+    <%= render "page_children_grid", page: current_page.parent, label: "兄弟ページ" %>
+  </div>
+<% end %>
+<% if current_page.children.any? %>
+  <%= render "page_children_grid", page: current_page, label: "子ページ" %>
+<% end %>

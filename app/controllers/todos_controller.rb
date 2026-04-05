@@ -34,16 +34,19 @@ class TodosController < ApplicationController
 
     respond_to do |format|
       if @todo.update(todo_params)
-        # format.html { redirect_to @todo }
-        # flash.notice = "Todo was successfully updated."
-        #
-        # Note that request_id needs to be set to nil
-        # format.turbo_stream { render turbo_stream: turbo_stream.refresh(request_id: nil) }
-        flash.now.notice = "Todo was successfully updated."
-        format.turbo_stream
+        if request.variant == :mpa
+          format.html { redirect_to @todo }
+          flash.notice = "Todo was successfully updated."
+        else
+          flash.now.notice = "Todo was successfully updated."
+          format.turbo_stream
+        end
       else
-        # format.html { render :edit, status: :unprocessable_content }
-        format.turbo_stream { render status: :unprocessable_content }
+        if request.variant == :mpa
+          format.html { render :edit, status: :unprocessable_content }
+        else
+          format.turbo_stream { render status: :unprocessable_content }
+        end
       end
     end
   end

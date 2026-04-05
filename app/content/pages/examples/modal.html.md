@@ -3,6 +3,21 @@ title: モーダル
 layout: article
 order: 100
 published: true
+descriptors:
+  component_names:
+    - Modal
+    - Dialog
+    - Popup
+  server_request: true
+  state_management:
+    - aria-expanded
+  technologies:
+    - Turbo Streams
+    - Stimulus
+  demo_urls:
+    - ["デモ", "/todos"]
+  related_pages:
+    - /concepts/stimulus-tips.html.md
 ---
 
 ウェブUIでよく見かけるモーダルですが、Hotwireで実装したというブログ記事はよく見かけます。そして多くの場合は「JavaScriptをほとんど使わないでできた！」っていうことを誇っています。

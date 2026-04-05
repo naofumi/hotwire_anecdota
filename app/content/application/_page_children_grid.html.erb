@@ -1,0 +1,18 @@
+<%# locals: (page:, label:) %>
+
+  <% page.children
+         .sort_by { it.data.order.to_i }
+         .filter { page_showable?(it, show_published_only: true) }
+         .each_with_index do |child_page, index| %>
+    <div class="h-8 font-bold text-right pr-4 border-r border-gray-300">
+      <%= index.zero? ? label : "" %>
+    </div>
+    <div class="pl-4 flex markdown">
+      <%= link_to child_page.data.title,
+                  child_page.url,
+                  class: "#{child_page.data.published ? '' : "opacity-40"} block link flex-1" %>
+      <% if Rails.env.development? %>
+        <span class="text-xs flex-initial"><%= child_page.data.order %></span>
+      <% end %>
+    </div>
+  <% end %>

@@ -115,3 +115,8 @@ Style/BlockDelimiters:
 # I like doing this
 Style/OneClassPerFile:
   Enabled: false
+
+# Don't change the style of if-else statements.
+# It often makes it harder to understand.
+Style/IfInsideElse:
+  Enabled: false
