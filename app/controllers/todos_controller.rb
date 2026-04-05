@@ -34,15 +34,15 @@ class TodosController < ApplicationController
 
     respond_to do |format|
       if @todo.update(todo_params)
-        if request.variant == :mpa
+        if request.variant.mpa?
           format.html { redirect_to @todo }
-          flash.notice = "Todo was successfully updated."
+          flash.notice = "Todo was successfully updated. (with Turbo Drive)"
         else
-          flash.now.notice = "Todo was successfully updated."
+          flash.now.notice = "Todo was successfully updated. (with Turbo Streams)"
           format.turbo_stream
         end
       else
-        if request.variant == :mpa
+        if request.variant.mpa?
           format.html { render :edit, status: :unprocessable_content }
         else
           format.turbo_stream { render status: :unprocessable_content }

@@ -25,10 +25,6 @@ export default class extends Controller {
     this.hide(event)
   }
 
-  // Used to prevent browser default behavior on specific elements.
-  void(event) {
-  }
-
   shownValueChanged() {
     if (this.shownValue) {
       this.#makePageUnresponsive()

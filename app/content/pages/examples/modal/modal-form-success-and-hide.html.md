@@ -4,6 +4,8 @@ layout: article
 order: 0010
 published: true
 show_siblings: true
+descriptors:
+  parent: /examples/modal
 ---
 
 Hotwireで作成したモーダル中のフォームからリクエストを送信し、成功するところまでを解説します。下記のビデオのものになります。

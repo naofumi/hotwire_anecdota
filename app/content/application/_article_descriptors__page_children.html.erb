@@ -8,9 +8,10 @@
       <%= index.zero? ? label : "" %>
     </div>
     <div class="pl-4 flex markdown">
+      <% is_current_page = current_page.url == child_page.url %>
       <%= link_to child_page.data.title,
                   child_page.url,
-                  class: "#{child_page.data.published ? '' : "opacity-40"} block link flex-1" %>
+                  class: class_names("block link flex-1", "opacity-40": !child_page.data.published, "font-bold": is_current_page) %>
       <% if Rails.env.development? %>
         <span class="text-xs flex-initial"><%= child_page.data.order %></span>
       <% end %>

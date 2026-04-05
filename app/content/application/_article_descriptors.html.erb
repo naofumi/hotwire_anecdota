@@ -1,16 +1,44 @@
-<% if current_page.data.descriptors %>
-  <% d = current_page.data.descriptors %>
-  <% raise "Descriptor element mismatch" unless d.keys == ["component_names", "server_request", "state_management", "technologies", "demo_urls", "related_pages"] %>
-  <div class="h-8 font-bold text-right pr-4 border-r border-gray-300">UI 要素名</div>
-  <div class="pl-4"><%= d.component_names.to_a.join(', ') %></div>
-  <div class="h-8 font-bold text-right pr-4 border-r border-gray-300">サーバ接続</div>
-  <div class="pl-4"><%= d.server_request ? "要" : "不要" %></div>
-  <div class="h-8 font-bold text-right pr-4 border-r border-gray-300">ステート管理</div>
-  <div class="pl-4"><%= d.state_management.to_a.join(', ').presence || "なし" %></div>
-  <div class="h-8 font-bold text-right pr-4 border-r border-gray-300">使用技術</div>
-  <div class="pl-4"><%= d.technologies.to_a.join(', ') %></div>
-  <div class="h-8 font-bold text-right pr-4 border-r border-gray-300">デモ</div>
-  <div class="pl-4 markdown"><%= safe_join d.demo_urls.map { link_to it[0], it[1], class: "link--demo" }, ", " %></div>
-  <div class="h-8 font-bold text-right pr-4 border-r border-gray-300">関連ページ</div>
-  <div class="pl-4 markdown"><%= safe_join d.related_pages.map { |path| link_to site.get(path).data.title, path }, ", " %></div>
-<% end %>
+<%# locals: (current_page:) %>
+<% available_descriptors = ["component_names", "server_request", "state_management", "technologies", "demo_urls", "related_pages", "parent"].freeze %>
+
+<div class="grid grid-cols-[auto_1fr] auto-rows-auto w-full">
+  <% if current_page.data.descriptors %>
+    <% d = current_page.data.descriptors %>
+    <% raise "Descriptor element mismatch" unless (d.keys - available_descriptors).empty? %>
+    <% if d.component_names.present? %>
+      <div class="h-8 font-bold text-right pr-4 border-r border-gray-300">UI 要素名</div>
+      <div class="pl-4"><%= d.component_names.to_a.join(', ') %></div>
+    <% end %>
+    <% unless d.server_request.nil? %>
+      <div class="h-8 font-bold text-right pr-4 border-r border-gray-300">サーバ接続</div>
+      <div class="pl-4"><%= d.server_request ? "要" : "不要" %></div>
+    <% end %>
+    <% unless d.state_management.nil? %>
+      <div class="h-8 font-bold text-right pr-4 border-r border-gray-300">ステート管理</div>
+      <div class="pl-4"><%= d.state_management.to_a.join(', ').presence || "なし" %></div>
+    <% end %>
+    <% if d.technologies.present? %>
+      <div class="h-8 font-bold text-right pr-4 border-r border-gray-300">使用技術</div>
+      <div class="pl-4"><%= d.technologies.to_a.join(', ') %></div>
+    <% end %>
+    <% if d.demo_urls.present? %>
+      <div class="h-8 font-bold text-right pr-4 border-r border-gray-300">デモ</div>
+      <div class="pl-4 markdown"><%= safe_join d.demo_urls.map { link_to it[0], it[1], class: "link--demo" }, ", " %></div>
+    <% end %>
+    <% if d.parent %>
+      <div class="h-8 font-bold text-right pr-4 border-r border-gray-300">親ページ</div>
+      <div class="pl-4 markdown"><%= link_to site.get(d.parent).data.title, d.parent %></div>
+    <% end %>
+    <% if d.related_pages.present? %>
+      <div class="h-8 font-bold text-right pr-4 border-r border-gray-300">関連ページ</div>
+      <div class="pl-4 markdown"><%= safe_join d.related_pages.map { |path| link_to site.get(path).data.title, path }, ", " %></div>
+    <% end %>
+  <% end %>
+
+  <% if current_page.data.show_siblings %>
+    <%= render "article_descriptors__page_children", page: current_page.parent, label: "兄弟ページ" %>
+  <% end %>
+  <% if current_page.children.present? %>
+    <%= render "article_descriptors__page_children", page: current_page, label: "子ページ" %>
+  <% end %>
+</div>
