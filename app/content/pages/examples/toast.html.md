@@ -3,17 +3,38 @@ title: トースト
 layout: article
 order: 90
 published: true
+descriptors:
+  component_names:
+    - Toast
+    - Notification
+    - Alert
+    - Message
+  server_request: true
+  state_management:
+    - サーバのflash (session)
+  technologies:
+    - Stimulus
+    - Turbo Drive, Turbo Streams
+  demo_urls:
+    - ["デモ", "/todos"]
+  related_pages:
+    - /concepts/stimulus-tips.html.md
 ---
 
-トーストは`<form>`リクエストの送信後に表示して、成功したことをユーザに伝えるのが主な目的です。
+トーストは一時的な通知を表示するUIです。特に表示されてから
+例えば`<form>`リクエストの送信後に表示して、成功したことをユーザに伝えるのに使います。
 
-ここで作るのは下記のようなUIです。
+ここで作るのは下記のようなUIです。（「更新」ボタンを押した後にトーストが表示されます）
 
 ![toast.mov](content_images/toast.mov "mx-auto max-w-[500px]")
 
 [デモはこちら](/todos)に用意しています。
 
 ## 考えるポイント --- thinking-points
+
+* サーバとの非同期通信
+  * 今回は`<form>`リクエストの成功・失敗に対する応答として考えるため、サーバとの非同期通信を行います。しかしトースト自身がサーバとの非同期通信である必要は必ずしもありません。 
+
 
 1. `<form>`送信後のレスポンスとして、Turbo DriveもしくはTurbo Streamsにより、トーストのHTMLがDOMに挿入されるものとします
    1. 挿入時にアニメーションとともにトーストが表示されるようにしますが、これはCSSだけで十分です
@@ -153,3 +174,7 @@ export default class extends Controller {
     * Turbo Driveは[POST/redirect/GETパターン](/concepts/post-redirect-get)を使用しますので、リダイレクト後の画面描画に反映させます
     * Turbo StreamsはPOSTだけでダイレクトにレスポンスを返しますので、同じリクエストの画面描画に反映させます
   * Railsの`flash`と`flash.now`を使用すると、ERBに条件分岐を入れずに、Controller側から上記の２つのケースにうまく対応できることを解説しました
+
+## 追記：トーストは良いUIか --- is-toast-good-ui
+
+

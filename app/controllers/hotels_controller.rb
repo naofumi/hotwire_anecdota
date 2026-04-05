@@ -1,5 +1,6 @@
 class HotelsController < HotelBaseController
-  before_action :set_hotel, only: [ :show, :edit, :update, :destroy ]
+  set_available_variants :stimulus_values, :zustand
+  before_action :set_hotel, only: [ :show ]
 
   # GET /hotels or /hotels.json
   def index
@@ -11,61 +12,9 @@ class HotelsController < HotelBaseController
     @carousel_images = [ "10543662.webp", "11471947.webp", "11471976.webp", "11471978.webp" ]
   end
 
-  # GET /hotels/new
-  def new
-    @hotel = Hotel.new
-  end
-
-  # GET /hotels/1/edit
-  def edit
-  end
-
-  # POST /hotels or /hotels.json
-  def create
-    @hotel = Hotel.new(hotel_params)
-
-    respond_to do |format|
-      if @hotel.save
-        format.html { redirect_to hotel_url(@hotel), notice: "Hotel was successfully created." }
-        format.json { render :show, status: :created, location: @hotel }
-      else
-        format.html { render :new, status: :unprocessable_content }
-        format.json { render json: @hotel.errors, status: :unprocessable_content }
-      end
-    end
-  end
-
-  # PATCH/PUT /hotels/1 or /hotels/1.json
-  def update
-    respond_to do |format|
-      if @hotel.update(hotel_params)
-        format.html { redirect_to hotel_url(@hotel), notice: "Hotel was successfully updated." }
-        format.json { render :show, status: :ok, location: @hotel }
-      else
-        format.html { render :edit, status: :unprocessable_content }
-        format.json { render json: @hotel.errors, status: :unprocessable_content }
-      end
-    end
-  end
-
-  # DELETE /hotels/1 or /hotels/1.json
-  def destroy
-    @hotel.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to hotels_url, notice: "Hotel was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_hotel
       @hotel = Hotel.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def hotel_params
-      params.expect(hotel: [ :name, :prefecture, :city, :tagline, :description ])
     end
 end

@@ -7,14 +7,14 @@ published: true
 
 ## Hotwireは入門書レベルのJavaScriptで書ける --- you-can-write-hotwire-with-tutorial-level-javascript
 
-[Reactとの比較](/opinions/why_is_react_difficult)になりますが、Hotwireで使うJavaScriptは簡単です。**Hotwireは入門書程度のJavaScriptで十分に書けます**。
+Hotwireは入門書程度のJavaScriptで十分に書けます。[Reactのように](/opinions/why_is_react_difficult)JavaScriptの高度な理解が要求されることはありません。
 
 * Hotwireでは高階関数はほとんど使いません。`Array.forEach()`とか`Array.filter()`などの初歩的なものを使ってDOM操作はしますが、高階関数を意識することはまずありません。
 * Hotwireではasync awaitやPromise、コールバック等は滅多に書きません
    * Reactでasync await等が必要になるのはほとんどが`fetch()`というでサーバと通信をするときだけです。それさえなければ、async awaitの必要性は激減します
    * Hotwireの場合は、`fetch()`はすべてTurboが担当します。そしてTurboは通常はJavaScriptすら必要なく、HTMLの属性を書くだけで十分です。もちろんasync awaitは登場しません
 
-Hotwireの方が入門者、もしくはJavaScriptに特に詳しくないウェブデザイナーにとって優しいライブラリーと言えると思います。
+Hotwireの方が入門者、もしくはJavaScriptに特に詳しくないウェブデザイナーにとって優しいライブラリーと言えます。
 
 ## 実際のJavaScript入門書を見てみる --- javascript-introduction
 
@@ -35,8 +35,3 @@ Hotwireの方が入門者、もしくはJavaScriptに特に詳しくないウェ
 
 ![javascript-intro-book.webp](content_images/javascript-intro-book.webp "max-w-[300px] mx-auto")
 
-## まとめ --- summary
-
-* HotwireのJavaScriptは、デザイナー向けの初歩的な知識だけでほぼ書けます
-* ウェブデザイナー、ウェブコーダーでも十分にHotwireのJavaScriptコードが書けます
-* Hotwireは、Reactと比べて、はるかに裾野が広い技術と言えます

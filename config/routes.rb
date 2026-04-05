@@ -35,8 +35,6 @@ Rails.application.routes.draw do
       collection do
         get :room
         get :restaurant
-        get :service
-        get :basic_info
       end
     end
   end

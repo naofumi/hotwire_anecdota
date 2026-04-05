@@ -10,15 +10,19 @@
   <%= yield :head %>
 
   <link rel="manifest" href="/manifest.json">
-<!--  <link rel="icon" href="/icon.png" type="image/png">-->
-<!--  <link rel="icon" href="/icon.svg" type="image/svg+xml">-->
-<!--  <link rel="apple-touch-icon" href="/icon.png">-->
+  <!--  <link rel="icon" href="/icon.png" type="image/png">-->
+  <!--  <link rel="icon" href="/icon.svg" type="image/svg+xml">-->
+  <!--  <link rel="apple-touch-icon" href="/icon.png">-->
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
 </head>
 
 <body>
-<div class="w-full min-w-[768px]">
+<div data-controller="slide-drawer"
+     data-slide-drawer-shown-value="false"
+     class="group/slide-drawer"
+>
+  <div class="w-full min-w-[768px]">
     <nav class="flex h-16">
       <div class="h-14 w-14">
         <%= image_tag "hotel_images/hotel-logo.webp",
@@ -27,19 +31,19 @@
                       alt: "logo" %>
       </div>
       <div class="h-14 grow flex pl-6 items-center">
-        <%= link_to "---", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
-        <%= link_to "---", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
-        <%= link_to "---", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
-        <%= link_to "---", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
-        <%= link_to "---", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
-        <%= link_to "---", "", class: "block mr-6 font-extralight hover:text-blue-500" %>
+        <%= link_to "---", "", class: "block mr-6 hover:text-blue-500" %>
+        <%= link_to "---", "", class: "block mr-6 hover:text-blue-500" %>
+        <%= link_to "---", "", class: "block mr-6 hover:text-blue-500" %>
+        <%= link_to "---", "", class: "block mr-6 hover:text-blue-500" %>
+        <%= link_to "Stimulus Values版", "?variant=stimulus_values", class: class_names("block mr-6 hover:text-blue-500", {"text-blue-600 font-bold": request.variant.include?(:stimulus_values)}) %>
+        <%= link_to "Zustand版", "?variant=zustand", class: class_names("block mr-6 hover:text-blue-500", {"text-blue-600 font-bold": request.variant.include?(:zustand)}) %>
       </div>
     </nav>
     <div><%= content_for(:breadcrumbs) %></div>
     <%= yield %>
   </div>
 
-<div data-controller="slide-drawer" data-slide-drawer-shown-value="false">
+  <div id="slide-drawer">
     <div class="peer transition-all duration-500 ease-out fixed h-full w-[768px] z-20 bg-white top-0 right-0 overflow-auto
                 aria-hidden:translate-x-[768px]"
          aria-hidden="true"
@@ -60,5 +64,6 @@
          data-action="click->slide-drawer#hide:prevent">
     </div>
   </div>
+</div>
 </body>
 </html>

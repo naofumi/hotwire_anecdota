@@ -3,10 +3,10 @@
 <% @back_link = { title: "コンテンツ一覧", url: "/directory" } %>
 
 <%= render_layout "body" do %>
-  <div class="max-w-3xl mx-auto mt-12">
+  <div class="max-w-3xl px-2 mx-auto mt-12">
     <%= render "content_breadcrumbs", current_page: %>
   </div>
-  <div class="max-w-3xl mx-auto flex gap-8 justify-between items-stretch mt-4">
+  <div class="max-w-3xl px-2 mx-auto flex gap-8 justify-between items-stretch mt-4">
     <div style="view-transition-name: <%= view_transition_name(current_page.data.key_image) %>"
       class="section__key-image section__key-image--<%= current_page.data.key_image %>">
       <h1 class="section__title">

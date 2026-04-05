@@ -1,7 +1,7 @@
 @layer components {
     .section__key-image {
         /*@apply flex-1 bg-orange-400 flex flex-col justify-center items-center;*/
-        @apply rounded-2xl flex-1 bg-cover flex flex-col justify-center items-center;
+        @apply rounded-2xl flex-1 bg-cover bg-center flex flex-col justify-center items-center;
     }
 
     .section__key-image--introduction {
@@ -10,6 +10,7 @@
 
     .section__key-image--examples {
         background-image: url('content_images/pexels-jakubzerdzicki-16859997.webp');
+        background-position: left;
     }
 
     .section__key-image--concepts {

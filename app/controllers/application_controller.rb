@@ -1,8 +1,6 @@
 class ApplicationController < ActionController::Base
   include Variantable
 
-  before_action :set_current_variant, unless: -> { it.is_a? Sitepress::SiteController }
-
   helper_method :current_user
 
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
@@ -17,9 +15,5 @@ class ApplicationController < ActionController::Base
 
     def current_user
       @current_user ||= Current.user
-    end
-
-    def set_current_variant
-      request.variant = validated_variant(session[:variant])
     end
 end

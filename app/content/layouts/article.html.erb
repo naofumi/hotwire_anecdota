@@ -1,7 +1,7 @@
 <% provide :head, turbo_exempts_page_from_preview %>
 <% @back_link = { title: current_page.parent.data.title, url: current_page.parent.url } %>
 <%= render_layout "body" do %>
-  <div class="max-w-3xl mx-auto bg-white">
+  <div class="max-w-3xl px-2 mx-auto bg-white">
     <div class="mt-12">
       <%= render "content_breadcrumbs",
                  current_page: %>
@@ -12,7 +12,7 @@
     <div class="text-base text-gray-700 mt-12">
       <%= render "article_toc", full_document: %>
       <div>
-        <h1 class="mt-2 text-3xl font-light text-gray-900 sm:text-4xl">
+        <h1 class="mt-2 mr-16 text-3xl font-light text-gray-900 sm:text-4xl">
           <%= current_page.data.title %>
         </h1>
         <p class="mt-6 text-xl leading-8">

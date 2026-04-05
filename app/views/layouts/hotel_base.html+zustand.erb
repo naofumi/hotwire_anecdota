@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for(:title) || "Tailwind Rails" %></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= yield :head %>
+
+  <link rel="manifest" href="/manifest.json">
+<!--  <link rel="icon" href="/icon.png" type="image/png">-->
+<!--  <link rel="icon" href="/icon.svg" type="image/svg+xml">-->
+<!--  <link rel="apple-touch-icon" href="/icon.png">-->
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+</head>
+
+<body>
+<div class="w-full min-w-[768px]">
+    <nav class="flex h-16">
+      <div class="h-14 w-14">
+        <%= image_tag "hotel_images/hotel-logo.webp",
+                      size: "56x56",
+                      class: "object-cover h-14 w-14",
+                      alt: "logo" %>
+      </div>
+      <div class="h-14 grow flex pl-6 items-center">
+        <%= link_to "---", "", class: "block mr-6 hover:text-blue-500" %>
+        <%= link_to "---", "", class: "block mr-6 hover:text-blue-500" %>
+        <%= link_to "---", "", class: "block mr-6 hover:text-blue-500" %>
+        <%= link_to "---", "", class: "block mr-6 hover:text-blue-500" %>
+        <%= link_to "Stimulus Values版", "?variant=stimulus_values", class: class_names("block mr-6 hover:text-blue-500", {"text-blue-600 font-bold": request.variant.include?(:stimulus_values)}) %>
+        <%= link_to "Zustand版", "?variant=zustand", class: class_names("block mr-6 hover:text-blue-500", {"text-blue-600 font-bold": request.variant.include?(:zustand)}) %>
+      </div>
+    </nav>
+    <div><%= content_for(:breadcrumbs) %></div>
+    <%= yield %>
+  </div>
+
+<div data-controller="slide-drawer-zustand" data-slide-drawer-zustand-shown-value="false">
+    <div class="peer transition-all duration-500 ease-out fixed h-full w-[768px] z-20 bg-white top-0 right-0 overflow-auto
+                aria-hidden:translate-x-[768px]"
+         aria-hidden="true"
+         data-slide-drawer-zustand-target="drawer">
+      <%= button_tag type: :button,
+                     data: { action: "click->slide-drawer-zustand#hide" },
+                     class: "absolute top-2 right-2 h-14 w-14 p-1 bg-gray-500 text-white hover:bg-gray-400 active:bg-gray-600 cursor-pointer" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+        </svg>
+      <% end %>
+      <%= turbo_frame_tag :slide_drawer %>
+    </div>
+    <div class="transition-all duration-500 fixed h-full w-full z-19 bg-black opacity-50 top-0 left-0
+                peer-aria-hidden:opacity-0
+                peer-aria-hidden:invisible "
+         aria-hidden="true"
+         data-action="click->slide-drawer-zustand#hide:prevent">
+    </div>
+  </div>
+</body>
+</html>

@@ -85,6 +85,9 @@ application.register("slide-drawer", SlideDrawerController)
 import SlideDrawerTriggerController from "./slide_drawer_trigger_controller"
 application.register("slide-drawer-trigger", SlideDrawerTriggerController)
 
+import SlideDrawerZustandController from "./slide_drawer_zustand_controller"
+application.register("slide-drawer-zustand", SlideDrawerZustandController)
+
 import SwitchController from "./switch_controller"
 application.register("switch", SwitchController)
 

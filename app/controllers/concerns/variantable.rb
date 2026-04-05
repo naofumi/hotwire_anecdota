@@ -1,8 +1,26 @@
+# module Variantable
+#
+# Set and retrieve variants with validation against pre-determined per-controller sets.
+#
+# Usage:
+#
+# In the controller which you will use the variants:
+#
+#     class PostsController < ApplicationController
+#       include Variantable
+#       set_available_variants :mobile, :desktop
+#     end
+#
+# When setting the variant:
+#
+#     request.variant = validated_variant(session[:variant])
+#
 module Variantable
   extend ActiveSupport::Concern
 
   included do
     helper_method :available_variants
+    before_action :set_current_variant, unless: -> { it.is_a? Sitepress::SiteController }
   end
 
   class_methods do
@@ -13,7 +31,12 @@ module Variantable
 
   private
 
-    # Validates that the variant is included in @@available_variants
+    def set_current_variant
+      session[:variant] = params[:variant] if params[:variant].present?
+      request.variant = validated_variant(session[:variant])
+    end
+
+    # Validates that the variant is included in @available_variants
     # and returns the validated variant.
     # If it is not validated, then returns the default variant, which is
     # the first variant in available_variants
@@ -43,11 +66,13 @@ class Variantable::VariantSelector
     variant_available?(variant) ? variant.to_sym : default_variant
   end
 
-  def variant_available?(variant)
-    variant.present? && @available_variants.include?(variant.to_sym)
-  end
+  private
 
-  def default_variant
-    @available_variants.first
-  end
+    def variant_available?(variant)
+      variant.present? && @available_variants.include?(variant.to_sym)
+    end
+
+    def default_variant
+      @available_variants.first
+    end
 end

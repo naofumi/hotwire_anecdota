@@ -24,7 +24,7 @@ descriptors:
 
 ここで作るのは下記のようなUIです。
 
-![accordion.mov](content_images/accordion.mov "mx-auto max-w-[500px]")
+![accordion.mov](content_images/accordion.mov "mx-auto max-w-full")
 
 [デモはこちら](/components/accordion)に用意しています。
 
