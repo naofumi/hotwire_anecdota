@@ -10,16 +10,14 @@ descriptors:
 
 Hotwireで作成したモーダル中のフォームからリクエストを送信し、成功するところまでを解説します。下記のビデオのものになります。
 
-![modal.mov](content_images/modal-update.mov "max-w-[500px] mx-auto")
-<div class="text-sm font-bold max-w-[500px] mx-auto">
+![modal.mov](content_images/modal-update.mov)
+<div class="text-sm font-bold">
 サーバレスポンスに1秒の遅延を入れています
 </div>
 
 ## 考えるポイント --- points-to-consider
 
 ![modal-crud.webp](content_images/modal-crud.webp "max-w-[700px] mx-auto")
-
-![interactive-flow-hotwire.webp](content_images/interactive-flow-hotwire.webp "max-w-[600px] mx-auto")
 
 1. `form`の送信はTurboで行います。レスポンスを返す方法としてはTurbo FramesとTurbo Streamsが考えられますが、今回は裏の画面を更新するだけでなく、トーストも出します。画面の一箇所しか書き換えられないTurbo Framesではなく、複数箇所が更新できるTurbo Streamsを選択します
    1. これ以外にTurbo Driveを使う方法もあります。

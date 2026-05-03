@@ -4,6 +4,8 @@ layout: article
 order: 0030
 published: true
 show_siblings: true
+descriptors:
+  parent: /examples/modal
 ---
 
 Hotwireで作成したモーダルでフォームを送信し、サーバサイドバリデーションが失敗した時の処理を紹介します。下記のビデオのものになります。

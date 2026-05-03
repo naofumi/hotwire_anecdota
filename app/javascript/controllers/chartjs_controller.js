@@ -24,7 +24,7 @@ export default class extends Controller {
     // We create a new dataValue object and use the
     // `this.dataValue` setter to update the value.
     // This is to trigger the `this.dataValueChange()` callback.
-    // It is unnecessary if you call `this.#render()` directly
+    // This is unnecessary if you call `this.#render()` directly
     // in this function.
     this.dataValue = newDataValue
   }

@@ -143,7 +143,6 @@ class ApplicationMarkdown < MarkdownRails::Renderer::Rails
     # This is provided as an example; there's many more YouTube URLs that this wouldn't catch.
     def youtube_tag(link, alt)
       url = URI(link)
-      console
       embed_url = "https://www.youtube-nocookie.com/embed/#{Rack::Utils.parse_query(url.query.to_s).fetch('v')}"
       content_tag(:iframe,
                   src: embed_url,

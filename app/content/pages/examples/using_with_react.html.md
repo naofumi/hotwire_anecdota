@@ -4,13 +4,34 @@ section: With Other Frameworks
 layout: article
 order: 100
 published: true
+descriptors:
+  technologies:
+    - React
+  demo_urls:
+    - ["React埋め込みデモ", "/react/iphone"]
+  related_pages:
+    - /examples/store/store-react-state.html.md
 ---
 
-## MPA/ERBの中にReactを埋め込む --- embed-react-in-an-mpa
+## ReactをMPAに埋め込むメリット --- merits-embed-react-in-an-mpa
 
-HotwireやMPA/ERBのページの中にReactを埋め込むのは簡単です。[Reactの公式サイトによると](https://ja.react.dev/learn/add-react-to-an-existing-project#using-react-for-a-part-of-your-existing-page)、**Facebookも長らくこの使い方がメインでした**。GitHubも最近はReactのページを増やしていますが、やり方としては**Turbo中心で作られたページの中の一部分でReactを使っています**。
+ReactではしばしばSPAアーキテクチャが採用されます。しかしSPAは多くの問題を抱えています。むしろサーバでレンダリングされたHTML (例えばERB/Hotwire)にReact埋め込む方が優れているケースも多いです。
 
-また**Apple StoreもMPAページの中にReactを埋め込んでいます**。世界のどの会社よりもUI/UXを重視するAppleウェブサイトも、ほぼ全てがMPAになっていて必要なところだけReactを使っています。
+**SPAのデメリット**
+
+- 最初のページ読み込みが遅くなります。
+- SEO等が弱くなります。
+- 動的データ読み込み用のJSON APIエンドポイントを作成する必要があります。
+- JSON APIからデータを非同期にfetchし、エラーハンドリングするためのステートやコードを用意する必要があります。
+
+**MPA埋め込みのメリット**
+
+- 最初のページ読み込みが早くなります。
+- SEO等に強くなります(Apple StoreはJSオフ環境用の簡略ページを用意)。
+- 動的データはHTMLに埋め込まれているのでAPIエンドポイントを別途用意する必要がありません。
+- 非同期にデータをfetchする必要がないので、エラーハンドリングもステートも不必要です。
+
+例えば**Apple StoreはMPAを中心に作成されており、一部ページでReactを埋め込んでいます**。
 
 ![apple-store.webp](content_images/apple-store.webp)
 
@@ -18,7 +39,7 @@ HotwireやMPA/ERBのページの中にReactを埋め込むのは簡単です。[
 
 下記はApple Storeを模写した例です。Reactの埋め込み方は完全に同じにはしていませんが、同じ効果があるような方法を使用しています。
 
-[模写の詳しい解説はこちら](/examples/store/store-react-state)を確認してください。また[デモはこちら](/react/iphone)に用意しています。
+[模写の詳しい解説は別途こちら](/examples/store/store-react-state)を確認してください。
 
 ```erb:app/views/react/iphone.html.erb
 <%= provide :head, javascript_include_tag("react_iphone", "data-turbo-track": "reload", type: "module") %>
@@ -39,11 +60,10 @@ HotwireやMPA/ERBのページの中にReactを埋め込むのは簡単です。[
 * `javascript_include_tag "react_iphone"`でReactアプリの本体の`react_iphone.jsx`を読み込んでいます
 * Reactアプリは`<div id="root"></div>`に埋め込まれます。
 * `<script type="application/json" id="catalog-data">`の箇所ではカタログのデータ（オプションごとの価格など）をJSON形式に変換し、記載しています
-   * 一般的には`@catalog_data`をJSONとして出力するJSON APIを用意し、Reactコンポーネントから`fetch()`で読み込みます。しかしこの方法ではデータを画面に表示されるまでに無駄な遅延が発生し、UI/UXが劣化します。
-   * ここではUI/UX劣化を避けるために、最初のHTMLページにJSONデータを埋め込んでいます。
+   * SPAでは`@catalog_data`をJSONとして出力するJSON APIを用意し、Reactコンポーネントから`fetch()`で読み込みます。しかしこの方法ではデータを画面に表示されるまでに無駄な遅延が発生し、UI/UXが劣化します。
+   * MPAではUI/UX劣化を避けるために、最初のHTMLページにJSONデータを埋め込むことができます。
      * これはNext.jsがSSRのHydrationで使う手法とほぼ同じです。
      * Inertia.jsも同じ方法を使います。
-   * 残念ながらこの方法を使わないでReactをMPA/ERBに埋め込んでいる例が非常に多くあります。これらはみなUI/UXが不必要に劣化してしまっています。
 
 ```jsx:app/javascript/react_iphone.jsx
 import React from "react";

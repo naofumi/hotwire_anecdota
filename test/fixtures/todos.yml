@@ -15,3 +15,59 @@ three:
 four:
   title: 猫を撫でる
   completed_at: null
+
+seven:
+  title: 観葉植物に水をあげる
+  completed_at: null
+
+eight:
+  title: メールを3通返信する
+  completed_at: null
+
+nine:
+  title: 部屋の床を掃除する
+  completed_at: null
+
+ten:
+  title: 冷蔵庫の中身を整理する
+  completed_at: null
+
+eleven:
+  title: 本を20ページ読む
+  completed_at: null
+
+twelve:
+  title: 洗濯物をたたむ
+  completed_at: null
+
+thirteen:
+  title: 散歩を30分する
+  completed_at: null
+
+fourteen:
+  title: 明日の予定をメモする
+  completed_at: null
+
+fifteen:
+  title: 財布のレシートを整理する
+  completed_at: null
+
+sixteen:
+  title: キッチンのシンクを磨く
+  completed_at: null
+
+seventeen:
+  title: スマホの写真をバックアップする
+  completed_at: null
+
+eighteen:
+  title: 机の引き出しを片付ける
+  completed_at: null
+
+nineteen:
+  title: 週末の買い物リストを作る
+  completed_at: null
+
+twenty:
+  title: 早めにお風呂に入る
+  completed_at: null

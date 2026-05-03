@@ -25,6 +25,7 @@ const DispatchImports = {
   "Toggle": () => import("./react/components/Toggle"),
   "Customers": () => import("./react/components/CustomersPage"),
   "Images": () => import("./react/components/ImagesPage"),
+  "TogglePlain": () => import("./react/components/TogglePlain"),
 }
 
 document.addEventListener("DOMContentLoaded", async () => {

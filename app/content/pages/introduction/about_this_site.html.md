@@ -1,7 +1,7 @@
 ---
 title: このサイトについて
 layout: article
-order: 10
+order: 1
 published: true
 ---
 
@@ -18,10 +18,12 @@ published: true
 
 このサイトは主に下記の技術で構成されています。
 
-* Ruby on Rails
-* Hotwire
-* SQLite3
-* Tailwind CSS
+* [Ruby on Rails](https://rubyonrails.org/)
+* [Sitepress](https://github.com/sitepress/sitepress)
+* [Hotwire](https://hotwired.dev/)
+* [React](https://react.dev/)
+* [SQLite3](https://sqlite.org/)
+* [Tailwind CSS](https://tailwindcss.com/)
 
 ## ローカルでのインストール --- local-installation
 

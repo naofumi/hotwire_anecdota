@@ -13,10 +13,9 @@ descriptors:
   technologies:
     - Stimulus
   demo_urls:
-    - ["デモ", "/components/hotels"]
+    - ["カルーセルデモ", "/hotels"]
   related_pages:
     - /concepts/stimulus-tips.html.md
-
 ---
 
 カルーセルはよく使われるUIウィジェットで広く使われているライブラリも存在します。最近はCSSでもかなり作れるようになっています。しかしここではStimlusによるステート管理の勉強として、自作したカルーセルを紹介します。

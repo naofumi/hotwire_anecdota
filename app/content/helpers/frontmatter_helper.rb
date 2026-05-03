@@ -1,9 +1,9 @@
 module FrontmatterHelper
-  def page_showable?(page, show_published_only: true)
+  def page_showable?(page, show_published_only: false)
     editor_viewable?(show_published_only:) || page.data.published
   end
 
-  def editor_viewable?(show_published_only: true)
+  def editor_viewable?(show_published_only: false)
     !Rails.env.production? && !show_published_only
   end
 

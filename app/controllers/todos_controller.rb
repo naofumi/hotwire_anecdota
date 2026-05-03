@@ -1,23 +1,21 @@
 class TodosController < ApplicationController
   before_action :set_todo, only: [ :edit, :update, :destroy ]
   before_action :authenticate_user!
-  set_available_variants :mpa, :streams, :optimistic
+  before_action :add_delay
+  set_available_variants :drive, :streams, :optimistic
 
   # GET /todos or /todos.json
   def index
-    sleep 1 unless Rails.env.test?
     @todos = Todo.all
   end
 
   # GET /todos/1 or /todos/1.json
   # GET /todos/1/edit
   def edit
-    sleep 1 unless Rails.env.test?
   end
 
   # POST /todos or /todos.json
   def create
-    sleep 1 unless Rails.env.test?
     @todo = Todo.new(todo_params)
 
     respond_to do |format|
@@ -30,8 +28,6 @@ class TodosController < ApplicationController
 
   # PATCH/PUT /todos/1 or /todos/1.json
   def update
-    sleep 1 unless Rails.env.test?
-
     respond_to do |format|
       if @todo.update(todo_params)
         if request.variant.mpa?
@@ -53,7 +49,6 @@ class TodosController < ApplicationController
 
   # DELETE /todos/1 or /todos/1.json
   def destroy
-    sleep 1 unless Rails.env.test?
     @todo.destroy!
 
     respond_to do |format|
@@ -74,5 +69,9 @@ class TodosController < ApplicationController
     # Only allow a list of trusted parameters through.
     def todo_params
       params.expect(todo: [ :title ])
+    end
+
+    def add_delay
+      sleep 0.3 unless Rails.env.test?
     end
 end

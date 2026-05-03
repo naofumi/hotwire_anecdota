@@ -5,6 +5,8 @@ hide_back_button: false
 hide_title: false
 published: true
 ---
+<% @back_link = { title: "Top", url: "/" } %>
+
 <div class="pt-12">
   <div class="mx-auto max-w-3xl px-2">
     <div>
@@ -57,7 +59,7 @@ published: true
               <span class="text-xs"><%= section_page.data.order %></span>
             <% end %>
           </h3>
-          <%= render 'article_descriptors__page_children', page: section_page, show_published_only: true %>
+          <%= render 'page_children', page: section_page, show_published_only: true %>
         </div>
       <% end %>
     </div>

@@ -1,10 +1,11 @@
-<% show_published_only = local_assigns.fetch(:show_published_only, true) %>
+<% show_published_only = local_assigns.fetch(:show_published_only, false) %>
 
 <ol class="text-base">
   <% page.children
          .sort_by { it.data.order.to_i }
          .filter { page_showable?(it, show_published_only:) }
          .each do |child_page| %>
+    <% next unless Rails.env.local? || child_page.data.published? %>
     <li class="group my-1 ml-16 list-decimal list-outside list-image-none italic font-thin text-3xl text-gray-400 hover:text-orange-400 hover:underline decoration-1 underline-offset-4 active:translate-y-0.5">
       <div class="flex flex-row gap-1 items-baseline">
         <%= link_to child_page.data.title,

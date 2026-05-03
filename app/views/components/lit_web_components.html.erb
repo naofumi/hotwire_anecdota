@@ -1,0 +1,34 @@
+<% provide :head do %>
+  <%=  javascript_include_tag("application_lit_web_components", "data-turbo-track": "reload", type: "module", blocking: "render") %>
+  <style>
+      :root {
+          --lit-color-primary: var(--color-orange-600);
+          --lit-color-primary-light: var(--color-orange-500);
+          --lit-color-white: var(--color-white);
+          --lit-color-gray-200: var(--color-gray-200);
+          --lit-radius-md: var(--radius-md);
+          --lit-font-weight-semibold: var(--font-weight-semibold);
+          --lit-shadow-md: var(--shadow-md);
+          --lit-text-sm: var(--text-sm);
+          --lit-text-sm--line-height: var(--text-sm--line-height);
+          --lit-spacing: var(--spacing);
+          --lit-text-lg: var(--text-lg);
+          --lit-text-3xl: var(--text-3xl);
+      }
+  </style>
+<% end %>
+
+<% set_breadcrumbs [["DropDown", component_path(:dropdown)]] %>
+
+<%= render 'template',
+           title: "Lit Web Components",
+           description: "" do %>
+  <lit-card title="Card title">
+    <div class="mt-4">
+      <lit-button variant="primary" size="sm">Hello Button</lit-button>
+      <lit-button variant="primary" size="lg">Hello Button</lit-button>
+    </div>
+  </lit-card>
+<% end %>
+
+

@@ -1,7 +1,7 @@
 ---
 title: HotwireのJavaScriptは簡単
 layout: article
-order: 10
+order: 30
 published: true
 ---
 

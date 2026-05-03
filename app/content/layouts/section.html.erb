@@ -16,10 +16,10 @@
         <%= current_page.data.subtitle %>
       </p>
     </div>
-    <div class="flex-1 flex flex-row-reverse">
+    <div class="flex-2 flex flex-row-reverse">
       <div class="w-fit">
         <% if current_page.children.any? %>
-          <%= render "article_descriptors__page_children", page: current_page %>
+          <%= render "page_children", page: current_page %>
         <% end %>
       </div>
     </div>
