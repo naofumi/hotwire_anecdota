@@ -2,7 +2,7 @@
   <div class="mt-1 py-2 px-4 my-8 flex justify-between items-center rounded-lg gap-x-4 max-w-xl mx-auto bg-gray-100" data-controller="variants-selector">
     <div class="">
       <%= form_with method: :get,
-                    class: "flex flex-row justify-end items-baseline" do |f| %>
+                    class: "flex flex-col gap-2" do |f| %>
         <%= f.label :variant, "variantを選択", class: "text-xs font-bold mr-3" %>
         <%= f.select :variant, available_variants,
                      { selected: (available_variants & request.variant).first },

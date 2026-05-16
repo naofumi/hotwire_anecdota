@@ -1,0 +1,4 @@
+single_feature_image_blob: <%= ActiveStorage::FixtureSet.blob filename: "reservations-single-feature_image.png", service_name: "test_fixtures" %>
+double_feature_image_blob: <%= ActiveStorage::FixtureSet.blob filename: "reservations-double-feature_image.png", service_name: "test_fixtures" %>
+superior_feature_image_blob: <%= ActiveStorage::FixtureSet.blob filename: "reservations-superior-feature_image.png", service_name: "test_fixtures" %>
+suite_feature_image_blob: <%= ActiveStorage::FixtureSet.blob filename: "reservations-suite-feature_image.png", service_name: "test_fixtures" %>

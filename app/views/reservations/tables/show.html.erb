@@ -1,0 +1,22 @@
+<% set_breadcrumbs [["Reservations", reservations_path],
+                    ["Table", reservations_table_path]] %>
+
+<% content_for :title, "Reservations" %>
+
+<div class="max-w-lg mx-auto">
+  <div class="mb-16">
+    <h1 class="text-4xl text-center">Reservations Table</h1>
+  </div>
+  <div class="actions-row my-8">
+    <div>
+      <%= link_to "List", reservations_path, class: "btn-outline-primary" %>
+    </div>
+    <div>
+      <%= link_to "New Reservation", new_reservation_path, class: "btn-primary" %>
+    </div>
+  </div>
+
+  <%= render 'table',
+             room_nights_by_room_id_and_date: @room_nights_by_room_id_and_date,
+             from: @from, to: @to, show_actions: true %>
+</div>

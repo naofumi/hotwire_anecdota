@@ -64,8 +64,8 @@ application.register("option-list", OptionListController)
 import PopupController from "./popup_controller"
 application.register("popup", PopupController)
 
-import RadioableController from "./radioable_controller"
-application.register("radioable", RadioableController)
+import RadioButtonController from "./radio_button_controller"
+application.register("radio-button", RadioButtonController)
 
 import RevealerController from "./revealer_controller"
 application.register("revealer", RevealerController)
@@ -99,6 +99,9 @@ application.register("todo", TodoController)
 
 import TodoLikesController from "./todo_likes_controller"
 application.register("todo-likes", TodoLikesController)
+
+import ValidatorController from "./validator_controller"
+application.register("validator", ValidatorController)
 
 import VariantsSelectorController from "./variants_selector_controller"
 application.register("variants-selector", VariantsSelectorController)

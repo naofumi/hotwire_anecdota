@@ -1,0 +1,19 @@
+single_feature_image:
+  name: feature_image
+  record: single_1 (Room)
+  blob: single_feature_image_blob
+
+double_feature_image:
+  name: feature_image
+  record: double_1 (Room)
+  blob: double_feature_image_blob
+
+superior_feature_image:
+  name: feature_image
+  record: superior_1 (Room)
+  blob: superior_feature_image_blob
+
+suite_feature_image:
+  name: feature_image
+  record: suite_1 (Room)
+  blob: suite_feature_image_blob

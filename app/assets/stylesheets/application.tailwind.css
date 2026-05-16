@@ -9,6 +9,9 @@
 @import "./components/landing.css";
 @import "./components/section.css";
 @import "./components/dropdown.css";
+@import "./components/attributes-list.css";
+@import "./components/card.css";
+@import "./components/actions-row.css";
 
 @layer base {
     html {

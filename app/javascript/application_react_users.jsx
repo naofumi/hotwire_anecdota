@@ -18,16 +18,17 @@ function UsersIndex() {
       .then(data => setUsers(data))
   }, [])
 
-  return (
+  return (<>
+    <div className="mb-16">
+      <h1 className="text-4xl text-center">Users React version</h1>
+    </div>
     <div className="grid grid-cols-2 gap-x-2">
       <div>
-        <div className="mb-16">
-          <h1 className="text-4xl text-center">Users React version</h1>
-        </div>
         {users
          ? <table id="users" className="min-w-full divide-y divide-gray-300">
            <thead>
            <tr>
+             <th>name</th>
              <th>email</th>
            </tr>
            </thead>
@@ -38,6 +39,7 @@ function UsersIndex() {
                                               ? "bg-yellow-200"
                                               : ""}`}
                  onClick={() => setSelectedUser(user)}>
+               <td>{user.userProfile.name}</td>
                <td>{user.email}</td>
              </tr>)}
            </tbody>
@@ -45,11 +47,11 @@ function UsersIndex() {
          : <div className="text-center text-4xl">Loading...</div>
         }
       </div>
-      <div className="border rounded shadow" id="user-profile">
+      <div className="border rounded shadow h-96 p-4" id="user-profile">
         {selectedUser && <UserProfile userId={selectedUser.id}/>}
       </div>
     </div>
-  )
+  </>)
 }
 
 function UserProfile({userId}) {

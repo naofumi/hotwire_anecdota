@@ -1,0 +1,11 @@
+var frame = document.getElementById("user-profile");
+frame.innerHTML = "<%= j render 'show', user_profile: @user_profile %>";
+
+var userRows = document.querySelectorAll(".user-row")
+userRows.forEach(row => {
+  if (row.id == "user_<%= @user_profile.user.id %>") {
+    row.classList.add("bg-yellow-200");
+  } else {
+    row.classList.remove("bg-yellow-200");
+  }
+});

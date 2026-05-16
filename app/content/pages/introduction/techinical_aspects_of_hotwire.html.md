@@ -5,60 +5,65 @@ order: 20
 published: true
 ---
 
+一通りHotwireを学習したものの、全体の構成がいまいちピンとこない人のために対局的に解説します。
+
+## Hotwireは通常のHTML/CSS/JavaScriptを拡張します --- hotwire-extends-html-css-javascript
+
+Reactや他のモダンフロントエンドと異なり、Hotwireはブラウザ技術を代替するものではありません。あくまでも拡張しかしません。静的HTML, PHPやERB, Bladeなどをはじめとした従来のフロントエンドに対して、**インタラクティブなUIを作りやすくするための拡張が用意されています**。
+
+既存のERBページをHotwire化する際も、あくまでも最初にERBのページを作り、それからどうやってインタラクティブにするかを考えます。Reactではウェブページの作り方をひっくり返し、ステートから出発しているのとは対照的です。**Hotwireは普通にHTMLのウェブページから出発します**。
+
+## どのような拡張か？ --- what-hotwire-extends
+
+Hotwireは大きく３つの側面で従来のHTMLを拡張しています。ここではウェブページを作ることに主眼を置きますので、最初のTurboとStimulusについて紹介します。
+
+* 非同期的にページを部分更新する技術 – **Turbo**
+* JavaScriptを整理するための技術 - **Stimulus**
+* iOSやAndroidと連携するための技術 - **Native**
+
 ## Turboの特徴 --- turbo-features
 
-Turboは`fetch`を使ってサーバと通信し、非同期でブラウザ画面を更新する一連の技術です。
+Turboは**ほとんどJavaScriptを書かなくとも非同期的にページを部分更新する技術**です。
 
-### TurboはサーバからHTMLを受け取ります --- turbo-receives-html-from-server
+Ruby on Railsは2004年の誕生以来、AJAXに注力しており、非同期的にページを部分更新する技術をフレームワークの中に取り込んでいました。
 
-Turboは下記の処理を行います。
+### Turboは15年の経験の上に作られている --- turbo-is-built-on-experience
 
-* `fetch`もしくはWebsocketを使ってサーバと通信します。
-   * `<a>`タグのクリックもしくは`<form>`タグのSubmitに応答して自動的にTurboのリクエストを送信します。
-   * JavaScriptからは`Turbo.visit()`で[Turboのリクエストを送信できます](https://turbo.hotwired.dev/reference/drive#turbodrivevisit)。
-* サーバからHTMLを取得します。
-* HTMLをDOMに反映します。この際[morphingを使う](https://turbo.hotwired.dev/handbook/page_refreshes)と差分のみを反映しますので、DOMのステートを維持することも可能です。
+2004年のRuby on Railsから2020年のHotwireの公開まで、さまざまなアプローチが試されてきました。
 
-### TurboはJSON APIが不要です --- turbo-doesnt-need-json-api
+* 当初から[Prototype.js](http://prototypejs.org/)のフレームワークに組み込まれており、ブラウザからのAJAX通信がサポートされていました。
+* [jQuery-UJS](https://github.com/rails/jquery-ujs)がフレームワークに組みこれており、JavaScriptを書かなくてもAJAX通信ができるようになっていました。
+* [サーバ側でJavaScriptを生成する Server-generated JavaScript Responses](https://signalvnoise.com/posts/3697-server-generated-javascript-responses)が推奨され、サーバから非同期的にブラウザ画面を操作する方法が用意されていました。
 
-ReactはブラウザでDOMをレンダリングします。動的なデータをレンダリングするためにはサーバからJSON APIでデータを渡す必要があります。しかしTurboはサーバでレンダリング済みのHTMLを受け取るため、JSON APIが不要です。
+Turboは上記の仕組みを15年間継続運用した経験の上に、**実際のウェブ開発で必要になるパターンを抽出し、それに絞った構成になっています**。
 
-JSON APIが不要なため、Turboでは`fetch`のコードを書いたり、エラーハンドリングしたり、レスポンスをステートに保存したりする必要がなく、コードが大幅に簡略化されます。
+### ページ更新方法から見たTurboの特徴 --- turbo-features-from-page-update-method
 
-### Turbo Driveは画面遷移を高速化するSPA --- turbo-drive-is-an-spa
+実際に[サーバ側でJavaScriptを生成する Server-generated JavaScript Responses](https://signalvnoise.com/posts/3697-server-generated-javascript-responses)でアプリを作ると、自由度が高すぎることに気づきます。サーバからJavaScriptを送れると、やれることが多すぎてコードが分散してしまいます。一方で**ほとんどの非同期処理はごく少数のパターンを繰り返している**ことがわかります。**TurboはサーバからJavaScriptを送り込むのをやめ、非同期処理をより簡単に行う方法を提供しています**。
 
-Turbo Driveは`<body>`タグ全体を入れ替えるため、画面全体が切り替わります。結果としてSPAの画面遷移を実現します。
+* **ページ全体を更新する場合 – TurboDrive:** ページ全体を切り替える場合であっても、非同期通信で`<body>`タグの中身だけを入れ替えることの方が有利なことが多いです。[ページ遷移が速くなる](https://github.com/defunkt/jquery-pjax)ことが一番の利点です。
+* **１箇所の部分更新をする場合 – TurboFrames:** ページを部分更新する場合でも、ページの一部部分のみを更新する場合を想定しています。例えばタブを切り替える場合や引き出し的なUIを作る時です。用途が比較的絞れるために、非同期更新に限らず負荷的な機能もサポートしています。
+* **複数箇所を部分更新する場合 – TurboStreams:** ページを細かく、複数箇所更新する場合を想定しています。更新する場合もreplaceだけではなく、append, prepend, removeなどの[8つの操作をサポートしています](https://turbo.hotwired.dev/reference/streams)。ただしTurboStreamsの場合であってもあえて従来の[Server-generated JavaScript Responses](https://signalvnoise.com/posts/3697-server-generated-javascript-responses)より大幅に柔軟性を落として機能を制限しています。[あえて制約を設けた方がコードの再利用が進み、理解しやすいコードになる](https://turbo.hotwired.dev/handbook/streams#but-what-about-running-javascript%3F)と考えているためです。
 
-**メリット**
+Turboで実現できないような複雑なことを行う場合はブラウザ側で[Turboのイベント](https://turbo.hotwired.dev/reference/events)に応答して、Stimulusなどで処理する方法が推奨されています。または[TurboStreamsを拡張する](https://turbo.hotwired.dev/handbook/streams#custom-actions)こともできます。
 
-* **高速なページ遷移が実現できます:** ページ間でステートが維持され、キャッシュやpreloadingも実施されるため、ページ遷移が高速になります。また`<head>`にある`<script>`のJavaScriptや`<link>`のCSSを再読み込みする必要がないため、画面遷移がさらに滑らかになります。
-* **コードがとても簡単に書けます:** MPA用に書いたページが、Turbo Driveをインストールするだけで使用できます。コードは非常に簡単で、非同期通信を意識する必要はありません。 
+## Stimulusの特徴 --- stimulus
 
-### Turbo Framesは画面を分割して非同期的に更新します --- turbo-frames-splits-screen
+**Stimulusはイベント駆動のJavaScriptを書く際の複雑さを解消するものです**。Reactはこの複雑さを単方向データフローで解決しました。それに対してHotwireは同じ複雑さをStimulusで解決しています。
 
-Turbo Framesは画面の一部分を独立した領域として考えられる場合、その部分だけを非同期更新するのに有効です。例えば検索結果を表示するテーブル、タブ切り替えのコンテンツなどがTurbo Framesに適しています。概念としては`<iframe>`に似ています。
+インタラクティブなJavaScriptの役割はユーザイベントに応答して、画面更新などの応答をすることです。一見シンプルに見えますが、イベントを発するパーツや更新しなければならないパーツが多くなると、コードがスパゲッティ状になります。また画面のどの要素がどのイベントを発するか、あるいは応答するかが見えにくくなることもあります。
 
-**メリット**
+Stimulusは以下の機能を通して、この問題を解決します。
 
-* **簡単に使えます:** MPA用に書いたページを`<turbo-frame>`タグで囲むだけでTurbo Framesを利用できます。また`<a>`タグや`<form>`タグに`data-turbo-frame`属性をつけるだけで、`<turbo-frame>`の中身を非同期更新できます。
-* **便利機能が付いています:** ローディング状態を示す`busy`, `complete`属性が自動的についたり、`autoscroll`属性でスクロールを制御したりできます。
-* **URLを更新できます:** 
+- **DOMとJavaScriptの明示的なバインディング:** Stimulus Controllerは`data-*`属性により、明示的にDOM要素と接続されます。 
+- **ステート:** [Values](https://stimulus.hotwired.dev/reference/values)がステートです。Valuesが変更されたらコールバックも実行されます。ただしValuesを使わなくても良いような簡単な処理の場合は、DOMにステートを持たせても構いません。
+- **イベントハンドラ:** [Actions](https://stimulus.hotwired.dev/reference/actions) はDOM要素のイベントとStimulus Controllerのメソッドを明示的に接続します。
 
-### Turbo Streamsは細かい制御を可能にする --- turbo-streams-allows-fine-control
+## まとめ --- conclusion
 
-Turbo Framesは画面の一部分を非同期更新するのに対して、Turbo Streamsは画面の複数箇所を細かく非同期更新するのに適しています。
+インタラクティブなウェブサイトを15年構築してきた経験を土台に、HTML/CSS/JavaScriptを拡張したものがHotwireです。余計なことをせず、過去にやりすぎた部分を削ぎ落としつつ、一貫して使いやすさ・分かりやすさに注力してきたフレームワークです。
 
-**メリット**
+* 非同期通信のパターンを簡単に実現するためのTurbo
+* JavaScriptのスパゲッティ化を防ぎ、わかりやすく記述できるようにしたStimulus
 
-* **画面の複数箇所を更新:** Turbo DriveおよびTurbo Framesは画面の連続した１箇所を非同期更新するが、Turbo Streamsであれば画面の複数箇所を非同期更新できます。
-* **通常と異なる制御が可能:** Turbo DriveやTurbo Framesは一番一般的なケースを想定して作られています。例えば[Turbo DriveはFormを送信したのちに303リダイレクトを期待する](https://turbo.hotwired.dev/handbook/drive#redirecting-after-a-form-submission)が、[Turbo Streamsを使えばリダイレクトせずにPOST後に直接画面を更新できます](https://turbo.hotwired.dev/handbook/drive#streaming-after-a-form-submission)。
-* **WebSocketが利用できます:** Turbo StreamsはWebSocketを活用することで、リアルタイムなUI更新が可能です。例えばチャットアプリやライブストリームなどに利用できます。
-
-## Stimulusはインタラクションを管理します --- stimulus-manages-interactions
-
-フロントエンドにおけるインタラクティビティとは、ユーザのアクションに対してステートを更新して、画面の表示を切り替えたり、バリデーションを実施したり、またサーバとの非同期通信をしたりすることです。Stimulusはこのためのツールを提供し、指定されたHTML要素をインタラクティブにします。
-
-- **ライフサイクル管理:** Stimulus controllerがマウントしたりアンマウントしたりするときに自動的に実行されるコールバックが用意されています。
-- **ステート:** Stimulus Controllerはvaluesというステートを持ち、ステートが変更されたらコールバックが実行されます。
-- **イベントハンドラ:** 
-
+ブラウザのネイティブな機能も大幅に進歩していますので、複雑なUI/UXを作る場合でもこれだけの拡張で十分です。

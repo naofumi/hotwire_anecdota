@@ -1,0 +1,5 @@
+@layer components {
+    .actions-row {
+        @apply flex justify-between gap-2 items-center;
+    }
+}

@@ -1,7 +1,7 @@
 ---
 title: Hotwireにまつわる誤った認識
 layout: article
-order: 50
+order: 70
 published: true
 ---
 

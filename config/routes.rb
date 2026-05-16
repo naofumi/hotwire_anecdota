@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :memberships
+  resources :room_nights
+  resources :rooms
+  namespace :reservations do
+    resource :table, only: :show
+  end
+  resources :reservations
+
   # Defines the root path route ("/")
   # root "components#index"
 

@@ -2,17 +2,13 @@
 title: なるべく<a>や<form>を使用すること
 section: Tips
 layout: article
-order: 45
+order: 25
 published: true
 ---
 
 ## `<a>`タグや`<form>`タグのメリット --- merits-of-using-a-links-and-forms
 
-Reactでインタラクティブな動作をさせる時、`<a>`タグを使用せずに`<button>`タグに`onClick`等のイベントハンドラーをつけることが多いです。同様にformを送信する場合も`<form>`タグに`action`属性をつけずに、代わりに`onSubmit`のイベントハンドラをつけて処理するのが一般的です。このように**Reactはブラウザネイティブの機能を使わずに、カスタムで動作を作ることが多いです**。
-
-Hotwireはこの逆です。**Hotwireではなるべくブラウザ本来の機能を使います**。
-
-ブラウザ本来の機能を使うメリットは以下のものが挙げられます。
+Hotwireではなるべく通常の`<a>`や`<form>`でナビゲーションをします。
 
 * JavaScriptがオフでも`<a>`タグや`<form>`タグは動作しますので、[プログレッシブエンハンスメント](https://ja.wikipedia.org/wiki/プログレッシブエンハンスメント)になります。つまりJavaScriptが読み込まれていなくてもウェブサイトが動作します
 * Hotwireの便利な機能が利用できます

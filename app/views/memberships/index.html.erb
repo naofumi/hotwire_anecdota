@@ -1,0 +1,31 @@
+<% set_breadcrumbs [["Memberships", memberships_path]] %>
+
+<% content_for :title, "Memberships" %>
+<%= render 'variant_selection_section' %>
+
+<div class="max-w-lg mx-auto">
+  <div class="mb-16">
+    <h1 class="text-4xl text-center">Memberships</h1>
+  </div>
+  <div class="actions-row">
+    <div></div>
+    <div>
+      <div></div>
+      <%= link_to "New Membership", new_membership_path, class: "btn-primary" %>
+    </div>
+  </div>
+  <table id="memberships" class="w-full border border-gray-400 rounded-lg border-spacing-0 border-separate mt-8">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Type</th>
+      <th>Company</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= render partial: "membership_row", collection: @memberships, as: :membership %>
+    </tbody>
+  </table>
+</div>

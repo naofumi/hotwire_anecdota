@@ -1,7 +1,7 @@
 ---
 title: POST/Redirect/GETパターンと高速化
 layout: article
-order: 50
+order: 330
 published: true
 ---
 

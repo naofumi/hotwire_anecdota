@@ -1,7 +1,7 @@
 ---
 title: TypeScript vs. ERBの型安全性
 layout: article
-order: 50
+order: 90
 published: true
 ---
 

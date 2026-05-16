@@ -1,7 +1,7 @@
 ---
 title: Stimulusはコンポーネントではない
 layout: article
-order: 25
+order: 160
 published: true
 descriptors:
   technologies:
@@ -15,15 +15,23 @@ descriptors:
 
 ここではStimulus controllerとReact等におけるコンポーネントの違いについて説明します。
 
+## ReactはHTMLとイベント処理を密結合。Stimulusは独立性重視 --- react-couples-stimulus-decouples
+
+Reactのコンポーネントの特徴は、HTML(DOM)とイベント処理(JavaScript)を密結合させていることです。CSSモジュールはCSS-in-JSを使用すると、さらにCSSも密結合させます。全てを一緒にすることでコンポーネントとしての再利用性が高まるという考え方です。
+
+それに対してStimulusはHTMLとイベント処理を独立させています。もちろんCSSも独立です。これは従来からのウェブフロントエンドの考え方で[プログレッシブエンハンスメント](https://ja.wikipedia.org/wiki/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%AC%E3%83%83%E3%82%B7%E3%83%96%E3%82%A8%E3%83%B3%E3%83%8F%E3%83%B3%E3%82%B9%E3%83%A1%E3%83%B3%E3%83%88)と呼ばれるものです。独立させることでイベント処理単体の再利用性、もしくはCSS単体の再利用性が高まります。
+
+どちらが正しくてどちらが誤っているかという単純なことは言えませんが、有利不利はあります。また最近Reactでは[Radix UI](https://www.radix-ui.com/), [React Aria Components](https://react-spectrum.adobe.com/react-aria/react-aria-components.html), [Base UI](https://base-ui.com/), [Headless UI](https://headlessui.com/), [Ark UI](https://ark-ui.com/)などの"headless UI"が主流になってきており、「動作」と「表示」を分ける動きも増えています。
+
 ## Stimulus controllerはDOMのレンダリングを行いません --- no-rendering
 
-ReactのコンポーネントはUI要素としての独立性が重視され、単体でDOMのレンダリングができ、単体でインタラクティビティを持つものです。以下の機能を持ちます。
+Reactのコンポーネントは以下の全てを行います。
 
 - DOMをレンダリングします。
 - ステートを持ちます。
 - イベントハンドラーを登録します。
 
-それに対してStimulus controllerはUI要素として独立したものではなく、既存のHTMLに対してインタラクティビティを付与するものです。DOMのレンダリングは行いません。
+それに対してStimulus controllerは既存のHTMLに対してインタラクティビティを付与するものであり、DOMのレンダリングを行いません。
 
 - ステートを持ちます。
 - イベントハンドラーを登録します。
@@ -122,7 +130,7 @@ export default class extends Controller {
   * Reactのコンポーネントの場合はコンポーネントを書き換えるか、もしくはJSXの`className` を変更できるように`TogglePlain`コンポーネントのpropsを工夫する必要があります。
   * Stimulus controllerの場合はHTMLテンプレートを書き換えるだけで大きなデザイン変更に対応できます。Stimulus controllerそのものに手を加える必要はありません。
 
-このようにStimulus controllerはインタラクティビティのみを担当し、表示には関与しないため、異なるHTML要素を使ったり、CSSを大幅に変えたり、HTMLの構造自体を変更しても同じStimulus controllerで対応できます。一方でReactコンポーネントは再利用せずに新しいコンポーネントを作成して対応することが多いでしょう。**この点ではStimulus controllerの方が再利用性が高いと言えます**。
+このようにStimulus controllerはインタラクティビティのみを担当し、表示には関与しないため、異なるHTML要素を使ったり、CSSを大幅に変えたり、HTMLの構造自体を変更しても同じStimulus controllerで対応できます。一方でReactコンポーネントは再利用せずに新しいコンポーネントを作成して対応することが多いでしょう。**この点においてはStimulus controllerの方が再利用性が高いと言えます**。
 
 ## まとめ --- summary
 

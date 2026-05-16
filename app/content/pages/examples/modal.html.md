@@ -1,7 +1,7 @@
 ---
 title: モーダル
 layout: article
-order: 100
+order: 150
 published: true
 descriptors:
   component_names:

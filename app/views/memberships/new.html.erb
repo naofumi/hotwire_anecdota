@@ -1,0 +1,18 @@
+<% set_breadcrumbs [["Memberships", memberships_path],
+                    ["New Membership", new_membership_path]] %>
+
+<% content_for :title, "New membership" %>
+
+<div class="max-w-lg mx-auto">
+  <div class="mb-16">
+    <h1 class="text-4xl text-center">New membership</h1>
+  </div>
+  <div class="actions-row">
+    <%= link_to "Back to memberships", memberships_path, class: "btn-outline-primary btn--back" %>
+    <div></div>
+  </div>
+
+  <div class="mt-8">
+    <%= render "form", membership: @membership %>
+  </div>
+</div>

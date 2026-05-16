@@ -1,0 +1,17 @@
+@layer components {
+    .attributes-list {
+        @apply border border-gray-300 rounded-md p-2;
+    }
+
+    .attributes-list__row {
+        @apply flex;
+    }
+
+    .attributes-list__label {
+        @apply font-bold mb-2 w-32;
+    }
+
+    .attributes-list__value {
+        @apply text-gray-700;
+    }
+}

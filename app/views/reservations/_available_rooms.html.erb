@@ -1,0 +1,20 @@
+<%# locals: (form:, to:, from:, current_reservation:) %>
+
+<div class="flex gap-4 flex-wrap">
+  <% Room.available(nil, to, from, current_reservation).each do |room| %>
+    <div class="card w-60 <%= room.id == current_reservation.requested_room_id.to_i ? "bg-orange-100" : "" %>">
+      <div class="flex justify-between">
+        <div>
+          <div class="text-sm font-bold"><%= room.number %></div>
+          <h3 class="text-2xl"><%= room.category %></h3>
+        </div>
+        <div>
+          <%= form.button :requested_room_id, value: room.id, type: :submit, class: "btn btn-primary btn--sm" do %>
+            <%= room.id == current_reservation.requested_room_id.to_i ? "今の部屋" : "部屋変更" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="mt-4"><%= image_tag room.feature_image.variant(:thumb), class: "rounded-lg aspect-3/2 object-cover" %></div>
+    </div>
+  <% end %>
+</div>

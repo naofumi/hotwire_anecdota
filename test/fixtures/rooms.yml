@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+single_1:
+  number: 201
+  category: single
+
+double_1:
+  number: 301
+  category: double
+
+superior_1:
+  number: 501
+  category: superior
+
+suite_1:
+  number: 901
+  category: suite

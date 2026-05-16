@@ -1,7 +1,7 @@
 class Users::UserProfilesController < ApplicationController
   before_action :set_user
   before_action :set_user_profile, only: [ :show ]
-  set_available_variants :hotwire, :react, :jquery
+  set_available_variants :frame, :stream, :react, :jquery, :sjr
 
   # GET /user_profiles/1 or /user_profiles/1.json
   def show

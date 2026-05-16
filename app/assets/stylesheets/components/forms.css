@@ -1,7 +1,48 @@
 /* app/assets/stylesheets/components/forms.css */
 
 @layer components {
-    .field_with_errors > input {
-        @apply !bg-red-500/10 !border-red-500 !border-2;
+    .field_with_errors {
+        display: contents;
+        & > input {
+            @apply !bg-red-500/10 !border-red-500 !border-2;
+        }
+        & > select {
+            @apply !bg-red-500/10 !border-red-500 !border-2;
+        }
+    }
+
+    .error-message {
+        @apply hidden text-red-600 font-bold text-xs mt-2;
+    }
+
+    .text-field {
+        @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-600 focus:ring-orange-600;
+        &:user-invalid {
+            @apply !bg-red-500/10 !border-red-500 !border-2;
+        }
+        &:user-invalid + .error-message {
+            @apply block
+        }
+    }
+
+    .select-field {
+        @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-600 focus:ring-orange-600;
+        &:user-invalid {
+            @apply !bg-red-500/10 !border-red-500 !border-2;
+        }
+        &:user-invalid + .error-message {
+            @apply block
+        }
+    }
+
+    .form-label {
+        @apply block text-sm font-medium text-gray-700;
+    }
+
+    .form-label--required:after {
+        content: "*";
+        color: var(--color-orange-600);
+        margin-left: 0.25rem;
+        font-weight: bold;
     }
 }

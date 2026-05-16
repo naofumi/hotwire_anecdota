@@ -1,0 +1,45 @@
+<%# locals: (room_nights_by_room_id_and_date:, from:, to:, show_actions: false) %>
+<% duration = (to - from) %>
+
+<% if show_actions %>
+  <div class="actions-row ">
+    <div>
+      <%= link_to "Prev. Week", reservations_table_path(from: from - duration - 1.day), class: "btn--back btn--sm btn-outline-primary" %>
+    </div>
+    <div>
+      <%= link_to "Next Week", reservations_table_path(from: to + 1.day), class: "btn--forward btn--sm btn-outline-primary" %>
+    </div>
+  </div>
+<% end %>
+
+<table class="w-full mt-4">
+  <thead>
+  <tr>
+    <th></th>
+    <% (from..to).to_a.each do |date| %>
+      <th class="px-1 border-1 <%= [0, 6].include?(date.wday) ? 'bg-red-200' : '' %>">
+        <%= l date, format: :short %>
+      </th>
+    <% end %>
+  </tr>
+  </thead>
+  <tbody>
+  <% Room.all.each do |room| %>
+    <tr>
+      <td class="px-1 border-1">
+        <div class="flex flex-col">
+          <span><%= room.number %></span>
+          <span class="text-xs"><%= room.category %></span>
+        </div>
+      </td>
+      <% (from..to).to_a.each do |date| %>
+        <td class="border-1">
+          <% if (room_night = room_nights_by_room_id_and_date.dig(room.id, date)) %>
+            <%= link_to "⚫︎", reservation_path(room_night.reservation), class: "text-center block inset-0 hover:bg-yellow-200" %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

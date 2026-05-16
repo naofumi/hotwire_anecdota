@@ -11,7 +11,7 @@ descriptors:
   server_request: true
   state_management: []
   technologies:
-    - Turbo
+    - Turbo Frames
     - Stimulus
   demo_urls:
     - ["デモ", "/customers"]

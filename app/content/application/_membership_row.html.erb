@@ -1,0 +1,17 @@
+<tr class="" id="<%= dom_id membership %>">
+  <td class="p-2 border-gray-400 border-t">
+    <%= membership.name %>
+  </td>
+  <td class="p-2 border-gray-400 border-t">
+    <%= membership.email %>
+  </td>
+  <td class="p-2 border-gray-400 border-t">
+    <%= membership.membership_type %>
+  </td>
+  <td class="p-2 border-gray-400 border-t">
+    <%= membership.company_name %>
+  </td>
+  <td class="p-2 border-gray-400 border-t">
+    <%= link_to '詳細', membership_path(membership), class: 'btn-outline-primary btn--sm whitespace-nowrap' %>
+  </td>
+</tr>

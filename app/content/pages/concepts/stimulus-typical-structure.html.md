@@ -1,7 +1,7 @@
 ---
 title: Stimulus Controllerの構造
 layout: article
-order: 30
+order: 150
 published: true
 ---
 
@@ -154,5 +154,4 @@ export default class extends Controller {
 
 ## まとめ --- summary
 
-* 簡単な場合はStimulus Controllerはどのように書いても整理ができます
-* しかしある程度複雑になると、Reactの単方向データフローと同じように、データフローを整理した方がわかりやすくなります。Stimulusはそのための[Valuesステート](https://stimulus.hotwired.dev/reference/values)を用意しています
+* ある程度複雑になると、Reactの単方向データフローと同じように、データフローを整理した方がわかりやすくなります。Stimulusはそのための[Valuesステート](https://stimulus.hotwired.dev/reference/values)を用意しています

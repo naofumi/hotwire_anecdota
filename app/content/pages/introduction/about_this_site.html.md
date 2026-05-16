@@ -1,18 +1,20 @@
 ---
 title: このサイトについて
 layout: article
-order: 1
+order: 10
 published: true
 ---
 
 このサイトは、下記の方を念頭に作成しています。
 
 * 技術選定する立場で、Hotwireで何ができるかを知りたい人
-* すでにある程度Hotwireを学んだものの、ベストプラクティスを知りたい人
+* すでにある程度Hotwireを学んだものの、今一つピンときていない人。もしくはベストプラクティスを知りたい人
 
 具体的なコードと動くデモを通して、Hotwireで何ができるか、どうやってそれを実現するかを紹介します。
 
 [コードはすべてGitHubで公開しています](https://github.com/naofumi/hotwire_anecdota)。デモへのリンクは随時紹介します。
+
+一方でHotwireを基本から学びたい人を念頭にしているわけではありませんのでご了承ください。
 
 ## 技術構成 --- tech-stack
 
@@ -27,4 +29,4 @@ published: true
 
 ## ローカルでのインストール --- local-installation
 
-GitHubのREADMEをご確認ください。SQLite3は自動的にインストールされますので、依存性はRubyだけです。Rubyが動く環境は各自でご用意していたくことになります。
+[GitHubのREADME](https://github.com/naofumi/hotwire_anecdota)をご確認ください。

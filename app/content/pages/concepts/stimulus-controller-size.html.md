@@ -2,7 +2,7 @@
 title: Stimulus Controllerの粒度
 layout: article
 order: 500
-published: true
+published: false
 ---
 
 ## Stimulus controllerは本当に再利用する？ --- do-you-really-reuse-stimulus-controllers

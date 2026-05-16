@@ -1,0 +1,5 @@
+@layer components {
+    .card {
+        @apply bg-white rounded-md p-4 border border-gray-300;
+    }
+}

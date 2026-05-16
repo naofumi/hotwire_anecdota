@@ -1,24 +1,26 @@
 ---
 title: HotwireとReactの違いを理解する
 layout: article
-order: 5
+order: 30
 published: true
 ---
 
-Reactとの比較を通して、Hotwireの特徴を考えたいと思います。
+Reactとの比較を通して、Hotwireの特徴を考えます。
 
 ## HotwireとReactの違い --- difference-between-hotwire-and-react
 
+先にまとめると、HotwireとReactの違いは以下の通りです。
+
 * **HotwireもReactも複雑なUI/UXが作れます**  
-  画面に表示されている内容をJavaScriptで操作するという意味ではHotwireもReactは全く同じです。JavaScript/HTML/CSSをどのように書くかという違いしかありません。**HotwireとReactが実現できるUI/UXには、原理的に大きな差は生じ得ません**。
+  画面に表示されている内容をJavaScriptで操作するという意味ではHotwireもReactは全く同じです。JavaScript/HTML/CSSをどのように書くかという違いしかありません。**原理的に考えると、HotwireとReactで実現できるUI/UXに大きな差はあり得ません**。
 * **画面数が多いシステムはHotwireの方が適しています**  
-  １ページ作成に必要な**工数とコード量は、Hotwireの方がReactよりも大幅に少なくなります**。SaaSが500ページ以上のシステムになるのは珍しくありませんが、これをすべてReactで作るのは現実的にかなり難しいです。将来的に大きくなる可能性があるアプリは、Hotwireが有利です。
+  １ページ作成に必要な**工数とコード量は、Hotwireの方がReactよりも大幅に少なくなります**。成功したSaaSのページ数(ERB)が500以上というのは一般的ですが、これをすべてReactで作るのは現実的にかなり難しいです。将来的に大きくなる可能性があるアプリは、Hotwireが有利です。
 * **複雑なシステムはHotwireの方が適しています**  
-  アプリが成長するとビジネスロジックが複雑化します。また認証・認可の要求が高度化していきます。これに伴ってビジネスロジックを適切にフロントエンドに露出させず、バックエンドだけで管理する必要が出てきます。**Hotwireはロジックの近くでHTMLをレンダリングしますので、ロジックが複雑なシステムならHotwireの方が適しています**。
+  アプリが成長するとビジネスロジックが複雑化します。また認証・認可の要求が高度化していきます。ビジネスロジックをフロントエンドに書かず、バックエンドだけで記述することが重要です。**HotwireはサーバでHTMLをレンダリングしますので、ロジックが複雑なシステムならHotwireの方が適しています**。
 
 ## UI/UXの優劣 --- differences-in-ui
 
-実際にHotwireで作られているアプリを確認してください。下のビデオは[37signals社のFizzy](https://www.fizzy.do/)ですが、無料で試すこともできます。ソースコードも[GitHubで公開](https://github.com/basecamp/fizzy)されています。
+論より証拠です。実際にHotwireで作られているアプリを確認してください。下のビデオは[37signals社のFizzy](https://www.fizzy.do/)ですが、無料で試すこともできます。ソースコードも[GitHubで公開](https://github.com/basecamp/fizzy)されています。
 
 ![Fizzy demo](content_images/fizzy_demo.mov)
 
@@ -54,7 +56,7 @@ UIに複雑なデータを表現するケースはかなり多くあります。
 ## 結論 --- conclusion
 
 * HotwireもReactも高度なUI/UXが作れます。特殊なアプリでない限り、ここに差はありません。
-* ビジネスが成長するのにしたがってアプリは大きく複雑になります。その際はHotwireの方がReactよりも明確に有利になります。
+* ビジネスが成長するのにしたがってアプリは大きく、ビジネスロジックは複雑になります。その際はHotwireの方がReactよりも明確に有利になります。
 
 
 

@@ -1,0 +1,48 @@
+<%= form_with(model: membership) do |form| %>
+  <% if membership.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(membership.errors.count, "error") %> prohibited this membership from being saved:</h2>
+
+      <ul>
+        <% membership.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mt-4">
+    <%= form.label :name, class: "form-label form-label--required" %>
+    <%= form.text_field :name, class: "text-field" %>
+  </div>
+
+  <div class="mt-4">
+    <%= form.label :email, class: "form-label form-label--required" %>
+    <%= form.text_field :email, class: "text-field" %>
+  </div>
+
+  <div class="mt-4 flex flex-row gap-2">
+    <div class="flex-1">
+      <%= form.label :valid_from, class: "form-label form-label--required" %>
+      <%= form.date_field :valid_from, class: "text-field", required: true, data: { action: "input->validator#validate", validator_target: "validFrom" } %>
+    </div>
+    <div class="flex-1">
+      <%= form.label :valid_to, class: "form-label form-label--required" %>
+      <%= form.date_field :valid_to, class: "text-field", required: true, data: { action: "input->validator#validate", validator_target: "validTo" } %>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <%= form.label :membership_type, class: "form-label form-label--required" %>
+    <%= form.select :membership_type, Membership.membership_types.values, { include_blank: true }, { class: "select-field" } %>
+  </div>
+
+  <div class="mt-4">
+    <%= form.label :company_name, class: "form-label" %>
+    <%= form.text_field :company_name, class: "text-field" %>
+  </div>
+
+  <div class="mt-8 flex justify-end">
+    <%= form.submit class: "btn-primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,16 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+namihei:
+  name: Namihei Isono
+  email: namihei@example.com
+  membership_type: company
+  valid_from: 2026-01-01
+  valid_to: 2026-12-31
+  company_name: Oiso Kaisan
+
+sazae:
+  name: Sazae Fuguta
+  email: sazae@example.com
+  membership_type: personal
+  valid_from: 2026-01-01
+  valid_to: 2026-12-31

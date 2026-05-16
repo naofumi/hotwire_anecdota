@@ -1,0 +1,20 @@
+<% set_breadcrumbs [["Reservations", reservations_path],
+                    [@reservation.guest_name, reservation_path(@reservation)]
+                   ] %>
+
+<% content_for :title, "Reservation Details" %>
+
+<div class="mt-4">
+  <%= render @reservation %>
+</div>
+
+<div class="mt-8 flex flex-row gap-2 flex-wrap">
+  <%= render partial: "room_night", collection: @reservation.room_nights %>
+</div>
+
+<div>
+  <%= link_to "Edit this reservation", edit_reservation_path(@reservation) %> |
+  <%= link_to "Back to reservations", reservations_path %>
+
+  <%= button_to "Destroy this reservation", @reservation, method: :delete %>
+</div>

@@ -1,7 +1,7 @@
 ---
 title: Stimulusのコア・コンセプト
 layout: article
-order: 25
+order: 120
 published: true
 ---
 
@@ -27,7 +27,7 @@ published: true
 * ステートはHTML要素に持たせます
 
 <span class="italic">
-**補足:** もちろんステートをURL, cookie, localStorage, `window`オブジェクトやStimulus Controllerのインスタンス変数等に持たせることはできます。Reactと異なり「ステートはこう管理すべき」というのがないだけです。とはいえStimulusでは一般的にステートをHTML要素に持たせます。それは上述のように変更を受けたHTMLそのものであったり、あるいはStimulus Controllerのインスタンス変数にバインディングされた[Values](https://stimulus.hotwired.dev/reference/values)だったりします。
+**補足:** Stimlus Controllerには[Values](https://stimulus.hotwired.dev/reference/values)が用意されており、ステート管理ができます。したがって「StimulusはステートをHTML要素に持たせないといけない」ということではなく、**「ステートはどこに持っても良い」**と考えた方が良いでしょう。
 </span>
 
 ## Reactを含めた他のライブラリと一緒に使う --- use-with-other-libraries

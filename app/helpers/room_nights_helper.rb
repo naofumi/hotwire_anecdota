@@ -1,0 +1,2 @@
+module RoomNightsHelper
+end

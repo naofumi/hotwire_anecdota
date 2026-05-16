@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  set_available_variants :hotwire, :react, :jquery
+  set_available_variants :frame, :stream, :react, :jquery, :sjr
 
   # GET /users or /users.json
   def index

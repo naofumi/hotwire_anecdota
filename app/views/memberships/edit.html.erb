@@ -1,0 +1,19 @@
+<% set_breadcrumbs [["Memberships", memberships_path],
+                    ["Edit Membership", edit_membership_path(@membership)]] %>
+
+<% content_for :title, "Edit membership" %>
+<%= render 'variant_selection_section' %>
+
+<div class="max-w-lg mx-auto">
+  <div class="mb-16">
+    <h1 class="text-4xl text-center">Edit membership</h1>
+  </div>
+  <div class="actions-row">
+    <%= link_to "Back to membership", membership_path(@membership), class: "btn-outline-primary btn--back" %>
+    <div></div>
+  </div>
+
+  <div class="mt-8">
+    <%= render "form", membership: @membership %>
+  </div>
+</div>

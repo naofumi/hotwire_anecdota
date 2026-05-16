@@ -1,20 +1,26 @@
 ---
 title: Stimulusのコツ
 layout: article
-order: 26
+order: 110
 published: true
 ---
 
 Stimulusを使うコツとして、私は下記を意識するようにしています。
 
-## なるべくブラウザネイティブな機能を使う
+## なるべくブラウザネイティブな機能を使う --- use-browser-native-features
 
 * ブラウザネイティブな機能を使えば、コードが少なくなり、メンテナンス性が向上します
 * ブラウザネイティブのアクセシビリティがついてくるので、アクセシビリティの心配が減ります
 
-## ステートを意識する
+## HTML生成をなるべく避ける --- avoid-html-generation
 
-* Stimulusを使う時も、Reactと同様にステートを考慮します。ただしReactは原則として`useState()`、`useContext()`などにステートを集約させますが、Stimulusの場合はステートの種類が多くなります。どれを使用するかはケースバイケースで判断することになりますが、ステートの存在を意識することは大切です。そして不必要にステートを増やさずに、すでにあるステートから関数等で導出できるステートはなるべくそのようにします。
+* StimulusはHTMLを生成するような機能を用意していません。JSXのように効率的にHTMLを生成するツールは用意されていません。
+* これは[設計上の意図的なもの](/concepts/why-avoid-rendering-html-in-stimulus)です。レンダリングだけを考えるとブラウザでHTMLを生成しても工数は増えないように考えがちですが、[JSONを準備だけで多くの工数がかかるケースが多いです](/introduction/key_difference_between_hotwire_and_react)。
+* もちろんStimulusの中でHTMLを生成することはできます。その場合は[記述量を最小限にすることをお勧めします](/concepts/why-avoid-rendering-html-in-stimulus#when-html-is-allowed)。
+
+## ステートを意識する --- state-management
+
+* Stimulusを使う時も、Reactと同様にステートを考慮します。ただしStimulusの場合はステートの種類が多く、どれを使用するかはケースバイケースで判断することになります。
     * ネイティブなHTML要素(`<input>`タグなど)のステート
     * `aria`属性
     * [StimulusのValues](https://stimulus.hotwired.dev/reference/values)
@@ -22,19 +28,22 @@ Stimulusを使うコツとして、私は下記を意識するようにしてい
     * hiddenなどのHTML要素の属性
     * Zustandなどのステートライブラリ
     * Stimulusコントローラのインスタンスプロパティ
-* ステートを画面に反映させる方法を意識します。Reactの場合は`useState()`、`useContext()`を使うとコンポーネントがサイレンダリングされ、ステートに応じて条件付きレンダーなどでDOM要素を出し分けします。それに対してStimulusの場合は、ケースバイケースでいろいろなやり方があります。
-    * CSSのセレクタ・擬似セレクタで表示を変えます
-       * ステートとしてHTML要素のステート、aria属性HTML属性、Stimulus values、hidden属性を使っている場合は、例えば `:checked`, `[aria-expanded="true"]`, `[data-xxx-yyy-value="zzz"]`, `[hidden]` のようになります
-    * それ以外のステートを使っている場合は、各イベントハンドラからStimulusのtargetなどを呼び出し、そのHTML属性、classやHTMLを変更して表示を変えます
-    * Reactなどのように自動的にサイレンダリングが実行される機能はありませんが、Stimulus Valuesを使っている場合は `xxxValueChange()`コールバックが使用でき、ステートが変更された時にこのコールバックが自動的に呼び出されます。またZustandを使っている場合も、ステートが変更された時に自動的に呼び出されるコールバックを指定できます。
+* ステートを画面に反映させる方法を意識します。これもケースバイケースでいろいろなやり方があります。
+    * CSSのセレクタ・擬似セレクタで表示を変える方法
+       * Aria属性やHTML属性、Stimulus values、hidden属性などをステートとしている場合は、`:checked`, `[aria-expanded="true"]`, `[data-xxx-yyy-value="zzz"]`, `[hidden]`のようなCSSを書くだけで自動的にステートを表示に反映できます。
+    * StimulusコントローラからDOM要素の属性、classやコンテンツを直接変更して表示を変えられます。
+    * Stimulus Valuesを使っている場合は、ステートが変更された時に[`xxxValueChanged()`コールバック](https://stimulus.hotwired.dev/reference/values#change-callbacks)が自動的に呼び出されます。この中に画面更新処理を記述できます。
 
-## イベント処理、ステート変更、表示更新の責務を分離する
+## イベント処理、ステート変更、表示更新の責務を分離する --- event-state-view-separation
 
-* Reactはコンポーネントのすべての責務を一つのfunctionの中に閉じ込める方法が主流です
-* 一方でStimulusは責務の分離を可能にしています
-   * DOM要素をイベントハンドラに接続する処理はHTMLの中で記述します
-   * イベントハンドラ(Stimulus action)はStimulusの中でステートを更新します
-   * ステートを反映してUIを更新する処理は、なるべくならCSSの中で行います
-   * ステート反映は必要に応じて`target`を使ってStimulusの中で更新します
+* Reactはすべての責務を一つのコンポーネントに押し込めます。
+* 一方でStimulusは責務の分離を可能にしています。
+   * 表示はHTMLおよびCSSで記述します。
+   * ユーザイベントに対する応答はStimulusコントローラで記述します。
+   * イベントに応答して画面表示を変える場合は、まずはCSSによる変更を検討します。
+   * CSSだけでは十分に表示を変えられない場合は、Stimulusの中からHTMLのコンテンツ等を書き換えます。 
 
-Stimulusの処理内容を最小化することによって、再利用性が向上します。
+## コードが複雑になったら単方向データフローを意識する --- single-direction-data-flow
+
+* Stimulusの処理が複雑になった場合、[単方向データフローをはじめとしたStimulusコントローラの構造を意識する](/concepts/stimulus-typical-structure)ことで改善するケースが多いです。
+

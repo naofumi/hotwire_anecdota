@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+superior_1_20260501:
+  room: superior_1
+  reservation: masuo
+  date: 2026-05-01
+
+superior_1_20260502:
+  room: superior_1
+  reservation: masuo
+  date: 2026-05-02
+
+suite_1_20260502:
+  room: suite_1
+  reservation: namihei
+  date: 2026-05-02
+

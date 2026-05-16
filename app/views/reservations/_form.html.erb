@@ -1,0 +1,49 @@
+<%= form_with(model: reservation, id: "reservation_form") do |form| %>
+  <% if reservation.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
+
+      <ul>
+        <% reservation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mt-4">
+    <%= form.label :guest_name, class: "form-label" %>
+    <%= form.text_field :guest_name, class: "text-field" %>
+  </div>
+
+  <div class="mt-4">
+    <%= form.label :guest_phone, class: "form-label" %>
+    <%= form.text_field :guest_phone, class: "text-field" %>
+  </div>
+
+  <div class="mt-4">
+    <%= form.label :check_in, class: "form-label" %>
+    <%= form.date_field :check_in, class: "text-field" %>
+  </div>
+
+  <div class="mt-4">
+    <%= form.label :check_out, class: "form-label" %>
+    <%= form.date_field :check_out, class: "text-field" %>
+  </div>
+
+  <% if date_span = reservation_date_span(reservation) %>
+    <div class="mt-8">
+      <%= render "available_rooms",
+                 from: date_span.from,
+                 to: date_span.to,
+                 current_reservation: reservation,
+                 form:
+      %>
+    </div>
+  <% end %>
+
+
+  <div class="mt-8">
+    <%= form.submit class: "btn-primary" %>
+  </div>
+<% end %>

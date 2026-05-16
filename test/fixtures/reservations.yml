@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+masuo:
+  guest_name: Masuo Fuguta
+  guest_phone: 01-2345-6789
+  requested_room: superior_1
+  check_in: 2026-05-01
+  check_out: 2026-05-03
+
+namihei:
+  guest_name: Namihei Isono
+  guest_phone: 01-2345-6780
+  requested_room: suite_1
+  check_in: 2026-05-02
+  check_out: 2026-05-03

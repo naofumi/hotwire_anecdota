@@ -1,0 +1,10 @@
+<div id="<%= dom_id room_night %>" class="card w-52">
+  <div class="flex justify-between">
+    <div>
+      <div class="text-sm font-bold"><%= room_night.room.number %></div>
+      <div><%= l room_night.date, format: :short %></div>
+      <h3 class="text-2xl"><%= room_night.room.category %></h3>
+    </div>
+  </div>
+  <div class="mt-4"><%= image_tag room_night.room.feature_image.variant(:thumb), class: "rounded-lg aspect-3/2 object-cover" %></div>
+</div>

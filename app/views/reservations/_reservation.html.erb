@@ -1,0 +1,18 @@
+<div id="<%= dom_id reservation %>" class="attributes-list">
+  <div class="attributes-list__row">
+    <div class="attributes-list__label">Guest name:</div>
+    <div class="attributes-list__value"><%= reservation.guest_name %></div>
+  </div>
+  <div class="attributes-list__row">
+    <div class="attributes-list__label">Guest phone:</div>
+    <div class="attributes-list__value"><%= reservation.guest_phone %></div>
+  </div>
+  <div class="attributes-list__row">
+    <div class="attributes-list__label">Check in:</div>
+    <div class="attributes-list__value"><%= l reservation.check_in, format: :long %></div>
+  </div>
+  <div class="attributes-list__row">
+    <div class="attributes-list__label">Guest out:</div>
+    <div class="attributes-list__value"><%= l reservation.check_out, format: :long %></div>
+  </div>
+</div>
