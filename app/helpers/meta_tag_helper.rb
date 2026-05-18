@@ -3,7 +3,7 @@ module MetaTagHelper
     image = image_url("ogp.webp")
     {
       og: {
-        site_name: "Hotwire Anecodota",
+        site_name: "Hotwire Anecdota",
         title:,
         # description: '',
         type: "website",

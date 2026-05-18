@@ -1,4 +1,4 @@
-# Hotwire Anecodota
+# Hotwire Anecdota
 
 The goal of this project is to study and document how to effectively use Hotwire, and to extract best practices and other lessons.
 
