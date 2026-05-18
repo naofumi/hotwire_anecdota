@@ -10,6 +10,8 @@ descriptors:
   technologies:
     - Turbo Drive
     - Turbo Morphing
+  related_pages:
+    - /concepts/post-redirect-get
   demo_urls:
     - ["Turbo Driveによるデモ", "/todos?variant=drive"]
 ---
@@ -18,9 +20,9 @@ descriptors:
 
 - コードは最もシンプルです。
 - ページ全体を再描画します。
-   - 通常は再描画によりページのUIステート(スクロール位置など)がリフレッシュされます。
-   - しかしMorphingを使うと、Reactの差分アルゴリズムと類似の処理が行われ、UIステートを残しつつ変更箇所だけを修正できます。
-- 更新系はPOST/Redirect/GETパターンに従うため、更新されたデータを受けとるまでにサーバに２回リクエストを飛ばします。
+   - 通常は再描画によりページのUIステートがリフレッシュされます。目立つところでは**スクロール位置がリセットされます**。
+   - ただしMorphingを使うと、Reactの差分アルゴリズムと類似の処理が行われ、変更箇所だけを修正できます。そのため**Morphingを使うとスクロール位置をはじめとした各種のUIステートを維持できます**。
+- 更新系は[POST/Redirect/GETパターン](/concepts/post-redirect-get)に従うため、更新されたデータを受けとるまでにサーバに２回リクエストを飛ばします。
 - Optimistic(楽観的)UIを使用していないことに加え、POST/Redirect/GETをしないといけないので、「いいね」ボタンを押してから実際に画面に反映されるまでに時間がかかります。
 
 ## コード --- code
@@ -103,5 +105,5 @@ end
 * `create`メソッドで「いいね」ボタンのアクションを実行します。
 * Turbo Driveを使用している場合は、DBを更新後、`return redirect_to todos_path`をします。いわゆる[POST/redirect/GETのパターン](/concepts/post-redirect-get)です
 * 通常のTurbo Driveであれば、redirect後にTodo一覧ページを再描画するとき、スクロール位置がリセットされます（画面の最上部にスクロールします）
-    * しかし今回は[`app/views/todos/index.html.erb`](https://github.com/naofumi/hotwire_anecdota/tree/master/app/views/todos/index.html.erb)で`turbo_refreshes_with method: :morph, scroll: :preserve`を設定しているため、Morphingを使った再レンダリングをしています。そのためスクロール位置は維持されます
+    * しかし今回は[`app/views/todos/index.html.erb`](https://github.com/naofumi/hotwire_anecdota/tree/master/app/views/todos/index.html.erb)で`turbo_refreshes_with method: :morph, scroll: :preserve`を設定しているため、[Morphingを使った再レンダリング](https://turbo.hotwired.dev/handbook/page_refreshes#morphing)をしています。そのためスクロール位置は維持されます
     * **最もシンプルなPOST/redirect/GETパターンを使いつつ、スクロール位置を含めたブラウザステートを維持したい場合、Morphingは非常に有効です**

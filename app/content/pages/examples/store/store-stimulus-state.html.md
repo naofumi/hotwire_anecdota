@@ -4,6 +4,15 @@ layout: article
 order: 20
 published: true
 show_siblings: true
+descriptors:
+  technologies:
+    - Stimulus
+  demo_urls:
+    - ["ステートをStimulusに持つデモ", "/components/iphone"]
+  related_pages:
+    - /concepts/stimulus-tips
+    - /concepts/stimulus-typical-structure
+    - /concepts/why-avoid-rendering-html-in-stimulus
 ---
 
 ## 概略 --- introduction

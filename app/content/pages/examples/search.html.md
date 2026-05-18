@@ -16,7 +16,9 @@ descriptors:
   demo_urls:
     - ["デモ", "/customers"]
   related_pages:
-    - /concepts/stimulus-tips.html.md
+    - /concepts/turbo-or-stimulus
+    - /concepts/turbo-network-lag
+    - /concepts/why-is-hotwire-fast
 
 ---
 
@@ -104,7 +106,7 @@ descriptors:
 </div>
 ```
 
-* 検索窓は`form_with`の中の`search_field_tag`で実装しています。HTMLで言うと`<form>`タグを`<input type="search">`を使います。
+* 検索窓は`form_with`の中の`search_field_tag`で実装しています。HTMLの`<form>`タグを`<input type="search">`に相当します。
     * `data-controller="autosubmit"`属性で`AutosubmitController`(Stimulus)に接続します。
     * `data-autosubmit-wait-value="300"`属性ではリアルタイム検索をするときのdebounceの待ち時間を設定しています。
     * `data-turbo-frame="customers"`属性により、サーバから送られてきたHTMLは`<turbo-frame id="customers">`で指定されたTurbo Frameのところに入れように指示しています。
@@ -145,5 +147,7 @@ export default class extends Controller {
 
 ## メモ --- memo
 
-* Hotwireは`<input>`タグに`data-turbo-submits-with`などでpending UI（待ちUI）を簡単に追加できたり、`disabled`属性が自動的についたり、さらに`<form>`要素に自動的に`aria-busy`がついたりするなど、自動でやってくれる範囲が広いです。
+* 今回はTurboが`<form>`要素に自動的に追加してくれる`aria-busy`属性を使い、CSSだけでpending UI (待ちUI)を実装しました。
+* このほかにもHotwireは`<input>`タグに`data-turbo-submits-with`などでpending UI（待ちUI）を簡単に追加できたり、何もしなくても`disabled`属性が自動的についたりなど、[一般的な処理を最初から付けてくれいます](https://turbo.hotwired.dev/reference/attributes)。これもRailsの[Omakaseの発想](https://rubyonrails.org/doctrine#omakase)と言えるでしょう。
+* 一方でReactはこのような仕組みを用意せず、各自で機能を追加する形になっています。
 

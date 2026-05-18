@@ -6,6 +6,14 @@ published: true
 show_siblings: true
 descriptors:
   parent: /examples/modal
+  technologies:
+    - Stimulus
+  demo_urls:
+    - ["デモ", "/todos"]
+  related_pages:
+    - /introduction/you-should-use-javascript
+    - /concepts/stimulus-tips
+    - /concepts/server-perspective-frames-vs-streams
 ---
 
 Hotwireで作成したモーダルでフォームを送信し、サーバサイドバリデーションが失敗した時の処理を紹介します。下記のビデオのものになります。

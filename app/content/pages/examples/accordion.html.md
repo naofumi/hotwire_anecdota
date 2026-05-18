@@ -20,6 +20,7 @@ descriptors:
     - ["Native版", "/components/accordion_native"]
   related_pages:
     - /concepts/stimulus-tips.html.md
+    - /concepts/stimulus-core-concept
 ---
 
 ここで作るのは下記のようなUIです。
@@ -38,7 +39,7 @@ descriptors:
     * a11yのために、`aria-hidden`や`inert`の属性を追加します
     * トランジションを実現するために、アコーディオンの詳細文の箇所の高さをStimulusから制御します。これはCSSの`interpolate-size`のサポートが広がれば不要になる見込みです。
 * 追記
-    * `<details>`, `<summary>`を使った例も参考として紹介しますが、滑らかなトランジションに必要な`interpolate-size`CSSSがまだすべての主要ブラウザに広がっていないため、あくまでも参考扱いです
+    * `<details>`, `<summary>`を使った例も参考として紹介しますが、滑らかなトランジションに必要な`interpolate-size`CSSがまだすべての主要ブラウザに広がっていないため、あくまでも参考扱いです
     * 他に`<input type="checkbox">`や`<input type="radio">`を使用する方法もありますが、ネイティブな`<details>`, `<summary>`での完全な実装が近い将来期待できますので、解説しません
 
 ## Stimulus版のコード --- code-stimulus
@@ -97,7 +98,6 @@ export default class extends Controller {
 }
 ```
 
-* Stimulus Controllerの作り方は[ここ](/tips/how-you-should-create-stimulus-controllers)をご確認ください
 * Stimulus Controllerで一番最初に見るべきポイントはイベントに応じて変化するステートです。
   * このControllerのイベントハンドラは`toggle()`だけなので、そこでステートがどのように変化するかを確認します。
   * そうすると`this.triggerTarget.ariaExpanded`がステートだというのがわかります。`toggle()`を実行することでこの値の`"true"`, `"false"`と変化します。

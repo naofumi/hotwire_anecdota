@@ -23,15 +23,23 @@
     <% end %>
     <% if d.demo_urls.present? %>
       <div class="h-8 font-bold text-right pr-4">デモ</div>
-      <div class="pl-4 markdown border-l border-gray-300"><%= safe_join d.demo_urls.map { link_to it[0], it[1], class: "link--demo" }, ", " %></div>
+      <div class="pl-4 markdown border-l border-gray-300">
+        <%= safe_join d.demo_urls.map {
+          link_to it[0], it[1], class: "link--demo", target: "_blank"
+        }, ", " %>
+      </div>
+    <% end %>
+    <% if d.related_pages.present? %>
+      <div class="h-8 font-bold text-right pr-4">関連ページ</div>
+      <div class="pl-4 pb-2 markdown border-l border-gray-300">
+        <%= safe_join d.related_pages.map { |path|
+          link_to site.get(path).data.title, path
+        }, ", " %>
+      </div>
     <% end %>
     <% if d.parent %>
       <div class="h-8 font-bold text-right pr-4">親ページ</div>
       <div class="pl-4 markdown border-l border-gray-300"><%= link_to site.get(d.parent).data.title, d.parent %></div>
-    <% end %>
-    <% if d.related_pages.present? %>
-      <div class="h-8 font-bold text-right pr-4">関連ページ</div>
-      <div class="pl-4 markdown border-l border-gray-300"><%= safe_join d.related_pages.map { |path| link_to site.get(path).data.title, path }, ", " %></div>
     <% end %>
   <% end %>
 

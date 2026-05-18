@@ -9,6 +9,8 @@ descriptors:
     - Stimulus Values
   technologies:
     - Stimulus
+  related_pages:
+    - /concepts/turbo-network-lag
   demo_urls:
     - ["Turbo Driveによるデモ", "/todos?variant=drive"]
     - ["Turbo Streamsによるデモ", "/todos?variant=streams"]
@@ -29,8 +31,10 @@ descriptors:
 * 「いいね」はサーバと同期する必要があります。したがってTurboを使います。Turboの中にもやり方は複数あります 
     * **Turbo Driveを使う方法:** 「いいね」ボタンを押すたびに画面全体をサーバで再レンダリングして、ブラウザに送ります
     * **Turbo Streamsを使う方法:** 「いいね」ボタンを押すたびに、該当の行だけを再レンダリングして、ブラウザに送ります
-    * **楽観的UIを使う方法** 「いいね」ボタンを押すと、ブラウザのネイティブ機能やJavaScriptを使い、ユーザにフィードバックを与えます。その裏でTurbo DriveもしくはTurbo Streamsでサーバと非同期通信を行い、レスポンスを受け取ったらUIを更新します。
+    * **楽観的UIを使う方法** 「いいね」ボタンを押すと、ブラウザのネイティブ機能やJavaScriptを使い、ユーザにすぐにフィードバックを与えます。その裏でTurbo DriveもしくはTurbo Streamsでサーバと非同期通信を行い、レスポンスを受け取ったらUIを更新します。
 * 楽観的UIを実現するためには、「いいね」ボタンを押した直後に（サーバからのレスポンスを受け取る前）UIを更新する必要があります。これはStimulus Controllerで実現します。
+   * Turboはネットワーク通信を行いますので、レスポンスを待っているともたつくUI/UXになる可能性があります。楽観的UIはこれを解消してくれます。[Turboとネットワーク遅延](/concepts/turbo-network-lag)
+
 
 ## 実装 --- actual-implementation
 

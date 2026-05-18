@@ -7,13 +7,11 @@ published: true
 
 ![stimulus-structure.webp](content_images/stimulus-structure.webp "max-w-[400px] mx-auto")
 
-## はじめに --- intro
-
 ここでは私がStimulus Controllerを書くときのパターンを紹介します。他人のものとの比較は十分にやっているわけではありませんが、概ね似ているのではないかと思います。
 
 ## 単方向データフロー --- single-direction-data-flow
 
-Reactが普及させた単方向データフローはロジックがわかりやすく、デバッグしやすいのが特徴です。特に複数のActionが複数のTargetを更新しているケースではロジックが追いやすくなります。
+単方向データフローはロジックがわかりやすく、デバッグしやすいのが特徴です。jQueryよりもReactの方がわかりやすいと言われるのは主に単方向データフローのおかげだと思います。**特に複数のActionが複数のTargetを更新しているケースではロジックが追いやすくなります**。
 
 **複雑なステートを管理する場合、Stimulusも単方向データフロー的な使い方ができます**。ここで紹介するのはこのようなものです。簡単なステートの場合は、ここまで考える必要はありません。
 
@@ -26,7 +24,7 @@ Reactが普及させた単方向データフローはロジックがわかりや
 
 下記は[Apple Store模写の比較的複雑なStimulus Controllerの例](/examples/store/store-stimulus-state)です。各セクションをコメントしていますので、コードの中をご確認ください。
 
-* 私は**Actionのメソッドの行数を少なくして、RailsのThin Controllerのようにしています**。ステートの更新に集中させることで、責務を明確にします（ただしステートを介さないような簡単な処理の場合は直接targetを更新させます）。
+* **Actionのメソッドの行数を少なくします**。ステートの更新に集中させることで、責務を明確にします（ただしステートを介さないような簡単な処理の場合は直接targetを更新させることもあります）。なおこの考え方は[Rails MVCのSkinny Controller](https://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model)と同じ考え方です。
 * **ActionハンドラーとRenderを明確に分けるのは大きなメリットがある**と感じています。
 * また下記では`IPhone`クラスを用意し、**ビジネスロジックは完全に分離収納しています**。下記のような処理の流れになります。
     * Actionで`this.iphoneValue`ステートを更新する（[Valuesステート](https://stimulus.hotwired.dev/reference/values)）
@@ -152,6 +150,70 @@ export default class extends Controller {
 }
 ```
 
+```js:app/javascript/models/IPhone.js
+export default class IPhone {
+  static DEFAULT_MODEL = "6-1inch"
+  static DEFAULT_COLOR = "naturaltitanium"
+  static DEFAULT_RAM = "256GB"
+
+  constructor(iphoneObject, data) {
+    this.model = iphoneObject.model
+    this.color = iphoneObject.color
+    this.ram = iphoneObject.ram
+    this.data = data
+  }
+
+  state() {
+    if (this.ram) {
+      return "ram_entered"
+    } else if (this.color) {
+      return "color_entered"
+    } else if (this.model) {
+      return "model_entered"
+    } else {
+      return "nothing_entered"
+    }
+  }
+
+  canEnterModel() {
+    return true
+  }
+
+  canEnterColor() {
+    return ["model_entered", "color_entered", "ram_entered"].includes(this.state())
+  }
+
+  canEnterRam() {
+    return ["color_entered", "ram_entered"].includes(this.state())
+  }
+
+  imagePath() {
+    const imageLabel = `${this.model || IPhone.DEFAULT_MODEL}-${this.color || IPhone.DEFAULT_COLOR}`
+    return this.data.images[imageLabel]
+  }
+
+  fullColorName() {
+    return this.data.colors[this.color || IPhone.DEFAULT_COLOR].full_name
+  }
+
+  price() {
+    const modelPrice = this.data.prices.model[this.model || IPhone.DEFAULT_MODEL]
+    const ramPrice = this.data.prices.ram[this.ram || IPhone.DEFAULT_RAM]
+    return {lump: modelPrice.lump + ramPrice.lump, monthly: modelPrice.monthly + ramPrice.monthly}
+  }
+
+  pricingFor(model, ram) {
+    model = model || IPhone.DEFAULT_MODEL
+    ram = ram || IPhone.DEFAULT_RAM
+    return {
+      lump: this.data.prices.model[model].lump + this.data.prices.ram[ram].lump,
+      monthly: this.data.prices.model[model].monthly + this.data.prices.ram[ram].monthly,
+    }
+  }
+}
+```
+
 ## まとめ --- summary
 
-* ある程度複雑になると、Reactの単方向データフローと同じように、データフローを整理した方がわかりやすくなります。Stimulusはそのための[Valuesステート](https://stimulus.hotwired.dev/reference/values)を用意しています
+* ある程度複雑になると、Reactの単方向データフローと同じように、データフローを整理した方がわかりやすくなります。
+* Stimulusはそのための[Valuesステート](https://stimulus.hotwired.dev/reference/values)を用意しています

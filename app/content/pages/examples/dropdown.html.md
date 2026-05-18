@@ -19,6 +19,7 @@ descriptors:
     - ["Native版", "/components/dropdown_menu_native"]
   related_pages:
     - /concepts/stimulus-tips.html.md
+    - /concepts/stimulus-core-concept
 ---
 
 ここで作るのは次のようなUIです。

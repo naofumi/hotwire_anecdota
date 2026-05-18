@@ -26,20 +26,21 @@ Stimulusを使うコツとして、私は下記を意識するようにしてい
     * [StimulusのValues](https://stimulus.hotwired.dev/reference/values)
     * CSSクラス
     * hiddenなどのHTML要素の属性
-    * Zustandなどのステートライブラリ
+    * Zustandなどのステートライブラリ(ZustandはReactがvanilla JavaScriptで使えます)
     * Stimulusコントローラのインスタンスプロパティ
 * ステートを画面に反映させる方法を意識します。これもケースバイケースでいろいろなやり方があります。
     * CSSのセレクタ・擬似セレクタで表示を変える方法
        * Aria属性やHTML属性、Stimulus values、hidden属性などをステートとしている場合は、`:checked`, `[aria-expanded="true"]`, `[data-xxx-yyy-value="zzz"]`, `[hidden]`のようなCSSを書くだけで自動的にステートを表示に反映できます。
-    * StimulusコントローラからDOM要素の属性、classやコンテンツを直接変更して表示を変えられます。
+    * StimulusコントローラからDOM要素の属性、classやコンテンツを直接変更して表示を変える方法。
     * Stimulus Valuesを使っている場合は、ステートが変更された時に[`xxxValueChanged()`コールバック](https://stimulus.hotwired.dev/reference/values#change-callbacks)が自動的に呼び出されます。この中に画面更新処理を記述できます。
 
 ## イベント処理、ステート変更、表示更新の責務を分離する --- event-state-view-separation
 
-* Reactはすべての責務を一つのコンポーネントに押し込めます。
-* 一方でStimulusは責務の分離を可能にしています。
-   * 表示はHTMLおよびCSSで記述します。
-   * ユーザイベントに対する応答はStimulusコントローラで記述します。
+* Reactはすべての責務を一つのコンポーネントに押し込めます。敢えて密結合・高凝集な設計になっています。
+* 一方でStimulusは責務を分離します。
+   * 表示はHTMLおよびCSSの責務です。
+   * ユーザイベントに対する応答はStimulusコントローラの責務です。
+* CSSは継承しますので、内包するHTML要素の表示を変えます。上流のCSSが自然と下流に流れますので、データフローと似た感じで表示の変化を変更できます。
    * イベントに応答して画面表示を変える場合は、まずはCSSによる変更を検討します。
    * CSSだけでは十分に表示を変えられない場合は、Stimulusの中からHTMLのコンテンツ等を書き換えます。 
 

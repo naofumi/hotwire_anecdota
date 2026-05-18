@@ -18,13 +18,18 @@ descriptors:
     - ["React版", "/users?variant=react"]
     - ["jQuery版", "/users?variant=jquery"]
     - ["Server Generated JavaScript Response版", "/users?variant=sjr"]
+    related_pages:
+      - /concepts/approach
+      - /concepts/server-perspective-frames-vs-streams
+      - /introduction/history
+
 ---
 
 ここで作成するUIは下記のものです。
 
 様々な技術で実装し、Hotwireの特徴を見ていただくのが目的です。
 
-![side-panel-hotwire.mov](content_images/side-panel-hotwire.mov "max-w-[500px] mx-auto")
+![Side Panel](content_images/side-panel.mov "mx-auto")
 
 ## 考えるポイント --- points-to-consider
 
@@ -253,6 +258,7 @@ function init(el: HTMLElement) {
 * jQueryにより、テーブルの行がクリックされると`load()`関数が呼ばれます。
     * `load()`によりサーバにリクエストが投げられ、HTMLレスポンスを受け取ります。
     * HTMLレスポンスは`frame`(サイドパネルの枠)の中に挿入されます。
+* ちなみに上記の[jQueryはTypeScriptで書いています](https://www.npmjs.com/package/@types/jquery)。
 
 ### サーバからのレスポンス --- jquery-server-response
 
@@ -268,7 +274,7 @@ function init(el: HTMLElement) {
 
 ## Server Generated JavaScript Response版 --- sjr
 
-[RailsのUJS (Unobtrusive JavaScript)](https://github.com/rails/rails-ujs)([jQuery版](https://github.com/rails/jquery-ujs))を使用する方法です。
+[RailsのUJS (Unobtrusive JavaScript)](https://github.com/rails/rails-ujs)([jQuery版](https://github.com/rails/jquery-ujs))を使用する方法です。[Server-generated JavaScript Responsesのポスト](https://signalvnoise.com/posts/3697-server-generated-javascript-responses)でDHHが詳しく解説しています。
 
 上記のjQuery版とともに、Hotwireが公開される前の2020年ごろまで、Ruby on Railsフロントエンドでよく使用されていた方法です。
 
@@ -317,5 +323,5 @@ frame.innerHTML = "<%= j render 'show', user_profile: @user_profile %>";
 ## まとめ --- summary
 
 * Hotwireは"HTML over the wire"というぐらいなので、画面の部分更新をする際にサーバからHTMLが返ってくるのが大きな特徴です。
-* ただしHTMLを返すと言っても、Ruby on Railsは様々な手法を試してきました。HotwireのTurbo FramesおよびTurbo Streamsはこれらを束ねる形で進化してきたものです。
+* ただしHTMLを返すと言っても、Ruby on Railsは20年間の間に様々な手法を試してきました(ここで紹介できてなかったものもまだあります)。HotwireのTurbo FramesおよびTurbo Streamsはこの知見の上に進化してきたものです。
 * Turbo FramesとTurbo Streamsの違いについては、[Turbo FramesとTurbo Streamsの違い](/concepts/server-perspective-frames-vs-streams)でも紹介しています。

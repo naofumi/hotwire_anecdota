@@ -4,6 +4,14 @@ layout: article
 order: 30
 published: true
 show_siblings: true
+descriptors:
+  technologies:
+    - React
+  demo_urls:
+    - ["Reactでステートを持つデモ", "/iphone"]
+  related_pages:
+    - /introduction/complex_ui
+    - /examples/using_with_react
 ---
 
 ## 概略 --- introduction
@@ -115,8 +123,9 @@ export function IPhoneShow({catalogData}) {
 
 ## まとめ --- summary
 
-* [Hotwireでステートをサーバに持たせた例](/examples/store/store-server-state)と構造としてはよく似ています
+* [Hotwireでステートをサーバに持たせた例](/examples/store/store-server-state)と構造がよく似ています
     * イベントハンドラの中で`iphoneState`ステートに保存し、IPhoneオブジェクトでロジックを処理して、コンポーネントを再レンダリングしています
+      * イベントハンドラをサーバへのリクエスト送信、IPhoneオブジェクトをモデル、再レンダリングをレスポンス送信と考えると、**Reactの単方向データフロートとウェブMVCは驚くほどよく似ています**。
     * Reactはステートを更新すると自動的に再レンダリングします。そのため、Stimulusで必要だった`#render*`のメソッドが不要になります
 * Stimulus Controller版では`#render*`メソッドを使ってステートをDOMに反映させました。一方でReactの場合は`IphoneShow`コンポーネント(`app/javascript/react/components/IPhoneShow.jsx`)のJSXの中にロジックが埋め込まれています(コード量が多くなるのでここでは掲載していません。[GitHub上で確認して](https://github.com/naofumi/hotwire_anecdota/tree/master/app/javascript/react/components/IPhoneShow.jsx)ください)
     * テンプレートの中にロジックを埋め込むのは[ステートをサーバに持たせた例](/examples/store/store-server-state)と同じです。[関心の分離](https://ja.wikipedia.org/wiki/関心の分離)という視点では議論がありますが、一般にHTMLとロジックの関係がわかりやすくなると思います

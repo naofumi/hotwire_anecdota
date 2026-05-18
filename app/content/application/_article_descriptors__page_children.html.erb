@@ -7,7 +7,7 @@
     <div class="h-8 font-bold text-right pr-4">
       <%= index.zero? ? label : "" %>
     </div>
-    <div class="pl-4 flex markdown border-l border-gray-300">
+    <div class="pl-4 pb-2 flex markdown border-l border-gray-300">
       <% is_current_page = current_page.url == child_page.url %>
       <%= link_to child_page.data.title,
                   child_page.url,

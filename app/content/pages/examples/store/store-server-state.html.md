@@ -1,9 +1,21 @@
 ---
-title: Hotwireでステートをサーバに持たせる
+title: ステートをサーバに持たせる
 layout: article
 order: 10
 published: true
 show_siblings: true
+descriptors:
+  technologies:
+    - Turbo Streams (Morphing)
+    - Stimulus
+  demo_urls:
+    - ["サーバでステートを持つデモ", "/iphone"]
+  related_pages:
+    - /examples/like_button
+    - /concepts/turbo-or-stimulus
+    - /concepts/post-redirect-get
+    - /concepts/server-perspective-frames-vs-streams
+
 ---
 
 
@@ -13,10 +25,10 @@ show_siblings: true
 
 [デモはこちら](/iphone "demo-iphone-server-state")に用意しています。
 
-1. オプションが選択されるたびにサーバにリクエストを送信します
-2. サーバは再計算された価格等をすべて反映したHTMLを返してきます
-3. TurboはレスポンスのHTMLを画面に反映させ、新しい状態の価格等を表示します
-4. この際、単にHTMLを置換するのではなく、Morphing(差分検出処理)を行い、ブラウザステートを維持します。これはReactが再レンダリングのたびに行うものと同じ考えです
+* オプションが選択されるたびにサーバにリクエストを送信します。
+* サーバは再計算された価格等をすべて反映したHTMLを返してきます(Turbo Streams)。
+* Turbo StreamsはレスポンスのHTMLを画面に反映させ、新しい状態の価格等を表示します。
+* この際、単にHTMLを置換するのではなく、Morphing(差分検出処理)を行い、ブラウザステートを維持します。これはReactが再レンダリングのたびに行うものと同じ考えです。
 
 ## コード --- server-state-code
 
@@ -42,7 +54,7 @@ end
 ```
 
 * `IphonesController#show`をエンドポイントとします
-* `@iphone`インスタンスは`Iphone`オブジェクトのインスタンスです。DBを使わずに、ステートはすべて`session`で管理ます。そのため`Iphone`インスタンスは`session`を使って初期化します
+* `@iphone`インスタンスは`Iphone`オブジェクトのインスタンスです。今回はDBを使わずに、ステートはすべて`session`で管理します。そのため`Iphone`インスタンスは`session`を使って初期化します。
 
 ### Iphone.rb モデル --- iphone-model
 
@@ -119,11 +131,11 @@ class Iphone
 end
 ```
 
-* `Iphone`クラスには注文状況とそこから導出される関連情報が収まっています
-    * どこまでオプションを入力したかをステートマシン的に管理(`#color_enterable?` `#ram_enterable?`)
-    * model, color, ram等のオプションをセットするメソッド (`#[...]=`)
-    * 色の名前や画像URLを算出する処理 => `Iphone::Catalog`クラスに移譲 (`#color_name` `image_path`)
-    * 価格情報を算出する処理 => `Iphone::Catalog`クラスに移譲 (`#pricing`)
+* `Iphone`クラスには注文状況とそこから導出される関連情報を収めています。
+    * どこまでオプションを入力したかをステートマシン的に管理しています(`#color_enterable?` `#ram_enterable?`)。
+    * model, color, ram等のオプションをセットするメソッドを用意しています (`#[...]=`)。
+    * 色の名前や画像URLを算出する処理は販売されている製品のバリエーションを管理する`Iphone::Catalog`クラスに移譲しています (`#color_name` `image_path`)。
+    * 価格情報を算出する処理も`Iphone::Catalog`クラスに移譲しています(`#pricing`)。
 
 ### iPhoneモデルオプション選択 view --- iphone-model-select-view
 
@@ -205,12 +217,12 @@ end
 
 ```erb:app/views/iphones/create.turbo_stream.erb
 <%= turbo_stream.replace "iphone", method: "morph" do %>
-  <%= render "iphone", iphone: @iphone, controller: @catalog %>
+  <%= render "iphone", iphone: @iphone, catalog: @catalog %>
 <% end %>
 ```
 
 * Turbo Streamの中ではHTML上のidが`iphone`の場所に、partialの`iphone`を入れ替えています。`iphone` partialはフォーム全体をカバーしています。つまり更新された内容でフォーム全体を描き直しています
-* `method: "morph"`をしていますので、単純にDOMを新しいものと入れ替えるのではなく、変更された箇所だけを入れ替えます。ブラウザのステートをなるべくそのままにしますので、よりスムーズなUI/UXになります
+* `method: "morph"`をしていますので、単純にDOMを新しいものと入れ替えるのではなく、差分を検知した上で変更された箇所だけを入れ替えます。ブラウザのステートをなるべくそのままにしますので、よりスムーズなUI/UXになります
     * Turbo Streamsは個別の小さい範囲を書き換えるのによく使いますが、今回のように大きい範囲を書き直すときも使えます。その方がコードが簡略化されます。その場合は一般的にMorphingを使ってブラウザステートを維持すると良いでしょう 
 
 ### カラーオプションをホバーした時 --- hover-on-color

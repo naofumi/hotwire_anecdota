@@ -24,11 +24,11 @@
   <div class="mt-4 flex flex-row gap-2">
     <div class="flex-1">
       <%= form.label :valid_from, class: "form-label form-label--required" %>
-      <%= form.date_field :valid_from, class: "text-field", required: true, data: { action: "input->validator#validate", validator_target: "validFrom" } %>
+      <%= form.date_field :valid_from, class: "text-field" %>
     </div>
     <div class="flex-1">
       <%= form.label :valid_to, class: "form-label form-label--required" %>
-      <%= form.date_field :valid_to, class: "text-field", required: true, data: { action: "input->validator#validate", validator_target: "validTo" } %>
+      <%= form.date_field :valid_to, class: "text-field" %>
     </div>
   </div>
 

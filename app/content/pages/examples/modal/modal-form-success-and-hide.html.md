@@ -6,6 +6,21 @@ published: true
 show_siblings: true
 descriptors:
   parent: /examples/modal
+  technologies:
+    - Turbo Frames
+    - Turbo Streams
+    - Stimulus
+  demo_urls:
+    - ["デモ", "/todos"]
+  related_pages:
+    - /introduction/you-should-use-javascript
+    - /concepts/turbo-or-stimulus
+    - /concepts/turbo-network-lag
+    - /introduction/modern-browsers-and-react-relevance
+    - /concepts/stimulus-tips
+    - /concepts/server-perspective-frames-vs-streams
+
+
 ---
 
 Hotwireで作成したモーダル中のフォームからリクエストを送信し、成功するところまでを解説します。下記のビデオのものになります。

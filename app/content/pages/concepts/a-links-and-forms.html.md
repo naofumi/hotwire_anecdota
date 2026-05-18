@@ -18,22 +18,22 @@ Hotwireではなるべく通常の`<a>`や`<form>`でナビゲーションをし
     * `<form>`に含まれる`<button>`や`<input>`に[`data-turbo-submits-with`](https://turbo.hotwired.dev/reference/attributes#data-attributes)を追加すると、送信中にボタンのテキストを自動的に変更できます。これだけでPending UI（待ちUI）が実現できます
     * `<a>`タグや`<form>`タグによってリクエストを送信すると、適切なHTML要素に`aria-busy`属性が付きます。アクセシビリティ的に有効な上に、これをCSS擬似セレクタで読み取れば待ちUIがCSSだけで作れます
     * `<form>`に`data-turbo-confirm`属性をつけると、form送信時に最終確認用のモーダルダイアログを表示できます。これはデフォルトではブラウザネイティブの`window.confirm()`が使用されますが、[カスタマイズ](https://turbo.hotwired.dev/reference/drive#turbo.setconfirmmethod)して任意のダイアログを表示できます
+    * `<a>`やGETの`<form>`に`data-turbo-stream`属性をつけると、リクエストヘッダーに`Accept: text/vnd.turbo-stream.html ...`がつき、サーバに対してturbo streamを要求されます。Turbo Streamの機能そのものには関係ありませんが、サーバ側コードが書きやすくなります。
   
 上記のように、Hotwireでは`<a>`タグや`<form>`タグを使えば数多くの便利機能がついてきます。`onClick`を使ってカスタムのイベントハンドラを書くのではなく、**なるべくブラウザの標準機能で引っ張り、少しでもライブラリに多くの仕事をさせるのがHotwireを便利に使いこなすコツの一つ**だと思います。
 
 ## 基本的な指針 --- basic-design-guideline
 
-* サーバからデータを取得するような操作を作るときは、なるべく`<a>`タグや`<form>`タグを使います
-   * `click`イベントではなく、例えば`input`や`change`イベントに応答するときは適宜対応するStimulus Controllerを書きます 
-* `<button>`タグに`onclick`を書いて、そのハンドラからサーバに`fetch`するようなコードは滅多に書きません
-   * 一般的なアコーディオンの開閉などはサーバとの通信が発生しませんので、`<button>`タグにStimulusを繋げます 
+* サーバからデータを取得するような操作を作るときは、なるべく`<a>`タグや`<form>`タグを使います。`fetch()`でリクエストをサーバに投げると、Turboが管理できなくなるので、可能な限り避けます。
+* `<form>`で通常のsubmitができない場合(例えば`<input>`の`input`や`change`イベントで送信したい場合)は、なるべくJavaScriptから`requestSubmit()`で送信をします。
+* それ以外の場合は下記の[JavaScriptから直接Turboを使う](#using-turbo-from-javascript)こともできます。
 
-## JavaScriptから自在にTurboを使いたい場合 --- using-turbo-from-javascript
+## JavaScriptから直接Turboを使いたい場合: request.js --- using-turbo-from-javascript
 
-Turboを使ってサーバとの非同期通信をスタートさせる場合、`<a>`タグや`<form>`タグが推奨されているのは上述した通りです。でも`<a>`タグや`<form>`タグとは無関係に、JavaScriptからリクエストを送信したい場合もあります。そして`Turbo.visit([url])`でそれが可能なことも紹介しました。しかし実は、ここには制限があります。`Turbo.visit()`はGETメソッドしか送信できないのです。
+非同期通信をする場合、`<a>`タグや`<form>`タグが推奨されているのは上述した通りです。しかし`<a>`タグや`<form>`タグとは無関係に、JavaScriptからリクエストを送信したい場合もあります。
 
-POST用のメソッドを用意しないなど、TurboではJavaScriptから送信できるリクエストを敢えて制限しています。JavaScriptから非GETのTurboリクエストを送信しにくくしているのです。なるべく`<form>`タグを作って、プログレッシブエンハンスメントできるように書きなさいと言われているかのようです。
+* `Turbo.visit([url])`で[JavaScriptからTurboのリクエストを投げることができます](https://turbo.hotwired.dev/reference/drive#turbo.visit)。
+   * ただし`Turbo.visit()`はGETメソッドしか送信できません。
+* GET以外のリクエストを送信したい場合は[request.js](https://github.com/rails/requestjs-rails?tab=readme-ov-file)を使います。request.jsはCSRFトークンの送信や返ってきたTurbo StreamをDOMに自動挿入する処理もしてくれます。
 
-**どうしてもJavaScriptから自由にTurboを使いたい場合は[request.js](https://github.com/rails/requestjs-rails?tab=readme-ov-file)があります**。これはGitHubの`rails`リポジトリにありますので、Railsのチームで管理をしているものです（安心して使えます）。request.jsはCSRFトークンの送信や返ってきたTurbo StreamをDOMに挿入する処理もしてくれますので、Turboと一緒に使うときは便利です。
-
-
+ただし繰り返しになりますが、なるべくならば`request.js`を使わないのがお勧めです。敢えて非表示の`<form>`を作ってでも、`<form>`を使った方が[プログレッシブエンハンスメント](https://ja.wikipedia.org/wiki/プログレッシブエンハンスメント)の考え方に沿っています。また`<form>`要素と`<button>`要素が親子関係にならない場合は[`form`属性](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/form)を使うと良いでしょう。

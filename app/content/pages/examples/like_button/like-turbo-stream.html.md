@@ -9,6 +9,9 @@ descriptors:
   server_request: true
   technologies:
     - Turbo Streams
+  related_pages:
+    - /concepts/post-redirect-get
+    - /concepts/server-perspective-frames-vs-streams
   demo_urls:
     - ["Turbo Streamsによるデモ", "/todos?variant=stream"]
 ---
@@ -21,6 +24,7 @@ descriptors:
 - Optimistic(楽観的)UIを使用していないので、「いいね」ボタンを押してから実際に画面に反映されるまでに時間がかかります。
 
 ### Todoの各行 --- todo-rows
+
 ```erb:app/views/todos/_todo.html.erb
 <% highlight = local_assigns.fetch(:highlight, false) %>
 
@@ -71,7 +75,37 @@ descriptors:
     * IDをつけるのは、Turbo Streamsで置換する際の目印をつけるためです。
     * [サーバから見たTurbo FramesとTurbo Streamsの違い](/concepts/server-perspective-frames-vs-streams)でも解説している通り、リクエストを出す時は通常のTurbo DriveとTurbo Streamでは何も変わりません。Turbo Driveで応答するかTurbo Streamsで応答するかは、すべてサーバ側で決定されます。
 
-コントローラは上述のものと同じです。ただし`request.variant.mpa?`はfalseを返しますので、`app/views/todos/likes/create.turbo_stream.erb`（下記）をテンプレートとしたレスポンスを返します。
+### Todos::LikesController Turbo Streamsバージョン --- todo-rows-turbo-streams
+
+```rb:app/controllers/todos/likes_controller.rb
+class Todos::LikesController < ApplicationController
+   # ...
+
+   def create
+      sleep 1
+
+      if params[:like]
+         @todo.like_by! current_user
+      else
+         @todo.unlike_by! current_user
+      end
+
+      if request.variant.drive?
+         return redirect_to todos_path
+      end
+   end
+
+   private
+
+      def set_todo
+         @todo = Todo.find(params[:todo_id])
+      end
+end
+```
+
+コントローラは[Turbo Driveのもの](/examples/like_button/like-turbo-drive#controller-mpa)と同じです。ただし`request.variant.drive?`はfalseを返しますので、`app/views/todos/likes/create.turbo_stream.erb`（下記）をテンプレートとしたレスポンスを返します。
+
+### Turbo Streamsレスポンス --- response-turbo-streams
 
 ```erb:app/views/todos/likes/create.turbo_stream.erb
 <%= turbo_stream.replace dom_id(@todo, :like_button) do %>

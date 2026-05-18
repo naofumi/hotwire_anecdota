@@ -11,25 +11,23 @@ published: true
 
 ### POST/Redirect/GET（PRGパターン）とは --- what-is-post-redirect-get
 
-[POST/Redirect/GET](https://en.wikipedia.org/wiki/Post/Redirect/Get)はウェブで`<form>`を送信する際の**定石パターン**です。[日本語のPRGパターンの解説としてはここが良い](https://poco-tech.com/posts/spring-boot-introduction/post-redirect-get-pattern/)と思います。
+[POST/Redirect/GET](https://en.wikipedia.org/wiki/Post/Redirect/Get)はウェブで`<form>`から非GETのリクエストを送信する際の**定石パターン**です。[日本語のPRGパターンの解説としてはここが良い](https://poco-tech.com/posts/spring-boot-introduction/post-redirect-get-pattern/)と思います。
 
-* Next.jsもRemixも、内部処理には多少の違いはあるものの、POST/Redirect/GETのパターンを使います
-* HotwireはTurbo Drive, Turbo FramesではPOST/Redirect/GETのパターンを強制されます。具体的には**Turbo Drive, Turbo FramesはPOSTの後にStatus 200系のレスポンスが返ってきても無視します**。
-* **[POST/Redirect/GETパターンはブラウザおのリロードによる多重送信を防いでくれます](https://poco-tech.com/posts/spring-boot-introduction/post-redirect-get-pattern/)**ので、古くから定石的な扱いでした。特に多重送信は電子商取引などでは多重発注につながりますので、可能な限り回避しました（とは言いつつ、ちゃんとやっていないサイトも実はそこそこあります）
-* **SPAでは`<form>`を使った際に多重送信が発生してしまう問題に注意する必要が技術的には無くなっています**（SPAでリロードすると、ブラウザのステートが吹っ飛ぶだけであり、ユーザにとっては不便ですが、多重送信そのものは発生しません）
-* Hotwire Turbo Drive, Next.jsやRemixの大文字`<Link>`タグのように、SPAとSSRを組み合わせた技術の場合は、SPAと同様に多重送信の問題は発生しません。したがって**技術的にはPOST/Redirect/GETパターンを使う必要はないのですが、現実には`<form>`送信後はリダイレクトやリフレッシュを行い、実質的にPOST/Redirect/GETをすることが多いです**
+* **Turbo Drive, Turbo FramesはPOST/Redirect/GETのパターンを強制します**。具体的には`<form>`の非GETリクエストのレスポンスがStatus 200系だった場合はレスポンスを無視します。
+  * **[POST/Redirect/GETパターンはブラウザのリロードによる多重送信を防いでくれます](https://poco-tech.com/posts/spring-boot-introduction/post-redirect-get-pattern/)**ので、古くから定石的な扱いでした。[^next-js-prg]
+  * 非同期のform送信を行うHotwire Turbo Driveでは多重送信の心配はほとんどありませんが、[`<form>`送信後のURLが不整合になる可能性があります](https://turbo.hotwired.dev/handbook/drive#redirecting-after-a-form-submission)。URL(`document.location.href`)の整合性を保ためにPOST/Redirect/GETパターンを強制しています。[^double-submission] [^url-integrity]
+  * なお400系ではレスポンスを普通に表示します。そのためバリデーションエラーの表示は通常通りに行えます。  
+     * Hotwire以前はまでは、バリデーションエラーに対してstatus 200を返しても問題ありませんでした。しかしHotwire以降ではstatus 400系(通常は422)を返さないとエラーページが表示してくれなくなりました。
+* ただしTurbo StreamsはPOST/Redirect/GETパターンに従う必要はありません。Turbo StreamsはURL (`document.location.href`)に影響しないためです。 
+
+[^next-js-prg]: Next.jsのserver actionも、内部処理には多少の違いはあるものの、[POST/Redirect/GETのパターンを使います](https://nextjs.org/docs/app/getting-started/mutating-data#redirect-after-a-mutation)。
+[^double-submission]: **非同期のform送信では多重送信が起きません**。多重送信はPOST後の画面でリロードするとPOSTが再送信されてしまうのが原因でした。しかし非同期でPOSTをした場合はリロードしてもPOSTは再実行されませんので多重送信の心配はありません。
+[^url-integrity]: Turboで`<form>`から非GETのリクエストを送信する場合、URLを変更しません。そのためレスポンスの内容をそのまま画面に表示してしまうと、表示コンテンツの内容とURLの中身が噛み合わなくなってしまいます(例えばURLは`posts/new`なのに、新しく作成された`posts/1`の内容が表示されてしまいます)。一方で仮にリクエストを送信後にURLを`<form>`の`action`属性に合わせてしまうと(ブラウザのnativeの挙動)、URLはPOST用のものになります。この時点でブラウザリロードをするとGET methodでPOST用のURLにリクエストを投げてしまうので、これも不整合になります。どっちの実装も大きい課題があるため、Turboではredirectを強要する設計にしています。
 
 ### POST/Redirect/GETの欠点 --- demerits-of-post-redirect-get
 
-古くから普及し、モダンなウェブ技術でも使われ続けているPOST/Redirect/GETですが、欠点もあります
-
-* POST/Redirect/GETは**２往復のサーバ通信が必要になるので、単純に遅延が倍になります**
-    * Next.jsのServer Actionでは、開発者はPOST/Redirect/GETを書いても実際にはサーバ通信が１往復しなしない特殊な仕掛けを用意しています
-* HotwireでPOST`<form>`送信の２往復を避ける場合、Turbo Streamを使います
-   * Turbo Drive, Turbo Framesは使えません。[POST/Redirect/GETを前提とした動作をする](https://turbo.hotwired.dev/handbook/drive#redirecting-after-a-form-submission)ためです
-      * 具体的には、フォーム送信後は必ずRedirectを期待し(ステータス300系)、バリデーションエラーでは必ずステータス400系を期待し、それに応じてブラウザ側でレスポンスを適宜処理します
-      * フォーム送信後にリダイレクトなしで200系を返すと、レスポンスは無視されます
-   * Turbo Streamsならば、ブラウザはステータス番号に関わらず、レスポンスbodyの中身だけで応答を決めます。普通は１往復だけでレスポンスします（[Turbo Streamのrefresh](https://turbo.hotwired.dev/reference/streams#refresh)だけは別です。ブラウザにページのリフレッシュをさせます – Morphingを使ったページリロード）
+* POST/Redirect/GETは**サーバ通信が２往復必要になるため、反応が遅くなります**
+* HotwireでPOST`<form>`送信後の通信２往復を避ける必要があり、かつURLの変更をさせない場合はTurbo Streamを使います
 
 ## 私のオススメ --- my-recommendation
 

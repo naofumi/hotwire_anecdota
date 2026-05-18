@@ -6,6 +6,18 @@ published: true
 show_siblings: true
 descriptors:
   parent: /examples/modal
+  technologies:
+    - Turbo Frames
+    - Stimulus
+  demo_urls:
+    - ["デモ", "/todos"]
+  related_pages:
+    - /introduction/you-should-use-javascript
+    - /concepts/turbo-or-stimulus
+    - /concepts/turbo-network-lag
+    - /introduction/modern-browsers-and-react-relevance
+    - /concepts/stimulus-tips
+    - /concepts/server-perspective-frames-vs-streams
 ---
 
 親ページの[モーダル](/examples/modal)の「モーダルの表示・非表示制御」の箇所について解説します。

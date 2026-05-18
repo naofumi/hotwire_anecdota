@@ -16,6 +16,10 @@ descriptors:
     - ["カルーセルデモ", "/hotels"]
   related_pages:
     - /concepts/stimulus-tips.html.md
+    - /concepts/stimulus-core-concept
+    - /concepts/why-avoid-rendering-html-in-stimulus
+    - /concepts/stimulus-typical-structure
+    - /concepts/jquery-issues
 ---
 
 カルーセルはよく使われるUIウィジェットで広く使われているライブラリも存在します。最近はCSSでもかなり作れるようになっています。しかしここではStimlusによるステート管理の勉強として、自作したカルーセルを紹介します。
@@ -27,7 +31,7 @@ descriptors:
 ## 考えるポイント --- points-to-consider
 
 * 現在表示されているページをステートとして保持する必要があります。
-* StimulusではDOMにステートを持たせることが一般に第一選択肢になります。
+* StimulusではDOMにステートを持たせることが一般には第一選択肢になります。
   * しかし今回は状態を変更するコントロールが複数あり、また表示が変わる画面要素も複数あります。単純にDOMにステートを持たせるとスパゲッティコードになる恐れがあります。
   * 対策として、一般的には[Mediator Pattern](https://refactoring.guru/ja/design-patterns/mediator)を使用します。Stimulusの[Values](https://stimulus.hotwired.dev/reference/values)を使ってステートを集中管理します。 
 
@@ -81,8 +85,10 @@ descriptors:
 * `CarouselController` (Stimulus)にイベントを伝えるのに`data-action`を設定します。`data-action="click->carousel#previous"`（左矢印ボタン）, `data-action= "click->carousel#next"`（右矢印ボタン）, `data-action="click->carousel#move"...`（ページネーションボタン）が該当します。
   * `move()`の箇所は`data-carousel-index-param=[index]`もありますので、何番目のボタンがクリックされたかも`move()`メソッドに[伝えています](https://stimulus.hotwired.dev/reference/actions#action-parameters)
 * イベントに応答して`CarouselController`は`target`を書き換えます。
-  * `data-carousel-target="slide"`の箇所(スライド画像)は`aria-hidden`の属性を`"true"`, `"false"`に切り替えます。Tailwindの`aria-[hidden=true]`擬似CSSセレクタを使って表示状態を制御します。
-  * `data-carousel-target="pagination"`の箇所(ページネーションボタン)は`aria-selected`の属性を`"true"`, `"false"`に切り替えます。Tailwindの`aria-[select=true]`擬似CSSセレクタを使って表示状態を制御します。
+  * `data-carousel-target="slide"`の箇所(スライド画像)は`aria-hidden`の属性を`"true"`, `"false"`に切り替えます。
+     * Tailwindの`aria-[hidden=true]`擬似CSSセレクタによって表示状態が変わります。
+  * `data-carousel-target="pagination"`の箇所(ページネーションボタン)は`aria-selected`の属性を`"true"`, `"false"`に切り替えます。
+      * Tailwindの`aria-[select=true]`擬似CSSセレクタを使って表示状態が変わります。
 
 ### `CarouselController` Stimulus Controller --- carousel-controller
 
@@ -189,6 +195,6 @@ export default class extends Controller {
 * `CarouselController` (Stimulus)です。
 * `currentSlideValue`ステートをmediatorとした[mediator patternに即した書き方](/concepts/stimulus-typical-structure)をしています。
   * `move()`, `next()`, `previous()`のイベントハンドラは**主に`currentSlideValue`ステートの変更だけ**を行います（副次的に自動再生をオフにする処理も行います）。
-  * `currentSlideValue`ステートが変更されると`currentSlideValueChanged()`が自動的に呼び出されます。
-  * `#render()`が呼び出され、`#renderPaginationTargets()`, `#renderSlideTargets()`でtargetが再描画されます。(具体的には`aria-*`属性だけを変更し、CSSによる表示変更を起こします)
+  * `currentSlideValue`ステートが変更されると`currentSlideValueChanged()`が自動的に呼び出されます。これは[Stimulus Valuesのコールバック機能](https://stimulus.hotwired.dev/reference/values#change-callbacks)です。
+  * `currentSlideValueChanged()`の中から`#render()`が呼び出され、`#renderPaginationTargets()`, `#renderSlideTargets()`でtargetが再描画されます。(具体的には`aria-*`属性だけを変更し、CSSによる表示変更を起こします)
   * 「ボタンが押される」 => 「ステート(Mediator)が変更される」 => 「再描画」が実行されるという流れになります。

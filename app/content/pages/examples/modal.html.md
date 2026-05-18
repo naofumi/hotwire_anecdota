@@ -13,17 +13,21 @@ descriptors:
     - aria-expanded
   technologies:
     - Turbo Streams
+    - Turbo Frames
     - Stimulus
-    - Turbo Drive
   demo_urls:
     - ["デモ", "/todos"]
   related_pages:
-    - /concepts/stimulus-tips.html.md
+    - /introduction/you-should-use-javascript
+    - /concepts/turbo-or-stimulus
+    - /concepts/turbo-network-lag
+    - /concepts/stimulus-tips
+    - /concepts/server-perspective-frames-vs-streams
 ---
 
 ここではモーダルダイアログの実装を紹介します。
 
-* [HTMLネイティブの`dialog`](https://developer.mozilla.org/ja/docs/Web/HTML/Element/dialog)を使わずに、ゼロからHotwireで作成します。HTMLネイティブなものは別途紹介します。
+* [HTMLネイティブの`dialog`](https://developer.mozilla.org/ja/docs/Web/HTML/Element/dialog)を使わずに、ゼロからHotwireで作成します。HotwireにおけるJavaScriptの考え方やUI/UXに対する考え方を紹介するためです。HTMLネイティブなものは別途紹介予定です。
 * JavaScriptをほとんど使わないような**簡易的モーダル**の実装ではありません。JavaScriptを使い、アクセシビリティにも配慮したモーダルを作ります。
 * あえて難しめのモーダルを作ることで、Hotwireのコツを少し紹介していきたいと思います。
 * 複数のページに跨って紹介していきます。上の「子ページ」から各セクションをご覧になってください。

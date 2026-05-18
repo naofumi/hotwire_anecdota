@@ -10,6 +10,9 @@ descriptors:
   technologies:
     - Turbo Streams
     - Stimulus
+  related_pages:
+    - /concepts/post-redirect-get
+    - /concepts/server-perspective-frames-vs-streams
   demo_urls:
     - ["Optimistic UIによるデモ", "/todos?variant=optimistic"]
 ---
@@ -18,9 +21,11 @@ descriptors:
 
 - サーバとのデータ通信方法はTurbo Streams版と同じにしています。ただしTurbo Streamsを使う必要性はなく、Turbo Drive版とも問題なく組み合わせることができます。
 - Optimistic(楽観的)UIは、Turbo Streamsのリクエストを送信するのと同時に、サーバのリクエストを待つことなく画面表示を変更するだけです。今回は下記の２つの方法でこれを行なっています。
-   - HTMLの`<input type="checkbox">`(チェックボックス)を使用します。HTMLの`input`要素はもともとOptimistic UIであり、UI操作の結果を直ちに画面に反映させます。チェックボックスのステートをCSS擬似セレクタで読み取り、表示を変えます。
+   - HTMLの`<input type="checkbox">`(チェックボックス)を使用します。**HTMLの`input`要素はもともとOptimistic UIであり、UI操作の結果を直ちに画面に反映させます**[^optimistic-elements]。チェックボックスのステートをCSS擬似セレクタで読み取り、表示を変えます。
    - Stimulus controller `TodoLikesController`を使用して、「いいね」の数をJavaScriptで更新します。
-   - なお、チェックボックスを使用せずにすべてをStimulus controllerで実装することも可能ですが、今回は例として２通りの実装方法を紹介しています。
+   - なお、チェックボックスを使用せずに楽観的UIをStimulus controllerで実装することも可能ですが、今回は紹介しません。
+
+[^optimistic-elements]: ウェブブラウザはネットワークが極めて貧弱だった1990年代中旬に誕生しました。当時は１秒間に数キロバイトしか転送できなかったため、楽観的UI以外は考えられませんでした。`<input>`や`<select>`はこの頃からありましたので、楽観的UIです。
 
 ## コード --- code
 
@@ -113,7 +118,7 @@ export default class extends Controller {
 }
 ```
 
-* TodoLikesController Stimulus Controllerです
+* TodoLikesController(Stimulus Controller)です
 * `targets`の`count`は「いいね」数を表示する場所、`checkbox`は「いいね」したかどうかのステートを保持するチェックボックスです
 * Actionは`submit`と`optimistic`の２つがあります
     * `submit`はチェックボックスのステートが変更されたら`form`を自動送信するものです（チェックがついたり、消えたりした時）

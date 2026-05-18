@@ -21,6 +21,7 @@ published: true
     * HTML要素の並べ替え
     * HTML要素のコンテンツ（テキスト等）の変更
 * もちろん新しいDOM要素を作ったりすることもできますが、このようなケースは少数です
+* 補足: [HTML生成が許容される場合](/concepts/why-avoid-rendering-html-in-stimulus#when-html-is-allowed)
 
 ## ステートの管理 --- managing-state
 

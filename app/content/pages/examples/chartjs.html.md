@@ -12,7 +12,7 @@ descriptors:
   demo_urls:
     - ["Chart.jsデモ", "/components/chartjs"]
   related_pages:
-    - /concepts/stimulus-tips.html.md
+    - /examples/using_with_react
 
 ---
 

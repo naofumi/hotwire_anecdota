@@ -18,6 +18,7 @@ descriptors:
     - ["Checkbox版", "/components/toggle_checkbox"]
   related_pages:
     - /concepts/stimulus-tips.html.md
+    - /concepts/stimulus-core-concept
 ---
 
 ここで作るのは下記のようなUIです。
@@ -91,11 +92,9 @@ export default class extends Controller {
 
 ## Checkbox版のコード(JavaScriptを使わない) --- without-javascript
 
-昔からあるやり方ですが、ブラウザのネイティブな機能をさらに活かして、JavaScriptを全く使わないアプローチもあります。
+ブラウザネイティブの`<input>`や`<select>`タグは自身の中にステートを持ちます。JavaScriptでステートを管理しなくても、HTMLタグ自身にステートを保持させ、CSSでステートを確認し、画面に反映させられます。
 
-HTMLのcheckboxを使います。
-
-[デモはこちらです](/components/toggle_checkbox)
+ここではHTMLのcheckboxを使います。これは[Daisy UIのトグル](https://daisyui.com/components/toggle/?lang=ja)と似た仕組みです。
 
 ```erb:app/views/components/toggle_checkbox.html.erb
 <% set_breadcrumbs [["Toggle Checkbox", component_path(:toggle)]] %>
@@ -134,4 +133,5 @@ HTMLのcheckboxを使います。
 
 * React的な発想だと、コンポーネントに１つのステートを持たせて、その内容によって２つのHTML要素のマークアップそのものを変えることが多いでしょう。これはReactでは[条件付きレンダー](https://ja.react.dev/learn/conditional-rendering)と呼ばれています
 * しかしStimulusではHTMLの変更は一般に最小化します。今回のStimulus版では、１つのHTML要素だけを変更し、CSSにより他のHTML要素の表示は自動的に変更されました。また Checkbox版では`<input type="checkbox">`のステートを使用しましたので、HTMLの変更は一切不要でCSSのみで実装できました。
+* Reactの考え方とHotwireの考え方の違いについては**関連ページ**でも解説していますので参照してください。
  
