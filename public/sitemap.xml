@@ -37,4 +37,304 @@
         <priority>0.8</priority>
     </url>
 
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/introduction/about_this_site</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/introduction/techinical_aspects_of_hotwire</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/introduction/key_difference_between_hotwire_and_react</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/introduction/unnecessary_stuff_in_react</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/introduction/hotwire_javascript_is_simple</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/introduction/you-should-use-javascript</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/introduction/history</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/introduction/hotwire-myths</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/introduction/complex_ui</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/introduction/type_safety</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/introduction/rails-frontend</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/introduction/dangers_of_replacement</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/introduction/modern-browsers-and-react-relevance</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/examples/toggle</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/examples/accordion</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/examples/dropdown</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/examples/side_panel</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/examples/search</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/examples/sidebar</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/examples/carousel</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/examples/drawer</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/examples/client-side-validation</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/examples/toast</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/examples/like_button</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/examples/store</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/examples/chartjs</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/examples/using_with_react</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/examples/modal</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/concepts/approach</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/concepts/how-to-start</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/concepts/a-links-and-forms</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/concepts/partial-helper-components</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/concepts/components</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/concepts/stimulus-tips</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/concepts/stimulus-core-concept</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/concepts/should_stimulus_controllers_change_classes</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/concepts/why-avoid-rendering-html-in-stimulus</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/concepts/stimulus-typical-structure</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/concepts/stimulus-component</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/concepts/jquery-issues</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/concepts/turbo-or-stimulus</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/concepts/turbo-network-lag</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/concepts/post-redirect-get</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/concepts/server-perspective-frames-vs-streams</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://hotwire-anecdota.castle104.com/concepts/why-is-hotwire-fast</loc>
+        <lastmod>2026-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
 </urlset>
