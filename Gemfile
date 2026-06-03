@@ -71,6 +71,6 @@ gem "sitepress-rails", "~> 4.1.1"
 
 gem "markdown-rails", "~> 2.2"
 
-gem "rouge", "~> 4.7"
+gem "rouge", "~> 5.0"
 
 gem "rack-cors"
