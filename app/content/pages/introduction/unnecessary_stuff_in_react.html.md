@@ -5,6 +5,8 @@ order: 35
 published: true
 ---
 
+![React unnecessary stuff](https://www.youtube.com/watch?v=BltU8cHgo5M)
+
 ここでは**Reactのアプリにはしばしば見られる一方、Hotwireではそもそも存在しないもの**をリストアップしました。
 
 * **クライアントサイドルータ:** Hotwireではクライアントサイドルータは不要です。同様に[Inertia.js](https://inertiajs.com/)もReactではあるもののクライアントサイドルータはありません。**仮にSPAであっても、サーバ側のルータ１つで十分です**。

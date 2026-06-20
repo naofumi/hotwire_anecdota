@@ -7,6 +7,8 @@ published: true
 
 Reactとの比較を通して、Hotwireの特徴を考えます。
 
+![Rails Tokyo #4](https://www.youtube.com/watch?v=jhP4vGv3gz4)
+
 ## HotwireとReactの違い --- difference-between-hotwire-and-react
 
 先にまとめると、HotwireとReactの違いは以下の通りです。
