@@ -36,6 +36,7 @@ descriptors:
 * ステート管理：トグルのオン・オフステート
     * `aria-checked` HTML属性を使うやり方 → JavaScript要
     * HTMLの`<input type="checkbox">`を使うやり方 → JavaScript不要
+    * Reactの`useState`を使うやり方 → React要、JavaScript要
 
 
 
