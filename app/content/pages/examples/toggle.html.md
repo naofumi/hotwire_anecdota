@@ -13,9 +13,11 @@ descriptors:
   technologies: 
     - Stimulus
     - HTML Checkbox
+    - React
   demo_urls: 
     - ["Stimulus版", "/components/toggle_stimulus"]
     - ["Checkbox版", "/components/toggle_checkbox"]
+    - ["React版", "/react/toggle_plain"]
   related_pages:
     - /concepts/stimulus-tips.html.md
     - /concepts/stimulus-core-concept
@@ -129,9 +131,59 @@ export default class extends Controller {
 * さらにTailwind CSSの`peer`擬似セレクタと組み合わせると、チェックボックスステートに応じてトグル全体の表示をCSSだけで切り替えられます
 * ネイティブなHTML要素なので、アクセシビリティーの要件（スペースキーで切り替えられること）なども満たします
 
+## React版のコード --- react
+
+Reactでも上述のCheckbox版と似た手法も可能ですが、`useState`を使用してコンポーネントの中にステートを持たせる方法も多いので、こちらを紹介します。
+
+```typescript:app/javascript/react/components/TogglePlain.tsx
+import React from "react"
+import Layout from "./Layout"
+
+export default function Toggle() {
+  return <Layout title="Toggle React" description="Toggle implemented with React">
+    <div className="text-center">
+      <TogglePlain/>
+    </div>
+  </Layout>
+}
+
+export function TogglePlain() {
+  const [enabled, setEnabled] = React.useState(false)
+
+  function clickHandler() {
+    setEnabled(!enabled)
+  }
+
+  return (
+    <button type="button"
+            className={`group bg-gray-200 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out
+                   focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2
+             ${enabled ? 'bg-indigo-600' : ''}`}
+            role="switch"
+            tabIndex={0}
+            aria-checked={enabled
+              ? "true"
+              : "false"}
+            onClick={clickHandler}
+    >
+      <span className="sr-only">Use setting</span>
+      <span aria-hidden="true"
+            className={`pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow ring-0
+                   transition duration-200 ease-in-out
+                   ${enabled ? 'translate-x-5' : 'translate-x-0'}`}
+      ></span>
+    </button>
+  )
+}
+``` 
+
+* `const [enabled, setEnabled] = React.useState(false)`で`enabled`ステートを定義し、トグルのオンオフを管理します
+* ボタンをクリックすると`clickHandler()`が呼び出され、`enabled`ステートが切り替わります
+* Reactの[条件付きレンダー手法](https://ja.react.dev/learn/conditional-rendering)に従い、`enabled`ステートによってCSSクラスの出しわけをして表示を変えます
+
 ## React的思考との対比 --- summary
 
-* React的な発想だと、コンポーネントに１つのステートを持たせて、その内容によって２つのHTML要素のマークアップそのものを変えることが多いでしょう。これはReactでは[条件付きレンダー](https://ja.react.dev/learn/conditional-rendering)と呼ばれています
-* しかしStimulusではHTMLの変更は一般に最小化します。今回のStimulus版では、１つのHTML要素だけを変更し、CSSにより他のHTML要素の表示は自動的に変更されました。また Checkbox版では`<input type="checkbox">`のステートを使用しましたので、HTMLの変更は一切不要でCSSのみで実装できました。
-* Reactの考え方とHotwireの考え方の違いについては**関連ページ**でも解説していますので参照してください。
- 
+* Reactの場合は[条件付きレンダー](https://ja.react.dev/learn/conditional-rendering)がやりやすいため、ステートによってHTML要素のマークアップを書き換えるケースが多いようです。
+* 一方でStimulusでHTML要素を変更する場合は[Target](https://stimulus.hotwired.dev/reference/targets)を使用することになりますので、少し煩雑になります。
+  * そこでHTML要素の変更は最小限にして(上記のStimulusの例では`aria-checked`のみ)、他の箇所はCSSの擬似セレクタに任せることが多くなります。 
+* Checkbox版では`<input type="checkbox">`にステートを持たせて、CSSの[:checked擬似セレクタ](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:checked)で表示を切り替えています。

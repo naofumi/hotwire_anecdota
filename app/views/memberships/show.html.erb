@@ -1,5 +1,5 @@
-<% set_breadcrumbs [["Memberships", memberships_path],
-                    [@membership.name, membership_path(@membership)]
+<% set_breadcrumbs_plus_examples_crumb [["Memberships", memberships_path],
+                                        [@membership.name, membership_path(@membership)]
                    ] %>
 
 <% content_for :title, "Membership Details" %>
