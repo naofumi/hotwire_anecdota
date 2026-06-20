@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hotwire-anecdota.castle104/sitemap.xml
+Sitemap: https://hotwire-anecdota.castle104.com/sitemap.xml
