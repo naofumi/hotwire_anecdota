@@ -224,7 +224,7 @@ function UserProfile({userId}) {
 <tr id="<%= dom_id user %>"
     data-js="click-user-row"
     data-href="<%= url_for user_user_profile_path(user) %>"
-    class="cursor-pointer user-row">
+    class="cursor-pointer">
   <td><%= user.user_profile.name %></td>
   <td><%= user.email %></td>
 </tr>

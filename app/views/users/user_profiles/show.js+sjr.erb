@@ -1,7 +1,7 @@
 var frame = document.getElementById("user-profile");
 frame.innerHTML = "<%= j render 'show', user_profile: @user_profile %>";
 
-var userRows = document.querySelectorAll(".user-row")
+var userRows = document.querySelectorAll("[data-sjr=user-row]")
 userRows.forEach(row => {
   if (row.id == "user_<%= @user_profile.user.id %>") {
     row.classList.add("bg-yellow-200");
