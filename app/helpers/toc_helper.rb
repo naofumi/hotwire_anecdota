@@ -27,9 +27,9 @@ module TocHelper
                   # I think there is a bug where anchor-only links are causing a page load, so we disable turbo here.
                   # https://github.com/hotwired/turbo/pull/1285#discussion_r2799488011
                   data: { turbo: false },
-                  class: "#{toc_indent_class(node.name)} block my-2 font-light text-sm text-gray-600 active:opacity-50 hover:text-orange-600 hover:underline")
+                  class: "#{toc_indent_class(node.name)} block my-2 font-light text-sm text-gray-900 active:opacity-50 hover:text-orange-900 hover:underline")
         else
-          tag.span(node.text, class: "#{toc_indent_class(node.name)} block my-1 text-base bg-red-600 text-white")
+          tag.span(node.text, class: "#{toc_indent_class(node.name)} block my-1 text-base bg-red-900 text-white")
         end
       end
 
