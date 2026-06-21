@@ -18,34 +18,33 @@ function UsersIndex() {
       .then(data => setUsers(data))
   }, [])
 
+  if (!users) return <div className="text-center text-4xl">Loading...</div>
+
   return (<>
     <div className="mb-16">
       <h1 className="text-4xl text-center">Users React version</h1>
     </div>
     <div className="grid grid-cols-2 gap-x-2">
       <div>
-        {users
-         ? <table id="users" className="min-w-full divide-y divide-gray-300">
-           <thead>
-           <tr>
-             <th>name</th>
-             <th>email</th>
-           </tr>
-           </thead>
-           <tbody className="divide-y divide-gray-200">
-           {users.map(user =>
-             <tr key={`user-${user.id}`}
-                 className={`cursor-pointer ${selectedUser?.id === user.id
-                                              ? "bg-yellow-200"
-                                              : ""}`}
-                 onClick={() => setSelectedUser(user)}>
-               <td>{user.userProfile.name}</td>
-               <td>{user.email}</td>
-             </tr>)}
-           </tbody>
-         </table>
-         : <div className="text-center text-4xl">Loading...</div>
-        }
+        <table id="users" className="min-w-full divide-y divide-gray-300">
+          <thead>
+          <tr>
+            <th>name</th>
+            <th>email</th>
+          </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+          {users.map(user =>
+            <tr key={`user-${user.id}`}
+                className={`cursor-pointer ${selectedUser?.id === user.id
+                                             ? "bg-yellow-200"
+                                             : ""}`}
+                onClick={() => setSelectedUser(user)}>
+              <td>{user.userProfile.name}</td>
+              <td>{user.email}</td>
+            </tr>)}
+          </tbody>
+        </table>
       </div>
       <div className="border rounded shadow h-96 p-4" id="user-profile">
         {selectedUser && <UserProfile userId={selectedUser.id}/>}
@@ -64,31 +63,28 @@ function UserProfile({userId}) {
       .then(data => setUserProfile(data))
   }, [userId])
 
-  return (<>
-      {userProfile
-       ? <div>
-         <p>
-           <strong>User:</strong>
-           {userProfile.user_id}
-         </p>
+  if (!userProfile) return <div className="text-center text-4xl">Loading...</div>
 
-         <p>
-           <strong>Name:</strong>
-           {userProfile.name}
-         </p>
+  return (<div>
+      <p>
+        <strong>User:</strong>
+        {userProfile.user_id}
+      </p>
 
-         <p>
-           <strong>Name jp:</strong>
-           {userProfile.name_jp}
-         </p>
+      <p>
+        <strong>Name:</strong>
+        {userProfile.name}
+      </p>
 
-         <p>
-           <strong>Age:</strong>
-           {userProfile.age}
-         </p>
-       </div>
-       : <div>Loading...</div>
-      }
-    </>
+      <p>
+        <strong>Name jp:</strong>
+        {userProfile.name_jp}
+      </p>
+
+      <p>
+        <strong>Age:</strong>
+        {userProfile.age}
+      </p>
+    </div>
   )
 }

@@ -149,6 +149,8 @@ function UsersIndex() {
       .then(data => setUsers(data))
   }, [])
 
+  if (!users) return <div className="text-center text-4xl">Loading...</div>
+
   return (<>
            ...
            <tbody className="divide-y divide-gray-200">
@@ -166,8 +168,7 @@ function UsersIndex() {
              </tr>)}
            </tbody>
            ...
-      { // サイドパネルの枠 
-      } 
+      { // サイドパネルの枠 } 
       <div className="border rounded shadow h-96 p-4" id="user-profile">
         {selectedUser && <UserProfile userId={selectedUser.id}/>}
       </div>
@@ -185,14 +186,14 @@ function UserProfile({userId}) {
       .then(data => setUserProfile(data))
   }, [userId])
 
+  if (!userProfile) return <div className="text-center text-4xl">Loading...</div>
+
   return (<>
-      {userProfile
-       ? <div>
+       <div>
           ...
           [サイドパネルの表示内容]
           ...
        </div>
-       : <div>Loading...</div>
       }
     </>
   )
