@@ -1,5 +1,6 @@
 ---
 title: アコーディオン
+description: "アコーディオンをStimulusとネイティブなdetails要素で実装し、開閉状態、aria属性、inert、トランジションを扱います。Stimulusではaria-expandedをCSSへ反映し、必要なアクセシビリティ処理だけをJavaScriptで補い、ブラウザ標準の進歩でさらに簡略化できることを示します。"
 layout: article
 order: 20
 published: true

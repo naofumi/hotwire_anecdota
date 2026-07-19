@@ -1,5 +1,6 @@
 ---
 title: PartialとHelperを使用したコンポーネント
+description: "Rails標準のpartialとhelperを使い、再利用可能なUI部品を作る方法をコード例とともに解説します。yieldを使った入れ子可能なpartial、Tag Helperによる安全なHTML生成、html_safe利用時のXSSリスクを扱い、CSSだけで十分なケースも含めて部品化手法を使い分けます。"
 section: Tips
 layout: article
 order: 30

@@ -1,5 +1,6 @@
 ---
 title: Stimulus Controllerの粒度
+description: "Stimulus Controllerの範囲を見た目やコード量ではなく、Actionから状態を経てTargetへ至るデータフローと、共有するステートから決める考え方を解説します。ウィジェット単位が多い一方、一つの要素が複数Controllerに属せるため、Reactのような排他的な部品階層に縛られない点を示します。"
 layout: article
 order: 500
 published: false

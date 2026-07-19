@@ -1,5 +1,6 @@
 ---
 title: Optimistic UI (楽観的UI)
+description: "いいねボタンを題材に、最小構成のTurbo Driveから部分更新するTurbo Streams、即時反応する楽観的UIへ段階的に改善します。通信回数、スクロールなどのDOM状態、待ち時間、コード量の違いを比較し、最初は単純に作り、必要なUXだけを後から最適化するHotwireの進め方を示します。"
 layout: article
 order: 110
 published: true

@@ -1,5 +1,6 @@
 ---
 title: トースト
+description: "フォーム処理後に一時通知を表示するトーストを、Railsのflash、Turbo、Stimulus、CSSで実装します。通知HTMLの存在を基本状態とし、アニメーション中だけValuesで制御して削除する方法や、Turbo DriveとStreamsにおけるflashとflash.nowの使い分けを解説します。"
 layout: article
 order: 90
 published: true

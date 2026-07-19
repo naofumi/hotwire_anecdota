@@ -1,5 +1,6 @@
 ---
 title: ReactをStimulusでラップする
+description: "CRUDページ全体はHotwireで作りながら、既存の高度なReactウィジェットだけを部分的に利用する構成を紹介します。既存MPAへReactを埋め込む一般的な方法に加え、StimulusでReactをラップして外部からpropsを更新し、二つの技術をページ内で協調させる考え方を解説します。"
 section: Tips
 layout: article
 order: 500

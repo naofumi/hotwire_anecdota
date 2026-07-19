@@ -1,5 +1,6 @@
 ---
 title: Sprockets, Webpacker後の世界
+description: "Railsのアセット管理がSprocketsとWebpackerから、Import Maps、jsbundling-rails、Propshaftへ移った経緯を解説します。ノービルドとReact向けビルドを選べる現在の構成、CSSや画像の扱い、Node利用の違いを整理し、Rails独自統合が簡素化されたことを示します。"
 section: Tips
 layout: article
 order: 005

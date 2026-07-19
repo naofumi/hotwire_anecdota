@@ -1,5 +1,6 @@
 ---
 title: リアルタイム検索
+description: "入力に反応するリアルタイム検索を、Stimulusによるdebounce付きフォーム自動送信とTurbo Framesの部分更新で実装します。検索結果をクライアント状態へ保存せず、サーバ生成HTMLを一箇所へ反映し、Turboが付与するaria-busyをCSSで検知して待ちUIまで少ないコードで実現します。"
 section: Tips
 layout: article
 order: 50

@@ -1,5 +1,6 @@
 ---
 title: Apple Store模写（複雑なステート）
+description: "Apple Store風の商品選択画面を題材に、価格、画像、選択可否が連動する複雑な状態をサーバ、Stimulus、Reactの三方式で管理して比較します。実装場所よりもモデルへビジネスロジックを集約することが重要であり、Stimulusでも複雑な状態を扱え、サーバ管理が最も単純になる場合を示します。"
 layout: article
 order: 120
 published: true

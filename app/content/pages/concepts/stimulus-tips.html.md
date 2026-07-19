@@ -1,5 +1,6 @@
 ---
 title: Stimulusのコツ
+description: "Stimulusを保守しやすく使うために、ブラウザ標準機能の優先、HTML生成の抑制、状態の置き場所と表示への反映方法を整理します。イベント処理、状態変更、HTMLとCSSによる表示更新の責務を分け、処理が複雑になった場合は単方向データフローを導入する実践的な指針を示します。"
 layout: article
 order: 110
 published: true

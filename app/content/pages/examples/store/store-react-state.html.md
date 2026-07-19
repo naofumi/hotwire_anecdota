@@ -1,5 +1,6 @@
 ---
 title: ステートをReactに持たせる
+description: "HotwireのMPAへReactを埋め込み、商品データを初期HTMLからpropsとして渡し、useStateで価格や画像、選択状態を更新します。イベント、状態、再描画という流れをサーバ版やStimulus版と比較し、ウェブMVCとの類似点、自動再描画の利点、JSXへロジックが集まる特徴を整理します。"
 layout: article
 order: 30
 published: true

@@ -1,5 +1,6 @@
 ---
 title: Stimulusはコンポーネントではない
+description: "DOMを描画するReactコンポーネントと、既存HTMLに動作を付与するStimulus Controllerの責務の違いを、トグル実装の比較で解説します。HTML、CSS、イベント処理を分離することで、異なるマークアップやデザインにも同じControllerを接続できるStimulus独自の再利用性を明らかにします。"
 layout: article
 order: 160
 published: true

@@ -1,5 +1,6 @@
 ---
 title: コンポーネント(UI部品)の考え方
+description: "ReactコンポーネントだけをUI部品化の基準にせず、Railsのpartialやhelper、ViewComponent、CSS、Stimulusを適材適所で組み合わせる方法を解説します。HTML、CSS、JavaScriptそれぞれの再利用性を活かし、細かな部品まで無理にクラスや関数へ閉じ込めない設計を提案します。"
 layout: article
 order: 40
 published: true

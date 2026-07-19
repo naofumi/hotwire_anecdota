@@ -1,5 +1,6 @@
 ---
 title: Hotwireにまつわる誤った認識
+description: "HotwireはRails専用、JavaScript不要、Reactと二者択一、エコシステムで不利といった誤解を具体例とともに検証します。Reactラッパーの土台となるVanilla JS、Web Components、Lookbook、ERBへのReact埋め込みなどを示し、技術の実際の役割と生産性を見直します。"
 layout: article
 order: 70
 published: true

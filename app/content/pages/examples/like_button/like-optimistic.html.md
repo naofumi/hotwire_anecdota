@@ -1,5 +1,6 @@
 ---
 title: 「いいね」ボタン (Optimistic)
+description: "いいね操作をサーバ応答前に反映する楽観的UIを、checkbox、CSS、Stimulusで実装します。checked状態から表示を即座に変え、Stimulusで件数とフォーム送信を補助し、Turboのaria-busyで待ち状態も示すことで、少ないJavaScriptでモバイルアプリのような応答性を実現します。"
 layout: article
 order: 30
 published: true

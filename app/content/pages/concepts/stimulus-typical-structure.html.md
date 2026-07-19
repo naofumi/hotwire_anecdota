@@ -1,5 +1,6 @@
 ---
 title: Stimulus Controllerの構造
+description: "複数のActionとTargetを持つ複雑なStimulus Controllerを、単方向データフローで整理する実装パターンを紹介します。ActionはValuesの更新に集中させ、変更コールバックからrender処理を呼び、ビジネスロジックを別モデルへ分離することで、追跡しやすくテストしやすい構造を作ります。"
 layout: article
 order: 150
 published: true

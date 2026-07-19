@@ -1,5 +1,6 @@
 ---
 title: このサイトについて
+description: "Hotwireの技術選定やベストプラクティスを知りたい人に向けて、具体的なコードと動作するデモで仕組みと実装方法を紹介するサイトです。入門手順そのものではなく、学習後に全体像を掴みたい人を対象とし、Rails、Sitepress、Hotwire、React、Tailwind CSSなどの構成も説明します。"
 layout: article
 order: 10
 published: true

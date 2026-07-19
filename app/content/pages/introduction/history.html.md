@@ -1,5 +1,6 @@
 ---
 title: Hotwireの歴史
+description: "Rails誕生時のRJSとPrototype.jsから、jQuery UJS、サーバ生成JavaScript、Turbolinksを経てHotwireへ至る歴史をたどります。サーバでHTMLを生成しながらAJAXと高速な画面更新を追求してきたこと、Hotwireが長年の実運用の知見を継承した技術であることを示します。"
 section: History
 layout: article
 order: 60

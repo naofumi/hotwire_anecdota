@@ -1,5 +1,6 @@
 ---
 title: Stimulusが解決したjQueryの問題
+description: "jQueryコードが保守しにくくなった原因と、Stimulusが規約、明示的なDOM接続、再利用可能なControllerによって解決した点を整理します。Reactだけが複雑なJavaScriptを改善したわけではなく、良いjQueryの設計とStimulusの設計には共通点が多いことも説明します。"
 layout: article
 order: 180
 published: true

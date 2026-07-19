@@ -1,5 +1,6 @@
 ---
 title: Railsフロントエンド。何を選ぶ？
+description: "Railsのフロントエンドとして、ERBとHotwire、React SPA、Inertia.js、Next.jsサーバを比較します。セットアップ、JSON API、認証とCSRF、型安全性、機密データ、複雑なドメインモデルへの対応を検討し、基本はHotwireを推奨しながら要件に合う選択肢を整理します。"
 layout: article
 order: 100
 published: true

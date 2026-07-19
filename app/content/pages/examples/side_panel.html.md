@@ -1,5 +1,6 @@
 ---
 title: サイドパネル
+description: "サーバから取得した内容を表示するサイドパネルを、Turbo、React、jQuery、Rails UJSで比較します。HTML、JSON、JavaScriptというレスポンス形式と、更新箇所をクライアントかサーバのどちらが決めるかを対比し、Hotwireが従来のRails技術から進化した位置付けを示します。"
 section: Components
 layout: article
 order: 40

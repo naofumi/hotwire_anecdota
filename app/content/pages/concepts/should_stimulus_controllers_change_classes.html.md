@@ -1,5 +1,6 @@
 ---
 title: Stimulus ControllerはCSS classを変更するべきか？
+description: "Stimulus ControllerからCSSクラスを直接変更すべきかを、表示と振る舞いの責務分離という観点で検討します。Stimulus Values、aria属性、CSSクラスそれぞれの特徴を比較し、複雑さやアクセシビリティ、Tailwind CSSの利用状況に応じて状態を保持し表示へ反映する基準を示します。"
 layout: article
 order: 130
 published: true

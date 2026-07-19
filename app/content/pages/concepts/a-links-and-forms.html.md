@@ -1,5 +1,6 @@
 ---
 title: なるべく<a>や<form>を使用すること
+description: "Hotwireで独自のクリック処理やfetchを増やさず、標準のa要素とform要素を中心に設計する利点を解説します。prefetch、Turbo Frameへの転送、待ちUI、確認処理などを活用し、プログレッシブエンハンスメントを保ちながら少ないコードで実装する指針を示します。"
 section: Tips
 layout: article
 order: 25

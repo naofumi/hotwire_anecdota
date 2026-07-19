@@ -1,5 +1,6 @@
 ---
 title: 「いいね」ボタン (Turbo Stream)
+description: "いいねボタンをTurbo Streamsで実装し、対象のボタンだけをサーバから返したHTMLで置き換える方法を解説します。POSTから直接Streamレスポンスを返すためRedirectと二回目の通信が不要になり、周囲のスクロールやUI状態を維持できますが、サーバ応答前に表示は変わらないという特性も整理します。"
 layout: article
 order: 20
 published: true

@@ -1,5 +1,6 @@
 ---
 title: Turboとネットワーク遅延
+description: "Turboのサーバ通信が遅いネットワークでUIを損なう可能性と、キャッシュ、prefetch、進捗表示、aria-busyなど標準で備わる対策を解説します。意図的な遅延や低速回線で検証し、必要に応じて事前読込、待ちUI、楽観的UI、Stimulusへの切り替えを判断する方法を示します。"
 layout: article
 order: 320
 published: true

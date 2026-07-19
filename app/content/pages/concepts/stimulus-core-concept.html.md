@@ -1,5 +1,6 @@
 ---
 title: Stimulusのコア・コンセプト
+description: "Stimulusの核となるController、Action、Targetの役割と、イベントから画面更新までの流れを整理します。通常はHTMLを生成せず、サーバが描画したDOMへ動作を加えること、状態はValuesやHTMLなど適切な場所に保持でき、他のJavaScriptライブラリとも共存できることを解説します。"
 layout: article
 order: 120
 published: true

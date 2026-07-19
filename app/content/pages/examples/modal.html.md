@@ -1,5 +1,6 @@
 ---
 title: モーダル
+description: "Hotwireでアクセシブルなモーダルを構築し、Turbo Framesによる内容取得、Turbo Streamsによるフォーム結果の反映、Stimulusによる表示制御を解説します。待ちUI、フォーカス、アニメーション、成功時の背景更新とトースト、失敗時のエラー表示まで、実用的なCRUDの設計を扱います。"
 layout: article
 order: 150
 published: true

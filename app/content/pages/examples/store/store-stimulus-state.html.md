@@ -1,5 +1,6 @@
 ---
 title: ステートをStimulusに持たせる
+description: "商品選択画面の状態をStimulus Valuesへ保持し、Action、Values、Targetという単方向データフローで価格、画像、選択可否を更新します。計算や状態遷移はIPhoneモデルへ移し、変更コールバックからrender処理を行うことで、複雑なブラウザ状態をスパゲッティ化させず管理する方法を解説します。"
 layout: article
 order: 20
 published: true

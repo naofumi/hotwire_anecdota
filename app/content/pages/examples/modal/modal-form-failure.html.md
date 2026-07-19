@@ -1,5 +1,6 @@
 ---
 title: フォーム送信バリデーション失敗
+description: "モーダル内のフォームがサーバサイドバリデーションに失敗した場合に、422とTurbo Streamsで入力フォームだけをエラー付きHTMLへ置き換える方法を解説します。Stimulusはレスポンスの失敗状態を読み、モーダルを閉じずに保つことで、成功時と失敗時のUIをサーバとブラウザで適切に分担します。"
 layout: article
 order: 0030
 published: true

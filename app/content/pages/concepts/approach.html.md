@@ -1,5 +1,6 @@
 ---
 title: Hotwire, React, jQueryのアプローチの比較
+description: "Hotwire、React、jQueryがイベント処理、DOM更新、サーバ通信をどのように整理するかを比較します。単方向データフローを強制するReact、規約の少ないjQueryに対し、HotwireがHTMLとJavaScriptを分離しつつ、規約と自動処理で複雑さを抑える特徴を整理します。"
 section: Tips
 layout: article
 order: 10

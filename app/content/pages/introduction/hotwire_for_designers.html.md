@@ -1,5 +1,6 @@
 ---
 title: ウェブデザイナーも使うHotwire
+description: "StimulusがSaaSだけでなく、デザイン性を重視するマーケティングサイトでも採用されている実例を紹介します。カルーセル、スクロール連動アニメーション、スライダーなどを、Reactを学ばず入門的なJavaScriptで実装でき、ビルド不要でコードを整理しやすい点からウェブデザイナーとの相性を考察します。"
 section: Introduction
 layout: article
 order: 150

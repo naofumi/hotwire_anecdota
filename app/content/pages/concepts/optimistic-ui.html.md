@@ -1,5 +1,6 @@
 ---
 title: 楽観的UI
+description: "サーバ応答を待たずに操作結果を表示する楽観的UIを、Hotwireでどう考えるかを整理します。checkboxやradioが持つブラウザ標準の即時反応とCSSの状態セレクタを活用する方法、HTML変更が必要な場合にStimulusを補助的に使う方法を分け、JavaScriptを増やしすぎない実装方針を示します。"
 section: Performance
 layout: article
 order: 500

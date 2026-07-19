@@ -1,5 +1,6 @@
 ---
 title: Turboが速い理由
+description: "Turboが高速に感じられる理由を、サーバ側HTMLレンダリング、stale-while-revalidate型キャッシュ、動的ページを含む積極的なprefetchから解説します。高速化の仕組みが古い表示を残す場合やサーバ負荷を増やす場合もあるため、各種data属性とmetaタグで制御する方法も紹介します。"
 section: Performance
 layout: article
 order: 410

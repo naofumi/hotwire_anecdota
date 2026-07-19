@@ -1,5 +1,6 @@
 ---
 title: 引き出し
+description: "サーバから内容を取得する引き出しUIをTurbo FramesとStimulusで実装し、離れたボタンとの状態同期を解説します。広いControllerでValuesを共有する方法と、Controllerを分割してZustandを使う方法を比較し、状態、renderの流れやCSSによる表示制御を整理します。"
 layout: article
 order: 80
 published: true

@@ -1,5 +1,6 @@
 ---
 title: Stimulus ControllerはなぜControllerか？
+description: "StimulusでJavaScriptの単位をControllerと呼ぶ理由を、操作を受けて本体へ伝え、状態変化をユーザーへ返すゲームコントローラーになぞらえて説明します。Actionやライフサイクルでイベントを受け、Valuesなどへ状態を保存し、TargetやOutletへ結果を反映する処理の全体像を整理します。"
 section: Concept
 layout: article
 order: 500

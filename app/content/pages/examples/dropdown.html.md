@@ -1,5 +1,6 @@
 ---
 title: ドロップダウン
+description: "サーバ通信を使わないドロップダウンメニューをStimulusで実装し、開閉状態、キーボード操作、フォーカス移動、外側クリックなどの処理を整理します。HTMLとCSSに表示を任せ、Controllerはイベントとaria属性を扱う構造を通じて、小さなUIウィジェットをアクセシブルかつ再利用可能に作る考え方を示します。"
 layout: article
 order: 30
 published: true

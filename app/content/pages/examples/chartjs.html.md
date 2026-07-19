@@ -1,5 +1,6 @@
 ---
 title: Chart.js埋め込み
+description: "ERBページへChart.jsを埋め込み、Stimulusからスライダー操作に応じてグラフを更新する実装を解説します。ValuesでRailsからJSONデータを受け渡し、変更コールバックでChartを再描画し、connectとdisconnectのライフサイクルで外部ライブラリを安全に初期化・破棄する方法を示します。"
 layout: article
 order: 130
 published: true

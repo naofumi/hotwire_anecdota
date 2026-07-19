@@ -1,5 +1,6 @@
 ---
 title: Reactと一緒に使う
+description: "Reactを独立SPAではなく、ERBとHotwireが描画するMPAの一部へ埋め込む利点と実装方法を解説します。初期HTMLにJSONデータを埋めてpropsへ渡すことで、追加APIやfetch、読込状態を不要にし、初期表示、SEO、エラー処理を改善しながら、必要な画面だけReactの対話性を利用できます。"
 section: With Other Frameworks
 layout: article
 order: 140

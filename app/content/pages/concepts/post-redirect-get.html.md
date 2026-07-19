@@ -1,5 +1,6 @@
 ---
 title: POST/Redirect/GETパターンと高速化
+description: "Turbo DriveとTurbo Framesが非GETフォーム送信後にPOST、Redirect、GETを要求する理由を、URL整合性や再送信防止の観点から解説します。通信が二往復になる性能上の欠点も整理し、開発初期は定石に従い、必要な箇所だけTurbo Streamsで最適化する実践的な進め方を提案します。"
 layout: article
 order: 330
 published: true

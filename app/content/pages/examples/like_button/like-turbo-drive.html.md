@@ -1,5 +1,6 @@
 ---
 title: 「いいね」ボタン (Turbo Drive)
+description: "いいねボタンを最も単純なTurbo DriveとPOST、Redirect、GETで実装します。通常はページ再描画でスクロールなどのUI状態が失われ、通信も二往復になりますが、Morphingとscroll preserveを使えば、構造を複雑にせず変更箇所だけを更新し、ブラウザ状態を維持できることを示します。"
 layout: article
 order: 10
 published: true

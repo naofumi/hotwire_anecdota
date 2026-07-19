@@ -1,5 +1,6 @@
 ---
 title: Stimulus中のHTML生成を避ける理由
+description: "Stimulus内でHTML生成を避ける理由を、ERBとのコード重複とJSON準備の負担から説明します。少量の文言変更やtemplate要素を使う場合は許容しつつ、基本はサーバでHTMLを描画し、Stimulusはdata属性などの状態を変更、CSSが表示を切り替える形で責務を分離する方法を示します。"
 layout: article
 order: 140
 published: true

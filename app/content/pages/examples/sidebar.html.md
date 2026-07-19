@@ -1,5 +1,6 @@
 ---
 title: サイドバーメニュー
+description: "ページ遷移後も開閉状態を維持するサイドバーを、Turboのdata-turbo-permanentとStimulusで実装します。Reactのように状態データから毎回再描画する方法と、DOMそのものを保持する方法を比較し、Turboが画面を独立した領域として扱い、少ないコードでブラウザ状態を保てることを示します。"
 layout: article
 order: 60
 published: true

@@ -1,5 +1,6 @@
 ---
 title: "TurboとStimulus: どっちを使う？"
+description: "インタラクティブUIをイベントから画面更新までの流れとして捉え、ブラウザ標準、Stimulus、Turboをどう使い分けるかを解説します。サーバ通信の有無、HTML更新量、応答速度、実装難易度を基準に、まずMPAで作り、FramesやStreams、最後にStimulusで段階的に最適化する方針を示します。"
 section: Tips
 layout: article
 order: 310

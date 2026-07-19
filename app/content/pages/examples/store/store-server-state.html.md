@@ -1,5 +1,6 @@
 ---
 title: ステートをサーバに持たせる
+description: "商品オプションと価格計算をサーバのモデルとsessionで管理し、選択のたびにTurbo StreamsとMorphingでフォーム全体を更新します。radioとCSSによる楽観的UI、Stimulusによるホバー処理を組み合わせ、通信を伴ってもロジックをモデルへ集約し、簡潔で応答性の高い画面を作れることを示します。"
 layout: article
 order: 10
 published: true

@@ -1,5 +1,6 @@
 ---
 title: Hotwireは複雑さの排除
+description: "人間の曖昧な操作と論理的なシステムをつなぐフロントエンドが複雑になりやすい理由を踏まえ、jQuery、React、Hotwireの対処法を比較します。Hotwireはサーバ生成JavaScriptの自由度を捨て、Turbo Streamsの操作を限定することで、複雑さを排除し理解しやすい設計を仕組みとして促します。"
 section: Introduction
 layout: article
 order: 150

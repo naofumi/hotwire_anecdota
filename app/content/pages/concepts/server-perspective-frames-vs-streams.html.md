@@ -1,5 +1,6 @@
 ---
 title: サーバから見たTurbo FramesとTurbo Streamsの違い
+description: "Turbo FramesとTurbo Streamsの違いを、更新箇所の数だけでなく、レスポンス処理をクライアントとサーバのどちらが決定するかという視点で解説します。一箇所の置換、複数箇所の操作、サーバ判定による更新方法の切り替えなど、具体的な要件に応じた選択基準を示します。"
 layout: article
 order: 340
 published: true

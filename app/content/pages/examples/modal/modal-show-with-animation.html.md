@@ -1,5 +1,6 @@
 ---
 title: モーダルの表示・非表示制御
+description: "モーダルの内容をTurbo Framesで非同期取得し、StimulusとCSSで待ち表示、開閉アニメーション、背景操作、キーボード操作を制御する方法を解説します。トリガーとモーダルがDOM上で離れていてもイベントで連携し、アクセシビリティを保ちながらサーバ描画HTMLを表示する構造を示します。"
 layout: article
 order: 006
 published: true

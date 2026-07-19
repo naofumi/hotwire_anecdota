@@ -1,5 +1,6 @@
 ---
 title: クライアントサイドバリデーション
+description: "ブラウザ標準のフォーム検証をStimulusで拡張し、適切なタイミングと文言でエラーを伝えるUIを実装します。サーバはデータ整合性、クライアントは入力支援を担当し、Validity API、user-invalid CSS、フォーム固有Controller、共通Validatorを組み合わせる方法を解説します。"
 layout: article
 order: 90
 published: true

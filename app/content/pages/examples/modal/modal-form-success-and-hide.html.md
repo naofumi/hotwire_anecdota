@@ -1,5 +1,6 @@
 ---
 title: フォーム送信成功と後処理
+description: "モーダル内のフォーム送信成功時に、Turbo Streamsで背景とトーストを更新し、Stimulusでモーダルを閉じます。Turboが提供するdisabled、data-turbo-submits-with、aria-busyで待ちUIと二重送信対策を行い、レスポンス状態をイベントから読み取って後処理を分岐します。"
 layout: article
 order: 0010
 published: true

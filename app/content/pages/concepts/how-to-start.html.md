@@ -1,5 +1,6 @@
 ---
 title: HotwireはMPAから作る
+description: "Hotwireで最初から完成形のインタラクティブUIを目指さず、まず単純なMPAとして機能を成立させ、必要に応じて段階的に改善する開発手順を紹介します。いいねボタンをTurbo Drive、Turbo Streams、楽観的UIへ発展させる例を通じて、複雑さを少しずつ追加する考え方を示します。"
 section: Tips
 layout: article
 order: 20

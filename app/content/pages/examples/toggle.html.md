@@ -1,5 +1,6 @@
 ---
 title: トグル
+description: "オンとオフを切り替えるトグルを、Stimulus、checkbox、Reactで比較します。aria-checked、checked、useStateという状態の置き場所と、CSSや条件付きレンダリングによる表示反映を比べ、ブラウザ標準ならJavaScriptなしでアクセシビリティも得られることを示します。"
 layout: article
 order: 10
 published: true

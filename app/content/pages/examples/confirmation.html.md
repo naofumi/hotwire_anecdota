@@ -1,5 +1,6 @@
 ---
 title: フォーム確認画面実装時の注意
+description: "フォーム送信前の確認画面を、入力済みフォームを隠して再利用する方法で実装します。Turbo DriveとFramesが非GET送信への200レスポンスを無視する理由をURL整合性から説明し、確認画面を422レスポンスとして描画して、確定時に同じController Actionへ再送信する設計上の注意点を示します。"
 layout: article
 order: 500
 published: false
