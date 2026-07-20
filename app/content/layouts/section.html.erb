@@ -2,6 +2,8 @@
 
 <% @back_link = { title: "コンテンツ一覧", url: "/directory" } %>
 
+<% @view_transition = true %>
+
 <%= render_layout "body" do %>
   <div class="max-w-3xl px-2 mx-auto mt-12">
     <%= render "content_breadcrumbs", current_page: %>

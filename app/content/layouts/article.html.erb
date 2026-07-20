@@ -1,4 +1,5 @@
-<% provide :head, turbo_exempts_page_from_preview %>
+<% turbo_exempts_page_from_preview %>
+
 <% @back_link = { title: current_page.parent.data.title, url: current_page.parent.url } %>
 <%= render_layout "body" do %>
   <div class="max-w-3xl px-2 mx-auto bg-white">

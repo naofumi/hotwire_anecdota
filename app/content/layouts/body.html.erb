@@ -21,7 +21,11 @@
   <!--  <link rel="apple-touch-icon" href="/icon.png">-->
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+  <% if @view_transition %>
+    <!-- Chrome has issues when loading a <video> tag in a view-transitioned page,
+         so I remove view transitions when visiting article pages. -->
   <meta name="view-transition" content="same-origin" />
+  <% end %>
 </head>
 
 <body>
