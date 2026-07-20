@@ -9,7 +9,7 @@ published: true
 
 Ruby on Railsでは「コンポーネント」という言葉こそ使わないものの、viewを再利用可能なパーツに分ける方法が用意されています。ここではこれを紹介します。
 
-## Partialを使う方法
+## Partialを使う方法 --- partials-as-components
 
 Partialは[Rails Guideで詳しく解説されています](https://guides.rubyonrails.org/action_view_overview.html#partials)。
 
@@ -49,7 +49,7 @@ PartialはHTMLが多く、比較的大きなコンポーネントを作成する
 </div>
 ```
 
-## Helperを使う方法
+## Helperを使う方法 --- helpers-as-components
 
 View HelperからもHTMLを出力できますので、コンポーネントが作れます。比較的小さなコンポーネントを作るときに便利です。Helperを使ってHTMLを出力する際は[ActionView Tag Helper](https://api.rubyonrails.org/classes/ActionView/Helpers/TagHelper.html)を使うのが一番安全です。その際は[`safe_join`](https://api.rubyonrails.org/classes/ActionView/Helpers/OutputSafetyHelper.html#method-i-safe_join)も使うことになると思います。
 
@@ -74,6 +74,6 @@ end
      data-props="{&quot;name&quot;:&quot;John&quot;}"></div>
 ```
 
-## CSSを使う方法
+## CSSを使う方法 --- css-as-components
 
 あえてコンポーネントを作成しなくても、CSSだけで十分に再利用性とDRYが実現できることが多々あります。これについては[CSSによるコンポーネント(UI部品)の考え方](/concepts/components)で解説しています。

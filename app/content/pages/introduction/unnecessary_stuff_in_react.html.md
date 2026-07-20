@@ -1,6 +1,6 @@
 ---
 title: Reactアプリで不要だと感じるもの
-subtitle: モダンフロントエンドの半分ほどは、Hotwireならそもそも不要。
+subtitle: モダンフロントエンドの半分ほどは、Hotwireならそもそも不要になります。
 description: "Reactアプリで一般的なクライアントルーター、JSON API、OpenAPI、シリアライザー、追加認証、複数fetch、広範な状態管理が、Hotwireでは不要になる理由を整理します。ERBが生きたオブジェクトから表示用HTMLを直接生成することで、工数、通信、データ漏洩、テストの複雑さを減らせると説明します。"
 layout: article
 order: 35

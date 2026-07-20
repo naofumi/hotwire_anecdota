@@ -1,6 +1,6 @@
 ---
 title: JavaScriptは積極的に使おう！
-subtitle: Hotwireと言えども、高度なUI/UXのためにはJavaScriptが必要。
+subtitle: Hotwireと言えども、高度なUI/UXのためにはJavaScriptが必要です。
 description: "HotwireはJavaScriptを書かない技術ではなく、不必要なコードを送らず、必要な動作には積極的にStimulusを使う思想だと解説します。実際のHotwire製品のController数も示し、コード量の削減より良いUIを優先しつつ、Reactより簡単なJavaScriptで実現する姿勢を提案します。"
 layout: article
 order: 50
