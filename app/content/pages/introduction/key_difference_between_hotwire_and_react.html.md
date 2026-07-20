@@ -1,5 +1,6 @@
 ---
 title: HotwireとReactの違いを理解する
+subtitle: アプリロジックが複雑であればあるほど、Hotwireのシンプルさが有利
 description: "HotwireとReactはどちらも高度なUIを作れる一方、データ取得、画面描画、認証認可、状態管理に必要な工数が大きく異なることを比較します。サーバでHTMLを生成するHotwireはJSON APIやOpenAPI、クライアントルーターを減らし、画面数やドメインロジックが増える大規模システムで有利だと論じます。"
 layout: article
 order: 30

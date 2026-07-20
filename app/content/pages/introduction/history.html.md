@@ -1,5 +1,6 @@
 ---
 title: Hotwireの歴史
+subtitle: Hotwireは20年間の一貫した歴史と実績を持つフレームワーク。
 description: "Rails誕生時のRJSとPrototype.jsから、jQuery UJS、サーバ生成JavaScript、Turbolinksを経てHotwireへ至る歴史をたどります。サーバでHTMLを生成しながらAJAXと高速な画面更新を追求してきたこと、Hotwireが長年の実運用の知見を継承した技術であることを示します。"
 section: History
 layout: article
@@ -35,3 +36,9 @@ Hotwireの歴史をもう少し細かく説明します。
       * Stackerのインスピレーションとなったのは[GitHubのPJAX](https://github.com/defunkt/jquery-pjax)です。 
    * 当時からクライアント側のJavaScriptでDOMをレンダリングするライブラリ(今でいうCSR: [Backbone.js](https://backbonejs.org), [AngularJS](https://angularjs.org), [Ember.js](https://emberjs.com/?utm_source=chatgpt.com)など)が話題になっていました。これに対して**サーバでHTMLをレンダーしても非常に高速化できるので、CSRを使う必要はない**というのが本記事の大きな主張でした。
 * Hotwireは2020年にリリースされました。2004年から16年間蓄積されたフロントエンドの知見が詰まっています。2004年のRJS以来コンセプトは一貫しており、これを少しずつ改善して進化したものがHotwireです。
+
+## ビデオ --- video
+
+ビデオ「サイドパネルを作ってHotwire, React, jQuery, SJRを比較する」ではそれぞれの書き味を比較しています。
+
+![サイドパネルを作ってHotwire, React, jQuery, SJRを比較する – Hotwire Anecdotaの解説ビデオ](https://www.youtube.com/watch?v=I-0m2sofFhc)
