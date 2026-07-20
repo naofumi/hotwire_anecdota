@@ -16,10 +16,6 @@
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/component-unit-size</loc>
-    <lastmod>2026-07-19</lastmod>
-  </url>
-  <url>
     <loc>https://hotwire-anecdota.castle104.com/concepts/components</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
@@ -29,10 +25,6 @@
   </url>
   <url>
     <loc>https://hotwire-anecdota.castle104.com/concepts/jquery-issues</loc>
-    <lastmod>2026-07-19</lastmod>
-  </url>
-  <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/optimistic-ui</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
@@ -53,14 +45,6 @@
   </url>
   <url>
     <loc>https://hotwire-anecdota.castle104.com/concepts/stimulus-component</loc>
-    <lastmod>2026-07-19</lastmod>
-  </url>
-  <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/stimulus-controller-concept</loc>
-    <lastmod>2026-07-19</lastmod>
-  </url>
-  <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/stimulus-controller-size</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
@@ -115,10 +99,6 @@
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/confirmation</loc>
-    <lastmod>2026-07-19</lastmod>
-  </url>
-  <url>
     <loc>https://hotwire-anecdota.castle104.com/examples/drawer</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
@@ -156,10 +136,6 @@
   </url>
   <url>
     <loc>https://hotwire-anecdota.castle104.com/examples/modal/modal-show-with-animation</loc>
-    <lastmod>2026-07-19</lastmod>
-  </url>
-  <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/react-wrapped-in-stimulus</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
@@ -214,10 +190,6 @@
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/introduction/complexity</loc>
-    <lastmod>2026-07-19</lastmod>
-  </url>
-  <url>
     <loc>https://hotwire-anecdota.castle104.com/introduction/dangers_of_replacement</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
@@ -227,10 +199,6 @@
   </url>
   <url>
     <loc>https://hotwire-anecdota.castle104.com/introduction/hotwire-myths</loc>
-    <lastmod>2026-07-19</lastmod>
-  </url>
-  <url>
-    <loc>https://hotwire-anecdota.castle104.com/introduction/hotwire_for_designers</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
@@ -267,10 +235,6 @@
   </url>
   <url>
     <loc>https://hotwire-anecdota.castle104.com/opinions</loc>
-  </url>
-  <url>
-    <loc>https://hotwire-anecdota.castle104.com/opinions/should_you_use_modals</loc>
-    <lastmod>2026-07-19</lastmod>
   </url>
   <url>
     <loc>https://hotwire-anecdota.castle104.com/other_libraries</loc>
