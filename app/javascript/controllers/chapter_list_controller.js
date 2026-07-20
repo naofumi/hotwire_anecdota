@@ -23,6 +23,13 @@ export default class extends Controller {
     this.shownValue = false
   }
 
+  scroll(event) {
+    event.preventDefault()
+    const elementId = event.currentTarget.getAttribute('href').replace('#', '')
+    const element = document.getElementById(elementId)
+    element.scrollIntoView({ behavior: 'smooth'})
+  }
+
   #clickOutsideHandler(event) {
     if (!this.element.contains(event.target)) {
       this.hide()
