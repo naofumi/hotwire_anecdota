@@ -12,23 +12,19 @@ export default class extends Controller {
   }
 
   toggle() {
-    console.log('toggle')
     this.shownValue = !this.shownValue
   }
 
   show() {
-    console.log('show')
     this.shownValue = true
   }
 
   hide() {
-    console.log('hide')
     this.shownValue = false
   }
 
   #clickOutsideHandler(event) {
     if (!this.element.contains(event.target)) {
-      console.log('click outside')
       this.hide()
     }
   }

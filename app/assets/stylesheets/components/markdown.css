@@ -8,7 +8,7 @@
         }
 
         h2 > a {
-            @apply text-inherit decoration-transparent hover:text-orange-600;
+            @apply text-inherit decoration-transparent hover:text-orange-600 active:translate-y-0.5;
         }
 
         h3 {
@@ -16,7 +16,7 @@
         }
 
         h3 > a {
-            @apply text-inherit decoration-transparent hover:text-orange-600;
+            @apply text-inherit decoration-transparent hover:text-orange-600 active:translate-y-0.5;
         }
 
         h4 {
@@ -38,18 +38,22 @@
         .link--demo {
             @apply inline-flex items-center leading-none;
             &:after {
-                @apply text-orange-600 hover:text-orange-400 underline h-4 w-4 mx-1;
+                @apply text-orange-600 hover:text-orange-400 active:translate-y-0.5 underline h-4 w-4 mx-1;
                 content: url("forward.svg");
             }
         }
 
+        .link--related-page {
+            @apply inline-flex items-center leading-none;
+        }
+
         .link--external:after {
-            @apply text-orange-600 hover:text-orange-400 underline inline-block h-4 w-4 mx-1;
+            @apply text-orange-600 hover:text-orange-400 active:translate-y-0.5 underline inline-block h-4 w-4 mx-1;
             content: url("arrow-top-right-on-square.svg");
         }
 
         .link--github:after {
-            @apply text-orange-600 hover:text-orange-400 underline inline-block h-4 w-4 mx-1 align-baseline;
+            @apply text-orange-600 hover:text-orange-400 active:translate-y-0.5 underline inline-block h-4 w-4 mx-1 align-baseline;
             content: url("github.svg");
         }
 

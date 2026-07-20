@@ -33,7 +33,7 @@
       <div class="h-8 font-bold text-right pr-4">関連ページ</div>
       <div class="pl-4 pb-2 markdown border-l border-gray-300">
         <%= safe_join d.related_pages.map { |path|
-          link_to site.get(path).data.title, path
+          link_to site.get(path).data.title, path, class: "link--related-page"
         }, ", " %>
       </div>
     <% end %>
