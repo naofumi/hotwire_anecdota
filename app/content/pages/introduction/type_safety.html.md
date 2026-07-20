@@ -1,6 +1,6 @@
 ---
 title: TypeScript vs. ERBの型安全性
-subtitle: TypeScriptによる静的型付けよりも、Ruby実行時の強い型の方がメリットは大きいです。
+subtitle: 静的型を頑張って記述しても、それだけでは型安全性は高くなりません。
 description: "TypeScriptが内部の型しか保証せず、実行時やJSON APIとの不整合を防げない点をReactとERBから比較します。RubyとERBは存在しない属性へのアクセスを実行時エラーにし、Controller testやRequest specで検出できるため、追加の契約検証なしでも本番バグを防ぎやすいと論じます。"
 layout: article
 order: 90
@@ -18,7 +18,7 @@ TypeScriptだけをいくら使用しても型安全にはなりません。逆�
    * JSXが`undefined`を空白文字列に自動変換してしまうためです。`undefined`なら`throw`するようにJSXが設計されていればこのようの問題は回避できたはずですが、Reactはそのように設計されていません。[^undefined] 
    * QAでも気づきにくい場合があるため、本番に出てしまうリスクが高いバグです。
    * E2Eテストがあっても、普通はすり抜けてしまいます。
-   * TypeScriptは実行時には存在しないため、役に立ちません。
+   * TypeScriptは実行時には存在しないため、実行時には役に立ちません。TypeScriptが保証できるのは「定義した型が正確であればこうなるはず」だけであって、前提となる型の正確性は保証できません。
    * 例えばバックエンドがJSON APIのプロパティ名を変えてしまい、フロントエンドで未対応の場合がこれに当たります。
 
 [^undefined]: ちなみにJavaScriptは`undefined`を`"undefined"`文字列に自動変換します。これも問題ではありますが、空白文字列よりは多少目立ちますのでまだマシです。

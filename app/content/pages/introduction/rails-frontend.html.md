@@ -1,6 +1,6 @@
 ---
 title: Railsフロントエンド。何を選ぶ？
-subtitle: Railsプロジェクトのフロントエンドを選定する際の判断材料を列挙しました。
+subtitle: 流行に流されず、プロジェクトの特徴に合致した技術の評価をしよう。
 description: "Railsのフロントエンドとして、ERBとHotwire、React SPA、Inertia.js、Next.jsサーバを比較します。セットアップ、JSON API、認証とCSRF、型安全性、機密データ、複雑なドメインモデルへの対応を検討し、基本はHotwireを推奨しながら要件に合う選択肢を整理します。"
 layout: article
 order: 100
@@ -16,7 +16,8 @@ published: true
 
 * Railsのデフォルトです。セットアップが簡単です。
 * コード量が少なく、非常に効率よく開発できます。
-* JSON APIを用意する必要がなく、シリアライズすら不必要なので、viewテンプレートの中で生きたオブジェクトを参照できます。必要なデータに簡単にアクセスできますので、ドメインモデルが複雑であっても効率よく開発できます。
+* JSON APIを用意する必要がなく、シリアライズすら不必要となります。viewテンプレートの中で生きたオブジェクトを参照できます。
+* 必要なデータに簡単にアクセスできますので、ドメインモデルが複雑であっても効率よく開発できます。
 * 画面に描画されたものだけがブラウザに送信されますので、不意のデータ漏洩の心配はほとんどありません。
 * ERBはMinitestのController testおよびRSpec Request specでレンダーされます。その際に不正なgetterやメソッドへのアクセスなどがあればエラーになります。完璧ではありませんが、かなり多くの型エラーが簡単なテストで防げます。
 * Hotwire等で高度なUI/UXが実現できます。
@@ -34,8 +35,7 @@ published: true
     * [react-rails gem](https://github.com/reactjs/react-rails)や[react_on_rails gem](https://github.com/shakacode/react_on_rails)などを使って、上記のステップの一部を代替することがあります。
     * その他、[jsbundling-rails](https://github.com/rails/jsbundling-rails)、[Webpacker](https://github.com/rails/webpacker)、[Shakapacker](https://github.com/shakacode/shakapacker)、[Vite Ruby Rails Integration](https://vite-ruby.netlify.app/guide/rails.html)を使いこともあります。
 * [HotwireとReactの工数の差](/introduction/key_difference_between_hotwire_and_react#differences-in-work)で紹介しているように、JSON APIを導入しているためにReact SPAはHotwireと比べて大幅に工数が増えます。
-* ドメインモデルが複雑な場合は、JSON APIにネストしたデータを組み込む工数がかかります。
-* 機密データをJSON APIに載せてしまっても、画面に表示されないために気づけません。データ漏洩のリスクが高まります。
+* JSON APIを使用するとデータ漏洩のリスクが高まります。JSON APIは一般に画面に表示する以上のデータを持たせますが、機密データを誤って載せてしまっても、画面に表示されないためになかなか気づけないためです。
 * フロントエンドとバックエンド双方がJSON API契約を守っていることの担保が困難です。下記のことを考慮する必要がありますので、かなりの作業が必要です。
    * [TypeScriptはJSON API契約遵守を保証してくれません](/introduction/type_safety)。フロントエンド内部の型安全性しか担保してくれません。
    * Open API(Swagger)を書いただけではフロントエンドとバックエンドが遵守している保証にはなりません。

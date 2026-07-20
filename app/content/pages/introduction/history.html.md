@@ -1,6 +1,6 @@
 ---
 title: Hotwireの歴史
-subtitle: Hotwireは20年間の一貫した歴史と実績を持つフレームワークです。
+subtitle: 20年間の歴史を持つ、実績豊富なフレームワーク。
 description: "Rails誕生時のRJSとPrototype.jsから、jQuery UJS、サーバ生成JavaScript、Turbolinksを経てHotwireへ至る歴史をたどります。サーバでHTMLを生成しながらAJAXと高速な画面更新を追求してきたこと、Hotwireが長年の実運用の知見を継承した技術であることを示します。"
 section: History
 layout: article

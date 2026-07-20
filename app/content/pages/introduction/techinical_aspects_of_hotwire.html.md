@@ -1,6 +1,6 @@
 ---
 title: Hotwireの技術的特徴
-subtitle: サーバとの非同期通信を簡略化したTurbo。モジュール化されたJavaScriptを書くやすくしたStimulus。
+subtitle: サーバとの非同期通信を簡略化したTurbo。モジュール化されたJavaScriptを書くためのStimulus。
 description: "Hotwireをブラウザ技術の代替ではなく、通常のHTML、CSS、JavaScriptを拡張する仕組みとして大局的に解説します。Turboが代表的な非同期更新パターンを限定された操作で提供し、StimulusがDOMとイベント処理を明示的に接続することで、自由度を保ちながらスパゲッティ化を防ぐ設計を示します。"
 layout: article
 order: 20

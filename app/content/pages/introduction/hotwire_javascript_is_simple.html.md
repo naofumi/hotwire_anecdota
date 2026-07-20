@@ -1,6 +1,6 @@
 ---
 title: HotwireのJavaScriptは簡単
-subtitle: Hotwireはasync, await, 高階関数等を知らなくても書けます。
+subtitle: 高階関数やasync, await等の難解なJavaScriptは不要です。
 description: "Hotwireで必要なJavaScriptが、DOM選択、イベント処理、条件分岐、配列操作といった入門書レベルで足りる理由を解説します。サーバ通信をTurboが担当するため、Reactで頻出するfetch、async、Promiseや複雑なコールバックを書く場面が少なく、初心者やデザイナーにも扱いやすいことを示します。"
 layout: article
 order: 40

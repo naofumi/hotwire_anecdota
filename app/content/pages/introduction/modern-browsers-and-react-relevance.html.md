@@ -1,5 +1,6 @@
 ---
 title: 新しいブラウザ機能とReactの必要性
+subtitle: 複雑なJavaScriptを書かなくても、新しいブラウザネイティブ機能で高度なUI/UXが実現できます。
 description: "dialog、details、popover、View Transitionsなど、近年のブラウザ機能で実現できるUIを紹介します。JavaScriptライブラリへ頼らずアクセシビリティや状態管理をブラウザに任せ、コード量と更新負担を減らしてHotwireを保守しやすく使う方法を示します。"
 layout: article
 order: 120
