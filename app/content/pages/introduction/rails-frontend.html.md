@@ -1,19 +1,20 @@
 ---
 title: Railsフロントエンド。何を選ぶ？
+subtitle: Railsプロジェクトのフロントエンドを選定する際の判断材料を列挙しました。
 description: "Railsのフロントエンドとして、ERBとHotwire、React SPA、Inertia.js、Next.jsサーバを比較します。セットアップ、JSON API、認証とCSRF、型安全性、機密データ、複雑なドメインモデルへの対応を検討し、基本はHotwireを推奨しながら要件に合う選択肢を整理します。"
 layout: article
 order: 100
 published: true
 ---
 
-新規にインストールしたRuby on RailsアプリのフロントエンドはERBとHotwireですが、デフォルトの他にさまざまな選択肢があります。私はHotwireの使用を強くお勧めしますが、事情により他の技術を選択肢とする場合もあります。
+新規にインストールしたRuby on RailsアプリのフロントエンドはERBとHotwireですが、デフォルトの他にさまざまな選択肢があります。私はHotwireの使用を強くお勧めしますが、事情により他の技術を選択肢とする場合もあるでしょう。
 
-下記では個人的な意見も含みますが、現在の選択肢を簡単に紹介しました。  
+下記では個人的な意見も含みますが、現在一般に利用されている選択肢を簡単に紹介しました。  
 （なお「モダン」フロントエンドの代表としてReactに言及していますが、他のものでも同様です）
 
 ## ERB, Hotwire --- erb-hotwire
 
-* デフォルトで使用できます。セットアップが簡単です。
+* Railsのデフォルトです。セットアップが簡単です。
 * コード量が少なく、非常に効率よく開発できます。
 * JSON APIを用意する必要がなく、シリアライズすら不必要なので、viewテンプレートの中で生きたオブジェクトを参照できます。必要なデータに簡単にアクセスできますので、ドメインモデルが複雑であっても効率よく開発できます。
 * 画面に描画されたものだけがブラウザに送信されますので、不意のデータ漏洩の心配はほとんどありません。
@@ -52,7 +53,7 @@ published: true
    * 最近の潮流としてはHTTP-only Cookieを使った認証が多くなっています。ERBを使用した従来の方法と同じもので、認証処理が大幅に簡略化されます。この場合はCSRF対策をしないと脆弱性になります。
      * なお[ReactをERBに埋め込むタイプ](#ERB-and-react-spa)の場合、通常は初期ロードHTML (bootstrap HTML)に[CSRF対策トークンが埋め込まれており](https://api.rubyonrails.org/v8.1.3/classes/ActionView/Helpers/CsrfHelper.html#method-i-csrf_meta_tags)、簡単に取得できます。
      * RailsとReactを独立させた場合は、別途CSRF対策トークンを取得する仕組みを用意する必要があります。
-   * Ruby on RailsをAPIモードで使用していて、後からHTTP-only Cookieに対応させた場合、注意が必要です。Cookie処理のミドルウェアを戻すだけでなく、忘れずにCSRF対策のミドルウェアも戻すようにしましょう。CSRFトークンの管理は別途考える必要があります。
+   * Ruby on RailsをAPIモードで使用していて、後からHTTP-only Cookieに対応させた場合、注意が必要です。Cookie処理のミドルウェアを戻すだけでなく、忘れずにCSRF対策も戻しましょう。具体的には[`ActionController::API`](https://api.rubyonrails.org/classes/ActionController/API.html)はCSRF対策をしませんので[`ActionController::Base`](https://api.rubyonrails.org/classes/ActionController/Base.html)を継承する、あるいは[`RequestForgeryProtection`](https://api.rubyonrails.org/classes/ActionController/RequestForgeryProtection.html)を`include`して`protect_from_forgery`を設定します。CSRFトークンの管理は別途考える必要があります。
 
 なお、[Next.jsのstatic export](https://nextjs.org/docs/pages/guides/static-exports)を使ってReact SPAを作り方法もありますが、下記の点に注意する必要があります。
 

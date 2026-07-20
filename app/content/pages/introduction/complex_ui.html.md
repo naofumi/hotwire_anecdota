@@ -1,5 +1,6 @@
 ---
 title: Reactの「複雑なUI/UX」？
+subtitle: ReactはどのようなUI/UXを可能にしたかを理解し、それをStimulusで実現する方法を考える。
 description: "Reactが複雑なUIを整理した単方向データフローを確認し、Stimulus Valuesと変更コールバックでも同じ構造を実現できることを説明します。FigmaやChart.jsなどの例から、高度なUIはReact固有ではなく、StimulusやVanilla JavaScriptでも構築可能だと論じます。"
 layout: article
 order: 80

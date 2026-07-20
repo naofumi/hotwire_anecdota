@@ -1,12 +1,13 @@
 ---
 title: TypeScript vs. ERBの型安全性
+subtitle: TypeScriptによる静的型付けよりも、Ruby実行時の強い型の方がメリットは大きいです。
 description: "TypeScriptが内部の型しか保証せず、実行時やJSON APIとの不整合を防げない点をReactとERBから比較します。RubyとERBは存在しない属性へのアクセスを実行時エラーにし、Controller testやRequest specで検出できるため、追加の契約検証なしでも本番バグを防ぎやすいと論じます。"
 layout: article
 order: 90
 published: true
 ---
 
-TypeScriptだけをいくら使用しても型安全にはなりません。逆にRuby ERBを使用すればほとんど何もしなくても高い型安全性が得られます。
+TypeScriptだけをいくら使用しても型安全にはなりません。逆にRuby ERBを使用すればほとんど何もしなくても高い型安全性が得られます。これはJavaScript/Reactが弱い型である一方、Rubyは強い型を持つからです。
 
 ![TypeScript vs. ERBの型安全性](https://www.youtube.com/watch?v=pUmNdI2PIj0 "mx-auto max-w-full")
 
