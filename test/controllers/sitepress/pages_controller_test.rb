@@ -12,6 +12,14 @@ class SitepressPagesControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", text: /コンテンツ一覧/
   end
 
+  test "public URLs use the configured site origin" do
+    get "/introduction/about_this_site", headers: { "Host" => "example.test" }
+
+    assert_response :success
+    assert_select "link[rel=canonical][href='https://frontend.naofumi.dev/introduction/about_this_site']", count: 1
+    assert_select "meta[property='og:url'][content='https://frontend.naofumi.dev/introduction/about_this_site']", count: 1
+  end
+
   test "get /tech_selection/what_is_hotwired should return success" do
     get "/tech_selection/what_is_hotwire"
     assert_response :success

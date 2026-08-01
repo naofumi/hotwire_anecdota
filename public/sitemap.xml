@@ -1,246 +1,246 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/</loc>
+    <loc>https://frontend.naofumi.dev/</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts</loc>
+    <loc>https://frontend.naofumi.dev/concepts</loc>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/a-links-and-forms</loc>
+    <loc>https://frontend.naofumi.dev/concepts/a-links-and-forms</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/approach</loc>
+    <loc>https://frontend.naofumi.dev/concepts/approach</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/components</loc>
+    <loc>https://frontend.naofumi.dev/concepts/components</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/how-to-start</loc>
+    <loc>https://frontend.naofumi.dev/concepts/how-to-start</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/jquery-issues</loc>
+    <loc>https://frontend.naofumi.dev/concepts/jquery-issues</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/partial-helper-components</loc>
+    <loc>https://frontend.naofumi.dev/concepts/partial-helper-components</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/post-redirect-get</loc>
+    <loc>https://frontend.naofumi.dev/concepts/post-redirect-get</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/server-perspective-frames-vs-streams</loc>
+    <loc>https://frontend.naofumi.dev/concepts/server-perspective-frames-vs-streams</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/should_stimulus_controllers_change_classes</loc>
+    <loc>https://frontend.naofumi.dev/concepts/should_stimulus_controllers_change_classes</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/stimulus-component</loc>
+    <loc>https://frontend.naofumi.dev/concepts/stimulus-component</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/stimulus-core-concept</loc>
+    <loc>https://frontend.naofumi.dev/concepts/stimulus-core-concept</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/stimulus-tips</loc>
+    <loc>https://frontend.naofumi.dev/concepts/stimulus-tips</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/stimulus-typical-structure</loc>
+    <loc>https://frontend.naofumi.dev/concepts/stimulus-typical-structure</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/turbo-network-lag</loc>
+    <loc>https://frontend.naofumi.dev/concepts/turbo-network-lag</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/turbo-or-stimulus</loc>
+    <loc>https://frontend.naofumi.dev/concepts/turbo-or-stimulus</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/why-avoid-rendering-html-in-stimulus</loc>
+    <loc>https://frontend.naofumi.dev/concepts/why-avoid-rendering-html-in-stimulus</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/concepts/why-is-hotwire-fast</loc>
+    <loc>https://frontend.naofumi.dev/concepts/why-is-hotwire-fast</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/directory</loc>
+    <loc>https://frontend.naofumi.dev/directory</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples</loc>
+    <loc>https://frontend.naofumi.dev/examples</loc>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/accordion</loc>
+    <loc>https://frontend.naofumi.dev/examples/accordion</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/carousel</loc>
+    <loc>https://frontend.naofumi.dev/examples/carousel</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/chartjs</loc>
+    <loc>https://frontend.naofumi.dev/examples/chartjs</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/client-side-validation</loc>
+    <loc>https://frontend.naofumi.dev/examples/client-side-validation</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/drawer</loc>
+    <loc>https://frontend.naofumi.dev/examples/drawer</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/dropdown</loc>
+    <loc>https://frontend.naofumi.dev/examples/dropdown</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/like_button</loc>
+    <loc>https://frontend.naofumi.dev/examples/like_button</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/like_button/like-optimistic</loc>
+    <loc>https://frontend.naofumi.dev/examples/like_button/like-optimistic</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/like_button/like-turbo-drive</loc>
+    <loc>https://frontend.naofumi.dev/examples/like_button/like-turbo-drive</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/like_button/like-turbo-stream</loc>
+    <loc>https://frontend.naofumi.dev/examples/like_button/like-turbo-stream</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/modal</loc>
+    <loc>https://frontend.naofumi.dev/examples/modal</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/modal/modal-form-failure</loc>
+    <loc>https://frontend.naofumi.dev/examples/modal/modal-form-failure</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/modal/modal-form-success-and-hide</loc>
+    <loc>https://frontend.naofumi.dev/examples/modal/modal-form-success-and-hide</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/modal/modal-show-with-animation</loc>
+    <loc>https://frontend.naofumi.dev/examples/modal/modal-show-with-animation</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/search</loc>
+    <loc>https://frontend.naofumi.dev/examples/search</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/side_panel</loc>
+    <loc>https://frontend.naofumi.dev/examples/side_panel</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/sidebar</loc>
+    <loc>https://frontend.naofumi.dev/examples/sidebar</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/store</loc>
+    <loc>https://frontend.naofumi.dev/examples/store</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/store/store-react-state</loc>
+    <loc>https://frontend.naofumi.dev/examples/store/store-react-state</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/store/store-server-state</loc>
+    <loc>https://frontend.naofumi.dev/examples/store/store-server-state</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/store/store-stimulus-state</loc>
+    <loc>https://frontend.naofumi.dev/examples/store/store-stimulus-state</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/toast</loc>
+    <loc>https://frontend.naofumi.dev/examples/toast</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/toggle</loc>
+    <loc>https://frontend.naofumi.dev/examples/toggle</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/examples/using_with_react</loc>
+    <loc>https://frontend.naofumi.dev/examples/using_with_react</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/introduction</loc>
+    <loc>https://frontend.naofumi.dev/introduction</loc>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/introduction/about_this_site</loc>
+    <loc>https://frontend.naofumi.dev/introduction/about_this_site</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/introduction/complex_ui</loc>
+    <loc>https://frontend.naofumi.dev/introduction/complex_ui</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/introduction/dangers_of_replacement</loc>
+    <loc>https://frontend.naofumi.dev/introduction/dangers_of_replacement</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/introduction/history</loc>
+    <loc>https://frontend.naofumi.dev/introduction/history</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/introduction/hotwire-myths</loc>
+    <loc>https://frontend.naofumi.dev/introduction/hotwire-myths</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/introduction/hotwire_javascript_is_simple</loc>
+    <loc>https://frontend.naofumi.dev/introduction/hotwire_javascript_is_simple</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/introduction/key_difference_between_hotwire_and_react</loc>
+    <loc>https://frontend.naofumi.dev/introduction/key_difference_between_hotwire_and_react</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/introduction/modern-browsers-and-react-relevance</loc>
+    <loc>https://frontend.naofumi.dev/introduction/modern-browsers-and-react-relevance</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/introduction/rails-frontend</loc>
+    <loc>https://frontend.naofumi.dev/introduction/rails-frontend</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/introduction/techinical_aspects_of_hotwire</loc>
+    <loc>https://frontend.naofumi.dev/introduction/techinical_aspects_of_hotwire</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/introduction/type_safety</loc>
+    <loc>https://frontend.naofumi.dev/introduction/type_safety</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/introduction/unnecessary_stuff_in_react</loc>
+    <loc>https://frontend.naofumi.dev/introduction/unnecessary_stuff_in_react</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/introduction/you-should-use-javascript</loc>
+    <loc>https://frontend.naofumi.dev/introduction/you-should-use-javascript</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/opinions</loc>
+    <loc>https://frontend.naofumi.dev/opinions</loc>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/other_libraries</loc>
+    <loc>https://frontend.naofumi.dev/other_libraries</loc>
   </url>
   <url>
-    <loc>https://hotwire-anecdota.castle104.com/other_libraries/after_webpacker</loc>
+    <loc>https://frontend.naofumi.dev/other_libraries/after_webpacker</loc>
     <lastmod>2026-07-19</lastmod>
   </url>
 </urlset>
