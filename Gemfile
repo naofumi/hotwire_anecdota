@@ -5,7 +5,7 @@ gem "rails", "~> 8.1.4.1"
 # Asset pipeline for Rails [https://github.com/rails/propshaft/blob/main/UPGRADING.md]
 gem "propshaft"
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", ">= 2.8"
+gem "sqlite3", ">= 2.10.2"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 8.0.2"
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
