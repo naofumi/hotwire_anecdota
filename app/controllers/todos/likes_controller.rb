@@ -23,6 +23,6 @@ class Todos::LikesController < ApplicationController
     end
 
     def set_todo
-      @todo = Todo.find(params[:todo_id])
+      @todo = Todo.find(params.expect(:todo_id))
     end
 end

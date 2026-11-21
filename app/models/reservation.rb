@@ -2,7 +2,9 @@ class Reservation < ApplicationRecord
   has_many :room_nights, dependent: :destroy
   belongs_to :requested_room, class_name: "Room"
 
-  validates :guest_name, :guest_phone, :check_in, :check_out, :requested_room, presence: true
+  # belongs_to already requires requested_room, but that error is "must exist".
+  # Keeping this presence validation preserves "can't be blank".
+  validates :guest_name, :guest_phone, :check_in, :check_out, :requested_room, presence: true # rubocop:disable Rails/RedundantPresenceValidationOnBelongsTo
   validate :ensure_checkout_equal_or_later_than_check_in
 
   before_validation :create_room_nights

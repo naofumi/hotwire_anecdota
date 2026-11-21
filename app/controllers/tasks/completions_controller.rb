@@ -16,6 +16,6 @@ class Tasks::CompletionsController < ApplicationController
   private
 
     def set_task
-      @task = Task.find(params[:task_id])
+      @task = Task.find(params.expect(:task_id))
     end
 end

@@ -17,7 +17,8 @@ class SitepressPagesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "link[rel=canonical][href='https://frontend.naofumi.dev/introduction/about_this_site']", count: 1
-    assert_select "meta[property='og:url'][content='https://frontend.naofumi.dev/introduction/about_this_site']", count: 1
+    assert_select "meta[property='og:url'][content='https://frontend.naofumi.dev/introduction/about_this_site']",
+                  count: 1
   end
 
   test "get /tech_selection/what_is_hotwired should return success" do
