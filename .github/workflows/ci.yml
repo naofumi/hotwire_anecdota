@@ -1,7 +1,5 @@
 name: CI
 
-# ubuntu-latest is 26.04, which only has the latest Ruby 4.0 patch.
-# .ruby-version is 4.0.4, still published for Ubuntu 24.04.
 on:
   pull_request:
   push:
@@ -9,7 +7,7 @@ on:
 
 jobs:
   scan_ruby:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -25,7 +23,7 @@ jobs:
         run: bin/brakeman --no-pager
 
   lint:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -40,7 +38,7 @@ jobs:
         run: bin/rubocop -f github
 
   test:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
 
     # services:
     #  redis:
