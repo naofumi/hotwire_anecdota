@@ -49,10 +49,10 @@ class ReservationTest < ActiveSupport::TestCase
   test "creates RoomNights on save" do
     reservation = Reservation.new(guest_name: "Hogeo",
                                   guest_phone: "090-1234-5678",
-                                  requested_room_category: "single",
+                                  requested_room: rooms(:single_1),
                                   check_in: Date.new(2030, 1, 1),
                                   check_out: Date.new(2030, 1, 2))
-    reservation.save
+    assert reservation.save
     assert_not reservation.room_nights.empty?
     assert_equal 1, reservation.room_nights.size
     assert_equal Date.new(2030, 1, 1), reservation.room_nights.first.date
@@ -60,7 +60,9 @@ class ReservationTest < ActiveSupport::TestCase
   end
 
   test "fails to create RoomNight if full" do
-    reservation = Reservation.new(guest_name: "Hogeo", guest_phone: "090-1234-5678", check_in: Date.new(2026, 5, 1),
+    reservation = Reservation.new(guest_name: "Hogeo", guest_phone: "090-1234-5678",
+                                  requested_room: rooms(:superior_1),
+                                  check_in: Date.new(2026, 5, 1),
                                   check_out: Date.new(2026, 5, 4))
 
     assert_no_changes -> { Reservation.count } do

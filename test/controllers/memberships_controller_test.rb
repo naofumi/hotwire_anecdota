@@ -2,7 +2,7 @@ require "test_helper"
 
 class MembershipsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @membership = memberships(:one)
+    @membership = memberships(:sazae)
   end
 
   test "should get index" do
@@ -18,8 +18,8 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
   test "should create membership" do
     assert_difference("Membership.count") do
       post memberships_url,
-           params: { membership: { company_name: @membership.company_name, email: @membership.email,
-                                   membership_type: @membership.membership_type, name: @membership.name } }
+           params: { membership: { email: "tara@example.com", membership_type: "personal", name: "Tara Isono",
+                                   valid_from: "2026-01-01", valid_to: "2026-12-31" } }
     end
 
     assert_redirected_to membership_url(Membership.last)
@@ -38,7 +38,8 @@ class MembershipsControllerTest < ActionDispatch::IntegrationTest
   test "should update membership" do
     patch membership_url(@membership),
           params: { membership: { company_name: @membership.company_name, email: @membership.email,
-                                  membership_type: @membership.membership_type, name: @membership.name } }
+                                  membership_type: @membership.membership_type, name: @membership.name,
+                                  valid_from: @membership.valid_from, valid_to: @membership.valid_to } }
     assert_redirected_to membership_url(@membership)
   end
 

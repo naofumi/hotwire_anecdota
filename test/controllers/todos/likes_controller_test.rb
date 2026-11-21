@@ -16,7 +16,7 @@ class Todos::LikesControllerTest
 
     test "should create like on todo and redirect if current_user has not liked it yet" do
       @current_user = users(:namihei)
-      with_variant :mpa do
+      with_variant :drive do
         assert_difference -> { Like.count }, 1 do
           login_user @current_user do
             post todo_likes_path(@todo, like: @like_param, format: :turbo_stream)
@@ -29,7 +29,7 @@ class Todos::LikesControllerTest
 
     test "should not like on todo and raises RecordInvalid if current_user has already liked it" do
       @current_user = users(:sazae)
-      with_variant :mpa do
+      with_variant :drive do
         login_user @current_user do
           assert_no_difference -> { Like.count } do
             assert_raises ActiveRecord::RecordInvalid do
@@ -49,7 +49,7 @@ class Todos::LikesControllerTest
 
     test "should delete like on todo and redirect if current_user has previously liked i" do
       @current_user = users(:sazae)
-      with_variant :mpa do
+      with_variant :drive do
         assert_difference -> { Like.count }, -1 do
           login_user @current_user do
             post todo_likes_path(@todo, like: @like_param, format: :turbo_stream)
@@ -62,7 +62,7 @@ class Todos::LikesControllerTest
 
     test "should raises RecordNotFound if current_user has not liked it yet" do
       @current_user = users(:namihei)
-      with_variant :mpa do
+      with_variant :drive do
         login_user @current_user do
           assert_no_difference -> { Like.count } do
             assert_raises ActiveRecord::RecordNotFound do

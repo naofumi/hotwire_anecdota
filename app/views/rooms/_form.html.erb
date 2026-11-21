@@ -17,6 +17,11 @@
   </div>
 
   <div>
+    <%= form.label :category, style: "display: block" %>
+    <%= form.select :category, Room.categories.keys %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>

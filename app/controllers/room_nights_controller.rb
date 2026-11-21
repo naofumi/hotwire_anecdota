@@ -65,6 +65,6 @@ class RoomNightsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def room_night_params
-      params.expect(room_night: [ :room_id, :booking_id, :date ])
+      params.expect(room_night: [ :room_id, :reservation_id, :date ])
     end
 end
