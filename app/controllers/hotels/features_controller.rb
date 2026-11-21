@@ -11,6 +11,6 @@ class Hotels::FeaturesController < HotelBaseController
   private
 
     def set_hotel
-      @hotel = Hotel.find(params[:hotel_id])
+      @hotel = Hotel.find(params.expect(:hotel_id))
     end
 end

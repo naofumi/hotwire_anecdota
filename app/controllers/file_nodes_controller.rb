@@ -62,7 +62,7 @@ class FileNodesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_file_node
-      @file_node = FileNode.find(params[:id])
+      @file_node = FileNode.find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.

@@ -31,7 +31,7 @@ class ComponentsController < ApplicationController
     end
 
     def set_template
-      @template = params[:id].presence_in(view_templates)
+      @template = params.expect(:id).presence_in(view_templates)
       raise ActionController::RoutingError, "Not Found" unless @template
     end
 end

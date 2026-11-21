@@ -60,7 +60,7 @@ class BucketsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bucket
-      @bucket = Bucket.find(params[:id])
+      @bucket = Bucket.find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.

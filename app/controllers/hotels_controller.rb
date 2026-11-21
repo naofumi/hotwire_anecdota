@@ -15,6 +15,6 @@ class HotelsController < HotelBaseController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_hotel
-      @hotel = Hotel.find(params[:id])
+      @hotel = Hotel.find(params.expect(:id))
     end
 end
