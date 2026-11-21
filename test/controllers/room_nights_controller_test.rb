@@ -2,7 +2,7 @@ require "test_helper"
 
 class RoomNightsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @room_night = room_nights(:one)
+    @room_night = room_nights(:superior_1_20260501)
   end
 
   test "should get index" do
@@ -18,8 +18,8 @@ class RoomNightsControllerTest < ActionDispatch::IntegrationTest
   test "should create room_night" do
     assert_difference("RoomNight.count") do
       post room_nights_url,
-           params: { room_night: { booking_id: @room_night.booking_id, date: @room_night.date,
-                                   room_id: @room_night.room_id } }
+           params: { room_night: { reservation_id: reservations(:masuo).id, date: "2026-06-01",
+                                   room_id: rooms(:double_1).id } }
     end
 
     assert_redirected_to room_night_url(RoomNight.last)
@@ -37,7 +37,7 @@ class RoomNightsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update room_night" do
     patch room_night_url(@room_night),
-          params: { room_night: { booking_id: @room_night.booking_id, date: @room_night.date,
+          params: { room_night: { reservation_id: @room_night.reservation_id, date: @room_night.date,
                                   room_id: @room_night.room_id } }
     assert_redirected_to room_night_url(@room_night)
   end

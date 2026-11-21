@@ -2,7 +2,7 @@ require "test_helper"
 
 class ReservationsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @reservation = reservations(:one)
+    @reservation = reservations(:masuo)
   end
 
   test "should get index" do
@@ -18,8 +18,10 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
   test "should create reservation" do
     assert_difference("Reservation.count") do
       post reservations_url,
-           params: { reservation: { check_in: @reservation.check_in, check_out: @reservation.check_out,
-                                    guest_name: @reservation.guest_name, guest_phone: @reservation.guest_phone } }
+           params: { confirmed: "1",
+                     reservation: { check_in: "2030-01-01", check_out: "2030-01-02",
+                                    guest_name: "Hogeo", guest_phone: "090-1234-5678",
+                                    requested_room_id: rooms(:single_1).id } }
     end
 
     assert_redirected_to reservation_url(Reservation.last)
@@ -37,8 +39,10 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update reservation" do
     patch reservation_url(@reservation),
-          params: { reservation: { check_in: @reservation.check_in, check_out: @reservation.check_out,
-                                   guest_name: @reservation.guest_name, guest_phone: @reservation.guest_phone } }
+          params: { confirmed: "1",
+                    reservation: { check_in: @reservation.check_in, check_out: @reservation.check_out,
+                                   guest_name: @reservation.guest_name, guest_phone: @reservation.guest_phone,
+                                   requested_room_id: @reservation.requested_room_id } }
     assert_redirected_to reservation_url(@reservation)
   end
 
